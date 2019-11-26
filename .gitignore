@@ -1,0 +1,24 @@
+cv_scripts
+social_network_proxy
+node_modules
+.vscode
+build/
+*.map
+*.pdf
+deploy
+*.out
+*.log
+coverage/
+*.pyc
+*__pycache__
+*.DS_Store
+*.scssc
+.flowconfig
+.je-project-settings
+careerlyft-ui.sublime-project
+careerlyft-ui.sublime-workspace
+packages/Template.code-workspace
+# master version
+startup.sh
+*.cache
+# *out

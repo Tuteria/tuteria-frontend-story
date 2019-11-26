@@ -1,0 +1,6 @@
+[submodule "packages/design-system"]
+	path = packages/design-system
+	url = https://gitlab.com/godwinbenson/zeta-design-system.git
+[submodule "packages/web-application"]
+	path = packages/web-application
+	url = https://gitlab.com/tuteria/web-application.git
