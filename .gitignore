@@ -22,3 +22,4 @@ packages/Template.code-workspace
 startup.sh
 *.cache
 # *out
+.env
