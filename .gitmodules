@@ -1,9 +1,11 @@
 [submodule "packages/design-system"]
 	path = packages/design-system
-	url = https://gitlab.com/godwinbenson/zeta-design-system.git
+	# url = https://gitlab.com/godwinbenson/zeta-design-system.git
+	url = git@github.com:Tuteria/old-design-system.git
 [submodule "packages/web-application"]
 	path = packages/web-application
 	url = https://gitlab.com/tuteria/web-application.git
 [submodule "packages/shared-lib"]
 	path = "packages/shared-lib"
-	url = https://gitlab.com/tuteria/v2/component-lib.git
+	# url = https://gitlab.com/tuteria/v2/component-lib.git
+	url = git@github.com:Tuteria/old-shared-lib.git
