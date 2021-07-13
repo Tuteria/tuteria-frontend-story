@@ -1,0 +1,3 @@
+[submodule "packages/tutor-app"]
+	path = packages/tutor-app
+	url = git@gitlab.com:tuteria/tutor-mobile-app.git

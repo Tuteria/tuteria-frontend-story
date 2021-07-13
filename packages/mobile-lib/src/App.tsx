@@ -4,12 +4,14 @@ import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 import Menu from './components/Menu';
 import Page from './pages/Page';
+import {observer} from 'mobx-react-lite'
 
 import "./styles"
 /* Theme variables */
 import './theme/variables.css';
+import { ISampleType } from './stores';
 
-const App: React.FC = () => {
+const App: React.FC<{store:ISampleType}> = observer(({store}) => {
   return (
     <IonApp>
       <IonReactRouter>
@@ -27,6 +29,6 @@ const App: React.FC = () => {
       </IonReactRouter>
     </IonApp>
   );
-};
+});
 
 export default App;
