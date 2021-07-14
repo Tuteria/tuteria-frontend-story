@@ -15,8 +15,6 @@ import {
   mailSharp,
   paperPlaneOutline,
   paperPlaneSharp,
-  trashOutline,
-  trashSharp,
 } from "ionicons/icons";
 import ExploreContainer from "@tuteria/mobile-lib/src/components/ExploreContainer";
 
