@@ -3,6 +3,7 @@ import { IonApp } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 
 import { TabView, Page, MenuView } from "@tuteria/mobile-lib/src/primitives";
+import PersonalDetailsForm from "@tuteria/mobile-lib/src/forms/PersonalDetails";
 import {
   ellipse,
   square,
@@ -134,5 +135,13 @@ export const TabsExample = () => {
 export const MenuExample = () => {
   return (
     <MenuView header="Profile" headerNote="tutor@email.com" menuItems={menu} />
+  );
+};
+
+export const PersonalDetails = () => {
+  return (
+    <Page title="Personal Details">
+      <PersonalDetailsForm />
+    </Page>
   );
 };
