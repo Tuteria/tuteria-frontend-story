@@ -1,0 +1,4478 @@
+[
+  {
+    "state": "Lagos",
+    "vicinity": "Abule-Egba"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Agege "
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ajah"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ajeromi-Ifelodun"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Akute"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Alagbado"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Alimosho"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Amuwo-Odofin"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Anthony"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Apapa"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Badagry"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ebute-metta"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Egbeda"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ejigbo"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Epe"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Festac Town"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Gbagada"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ibeju-Lekki"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ifako Ijaiye"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Iju Ishaga"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ikeja"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ikorodu"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ikotun"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ikoyi"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ilupeju"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ikosi-Ketu"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Lagos Island"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Lekki"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Magodo"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Maryland"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Mushin"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ogba"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ogudu"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ojo"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Ojodu-Berger"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Okota"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Omole"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Oshodi-Isolo"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Sangotedo"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Satellite Town"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Shomolu"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Surulere"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Victoria Island"
+  },
+  {
+    "state": "Lagos",
+    "vicinity": "Yaba"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Abuja-Keffi Road"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Airport Road"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Apo"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Asokoro"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Bwari"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Central Business District"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Dakwo"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Dawaki"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Dei Dei"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Durumi"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Dutse Alhaji"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Galadimawa"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Garki"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Guzape"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Gwagwa"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Gwagwalada"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Gwarimpa"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Iddo"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Jabi"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Jikwoyi"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Kabusa"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Kado"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Katampe"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Kaura"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Kubwa"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Kuje"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Kurudu"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Life Camp"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Lokogoma"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Lugbe"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Mabushi"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Maitama"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Maraba-Karu"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Nyanya"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Utako"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Wuse"
+  },
+  {
+    "state": "Abuja",
+    "vicinity": "Wuye"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Abuloma"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Ada George"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Agip"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Ahoada East"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Akinima"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Alo-mini"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Bonny Island"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Bori"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Buguma"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Choba"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "D-line"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Diobu"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Eagle Island"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Elechi"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Elele"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Elelenwo"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Eleme"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Eliozu"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Emohua"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Eneka"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Igbo-Etche"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Ikwerre"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Khana"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Kpor"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Mgbuoba"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Ogunabali"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Okirika Town"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Old G.R.A"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Omagwa"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Onne"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Oyigbo"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Ozuoba"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Rukpokwu"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Rumueme"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Rumukrueshi"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Rumuokwuta"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Rumuola"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Rumuoluemeni"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Rumuosi"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Trans  Amadi"
+  },
+  {
+    "state": "Rivers",
+    "vicinity": "Woji"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Aba"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Aba Central"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Abiriba"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Arochukwu"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Bende"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Eziama-Layout"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Ikwuano"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Isiala Ngwa North"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Isiala Ngwa South"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Obi Ngwa"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Ohafia"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Osisioma Ngwa"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Ugwunagbo"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Umuahia"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Umuahia Urban I"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Umuahia Urban III"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Ukwa East"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Ukwa West"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Umungasi"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "Umunneochi"
+  },
+  {
+    "state": "Abia",
+    "vicinity": "World Bank"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Airfield"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Damilo"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Demsawo"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Dubeli"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Fufore"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Federal Housing"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Ganye"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Girei"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Gombi"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Gwadabawa"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Guyuk"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Hong"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Jada"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Industrial"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Jambutu"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Karewa"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Kochifa Ward"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Lamido Palace"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Luggere"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Lamurde"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Madaghali"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Maiha"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Mayo-Belwa"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Michika"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Mubi"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Numan"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Old G.R.A."
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "School of Arts"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Shelleng"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Shuware Ward"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Song"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Toungo"
+  },
+  {
+    "state": "Adamawa",
+    "vicinity": "Yola"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Abak"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Eastern Obolo"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Eket"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Esit-Eket"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Essien-Udim"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Etim-Ekpo"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Etinan"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Faha Oku Akpon"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Housing Estate Ewet"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Ibiono-Ibom"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Ibesikpo-Asutan"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Iboko"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Ika"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Ikono"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Ikot Abasi"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Ikot Ekpene"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Ini"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Itiam Ikot Abia"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Itu"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Mbo"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Mkpat-Enin"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Iba Oku"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Mkpat-Enin"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Nsit-Atai"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Nsit-Ibom"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Nsit-Ubium"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Obot-Akara"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Okobo"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Onna"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Oron"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Oruk-Anam"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Ukanafun"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Udung-Uko"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Uruang"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Urue-Uffong"
+  },
+  {
+    "state": "Akwa Ibom",
+    "vicinity": "Uyo"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Aguata"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Aguleri"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Ajalli"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Anaocha"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Ayamelum"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Awka"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Dunukofia"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Ekwusigo"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Ekwulobia"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "GRA I"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "GRA II"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "GRA III"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Idemili North"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Idemili South"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "IgboUkwuu"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Ihiala"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Industrial Layout"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Njikoka"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Nnewi"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Nnobi"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Ogbaru"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Omagba Lyt Phase I & II"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Onitsha "
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Orumba North"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Orumba South"
+  },
+  {
+    "state": "Anambra",
+    "vicinity": "Oyi"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Abubakar Tafawa Balewa University"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Alkaleri"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Army Barracks"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Bacas"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Bauchi"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Bogoro"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Dass"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Dambam"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Darazo"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Durum"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "G.R.A"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Ganjuwa"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Gamawa"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Giade"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Gumi Hill"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Gwaram"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Itas-Gadau"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Jama'Are"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Kari"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Kirfi"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Kofar Jahun"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Kofar Wambai"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Kofar Wasa"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Katagum"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Lushi"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Misau"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Ningi"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Railway Station"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Rishi"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Shira"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Tafawa Balewa Housing Estate"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Toro"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Warji"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Yankari"
+  },
+  {
+    "state": "Bauchi",
+    "vicinity": "Zaki"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Amarata-Epie"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Bebelebiri"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Brass"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Ede-Epe"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Ekeki"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Ekeremor"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Imgbi"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Julius Berger"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Kolokuma Opokuma"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Nembe"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Nipost Market"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Ogbia"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Okaka"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Otuoke"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Sagbama"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Swali"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Southern Ijaw"
+  },
+  {
+    "state": "Bayelsa",
+    "vicinity": "Yenagoa"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Ado"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Agatu"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Ahmadu Bello"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Apa"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Buruku"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Eupi-New Layout"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Federal Housing Area"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Federal Low"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Gboko"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Guma"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Gwer East"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "High Level Ass. Vill."
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Hudco Quarters"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Katsinala"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Kokoroo"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Konshisha"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Kwande"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Logo"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Makurdi"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Ministry of Works"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Ohimini"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "New Market"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "No. Cross"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Obi"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Ochido's Palace"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Ogbadibo"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Ohimini"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Oju"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Okpokwu"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Otukpo"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Post Office"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Rice Mill"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Sabon Gari"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Tarka"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Ushongo"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Ukum"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Vandeikya"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Wadata"
+  },
+  {
+    "state": "Benue",
+    "vicinity": "Wurukum"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Ajari"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Abadam"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Bama"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Bayo"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Biu"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Bolori"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Chibok"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "College of Agric."
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Dikwa"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Damboa"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Elkanemi islamic Theology"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "G.R.A "
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Gubio"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Guzamala"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Government House"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Gwange"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Gwoza"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Hawul"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Kukawa"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Kagar"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Kwaya Kusar"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Konduga"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Lamisula / mafoni"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "London ciki"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Jere"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Maiduguri"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Molai G. R. A."
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Monguno"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "New G.R.A"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Nganzai"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Police College"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Pompamari"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Shani"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "Shehu's  Palace"
+  },
+  {
+    "state": "Borno",
+    "vicinity": "State low cost"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Abi"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Airport Road"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Akamkpa"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Akpabuyo"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Bakassi"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Bekwarra"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Biase"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Bogobiri"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Boki"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Calabar"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Creek Town"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Dan Archibong"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Ediba"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Egerton"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Ekpo Abasi"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Essien Town"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Eta Agbor"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Etung"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Goldie"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Ikom"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Ikorinim"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Ikot Ansa"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Main Market"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Obanliku"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Obubra"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Obudu"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Odukpani"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Ogoja"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Stadium"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "State Housing Estate"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Uwanse"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Yakkur"
+  },
+  {
+    "state": "Cross River",
+    "vicinity": "Yala"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Aniocha"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Asaba"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Bomadi"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Burutu"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Effurun"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Ethiope"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "G. R. A."
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Ibusa"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Ika"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Isoko"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Kwale"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Ndokwa"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Ogwashi Uku"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Okpe "
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Oshimili"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Patani"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Sapele"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Udu"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Ughelli"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Ukwani"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Uvwie"
+  },
+  {
+    "state": "Delta",
+    "vicinity": "Warri"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Abakaliki"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Afikpo"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Edda"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Enugu Express"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Ezza"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Ikwo"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Ishielu"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Ivo"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Kpiri-Kpiri"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Mbukobe"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Ndiaguo"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Izzi"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "New layout"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Ntezi Aba"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Ogbaga Rd"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Ogoja "
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Onicha"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Ohaozara"
+  },
+  {
+    "state": "Ebonyi",
+    "vicinity": "Ohaukwu"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Akoko Edo"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Auchi"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Benin City"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Egor"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Esan Central"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Esan North"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Esan South"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Ekpoma"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Etsako Central"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Etsako East"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Etsako West"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Igueben"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Ikpoba Okha"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Oredo"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Oba Akenzua II"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Ohovbeokao"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Orhionmwon"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Ovia North-East"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Ovia South-West"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Owan East"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Owan West"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Oregbeni"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Ugbekun"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Ugbowo"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Uhumwonde"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Uselu"
+  },
+  {
+    "state": "Edo",
+    "vicinity": "Uwelu"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Ado Ekiti"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Aiyekire"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Cocoa Dev. Unit Area"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Efon Alaye"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Emure"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Falegan Estate"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Federal Polytechnic"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Fehintola Estate"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "G.R.A."
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Idolofin"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Ilejemeje"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Irepodun"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Ise"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Ijero"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Ijoka Quarters"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Ikere"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Ikole"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Isolo"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Kojola Quarters"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Moba"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Olora's Palace Area"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Onward"
+  },
+  {
+    "state": "Ekiti",
+    "vicinity": "Oye"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Abakpa Nike"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Achi"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Amaoji Agu Nike"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Aninri"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Army Barracks"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Awugu"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "China Town"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Emene"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Enugu East"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Enugu City"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Ezeagu"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Independence Layout"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Igbo Etiti"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Isi Uzo"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "New Haven"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Nike"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Ninth Mile"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Nkanu West"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Nsukka"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Ogbete Layout"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Oji River"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Republic Layout"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Udenu"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Udi"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Ugbo Odogwu"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "UNN"
+  },
+  {
+    "state": "Enugu",
+    "vicinity": "Uzo-Uwani"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Akko"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Balanga"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Billiri"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Boh"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Bajoga"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Bolori"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Deba"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Dukku"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Emir's Palace"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "G. R. A"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Funakaye"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Gombe"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Government House"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Hero Gana"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Jeka Da Fari"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Kaltungo"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Kumbiya Kumbiya"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Kumo"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Kwami"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Mallam Sidi"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Nafada"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Nassarawo"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Pantami"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Shamaki"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Shongom"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Tallese"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Tudun Hatsi"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Tudun Wada"
+  },
+  {
+    "state": "Gombe",
+    "vicinity": "Yamaltu"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Agoh Mbaise"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Aladinma Estate"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Amawom"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Arugo Layout"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Ehime Mbano"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Ezinihitte Mbaise"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "German hill"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Ideato North"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Ideato South"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Ihitte "
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Ikeduru"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Ikenegbu Layout"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Isiala Mbano"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Isu"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Industrial area"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Low Cost"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Mbaitolu"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Mbano"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Njaba"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "New Owerri"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Ngor-Okpala"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Nwangele"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Nkwerre"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Obowo"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Oguta"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Owerri"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Ohaji"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Ugwu Orji"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Okigwe"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Onuimo"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Orlu"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Umueche"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Oru East"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Oru West"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Umuodu"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Umuoyima Emmanuel College Layout"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Umusasa"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Uzi Layout"
+  },
+  {
+    "state": "Imo",
+    "vicinity": "Works Layout"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Auyo"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Babura"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Birnin Kudu"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Birniwa"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Buji"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Dutse"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Fagoji"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Galdimawa"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Garki"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Gagarawa"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Guri"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Gumel"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Gwaram"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Gwiwa"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Hadejia "
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Internet Area"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Jahun"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Kaugama"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Kafin Hausa"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Kazaure"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Kiri Kasama"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Kiyawa"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Maigatari"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Majema"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Miga"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Malam Madori"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "New G.R.A"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Ringim"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Roni"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Sabon Garin Zai"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Sabuwar Marinjuwa"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Sule Tankarkar"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Takur Quartres"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Taura"
+  },
+  {
+    "state": "Jigawa",
+    "vicinity": "Yankwashi"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Ahmadu Bello Way"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Barnawa G.R.A"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Birnin-Gwari"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Chikun"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Dallet Barracks"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Giwa"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Igabi"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Ikara"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Jaba"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Jema'a"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Kachia"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Airport Road"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Kaduna North"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Kaduna South"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Kafanchan"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Kagarko"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Kajuru"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Kakuri"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Kaura"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Kauru"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Kawo"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Kubau"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Kudan"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Kurmi Mashi"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Lere"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Kwoi"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Markarfi"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Sabon Gari"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Sanga"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Zango"
+  },
+  {
+    "state": "Kaduna",
+    "vicinity": "Zaria"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Ajingi"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Albasu"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Bagwai"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Bebeji"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Bichi"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Bunkure"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Dakata"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Dala"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Danbatta"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Dawakin Kudu"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Dawakin Tofa"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Doguwa"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Fagge"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Gabasawa"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Garko"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Garum Mallam"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Gaya"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Gezawa"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Gwale"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Gwarzo"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Gyadi Gyadi"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Kabo"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Kano Municipal"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Hotoro"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Karaye"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Kibiya"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Kiru"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Kumbotso"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Kunchi"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Kura"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Madobi"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Makoda"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Minjibir"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Nassarawa GRA"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Rano"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Rimin Gado"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Rogo"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Shanono"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Sharada"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Sumaila"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Takai"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Tarauni"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Tofa"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Tsanyawa"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Tudun Wada"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Ungogo"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Warawa"
+  },
+  {
+    "state": "Kano",
+    "vicinity": "Wudil"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Bakori"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Batagarawa"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Batsari"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Baure"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Bindawa"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Charanchi"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Dandume"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Danja"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Dan Musa"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Daura"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Dutsi"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Dutsin- Ma"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Faskari"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Funtua"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "GRA"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Ingawa"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Jibia"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Kafur"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Kaita"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Kankara"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Kankia"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Kastina"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Kofar Baru"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Kurfi"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Kusada"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Low Cost"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Mai Aida"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Malumfashi"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Mani"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Mashi"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Matazuu"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Musawa"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Nasarawa"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Rimi"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Saban Gari"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Sabuwa"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Safana"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Sandamu"
+  },
+  {
+    "state": "Katsina",
+    "vicinity": "Zango"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Aleiro"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Arewa Dandi"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Argungu"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Augie"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Bagudo"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Birninkebbi"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Bunza"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Dandi"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Fakai"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Gesse low  cost"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Gwandu"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Jega"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Kalgo"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Koko"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Maiyama"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Ngaski"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Rafin Atiku"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Sakaba"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Shanga"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Suru"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Wasagu"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Yauri"
+  },
+  {
+    "state": "Kebbi",
+    "vicinity": "Zuru"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Adavi"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Ajaokuta"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Ankpa"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Bassa"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Dekina"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Ibaji"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Idah"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Igalamela-Odolu"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Ijimu"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Kabba "
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Lokoja"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Mopa-Muro"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Ofu"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Ogori"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Okehi"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Okene"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Olamabolo"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Omala"
+  },
+  {
+    "state": "Kogi",
+    "vicinity": "Yagba"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Adewole Estate"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Asa"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Baruten"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Edu"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Gaa Akanbi"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Ifelodun"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Ilorin"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Irepodun"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Jebba"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Kaiama"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Koro"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Kulende"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Moro"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Oyun"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Offa"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Oke Ero"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Okelele"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Old Yidi"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Oloje"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Pakata"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Pategi"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Sabon Line Amilegbe"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Stadium Rd. Gbalasa"
+  },
+  {
+    "state": "Kwara",
+    "vicinity": "Taiwo"
+  },
+  {
+    "state": "Nassarawa",
+    "vicinity": "Awe"
+  },
+  {
+    "state": "Nassarawa",
+    "vicinity": "Akwanga"
+  },
+  {
+    "state": "Nassarawa",
+    "vicinity": "Doma"
+  },
+  {
+    "state": "Nassarawa",
+    "vicinity": "Karu"
+  },
+  {
+    "state": "Nassarawa",
+    "vicinity": "Kokona"
+  },
+  {
+    "state": "Nassarawa",
+    "vicinity": "Keana"
+  },
+  {
+    "state": "Nassarawa",
+    "vicinity": "Keffi"
+  },
+  {
+    "state": "Nassarawa",
+    "vicinity": "Nassarawa Egon"
+  },
+  {
+    "state": "Nassarawa",
+    "vicinity": "Obi"
+  },
+  {
+    "state": "Nassarawa",
+    "vicinity": "Toto"
+  },
+  {
+    "state": "Nassarawa",
+    "vicinity": "Lafia"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Agaie"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Agwara"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Airport Kwangila"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Bida"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Bosso"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Chanchaga"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Edati"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Gbako"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Gurara"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Gwada"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Katcha"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Koida Kura"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Kontagora"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Kpakungu"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Kuchita Ndak Potun"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Lapai"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Layun"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Maitumbi Gwadai"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Minna"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Magama"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Mariga"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Mokwa"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Muya"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Pailoro"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Rijau"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Rafi"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Shiroro"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Suleja"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Tafa"
+  },
+  {
+    "state": "Niger",
+    "vicinity": "Wushishi"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Abeokuta"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ado Odo/ Ota"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Afobaje Estate/ Agbala Obanibasiri"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ago-Iwoye"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ago-Oko"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Akilo Quarters"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Egbado North"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "G. R .A"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Egbado South"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ewekoro"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ibara/GRA"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Iberekodo / Akomoje"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ibese"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ifo"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Idiaba"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Idiroko Rd. /Ojuore"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ijagun"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ijamido"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "ijana Qtrs / Oke Oyinbo / Mefun/"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ijari / Ogbogbo Area"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ijebu East"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ijebu Ife"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ijebu Igbo"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ijebu Mushin"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ijebu Ode"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ikenne"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ikopa/Iawo Onigunu- Dogo"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Imeko-Afon"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ipokia"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Isabo"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Isheri/OPIC"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Jemo"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Molipa"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Mowe"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Obafemi Owode"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Odogbolu"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Odeda"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ogun Waterside"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Ojokodo / Ido Owe/"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Olomore"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Onikolobo/ GRA Extension"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Remo North"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Quarry"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Sabo"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Sagamu"
+  },
+  {
+    "state": "Ogun",
+    "vicinity": "Sango Ota"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Akoko North East"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Akoko South West"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Akure"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Alagbaka"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Ese Odo"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Idanre"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Ifedore"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Ilaje"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Ile-Oluji"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Irele"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Ijapo Estate"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Ijomu"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Oba Ile"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Odigbo"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Oke Aro Danjuma"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Okearo"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Okegbe"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Okitipupa"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Okorun"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Olukare's Palace"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Ore"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Osinle Sijuade Estate"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Owo"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Ondo East"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Ondo West"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Ose"
+  },
+  {
+    "state": "Ondo",
+    "vicinity": "Shagari Village"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Aiyetoro"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Alekuwodo"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Ayeso"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Dada Estate"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Ede"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Ejigbo"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Eleyele"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Fagbewesa"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Gbongan"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Ijebu Ijesha"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Ikeja Arakeji"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Ikirun"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Ikoyi"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Ile-Ife"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Ilesa "
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Ilobu"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Iragbiji"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Iree"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Irepodun"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Iwo"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Kola Balogun"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "leventis Agric Farm"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Odiolowo"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Ogooluwa"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Oke Baale"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Okefia"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Old Akure Rd."
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Omo West"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Osogbo"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Ota Efun"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Palace"
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Ring Rd."
+  },
+  {
+    "state": "Osun",
+    "vicinity": "Stadium"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Afijo"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Adamasingba/ ekotedo"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Agobwo/Orogun/Samonda"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ajibode/ iita"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Akinyele"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Akobo"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Atiba"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Atigbo"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Alakia/Monatan/Pdc Estate"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Apata ganga"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Dugbe/labaowo/ foko"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Egbeda"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Gbelekale/Oja Igbo"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Gbenla/Old Ife Rd."
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ibadan North"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ibadan North West"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ibadan South West"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ibadan South East"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ibarapa East"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ibarapa North"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ido"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ifewara"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ikoyi"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ipetumodu"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Irepo"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Iseyin"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Itesiwaju"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "IWERE-ILE"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Agodi GRA"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Iwajowa"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Kajola"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Lagelu Ogbomosho North"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ogbomosho South"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ogo-oluwa"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Olorunshogo"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ona-Ara"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ore Loke"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ori Ire"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Oyo East"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Oyo West"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Molete"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Modakeke"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Old Bodija / U.C.H/ Mokola"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Oluyole"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Owode"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Oyo State GRA"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Ring Rd. / Ososadi"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Sabo / oke ado"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Saki East"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Saki West"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Salvation army"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Surulere"
+  },
+  {
+    "state": "Oyo",
+    "vicinity": "Yemetu"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Anglo Jos"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Barkin-Ladi"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Bassa"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Bokkos"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Dadin kowa / kuffang"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Gangare"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Jos South"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Jos East"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Jos North "
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Kanam"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Kanke"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Langtang"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Lere"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Liberty Dam/British America"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Mangu"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Mikang"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Pankshin"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Qu'an Pan"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Riyom"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Tudun Wada"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Shendam"
+  },
+  {
+    "state": "Plateau",
+    "vicinity": "Wase"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Ali Akilu"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Binji"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Bodinga"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Dange-Shnsi"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Gada"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Gawo Nama"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Gawabawa"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Goronyo"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Gudu"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Hajiya Halima"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Illela"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Isa"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Kalambaina Gidan Manuma"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Kebbe"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Kware"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Low Cost Gwiwa"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Mabera Gidan Dahala"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Mabera Gidan Gwadabe"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Mabera Idi"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Mabera Shiyar Nasarawa"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Mabera Tsohon Gida    II"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Mabera Tsohon Gida   I"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Magajin Gari"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Rabah"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Runjin Sambo"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Sabon-Birni"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Shagari"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Shiyar Kalgawa"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Silame"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Sokoto"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Tambuwal"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Tangaza"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Tureta"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Tusun Wada"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Wamako"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Wurno"
+  },
+  {
+    "state": "Sokoto",
+    "vicinity": "Yauri Flat Area"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Ardo-Kola"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Bali"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Chanchangi"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Donga"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Gashaka"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Gassol"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Ibi"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Jalingo"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Karim Lamido"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Kurmi"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Lau"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Sabon Gari"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Sardauna"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Takum"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Ussa"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Wukari"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Yorro"
+  },
+  {
+    "state": "Taraba",
+    "vicinity": "Zing"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Barde"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Benkalio Estate"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Bursari"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Damaturu"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Dapchi"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Federal Low Cost"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Fika"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Fune"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Geidam"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Gujba"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Ibrahim Abacha Estate"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Gulani"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Jakusco"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Karasuwa"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Karawa"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Machina"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Nangere"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Nguru"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Potiskum"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "State Low Cost"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "State Low Cost Housing Village"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Tarmuwa"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Yunusari"
+  },
+  {
+    "state": "Yobe",
+    "vicinity": "Yusufari"
+  },
+  {
+    "state": "Zamfara",
+    "vicinity": "Anka"
+  },
+  {
+    "state": "Zamfara",
+    "vicinity": "Bakura"
+  },
+  {
+    "state": "Zamfara",
+    "vicinity": "Birnin Magaji"
+  },
+  {
+    "state": "Zamfara",
+    "vicinity": "Bungudu"
+  },
+  {
+    "state": "Zamfara",
+    "vicinity": "Bukkuyum"
+  },
+  {
+    "state": "Zamfara",
+    "vicinity": "Gusau"
+  },
+  {
+    "state": "Zamfara",
+    "vicinity": "Gummi"
+  },
+  {
+    "state": "Zamfara",
+    "vicinity": "Kaura"
+  },
+  {
+    "state": "Zamfara",
+    "vicinity": "Namoda"
+  },
+  {
+    "state": "Zamfara",
+    "vicinity": "Magaji"
+  },
+  {
+    "state": "Zamfara",
+    "vicinity": "Maradun"
+  },
+  {
+    "state": "Zamfara",
+    "vicinity": "Maru"
+  },
+  {
+    "state": "Zamfara",
+    "vicinity": "Shinkafi"
+  },
+  {
+    "state": "Zamfara",
+    "vicinity": "Talata Mafara"
+  },
+  {
+    "state": "Zamfara",
+    "vicinity": "Tsafe"
+  }
+]

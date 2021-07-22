@@ -1,10 +1,8 @@
-import React from "react";
+import { Box } from "@chakra-ui/react";
 import { IonApp, IonButton } from "@ionic/react";
 import WorkHistoryComponent from "@tuteria/mobile-lib/src/forms/WorkHistory";
-import "@ionic/react/css/core.css";
-import "@ionic/react/css/typography.css";
-import "@ionic/react/css/normalize.css";
-import { Box } from "@chakra-ui/react";
+import "@tuteria/mobile-lib/src/styles";
+import React from "react";
 
 export default {
   title: "Ionic Forms",
