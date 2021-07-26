@@ -9,6 +9,7 @@ import PageWrapper from "@tuteria/shared-lib/src/tutor-revamp/PageWrapper";
 import React from "react";
 import allCountries from "../data/countries.json";
 import allRegions from "../data/regions.json";
+import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
 
 export default {
   title: "Tutor Application",
@@ -302,7 +303,6 @@ export const EducationHistory = () => {
   );
 };
 export const WorkHistory = () => {
-  console.log({ store });
   return (
     // <PageWrapper
     //   store={store}
@@ -319,4 +319,8 @@ export const WorkHistory = () => {
     />
     // </PageWrapper>
   );
+};
+
+export const TutorPage = () => {
+  return <TutorPageWrapper store={store} />;
 };
