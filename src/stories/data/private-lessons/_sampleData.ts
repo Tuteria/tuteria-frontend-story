@@ -11421,8 +11421,6 @@ export const TUTORJOBLIST_DATA = [
       subjectGroup: ["Primary Math", "Primary English"],
       searchSubject: "Primary Math",
       teacherOption: "One teacher",
-
-      tutorId: "tolur",
     },
   },
   {

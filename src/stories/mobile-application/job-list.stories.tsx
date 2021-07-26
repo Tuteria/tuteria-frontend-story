@@ -1,11 +1,12 @@
 import ThemeProvider from "@tuteria/mobile-lib/src/bootstrap";
+import { OverlayRouter } from "@tuteria/mobile-lib/src/components/OverlayRouter";
+// import { TutorsPageWrapper } from "@tuteria/mobile-lib/src/components/products/private-lessons/tutor-pages/JobListPage/TutorsPageWrapper";
 import storage from "@tuteria/mobile-lib/src/local-storage";
+import JobListPageComponent from "@tuteria/mobile-lib/src/pages/JobList";
+import TutorJobListStore from "@tuteria/mobile-lib/src/store/tutorJobList";
 import React, { useEffect } from "react";
 import allCountries from "../data/countries.json";
 import ACADEMICS_DATA from "../data/parent-flow/data";
-import { OverlayRouter } from "@tuteria/mobile-lib/src/components/OverlayRouter";
-import { TutorsPageWrapper } from "@tuteria/mobile-lib/src/components/products/private-lessons/tutor-pages/JobListPage/TutorsPageWrapper";
-
 import {
   SAMPLENEIGHBORINGAREA,
   TUTORJOBLIST_DATA,
@@ -287,22 +288,23 @@ export const JobListPage = () => {
 
   return (
     <OverlayRouter>
-      <TutorsPageWrapper
-        defaultMenu="Jobs"
-        videoDetails={videoDetailsObject}
-        alertProps={{
-          hasCompletedProfile: true,
-          hasUpdatedSchedule: true,
-          hasSetPrice: false,
-          hasWhatsappNumber: false,
-          completeProfileLink: "",
-          updateScheduleLink: "",
-          setPriceLink: "",
-          setWhatsappNumber: (no) => saveWhatsapp(no),
-        }}
+      <React.Fragment
+      // defaultMenu="Jobs"
+      // videoDetails={videoDetailsObject}
+      // alertProps={{
+      //   hasCompletedProfile: true,
+      //   hasUpdatedSchedule: true,
+      //   hasSetPrice: false,
+      //   hasWhatsappNumber: false,
+      //   completeProfileLink: "",
+      //   updateScheduleLink: "",
+      //   setPriceLink: "",
+      //   setWhatsappNumber: (no) => saveWhatsapp(no),
+      // }}
       >
-        <JobListPage
-          isLoading={false}
+        <JobListPageComponent
+          agent={{}}
+          host=""
           // bookings={jobListStore.summaryInfo}
           // bookings={jobListStore.summaryInfo.map((o, i) => {
           //   return { ...o, tutorResponse: sampleBookings[i].tutorResponse };
@@ -312,7 +314,7 @@ export const JobListPage = () => {
           // bookings={sampleBookings}
           tutorInfo={sampleTutorInfo}
         />
-      </TutorsPageWrapper>
+      </React.Fragment>
     </OverlayRouter>
   );
 };
