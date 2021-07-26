@@ -11421,8 +11421,6 @@ export const TUTORJOBLIST_DATA = [
       subjectGroup: ["Primary Math", "Primary English"],
       searchSubject: "Primary Math",
       teacherOption: "One teacher",
-
-      tutorId: "tolur",
     },
   },
   {
@@ -13983,7 +13981,8 @@ export const REAL_TUTORS_DATA = [
           isTeachingRole: true,
         },
         {
-          role: "Secondary English Language, Literature, Civic Edu, and Government Teacher",
+          role:
+            "Secondary English Language, Literature, Civic Edu, and Government Teacher",
           company: "Totalman College",
           endYear: "",
           isCurrent: true,
