@@ -1,12 +1,15 @@
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { RootStore } from "@tuteria/shared-lib/src/stores";
-import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
+import EducationHistoryPage from "@tuteria/shared-lib/src/tutor-revamp/EducationHistory";
+import LocationInfoForm from "@tuteria/shared-lib/src/tutor-revamp/LocationInfo";
+import PersonalInfoForm from "@tuteria/shared-lib/src/tutor-revamp/PersonalInfo";
+import WorkHistoryPage from "@tuteria/shared-lib/src/tutor-revamp/WorkHistory";
 import React from "react";
 import allCountries from "../data/countries.json";
 import allRegions from "../data/regions.json";
 
 export default {
-  title: "Tutor Application/Pages",
+  title: "Tutor Application/Forms",
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
@@ -237,6 +240,80 @@ const initialSteps = [
   },
 ];
 
-export const TutorPage = () => {
-  return <TutorPageWrapper store={store} />;
+export const PersonalInfo = () => {
+  return (
+    // <PageWrapper
+    //   store={store}
+    //   updateSteps={initialSteps}
+    //   currentRoute="/personal-details"
+    //   onNextClick={() => {}}
+    // >
+    <PersonalInfoForm
+      key={store.locationInfo.countries.length > 0}
+      store={store.personalInfo}
+      viewModel={store.locationInfo}
+      onSubmit={(formData: any) => {
+        console.log("Form Data", formData);
+        store.toNextPath(); //moving to the next page.
+      }}
+    />
+    // </PageWrapper>
+  );
+};
+export const LocationInfo = () => {
+  return (
+    // <PageWrapper
+    //   store={store}
+    //   updateSteps={initialSteps}
+    //   currentRoute="/personal-details"
+    //   onNextClick={() => {}}
+    // >
+    <LocationInfoForm
+      key={store.locationInfo.countries.length > 0}
+      store={store.personalInfo}
+      viewModel={store.locationInfo}
+      onSubmit={(formData: any) => {
+        console.log("Form Data", formData);
+        store.toNextPath(); //moving to the next page.
+      }}
+    />
+    // </PageWrapper>
+  );
+};
+
+export const EducationHistory = () => {
+  return (
+    // <PageWrapper
+    //   store={store}
+    //   reverify
+    //   updateSteps={initialSteps}
+    //   currentRoute="/education-work"
+    //   onNextClick={() => {
+    //     store.saveEducationAndWorkHistory();
+    //   }}
+    // >
+    <EducationHistoryPage
+      store={store.educationWorkHistory}
+      countries={allCountries}
+    />
+    // </PageWrapper>
+  );
+};
+export const WorkHistory = () => {
+  return (
+    // <PageWrapper
+    //   store={store}
+    //   reverify
+    //   updateSteps={initialSteps}
+    //   currentRoute="/education-work"
+    //   onNextClick={() => {
+    //     store.saveEducationAndWorkHistory();
+    //   }}
+    // >
+    <WorkHistoryPage
+      store={store.educationWorkHistory}
+      countries={allCountries}
+    />
+    // </PageWrapper>
+  );
 };
