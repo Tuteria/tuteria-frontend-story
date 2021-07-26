@@ -13,7 +13,7 @@ clone the shared-lib repo
 ```
 cd packages
 mkdir shared-lib
-cd packages/shared-lib
+cd shared-lib
 git clone  git@gitlab.com:tuteria/v2/shared-lib.git
 ```
 
