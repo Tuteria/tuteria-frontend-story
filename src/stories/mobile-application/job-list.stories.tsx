@@ -12,6 +12,7 @@ import {
   TUTORJOBLIST_DATA,
 } from "../data/private-lessons/_sampleData";
 import allRegions from "../data/regions.json";
+import { observer } from "mobx-react-lite";
 
 export default {
   title: "Mobile Application",
@@ -270,9 +271,8 @@ function getJobListStore() {
     { adapter }
   );
 }
-const jobListStore = getJobListStore();
 
-export const JobListPage = () => {
+const JobListStory = observer(({ jobListStore }) => {
   useEffect(() => {
     jobListStore.bulkMapToStore(TUTORJOBLIST_DATA);
     console.log(jobListStore.summaryInfo);
@@ -317,4 +317,9 @@ export const JobListPage = () => {
       </TutorPageWrapper>
     </OverlayRouter>
   );
+});
+
+export const JobListPage = () => {
+  const jobListStore = getJobListStore();
+  return <JobListStory jobListStore={jobListStore} />;
 };
