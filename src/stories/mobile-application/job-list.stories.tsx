@@ -13,6 +13,7 @@ import {
 } from "../data/private-lessons/_sampleData";
 import allRegions from "../data/regions.json";
 import { observer } from "mobx-react-lite";
+import { Box } from "@chakra-ui/react";
 
 export default {
   title: "Mobile Application",
@@ -287,35 +288,37 @@ const JobListStory = observer(({ jobListStore }) => {
   }
 
   return (
-    <OverlayRouter>
-      <TutorPageWrapper
-        defaultMenu="Jobs"
-        videoDetails={videoDetailsObject}
-        alertProps={{
-          hasCompletedProfile: true,
-          hasUpdatedSchedule: true,
-          hasSetPrice: false,
-          hasWhatsappNumber: false,
-          completeProfileLink: "",
-          updateScheduleLink: "",
-          setPriceLink: "",
-          setWhatsappNumber: (no) => saveWhatsapp(no),
-        }}
-      >
-        <JobListPageComponent
-          agent={{}}
-          host=""
-          // bookings={jobListStore.summaryInfo}
-          // bookings={jobListStore.summaryInfo.map((o, i) => {
-          //   return { ...o, tutorResponse: sampleBookings[i].tutorResponse };
-          // })}
-          store={jobListStore}
-          bookings={jobListStore.bookings}
-          // bookings={sampleBookings}
-          tutorInfo={sampleTutorInfo}
-        />
-      </TutorPageWrapper>
-    </OverlayRouter>
+    <Box height="100vh" overflow="auto">
+      <OverlayRouter>
+        <TutorPageWrapper
+          defaultMenu="Jobs"
+          videoDetails={videoDetailsObject}
+          alertProps={{
+            hasCompletedProfile: true,
+            hasUpdatedSchedule: true,
+            hasSetPrice: false,
+            hasWhatsappNumber: false,
+            completeProfileLink: "",
+            updateScheduleLink: "",
+            setPriceLink: "",
+            setWhatsappNumber: (no) => saveWhatsapp(no),
+          }}
+        >
+          <JobListPageComponent
+            agent={{}}
+            host=""
+            // bookings={jobListStore.summaryInfo}
+            // bookings={jobListStore.summaryInfo.map((o, i) => {
+            //   return { ...o, tutorResponse: sampleBookings[i].tutorResponse };
+            // })}
+            store={jobListStore}
+            bookings={jobListStore.bookings}
+            // bookings={sampleBookings}
+            tutorInfo={sampleTutorInfo}
+          />
+        </TutorPageWrapper>
+      </OverlayRouter>
+    </Box>
   );
 });
 

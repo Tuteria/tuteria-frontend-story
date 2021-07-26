@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@capacitor/cli": "3.1.1",
-    "@chakra-ui/react": "^1.6.5",
+    "@chakra-ui/react": "1.6.4",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@ionic/react": "^5.5.0",
