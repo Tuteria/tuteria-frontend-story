@@ -2,10 +2,14 @@ import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { RootStore } from "@tuteria/shared-lib/src/stores";
 import PersonalInfoForm from "@tuteria/shared-lib/src/tutor-revamp/PersonalInfo";
+import LocationInfoForm from "@tuteria/shared-lib/src/tutor-revamp/LocationInfo";
+import EducationHistoryPage from "@tuteria/shared-lib/src/tutor-revamp/EducationHistory";
+import WorkHistoryPage from "@tuteria/shared-lib/src/tutor-revamp/WorkHistory";
 import PageWrapper from "@tuteria/shared-lib/src/tutor-revamp/PageWrapper";
 import React from "react";
 import allCountries from "../data/countries.json";
 import allRegions from "../data/regions.json";
+
 export default {
   title: "Tutor Application",
   decorators: [
@@ -71,38 +75,37 @@ const store = RootStore.create(
           endYear: "2020",
           isCurrent: true,
           showOnProfile: true,
-          classGroup: [],
         },
       ],
     },
-    teachingProfile: {
-      classGroup: ["Lower Primary", "Pre-primary"],
-      curriculums: ["British", "Nigerian"],
-      examExperience: {
-        exams: [
-          "Common Entrance Exam",
-          "Cambridge Checkpoint",
-          "13+ Entrance Exam",
-        ],
-        schools: ["Greensprings", "Grange"],
-      },
-      specialNeeds: ["ADD/ADHD", "Dyslexia"],
-      tutorDisabilities: ["ADD/ADHD"],
-      onlineProfile: {
-        acceptsOnline: true,
-        hasComputer: true,
-        hasInternet: true,
-      },
-    },
-    availability: {
-      availability: {
-        Monday: ["Morning", "Late afternoon"],
-        Wednesday: ["Evening", "Early evening"],
-      },
-      maxDays: 3,
-      maxHours: 1,
-      maxStudents: 3,
-    },
+    // teachingProfile: {
+    //   classGroup: ["Lower Primary", "Pre-primary"],
+    //   curriculums: ["British", "Nigerian"],
+    //   examExperience: {
+    //     exams: [
+    //       "Common Entrance Exam",
+    //       "Cambridge Checkpoint",
+    //       "13+ Entrance Exam",
+    //     ],
+    //     schools: ["Greensprings", "Grange"],
+    //   },
+    //   specialNeeds: ["ADD/ADHD", "Dyslexia"],
+    //   tutorDisabilities: ["ADD/ADHD"],
+    //   onlineProfile: {
+    //     acceptsOnline: true,
+    //     hasComputer: true,
+    //     hasInternet: true,
+    //   },
+    // },
+    // availability: {
+    //   availability: {
+    //     Monday: ["Morning", "Late afternoon"],
+    //     Wednesday: ["Evening", "Early evening"],
+    //   },
+    //   maxDays: 3,
+    //   maxHours: 1,
+    //   maxStudents: 3,
+    // },
     identity: {
       profilePhotoId: "hello/holla",
       profilePhoto:
@@ -118,12 +121,12 @@ const store = RootStore.create(
       //   ],
       // },
     },
-    agreement: {
-      lessonPercent: true,
-      amountEarned: 567650,
-      contractAgreement: true,
-      taxP: 5,
-    },
+    // agreement: {
+    //   lessonPercent: true,
+    //   amountEarned: 567650,
+    //   contractAgreement: true,
+    //   taxP: 5,
+    // },
     slug: "tutor-101",
   }
   // {
@@ -173,7 +176,6 @@ const store = RootStore.create(
   //   },
   // }
 );
-
 const initialSteps = [
   {
     stepName: "What is this about?",
@@ -242,22 +244,79 @@ const initialSteps = [
 
 export const PersonalInfo = () => {
   return (
-    <PageWrapper
-      store={store}
-      updateSteps={initialSteps}
-      currentRoute="/personal-details"
-      onNextClick={() => {}}
-    >
-      <PersonalInfoForm
-        store={store}
-        key={store.locationInfo.countries.length > 0}
-        store={store.personalInfo}
-        viewModel={store.locationInfo}
-        onSubmit={(formData) => {
-          console.log("Form Data", formData);
-          store.toNextPath(); //moving to the next page.
-        }}
-      />
-    </PageWrapper>
+    // <PageWrapper
+    //   store={store}
+    //   updateSteps={initialSteps}
+    //   currentRoute="/personal-details"
+    //   onNextClick={() => {}}
+    // >
+    <PersonalInfoForm
+      key={store.locationInfo.countries.length > 0}
+      store={store.personalInfo}
+      viewModel={store.locationInfo}
+      onSubmit={(formData: any) => {
+        console.log("Form Data", formData);
+        store.toNextPath(); //moving to the next page.
+      }}
+    />
+    // </PageWrapper>
+  );
+};
+export const LocationInfo = () => {
+  return (
+    // <PageWrapper
+    //   store={store}
+    //   updateSteps={initialSteps}
+    //   currentRoute="/personal-details"
+    //   onNextClick={() => {}}
+    // >
+    <LocationInfoForm
+      key={store.locationInfo.countries.length > 0}
+      store={store.personalInfo}
+      viewModel={store.locationInfo}
+      onSubmit={(formData: any) => {
+        console.log("Form Data", formData);
+        store.toNextPath(); //moving to the next page.
+      }}
+    />
+    // </PageWrapper>
+  );
+};
+
+export const EducationHistory = () => {
+  return (
+    // <PageWrapper
+    //   store={store}
+    //   reverify
+    //   updateSteps={initialSteps}
+    //   currentRoute="/education-work"
+    //   onNextClick={() => {
+    //     store.saveEducationAndWorkHistory();
+    //   }}
+    // >
+    <EducationHistoryPage
+      store={store.educationWorkHistory}
+      countries={allCountries}
+    />
+    // </PageWrapper>
+  );
+};
+export const WorkHistory = () => {
+  console.log({ store });
+  return (
+    // <PageWrapper
+    //   store={store}
+    //   reverify
+    //   updateSteps={initialSteps}
+    //   currentRoute="/education-work"
+    //   onNextClick={() => {
+    //     store.saveEducationAndWorkHistory();
+    //   }}
+    // >
+    <WorkHistoryPage
+      store={store.educationWorkHistory}
+      countries={allCountries}
+    />
+    // </PageWrapper>
   );
 };
