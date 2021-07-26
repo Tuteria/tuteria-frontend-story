@@ -1,6 +1,5 @@
 // import TutorJobListStore  from "@tuteria/mobile-lib/src/store/tutorJobList";
 // import ThemeProvider from "@tuteria/mobile-lib/src/bootstrap";
-// // import { TutorsPageWrapper } from "@tuteria/mobile-lib/src/components/products/private-lessons/tutor-pages/JobListPage/TutorsPageWrapper";
 // import storage from "@tuteria/mobile-lib/src/local-storage";
 // import React, { useEffect } from "react";
 // import allCountries from "../data/countries.json";
@@ -23,7 +22,7 @@
 // const REGION_KEY = "TEST-REGIONS-VICINITIES";
 // const COUNTRY_KEY = "TEST-COUNTRIES";
 // const REQUEST_KEY = "TEST-HOME-TUTORING-REQUEST";
-// export const adapter = {
+// const adapter = {
 //   regionKey: REGION_KEY,
 //   countryKey: COUNTRY_KEY,
 //   requestKey: REQUEST_KEY,

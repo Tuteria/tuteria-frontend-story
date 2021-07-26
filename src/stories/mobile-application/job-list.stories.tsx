@@ -1,6 +1,6 @@
 import ThemeProvider from "@tuteria/mobile-lib/src/bootstrap";
 import { OverlayRouter } from "@tuteria/mobile-lib/src/components/OverlayRouter";
-// import { TutorsPageWrapper } from "@tuteria/mobile-lib/src/components/products/private-lessons/tutor-pages/JobListPage/TutorsPageWrapper";
+import TutorPageWrapper from "@tuteria/mobile-lib/src/components/TutorPageWrapper";
 import storage from "@tuteria/mobile-lib/src/local-storage";
 import JobListPageComponent from "@tuteria/mobile-lib/src/pages/JobList";
 import TutorJobListStore from "@tuteria/mobile-lib/src/store/tutorJobList";
@@ -27,7 +27,7 @@ export default {
 const REGION_KEY = "TEST-REGIONS-VICINITIES";
 const COUNTRY_KEY = "TEST-COUNTRIES";
 const REQUEST_KEY = "TEST-HOME-TUTORING-REQUEST";
-export const adapter = {
+const adapter = {
   regionKey: REGION_KEY,
   countryKey: COUNTRY_KEY,
   requestKey: REQUEST_KEY,
@@ -288,19 +288,19 @@ export const JobListPage = () => {
 
   return (
     <OverlayRouter>
-      <React.Fragment
-      // defaultMenu="Jobs"
-      // videoDetails={videoDetailsObject}
-      // alertProps={{
-      //   hasCompletedProfile: true,
-      //   hasUpdatedSchedule: true,
-      //   hasSetPrice: false,
-      //   hasWhatsappNumber: false,
-      //   completeProfileLink: "",
-      //   updateScheduleLink: "",
-      //   setPriceLink: "",
-      //   setWhatsappNumber: (no) => saveWhatsapp(no),
-      // }}
+      <TutorPageWrapper
+        defaultMenu="Jobs"
+        videoDetails={videoDetailsObject}
+        alertProps={{
+          hasCompletedProfile: true,
+          hasUpdatedSchedule: true,
+          hasSetPrice: false,
+          hasWhatsappNumber: false,
+          completeProfileLink: "",
+          updateScheduleLink: "",
+          setPriceLink: "",
+          setWhatsappNumber: (no) => saveWhatsapp(no),
+        }}
       >
         <JobListPageComponent
           agent={{}}
@@ -314,7 +314,7 @@ export const JobListPage = () => {
           // bookings={sampleBookings}
           tutorInfo={sampleTutorInfo}
         />
-      </React.Fragment>
+      </TutorPageWrapper>
     </OverlayRouter>
   );
 };
