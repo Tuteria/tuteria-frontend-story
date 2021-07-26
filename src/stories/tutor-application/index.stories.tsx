@@ -238,5 +238,5 @@ const initialSteps = [
 ];
 
 export const TutorPage = () => {
-  return <TutorPageWrapper store={store} />;
+  return <TutorPageWrapper store={store} allCountries={allCountries} />;
 };
