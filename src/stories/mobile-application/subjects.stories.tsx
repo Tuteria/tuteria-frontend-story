@@ -1,18 +1,16 @@
 import ThemeProvider from "@tuteria/mobile-lib/src/bootstrap";
-import { OverlayRouter } from "@tuteria/mobile-lib/src/components/OverlayRouter";
-import TutorPageWrapper from "@tuteria/mobile-lib/src/components/TutorPageWrapper";
 import storage from "@tuteria/mobile-lib/src/local-storage";
-import JobListPageComponent from "@tuteria/mobile-lib/src/pages/JobList";
 import TutorJobListStore from "@tuteria/mobile-lib/src/store/tutorJobList";
-import React, { useEffect } from "react";
+import React from "react";
 import allCountries from "../data/countries.json";
 import ACADEMICS_DATA from "../data/parent-flow/data";
+import Subject from "@tuteria/mobile-lib/src/tutor-revamp/Subject";
 import {
   SAMPLENEIGHBORINGAREA,
-  TUTORJOBLIST_DATA,
+  SAMPLETUTORSUBJECTS,
 } from "../data/private-lessons/_sampleData";
+import TutorsPageWrapper from "@tuteria/mobile-lib/src/components/TutorPageWrapper";
 import allRegions from "../data/regions.json";
-import { observer } from "mobx-react-lite";
 import { Box } from "@chakra-ui/react";
 
 export default {
@@ -196,17 +194,7 @@ const adapter = {
     });
   },
 };
-const sampleTutorInfo = {
-  userId: "ythguj",
-  firstName: "Jumoke",
-  lastName: "Benson",
-  requestsDeclined: 4,
-  photo:
-    "http://res.cloudinary.com/tuteria/image/upload/v1510931421/profile_pics/neizg4691lidnczc36nx.jpg",
-  level: "premium",
-  newTutorDiscount: 10,
-  delivery: ["physical"],
-};
+
 const videoDetailsObject = {
   Updates: {
     headline: "More info about updates page",
@@ -251,6 +239,7 @@ const videoDetailsObject = {
     ],
   },
 };
+
 function getJobListStore() {
   return TutorJobListStore.create(
     {
@@ -274,15 +263,12 @@ function getJobListStore() {
     { adapter }
   );
 }
-
-const JobListStory = observer(({ jobListStore }) => {
-  useEffect(() => {
-    jobListStore.bulkMapToStore(TUTORJOBLIST_DATA);
-    console.log(jobListStore.summaryInfo);
-  }, []);
+export const SubjectPage = ({}) => {
+  const jobListStore = getJobListStore();
+  jobListStore.subject.initializeSubjectStore(SAMPLETUTORSUBJECTS);
 
   async function saveWhatsapp(number) {
-    new Promise((resolve) => {
+    return new Promise((resolve) => {
       setTimeout(() => {
         resolve(number);
       }, 1000);
@@ -290,39 +276,21 @@ const JobListStory = observer(({ jobListStore }) => {
   }
 
   return (
-    <OverlayRouter>
-      <TutorPageWrapper
-        defaultMenu="Jobs"
-        videoDetails={videoDetailsObject}
-        alertProps={{
-          hasCompletedProfile: true,
-          hasUpdatedSchedule: true,
-          hasSetPrice: false,
-          hasWhatsappNumber: false,
-          completeProfileLink: "",
-          updateScheduleLink: "",
-          setPriceLink: "",
-          setWhatsappNumber: (no) => saveWhatsapp(no),
-        }}
-      >
-        <JobListPageComponent
-          agent={{}}
-          host=""
-          // bookings={jobListStore.summaryInfo}
-          // bookings={jobListStore.summaryInfo.map((o, i) => {
-          //   return { ...o, tutorResponse: sampleBookings[i].tutorResponse };
-          // })}
-          store={jobListStore}
-          bookings={jobListStore.bookings}
-          // bookings={sampleBookings}
-          tutorInfo={sampleTutorInfo}
-        />
-      </TutorPageWrapper>
-    </OverlayRouter>
+    <TutorsPageWrapper
+      defaultMenu={"Subjects"}
+      videoDetails={videoDetailsObject}
+      alertProps={{
+        hasCompletedProfile: true,
+        hasUpdatedSchedule: true,
+        hasSetPrice: true,
+        hasWhatsappNumber: false,
+        completeProfileLink: "",
+        updateScheduleLink: "",
+        setPriceLink: "",
+        setWhatsappNumber: (no) => saveWhatsapp(no),
+      }}
+    >
+      <Subject store={jobListStore.subject} />
+    </TutorsPageWrapper>
   );
-});
-
-export const JobListPage = () => {
-  const jobListStore = getJobListStore();
-  return <JobListStory jobListStore={jobListStore} />;
 };
