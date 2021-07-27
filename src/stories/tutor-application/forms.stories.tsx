@@ -136,7 +136,7 @@ const store = RootStore.create(
   //       }, 3000);
   //     });
   //   },
-  //   toNextPath: async () => {},
+  // toNextPath: async () => {},
   //   remoteDeleteImage: async (file) => {
   //     console.log(file);
   //   },
@@ -241,6 +241,7 @@ const initialSteps = [
 ];
 
 export const PersonalInfo = () => {
+  store.initializeForm("personal-info");
   return (
     // <PageWrapper
     //   store={store}
@@ -249,9 +250,8 @@ export const PersonalInfo = () => {
     //   onNextClick={() => {}}
     // >
     <PersonalInfoForm
-      key={store.locationInfo.countries.length > 0}
-      store={store.personalInfo}
-      viewModel={store.locationInfo}
+      store={store}
+      countries={allCountries.map((country) => country.name)}
       onSubmit={(formData: any) => {
         console.log("Form Data", formData);
         store.toNextPath(); //moving to the next page.
@@ -261,6 +261,7 @@ export const PersonalInfo = () => {
   );
 };
 export const LocationInfo = () => {
+  store.initializeForm("location-info");
   return (
     // <PageWrapper
     //   store={store}
@@ -269,9 +270,7 @@ export const LocationInfo = () => {
     //   onNextClick={() => {}}
     // >
     <LocationInfoForm
-      key={store.locationInfo.countries.length > 0}
-      store={store.personalInfo}
-      viewModel={store.locationInfo}
+      store={store}
       onSubmit={(formData: any) => {
         console.log("Form Data", formData);
         store.toNextPath(); //moving to the next page.
@@ -282,6 +281,7 @@ export const LocationInfo = () => {
 };
 
 export const EducationHistory = () => {
+  store.initializeForm("education-history");
   return (
     // <PageWrapper
     //   store={store}
@@ -292,14 +292,12 @@ export const EducationHistory = () => {
     //     store.saveEducationAndWorkHistory();
     //   }}
     // >
-    <EducationHistoryPage
-      store={store.educationWorkHistory}
-      countries={allCountries}
-    />
+    <EducationHistoryPage store={store} countries={allCountries} />
     // </PageWrapper>
   );
 };
 export const WorkHistory = () => {
+  store.initializeForm("work-history");
   return (
     // <PageWrapper
     //   store={store}
@@ -310,10 +308,7 @@ export const WorkHistory = () => {
     //     store.saveEducationAndWorkHistory();
     //   }}
     // >
-    <WorkHistoryPage
-      store={store.educationWorkHistory}
-      countries={allCountries}
-    />
+    <WorkHistoryPage store={store} countries={allCountries} />
     // </PageWrapper>
   );
 };
