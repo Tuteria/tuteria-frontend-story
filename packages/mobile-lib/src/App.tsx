@@ -10,11 +10,16 @@ import "./styles";
 /* Theme variables */
 import "./theme/variables.css";
 import { ISampleType } from "./stores";
+import { MobileRouter } from "./components/OverlayRouter";
 
 const App: React.FC<{ store: ISampleType }> = observer(({ store }) => {
   return (
     <IonApp>
-      <IonReactRouter>
+      <MobileRouter
+        initialIndex={2}
+        mode="dev"
+        initialEntries={["/", "/page/Inbox", "/page/Outbox"]}
+      >
         <IonSplitPane contentId="main">
           <Menu />
           <IonRouterOutlet id="main">
@@ -26,7 +31,7 @@ const App: React.FC<{ store: ISampleType }> = observer(({ store }) => {
             </Route>
           </IonRouterOutlet>
         </IonSplitPane>
-      </IonReactRouter>
+      </MobileRouter>
     </IonApp>
   );
 });

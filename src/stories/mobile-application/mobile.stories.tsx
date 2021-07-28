@@ -1,22 +1,48 @@
+import {
+  IonApp,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonListHeader,
+  IonMenu,
+  IonMenuButton,
+  IonMenuToggle,
+  IonNote,
+  IonPage,
+  IonRouterOutlet,
+  IonSplitPane,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
 import ThemeProvider from "@tuteria/mobile-lib/src/bootstrap";
-import storage from "@tuteria/mobile-lib/src/local-storage";
-import React from "react";
+import JobListPageComponent from "@tuteria/mobile-lib/src/pages/JobList";
+import { observer } from "mobx-react-lite";
+import TutorJobListStore from "@tuteria/mobile-lib/src/store/tutorJobList";
+import React, { useEffect } from "react";
+import { Redirect, Route, useLocation, useParams } from "react-router-dom";
 import allCountries from "../data/countries.json";
-import ACADEMICS_DATA from "../data/parent-flow/data";
-import { SAMPLENEIGHBORINGAREA } from "../data/private-lessons/_sampleData";
+import { TUTORJOBLIST_DATA } from "../data/private-lessons/_sampleData";
 import allRegions from "../data/regions.json";
+import { MobileRouter } from "@tuteria/mobile-lib/src/components/OverlayRouter";
 
 export default {
   title: "Mobile Application/Pages",
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <Story />
+        <IonApp>
+          <MobileRouter mode="dev" initialEntries={["/"]} initialIndex={0}>
+            <Story />
+          </MobileRouter>
+        </IonApp>
       </ThemeProvider>
     ),
   ],
 };
-
 const REGION_KEY = "TEST-REGIONS-VICINITIES";
 const COUNTRY_KEY = "TEST-COUNTRIES";
 const REQUEST_KEY = "TEST-HOME-TUTORING-REQUEST";
@@ -185,73 +211,132 @@ const adapter = {
     });
   },
 };
-
-const videoDetailsObject = {
-  Updates: {
-    headline: "More info about updates page",
-    videoURL: "https://www.youtube.com/watch?v=mWZ6b_I-Djg",
-    thumbnailURL: "https://img.youtube.com/vi/HQx5Be9g16U/maxresdefault.jpg",
-    listItems: [
-      "What to expect in the update page",
-      "How to maximize the update page",
-    ],
-  },
-  Jobs: {
-    headline: "How to accept jobs",
-    videoURL: "https://www.youtube.com/watch?v=sVPYIRF9RCQ",
-    thumbnailURL: "https://img.youtube.com/vi/sVPYIRF9RCQ/default.jpg",
-    listItems: [
-      "When to update your schedule",
-      "How to exclude areas you are not interested in",
-    ],
-  },
-  Schedule: {
-    headline: "How to update your schedule and availability",
-    videoURL: "https://www.youtube.com/watch?v=HQx5Be9g16U",
-    thumbnailURL: "https://img.youtube.com/vi/HQx5Be9g16U/default.jpg",
-    listItems: [
-      "When to update your schedule",
-      "How to exclude areas you are not interested in",
-    ],
-  },
-  Lessons: {
-    headline: "How to use the lesson's page",
-    videoURL: "https://www.youtube.com/watch?v=eGVOSeXRy9o",
-    thumbnailURL: "https://img.youtube.com/vi/HQx5Be9g16U/default.jpg",
-    listItems: ["How to use the lesson's page"],
-  },
-  Subjects: {
-    headline: "How to update your subjects",
-    videoURL: "https://www.youtube.com/watch?v=dJpIU1rSOFY",
-    thumbnailURL: "https://img.youtube.com/vi/dJpIU1rSOFY/default.jpg",
-    listItems: [
-      "How to update your subject heading",
-      "How to update your subject descriptions",
-    ],
-  },
+const sampleTutorInfo = {
+  userId: "ythguj",
+  firstName: "Jumoke",
+  lastName: "Benson",
+  requestsDeclined: 4,
+  photo:
+    "http://res.cloudinary.com/tuteria/image/upload/v1510931421/profile_pics/neizg4691lidnczc36nx.jpg",
+  level: "premium",
+  newTutorDiscount: 10,
+  delivery: ["physical"],
 };
+function getJobListStore() {
+  return TutorJobListStore.create(
+    {
+      availability: {
+        availability: {
+          Monday: ["Morning", "Late afternoon"],
+          Wednesday: ["Evening", "Early evening"],
+        },
+        maxDays: 3,
+        maxHours: 1,
+        maxStudents: 3,
+      },
+      locationInfo: {
+        country: "Nigeria",
+        countries: allCountries,
+        state: "Lagos",
+        region: "Agege",
+        regions: allRegions,
+      },
+    },
+    { adapter }
+  );
+}
+const SideMenu = observer(({ appPages = [] }) => {
+  const location = useLocation();
 
-const availabilityData = {
-  availability: {
-    Monday: ["Morning", "Late afternoon"],
-    Wednesday: ["Evening", "Early evening"],
-  },
-  maxDays: 2,
-  maxHours: 1,
-  maxStudents: 3,
-  lastCalendarUpdate: "2021-05-14T00:00:00.000Z",
-  availabilityStatus: {
-    isAvailable: false,
-    resumptionDate: "2021-06-18",
-  },
-  exemptedAreas: ["Apapa", "Ajah", "Epe"],
+  return (
+    <IonMenu contentId="main" type="overlay">
+      <IonContent>
+        <IonList id="inbox-list">
+          <IonListHeader>Inbox</IonListHeader>
+          <IonNote>hi@ionicframework.com</IonNote>
+          {appPages.map((appPage, index) => {
+            return (
+              <IonMenuToggle key={index} autoHide={false}>
+                <IonItem
+                  className={
+                    location.pathname === appPage.url ? "selected" : ""
+                  }
+                  routerLink={appPage.url}
+                  routerDirection="none"
+                  lines="none"
+                  detail={false}
+                >
+                  <IonIcon
+                    slot="start"
+                    ios={appPage.iosIcon}
+                    md={appPage.mdIcon}
+                  />
+                  <IonLabel>{appPage.title}</IonLabel>
+                </IonItem>
+              </IonMenuToggle>
+            );
+          })}
+        </IonList>
+      </IonContent>
+    </IonMenu>
+  );
+});
+const Page = ({ children, name }) => {
+  return (
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
+          <IonTitle>{name}</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+
+      <IonContent fullscreen>
+        <IonHeader collapse="condense">
+          <IonToolbar>
+            <IonTitle size="large">{name}</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        {children}
+      </IonContent>
+    </IonPage>
+  );
 };
-const locationInfo = {
-  country: "Nigeria",
-  countries: allCountries,
-  state: "Lagos",
-  region: "Agege",
-  address: "Agege Estate",
-  vicinity: "Agege Bus stop",
-  regions: allRegions,
+const JobListView = observer(({ store }) => {
+  const { name } = useParams<{ name: string }>();
+  useEffect(() => {
+    store.bulkMapToStore(TUTORJOBLIST_DATA);
+    console.log(store.summaryInfo);
+  }, []);
+  return (
+    <Page name="Job">
+      <JobListPageComponent
+        agent={{}}
+        host=""
+        store={store}
+        bookings={store.bookings}
+        // bookings={sampleBookings}
+        tutorInfo={sampleTutorInfo}
+      />
+    </Page>
+  );
+});
+const appPages = [{ title: "Jobs", url: "/page/Jobs" }];
+export const JobListPage = () => {
+  const jobListStore = getJobListStore();
+  return (
+    <IonSplitPane contentId="main">
+      <SideMenu appPages={appPages} />
+      <IonRouterOutlet id="main">
+        <Route path="/" exact={true}>
+          <Redirect to="/page/Jobs" />
+        </Route>
+        <Route path="/page/Jobs" exact={true}>
+          <JobListView store={jobListStore} />
+        </Route>
+      </IonRouterOutlet>
+    </IonSplitPane>
+  );
 };

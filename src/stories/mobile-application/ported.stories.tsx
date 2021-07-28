@@ -11,6 +11,7 @@ import Availability from "@tuteria/mobile-lib/src/tutor-revamp/Availability";
 import Subject from "@tuteria/mobile-lib/src/tutor-revamp/Subject";
 import {
   SAMPLENEIGHBORINGAREA,
+  SAMPLETUTORSUBJECTS,
   TUTORJOBLIST_DATA,
 } from "../data/private-lessons/_sampleData";
 import allRegions from "../data/regions.json";
