@@ -1,44 +1,34 @@
-import {
-  IonApp,
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonListHeader,
-  IonMenu,
-  IonMenuButton,
-  IonMenuToggle,
-  IonNote,
-  IonPage,
-  IonRouterOutlet,
-  IonSplitPane,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
+import { IonRouterOutlet } from "@ionic/react";
 import ThemeProvider from "@tuteria/mobile-lib/src/bootstrap";
-import JobListPageComponent from "@tuteria/mobile-lib/src/pages/JobList";
-import { observer } from "mobx-react-lite";
+import AppRouter from "@tuteria/mobile-lib/src/pages/AppRoute";
+import Page from "@tuteria/mobile-lib/src/pages/Page";
 import TutorJobListStore from "@tuteria/mobile-lib/src/store/tutorJobList";
+import JobListPageComponent from "@tuteria/mobile-lib/src/tutor-revamp/JobList";
+import { observer } from "mobx-react-lite";
 import React, { useEffect } from "react";
-import { Redirect, Route, useLocation, useParams } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import allCountries from "../data/countries.json";
 import { TUTORJOBLIST_DATA } from "../data/private-lessons/_sampleData";
 import allRegions from "../data/regions.json";
-import { MobileRouter } from "@tuteria/mobile-lib/src/components/OverlayRouter";
 
+const appPages = [
+  { title: "Jobs", url: "/page/Jobs" },
+  { title: "Schedule", url: "/page/Schedule" },
+  { title: "Subjects", url: "/page/Subjects" },
+];
 export default {
-  title: "Mobile Application/Pages",
+  title: "Mobile Application",
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <IonApp>
-          <MobileRouter mode="dev" initialEntries={["/"]} initialIndex={0}>
-            <Story />
-          </MobileRouter>
-        </IonApp>
+        <AppRouter
+          appPages={appPages}
+          mode="dev"
+          initialEntries={["/"]}
+          initialIndex={0}
+        >
+          <Story />
+        </AppRouter>
       </ThemeProvider>
     ),
   ],
@@ -245,98 +235,37 @@ function getJobListStore() {
     { adapter }
   );
 }
-const SideMenu = observer(({ appPages = [] }) => {
-  const location = useLocation();
 
-  return (
-    <IonMenu contentId="main" type="overlay">
-      <IonContent>
-        <IonList id="inbox-list">
-          <IonListHeader>Inbox</IonListHeader>
-          <IonNote>hi@ionicframework.com</IonNote>
-          {appPages.map((appPage, index) => {
-            return (
-              <IonMenuToggle key={index} autoHide={false}>
-                <IonItem
-                  className={
-                    location.pathname === appPage.url ? "selected" : ""
-                  }
-                  routerLink={appPage.url}
-                  routerDirection="none"
-                  lines="none"
-                  detail={false}
-                >
-                  <IonIcon
-                    slot="start"
-                    ios={appPage.iosIcon}
-                    md={appPage.mdIcon}
-                  />
-                  <IonLabel>{appPage.title}</IonLabel>
-                </IonItem>
-              </IonMenuToggle>
-            );
-          })}
-        </IonList>
-      </IonContent>
-    </IonMenu>
-  );
-});
-const Page = ({ children, name }) => {
-  return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>{name}</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">{name}</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        {children}
-      </IonContent>
-    </IonPage>
-  );
-};
-const JobListView = observer(({ store }) => {
-  const { name } = useParams<{ name: string }>();
+const JobListView = observer(({ jobListStore }) => {
   useEffect(() => {
-    store.bulkMapToStore(TUTORJOBLIST_DATA);
-    console.log(store.summaryInfo);
+    jobListStore.bulkMapToStore(TUTORJOBLIST_DATA);
+    console.log(jobListStore.summaryInfo);
   }, []);
+
   return (
-    <Page name="Job">
+    <Page name="Jobs">
       <JobListPageComponent
         agent={{}}
         host=""
-        store={store}
-        bookings={store.bookings}
+        store={jobListStore}
+        bookings={jobListStore.bookings}
         // bookings={sampleBookings}
         tutorInfo={sampleTutorInfo}
       />
     </Page>
   );
 });
-const appPages = [{ title: "Jobs", url: "/page/Jobs" }];
-export const JobListPage = () => {
+
+export const Pages = () => {
   const jobListStore = getJobListStore();
   return (
-    <IonSplitPane contentId="main">
-      <SideMenu appPages={appPages} />
-      <IonRouterOutlet id="main">
-        <Route path="/" exact={true}>
-          <Redirect to="/page/Jobs" />
-        </Route>
-        <Route path="/page/Jobs" exact={true}>
-          <JobListView store={jobListStore} />
-        </Route>
-      </IonRouterOutlet>
-    </IonSplitPane>
+    <IonRouterOutlet id="main">
+      <Route path="/" exact={true}>
+        <Redirect to="/page/Jobs" />
+      </Route>
+      <Route path="/page/Jobs" exact={true}>
+        <JobListView jobListStore={jobListStore} />
+      </Route>
+    </IonRouterOutlet>
   );
 };
