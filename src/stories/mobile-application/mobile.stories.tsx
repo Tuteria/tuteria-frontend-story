@@ -14,7 +14,15 @@ import { Redirect, Route } from "react-router-dom";
 
 const appPages = [
   { title: "Jobs", url: "/page/Jobs" },
-  { title: "Schedule", url: "/page/Schedule" },
+  {
+    title: "Schedule",
+    url: "/page/Schedule",
+    onClick: (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("Navigate to schedule");
+    },
+  },
   { title: "Subjects", url: "/page/Subjects" },
 ];
 export default {
