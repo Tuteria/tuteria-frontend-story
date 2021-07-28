@@ -1,26 +1,17 @@
 import ThemeProvider from "@tuteria/mobile-lib/src/bootstrap";
 import storage from "@tuteria/mobile-lib/src/local-storage";
-import TutorJobListStore from "@tuteria/mobile-lib/src/store/tutorJobList";
 import React from "react";
 import allCountries from "../data/countries.json";
 import ACADEMICS_DATA from "../data/parent-flow/data";
-import Subject from "@tuteria/mobile-lib/src/tutor-revamp/Subject";
-import {
-  SAMPLENEIGHBORINGAREA,
-  SAMPLETUTORSUBJECTS,
-} from "../data/private-lessons/_sampleData";
-import TutorsPageWrapper from "@tuteria/mobile-lib/src/components/TutorPageWrapper";
+import { SAMPLENEIGHBORINGAREA } from "../data/private-lessons/_sampleData";
 import allRegions from "../data/regions.json";
-import { Box } from "@chakra-ui/react";
 
 export default {
-  title: "Mobile Application/Ported",
+  title: "Mobile Application/Pages",
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <Box height="100vh" overflow="auto">
-          <Story />
-        </Box>
+        <Story />
       </ThemeProvider>
     ),
   ],
@@ -240,57 +231,27 @@ const videoDetailsObject = {
   },
 };
 
-function getJobListStore() {
-  return TutorJobListStore.create(
-    {
-      availability: {
-        availability: {
-          Monday: ["Morning", "Late afternoon"],
-          Wednesday: ["Evening", "Early evening"],
-        },
-        maxDays: 3,
-        maxHours: 1,
-        maxStudents: 3,
-      },
-      locationInfo: {
-        country: "Nigeria",
-        countries: allCountries,
-        state: "Lagos",
-        region: "Agege",
-        regions: allRegions,
-      },
-    },
-    { adapter }
-  );
-}
-export const SubjectPage = ({}) => {
-  const jobListStore = getJobListStore();
-  jobListStore.subject.initializeSubjectStore(SAMPLETUTORSUBJECTS);
-
-  async function saveWhatsapp(number) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(number);
-      }, 1000);
-    });
-  }
-
-  return (
-    <TutorsPageWrapper
-      defaultMenu={"Subjects"}
-      videoDetails={videoDetailsObject}
-      alertProps={{
-        hasCompletedProfile: true,
-        hasUpdatedSchedule: true,
-        hasSetPrice: true,
-        hasWhatsappNumber: false,
-        completeProfileLink: "",
-        updateScheduleLink: "",
-        setPriceLink: "",
-        setWhatsappNumber: (no) => saveWhatsapp(no),
-      }}
-    >
-      <Subject store={jobListStore.subject} />
-    </TutorsPageWrapper>
-  );
+const availabilityData = {
+  availability: {
+    Monday: ["Morning", "Late afternoon"],
+    Wednesday: ["Evening", "Early evening"],
+  },
+  maxDays: 2,
+  maxHours: 1,
+  maxStudents: 3,
+  lastCalendarUpdate: "2021-05-14T00:00:00.000Z",
+  availabilityStatus: {
+    isAvailable: false,
+    resumptionDate: "2021-06-18",
+  },
+  exemptedAreas: ["Apapa", "Ajah", "Epe"],
+};
+const locationInfo = {
+  country: "Nigeria",
+  countries: allCountries,
+  state: "Lagos",
+  region: "Agege",
+  address: "Agege Estate",
+  vicinity: "Agege Bus stop",
+  regions: allRegions,
 };
