@@ -7,9 +7,9 @@ import JobListPageComponent from "@tuteria/mobile-lib/src/tutor-revamp/JobList";
 import { observer } from "mobx-react-lite";
 import React, { useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
-import allCountries from "../data/countries.json";
-import { TUTORJOBLIST_DATA } from "../data/private-lessons/_sampleData";
-import allRegions from "../data/regions.json";
+import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
+import { TUTORJOBLIST_DATA } from "@tuteria/mobile-lib/src/data/private-lessons/_sampleData";
+import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
 
 const appPages = [
   { title: "Jobs", url: "/page/Jobs" },

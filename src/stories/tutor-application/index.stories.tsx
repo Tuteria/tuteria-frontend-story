@@ -2,8 +2,8 @@ import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { RootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
 import React from "react";
-import allCountries from "../data/countries.json";
-import allRegions from "../data/regions.json";
+import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
+import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
 
 export default {
   title: "Tutor Application/Pages",
@@ -137,14 +137,14 @@ const store = RootStore.create(
   },
   // { adapter }
   {
-  saveTutorInfo: (key, value, slug) => {
-    console.log({ key, value, slug });
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({});
-      }, 3000);
-    });
-  },
+    saveTutorInfo: (key, value, slug) => {
+      console.log({ key, value, slug });
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({});
+        }, 3000);
+      });
+    },
     toNextPath: async () => {},
     remoteDeleteImage: async (file) => {
       console.log(file);
