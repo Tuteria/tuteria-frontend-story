@@ -2,16 +2,19 @@ import ThemeProvider from "@tuteria/mobile-lib/src/bootstrap";
 import { OverlayRouter } from "@tuteria/mobile-lib/src/components/OverlayRouter";
 import TutorPageWrapper from "@tuteria/mobile-lib/src/components/TutorPageWrapper";
 import storage from "@tuteria/mobile-lib/src/local-storage";
-import JobListPageComponent from "@tuteria/mobile-lib/src/pages/JobList";
+import JobListPageComponent from "@tuteria/mobile-lib/src/tutor-revamp/JobList";
 import TutorJobListStore from "@tuteria/mobile-lib/src/store/tutorJobList";
 import React, { useEffect } from "react";
-import allCountries from "../data/countries.json";
-import ACADEMICS_DATA from "../data/parent-flow/data";
+import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
+import ACADEMICS_DATA from "@tuteria/mobile-lib/src/data/parent-flow/data";
+import Availability from "@tuteria/mobile-lib/src/tutor-revamp/Availability";
+import Subject from "@tuteria/mobile-lib/src/tutor-revamp/Subject";
 import {
   SAMPLENEIGHBORINGAREA,
+  SAMPLETUTORSUBJECTS,
   TUTORJOBLIST_DATA,
-} from "../data/private-lessons/_sampleData";
-import allRegions from "../data/regions.json";
+} from "@tuteria/mobile-lib/src/data/private-lessons/_sampleData";
+import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
 import { observer } from "mobx-react-lite";
 import { Box } from "@chakra-ui/react";
 
@@ -20,7 +23,9 @@ export default {
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <Story />
+        <Box height="100vh" overflow="auto">
+          <Story />
+        </Box>
       </ThemeProvider>
     ),
   ],
@@ -288,15 +293,67 @@ const JobListStory = observer(({ jobListStore }) => {
   }
 
   return (
-    <Box height="100vh" overflow="auto">
-      <OverlayRouter>
+    <OverlayRouter>
+      <TutorPageWrapper
+        defaultMenu="Jobs"
+        videoDetails={videoDetailsObject}
+        alertProps={{
+          hasCompletedProfile: true,
+          hasUpdatedSchedule: true,
+          hasSetPrice: false,
+          hasWhatsappNumber: false,
+          completeProfileLink: "",
+          updateScheduleLink: "",
+          setPriceLink: "",
+          setWhatsappNumber: (no) => saveWhatsapp(no),
+        }}
+      >
+        <JobListPageComponent
+          agent={{}}
+          host=""
+          // bookings={jobListStore.summaryInfo}
+          // bookings={jobListStore.summaryInfo.map((o, i) => {
+          //   return { ...o, tutorResponse: sampleBookings[i].tutorResponse };
+          // })}
+          store={jobListStore}
+          bookings={jobListStore.bookings}
+          // bookings={sampleBookings}
+          tutorInfo={sampleTutorInfo}
+        />
+      </TutorPageWrapper>
+    </OverlayRouter>
+  );
+});
+
+export const JobListPage = () => {
+  const jobListStore = getJobListStore();
+  return <JobListStory jobListStore={jobListStore} />;
+};
+
+const AvailabilityComponent = observer(
+  ({ store, availabilityData, locationInfo }: any) => {
+    useEffect(() => {
+      store.updateAvailability(availabilityData);
+      store.updateLocationInfo(locationInfo);
+    }, []);
+
+    async function saveWhatsapp(number) {
+      new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(number);
+        }, 1000);
+      });
+    }
+
+    return (
+      <Box height="100vh" overflow="auto">
         <TutorPageWrapper
-          defaultMenu="Jobs"
+          defaultMenu={"Schedule"}
           videoDetails={videoDetailsObject}
           alertProps={{
             hasCompletedProfile: true,
-            hasUpdatedSchedule: true,
-            hasSetPrice: false,
+            hasUpdatedSchedule: false,
+            hasSetPrice: true,
             hasWhatsappNumber: false,
             completeProfileLink: "",
             updateScheduleLink: "",
@@ -304,25 +361,74 @@ const JobListStory = observer(({ jobListStore }) => {
             setWhatsappNumber: (no) => saveWhatsapp(no),
           }}
         >
-          <JobListPageComponent
-            agent={{}}
-            host=""
-            // bookings={jobListStore.summaryInfo}
-            // bookings={jobListStore.summaryInfo.map((o, i) => {
-            //   return { ...o, tutorResponse: sampleBookings[i].tutorResponse };
-            // })}
-            store={jobListStore}
-            bookings={jobListStore.bookings}
-            // bookings={sampleBookings}
-            tutorInfo={sampleTutorInfo}
-          />
+          <Availability store={store.availability} />
         </TutorPageWrapper>
-      </OverlayRouter>
-    </Box>
-  );
-});
+      </Box>
+    );
+  }
+);
 
-export const JobListPage = () => {
+export const AvailabilityPage = () => {
+  const store = TutorJobListStore.create({}, { adapter });
+  return (
+    <AvailabilityComponent
+      store={store}
+      availabilityData={{
+        availability: {
+          Monday: ["Morning", "Late afternoon"],
+          Wednesday: ["Evening", "Early evening"],
+        },
+        maxDays: 2,
+        maxHours: 1,
+        maxStudents: 3,
+        lastCalendarUpdate: "2021-05-14T00:00:00.000Z",
+        availabilityStatus: {
+          isAvailable: false,
+          resumptionDate: "2021-06-18",
+        },
+        exemptedAreas: ["Apapa", "Ajah", "Epe"],
+      }}
+      locationInfo={{
+        country: "Nigeria",
+        countries: allCountries,
+        state: "Lagos",
+        region: "Agege",
+        address: "Agege Estate",
+        vicinity: "Agege Bus stop",
+        regions: allRegions,
+      }}
+    />
+  );
+};
+
+export const SubjectPage = ({}) => {
   const jobListStore = getJobListStore();
-  return <JobListStory jobListStore={jobListStore} />;
+  jobListStore.subject.initializeSubjectStore(SAMPLETUTORSUBJECTS);
+
+  async function saveWhatsapp(number) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(number);
+      }, 1000);
+    });
+  }
+
+  return (
+    <TutorPageWrapper
+      defaultMenu={"Subjects"}
+      videoDetails={videoDetailsObject}
+      alertProps={{
+        hasCompletedProfile: true,
+        hasUpdatedSchedule: true,
+        hasSetPrice: true,
+        hasWhatsappNumber: false,
+        completeProfileLink: "",
+        updateScheduleLink: "",
+        setPriceLink: "",
+        setWhatsappNumber: (no) => saveWhatsapp(no),
+      }}
+    >
+      <Subject store={jobListStore.subject} />
+    </TutorPageWrapper>
+  );
 };
