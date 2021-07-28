@@ -46,6 +46,7 @@ const store = RootStore.create(
       country: "Nigeria",
       dateOfBirth: "1998-10-12",
       phone: "2347035209922",
+      whatsappNo: "2348152957065",
       state: "Lagos",
       vicinity: "Agege",
       region: "Agege",
