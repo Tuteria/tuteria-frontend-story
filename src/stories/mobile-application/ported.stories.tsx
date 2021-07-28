@@ -2,7 +2,7 @@ import ThemeProvider from "@tuteria/mobile-lib/src/bootstrap";
 import { OverlayRouter } from "@tuteria/mobile-lib/src/components/OverlayRouter";
 import TutorPageWrapper from "@tuteria/mobile-lib/src/components/TutorPageWrapper";
 import storage from "@tuteria/mobile-lib/src/local-storage";
-import JobListPageComponent from "@tuteria/mobile-lib/src/pages/JobList";
+import JobListPageComponent from "@tuteria/mobile-lib/src/tutor-revamp/JobList";
 import TutorJobListStore from "@tuteria/mobile-lib/src/store/tutorJobList";
 import React, { useEffect } from "react";
 import allCountries from "../data/countries.json";
@@ -11,6 +11,7 @@ import Availability from "@tuteria/mobile-lib/src/tutor-revamp/Availability";
 import Subject from "@tuteria/mobile-lib/src/tutor-revamp/Subject";
 import {
   SAMPLENEIGHBORINGAREA,
+  SAMPLETUTORSUBJECTS,
   TUTORJOBLIST_DATA,
 } from "../data/private-lessons/_sampleData";
 import allRegions from "../data/regions.json";
