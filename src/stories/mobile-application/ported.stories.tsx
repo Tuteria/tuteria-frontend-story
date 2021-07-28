@@ -5,16 +5,16 @@ import storage from "@tuteria/mobile-lib/src/local-storage";
 import JobListPageComponent from "@tuteria/mobile-lib/src/tutor-revamp/JobList";
 import TutorJobListStore from "@tuteria/mobile-lib/src/store/tutorJobList";
 import React, { useEffect } from "react";
-import allCountries from "../data/countries.json";
-import ACADEMICS_DATA from "../data/parent-flow/data";
+import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
+import ACADEMICS_DATA from "@tuteria/mobile-lib/src/data/parent-flow/data";
 import Availability from "@tuteria/mobile-lib/src/tutor-revamp/Availability";
 import Subject from "@tuteria/mobile-lib/src/tutor-revamp/Subject";
 import {
   SAMPLENEIGHBORINGAREA,
   SAMPLETUTORSUBJECTS,
   TUTORJOBLIST_DATA,
-} from "../data/private-lessons/_sampleData";
-import allRegions from "../data/regions.json";
+} from "@tuteria/mobile-lib/src/data/private-lessons/_sampleData";
+import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
 import { observer } from "mobx-react-lite";
 import { Box } from "@chakra-ui/react";
 
