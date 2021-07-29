@@ -8,6 +8,7 @@ import React, { useEffect } from "react";
 import ACADEMICS_DATA from "@tuteria/mobile-lib/src/data/parent-flow/data";
 import Availability from "@tuteria/mobile-lib/src/tutor-revamp/Availability";
 import Subject from "@tuteria/mobile-lib/src/tutor-revamp/Subject";
+import LoginAndResetPasswordComponent from "@tuteria/mobile-lib/src/components/LoginAndResetPassword";
 import {
   SAMPLENEIGHBORINGAREA,
   SAMPLETUTORSUBJECTS,
@@ -430,5 +431,16 @@ export const SubjectPage = ({}) => {
     >
       <Subject store={jobListStore.subject} />
     </TutorPageWrapper>
+  );
+};
+
+export const LoginAndResetPassword = () => {
+  return (
+    <Box maxW="500px" mx="auto" mt="20px">
+      <LoginAndResetPasswordComponent
+        onLogin={(values) => console.log(values)}
+        onResetPassword={(values) => console.log(values)}
+      />
+    </Box>
   );
 };
