@@ -6,7 +6,7 @@
     "declarationMap": true,
     "sourceMap": true,
 
-    "strict": true,
+    "strict": false,
 
     "skipLibCheck": true,
 
