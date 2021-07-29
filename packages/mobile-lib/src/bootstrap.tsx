@@ -374,7 +374,6 @@ export const ThemeProvider: React.FC = ({ children }) => {
   // 2. Use at the root of your app
   return (
     <ChakraProvider theme={theme}>
-      <CSSReset />
       <Global styles={GlobalFonts} />
       {children}
     </ChakraProvider>
