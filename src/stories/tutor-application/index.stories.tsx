@@ -35,8 +35,9 @@ const store = RootStore.create(
       regions: allRegions,
       countries: allCountries,
       state: "Lagos",
-      region: "Agege",
-      vicinity: "Agege",
+      region: "Gbagada",
+      vicinity: "Charley boy Busstop",
+      // address: "10, Lanre awolokun street"
     },
     personalInfo: {
       firstName: "Abiola",
@@ -54,24 +55,24 @@ const store = RootStore.create(
     },
     educationWorkHistory: {
       educations: [
-        {
-          school: "Ikeja Grammar school",
-          country: "Nigeria",
-          course: "Chemistry",
-          degree: "MBBS",
-          startYear: "2006",
-          endYear: "2020",
-          grade: "First Class",
-        },
-        {
-          school: "University of Lagos",
-          country: "Nigeria",
-          course: "Organic Chemistry",
-          degree: "MBBS",
-          startYear: "2006",
-          endYear: "2020",
-          grade: "First Class",
-        },
+        // {
+        //   school: "Ikeja Grammar school",
+        //   country: "Nigeria",
+        //   course: "Chemistry",
+        //   degree: "MBBS",
+        //   startYear: "2006",
+        //   endYear: "2020",
+        //   grade: "First Class",
+        // },
+        // {
+        //   school: "University of Lagos",
+        //   country: "Nigeria",
+        //   course: "Organic Chemistry",
+        //   degree: "MBBS",
+        //   startYear: "2006",
+        //   endYear: "2020",
+        //   grade: "First Class",
+        // },
       ],
       workHistories: [
         {
