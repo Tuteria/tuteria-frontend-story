@@ -435,11 +435,20 @@ export const SubjectPage = ({}) => {
 };
 
 export const LoginAndResetPassword = () => {
+  const noop = (values: any) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.log(values);
+        resolve(null);
+      }, 1500);
+    });
+  };
   return (
     <Box maxW="500px" mx="auto" mt="20px">
       <LoginAndResetPasswordComponent
-        onLogin={(values) => console.log(values)}
-        onResetPassword={(values) => console.log(values)}
+        onLogin={noop}
+        onLoginWithCode={noop}
+        onSendEmail={noop}
       />
     </Box>
   );
