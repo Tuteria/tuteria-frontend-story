@@ -37,7 +37,7 @@ const store = RootStore.create(
       state: "Lagos",
       region: "Gbagada",
       vicinity: "Charley boy Busstop",
-      // address: "10, Lanre awolokun street"
+      address: "10, Lanre awolokun street",
     },
     personalInfo: {
       firstName: "Abiola",
@@ -49,8 +49,8 @@ const store = RootStore.create(
       phone: "2347035209922",
       whatsappNo: "2348152957065",
       state: "Lagos",
-      vicinity: "Agege",
-      region: "Agege",
+      vicinity: "Charley boy Busstop",
+      region: "Gbagada",
       address: "Irabor Street Koto",
     },
     educationWorkHistory: {
