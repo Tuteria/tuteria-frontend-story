@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { CSSReset } from "@chakra-ui/react";
-import * as React from "react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { css, Global } from "@emotion/react";
+import * as React from "react";
 // 1. import `ChakraProvider` component
 import theme from "./theme";
-import { ChakraProvider } from "@chakra-ui/react";
 
 export const GlobalFonts = css`
   @font-face {
@@ -373,7 +372,7 @@ export const GlobalStyle = css`
 export const ThemeProvider: React.FC = ({ children }) => {
   // 2. Use at the root of your app
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider resetCSS={true} theme={theme}>
       <Global styles={GlobalFonts} />
       {children}
     </ChakraProvider>

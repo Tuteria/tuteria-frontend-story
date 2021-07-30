@@ -1,26 +1,26 @@
+import { Browser } from "@capacitor/browser";
 import { IonRouterOutlet } from "@ionic/react";
 import ThemeProvider from "@tuteria/mobile-lib/src/bootstrap";
+import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
 import {
   SAMPLETUTORSUBJECTS,
   TUTORJOBLIST_DATA,
 } from "@tuteria/mobile-lib/src/data/private-lessons/_sampleData";
-import Availability from "@tuteria/mobile-lib/src/tutor-revamp/Availability";
+import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
 import {
   getJobListStore,
   sampleTutorInfo,
 } from "@tuteria/mobile-lib/src/data/store";
-
-import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
-import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
 import AppRouter from "@tuteria/mobile-lib/src/pages/AppRoute";
 import Page from "@tuteria/mobile-lib/src/pages/Page";
+import { IRootStore } from "@tuteria/mobile-lib/src/store/types";
+import "@tuteria/mobile-lib/src/styles";
+import Availability from "@tuteria/mobile-lib/src/tutor-revamp/Availability";
 import JobListPageComponent from "@tuteria/mobile-lib/src/tutor-revamp/JobList";
 import Subject from "@tuteria/mobile-lib/src/tutor-revamp/Subject";
 import { observer } from "mobx-react-lite";
 import React, { useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
-import { Browser } from "@capacitor/browser";
-import "@tuteria/mobile-lib/src/styles";
 
 const appPages = [
   { title: "Jobs", url: "/page/Jobs" },
@@ -58,14 +58,7 @@ export default {
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <AppRouter
-          appPages={appPages}
-          mode="dev"
-          initialEntries={["/", "/page/Schedule"]}
-          initialIndex={1}
-        >
-          <Story />
-        </AppRouter>
+        <Story />
       </ThemeProvider>
     ),
   ],
@@ -137,22 +130,36 @@ const AvailabilityView = observer(({ store }: any) => {
   );
 });
 
+const PageStory: React.FC<{ jobListStore: IRootStore }> = observer(
+  ({ jobListStore }) => {
+    return (
+      <AppRouter
+        appPages={appPages}
+        mode="dev"
+        store={jobListStore}
+        initialEntries={["/", "/page/Schedule"]}
+        initialIndex={1}
+      >
+        <IonRouterOutlet id="main">
+          <Route path="/" exact={true}>
+            <Redirect to="/page/Jobs" />
+          </Route>
+          <Route path="/page/Jobs" exact={true}>
+            <JobListView jobListStore={jobListStore} />
+          </Route>
+          <Route path="/page/Subjects" exact={true}>
+            <SubjectView store={jobListStore.subject} />
+          </Route>
+          <Route path="/page/Schedule" exact={true}>
+            <AvailabilityView store={jobListStore} />
+          </Route>
+        </IonRouterOutlet>
+      </AppRouter>
+    );
+  }
+);
+
 export const Pages = () => {
   const jobListStore = getJobListStore();
-  return (
-    <IonRouterOutlet id="main">
-      <Route path="/" exact={true}>
-        <Redirect to="/page/Jobs" />
-      </Route>
-      <Route path="/page/Jobs" exact={true}>
-        <JobListView jobListStore={jobListStore} />
-      </Route>
-      <Route path="/page/Subjects" exact={true}>
-        <SubjectView store={jobListStore.subject} />
-      </Route>
-      <Route path="/page/Schedule" exact={true}>
-        <AvailabilityView store={jobListStore} />
-      </Route>
-    </IonRouterOutlet>
-  );
+  return <PageStory jobListStore={jobListStore} />;
 };
