@@ -75,15 +75,15 @@ const store = RootStore.create(
         // },
       ],
       workHistories: [
-        {
-          company: "Tuteria Limited",
-          role: "CEO",
-          isTeachingRole: false,
-          startYear: "2015",
-          endYear: "2020",
-          isCurrent: true,
-          showOnProfile: true,
-        },
+        // {
+        //   company: "Tuteria Limited",
+        //   role: "CEO",
+        //   isTeachingRole: false,
+        //   startYear: "2015",
+        //   endYear: "2020",
+        //   isCurrent: true,
+        //   showOnProfile: true,
+        // },
       ],
     },
     // teachingProfile: {
@@ -139,14 +139,14 @@ const store = RootStore.create(
   },
   // { adapter }
   {
-  saveTutorInfo: (key: string, value: any, slug: string) => {
-    console.log({ key, value, slug });
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({});
-      }, 3000);
-    });
-  },
+    saveTutorInfo: (key: string, value: any, slug: string) => {
+      console.log({ key, value, slug });
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({});
+        }, 3000);
+      });
+    },
     toNextPath: async () => {},
     // remoteDeleteImage: async (file) => {
     //   console.log(file);
