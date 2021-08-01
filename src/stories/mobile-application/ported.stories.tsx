@@ -5,15 +5,16 @@ import storage from "@tuteria/mobile-lib/src/local-storage";
 import JobListPageComponent from "@tuteria/mobile-lib/src/tutor-revamp/JobList";
 import TutorJobListStore from "@tuteria/mobile-lib/src/store/tutorJobList";
 import React, { useEffect } from "react";
-import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
 import ACADEMICS_DATA from "@tuteria/mobile-lib/src/data/parent-flow/data";
 import Availability from "@tuteria/mobile-lib/src/tutor-revamp/Availability";
 import Subject from "@tuteria/mobile-lib/src/tutor-revamp/Subject";
+import LoginAndResetPasswordComponent from "@tuteria/mobile-lib/src/components/LoginAndResetPassword";
 import {
   SAMPLENEIGHBORINGAREA,
   SAMPLETUTORSUBJECTS,
   TUTORJOBLIST_DATA,
 } from "@tuteria/mobile-lib/src/data/private-lessons/_sampleData";
+import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
 import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
 import { observer } from "mobx-react-lite";
 import { Box } from "@chakra-ui/react";
@@ -430,5 +431,25 @@ export const SubjectPage = ({}) => {
     >
       <Subject store={jobListStore.subject} />
     </TutorPageWrapper>
+  );
+};
+
+export const LoginAndResetPassword = () => {
+  const noop = (values: any) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.log(values);
+        resolve(null);
+      }, 1500);
+    });
+  };
+  return (
+    <Box maxW="500px" mx="auto" mt="20px">
+      <LoginAndResetPasswordComponent
+        onLogin={noop}
+        onLoginWithCode={noop}
+        onSendEmail={noop}
+      />
+    </Box>
   );
 };
