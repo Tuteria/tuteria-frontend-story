@@ -13,7 +13,7 @@ import {
 } from "@tuteria/mobile-lib/src/data/store";
 import AppRouter from "@tuteria/mobile-lib/src/pages/AppRoute";
 import Page from "@tuteria/mobile-lib/src/pages/Page";
-import { IRootStore } from "@tuteria/mobile-lib/src/store/types";
+import { IRootStore, ISubjectStore } from "@tuteria/mobile-lib/src/store/types";
 import "@tuteria/mobile-lib/src/styles";
 import Availability from "@tuteria/mobile-lib/src/tutor-revamp/Availability";
 import JobListPageComponent from "@tuteria/mobile-lib/src/tutor-revamp/JobList";
@@ -27,12 +27,6 @@ const appPages = [
   {
     title: "Schedule",
     url: "/page/Schedule",
-    onClick: async (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      console.log("Navigate to schedule");
-      await Browser.open({ url: "http://capacitorjs.com/" });
-    },
   },
   { title: "Subjects", url: "/page/Subjects" },
   {
@@ -84,16 +78,18 @@ const JobListView = observer(({ jobListStore }) => {
   );
 });
 
-const SubjectView = observer(({ store }) => {
-  useEffect(() => {
-    store.initializeSubjectStore(SAMPLETUTORSUBJECTS);
-  }, []);
-  return (
-    <Page name="Subjects">
-      <Subject store={store} />
-    </Page>
-  );
-});
+const SubjectView: React.FC<{ store: ISubjectStore }> = observer(
+  ({ store }) => {
+    useEffect(() => {
+      store.initializeSubjectStore(SAMPLETUTORSUBJECTS);
+    }, []);
+    return (
+      <Page name="Subjects">
+        <Subject store={store} />
+      </Page>
+    );
+  }
+);
 
 const AvailabilityView = observer(({ store }: any) => {
   useEffect(() => {
@@ -132,6 +128,12 @@ const AvailabilityView = observer(({ store }: any) => {
 
 const PageStory: React.FC<{ jobListStore: IRootStore }> = observer(
   ({ jobListStore }) => {
+    React.useEffect(() => {
+      async function updateLoggedIn() {
+        await jobListStore.updateLoggedInStatus();
+      }
+      updateLoggedIn();
+    }, []);
     return (
       <AppRouter
         appPages={appPages}
@@ -142,7 +144,7 @@ const PageStory: React.FC<{ jobListStore: IRootStore }> = observer(
       >
         <IonRouterOutlet id="main">
           <Route path="/" exact={true}>
-            <Redirect to="/page/Jobs" />
+            <Redirect to="/page/Schedule" />
           </Route>
           <Route path="/page/Jobs" exact={true}>
             <JobListView jobListStore={jobListStore} />
