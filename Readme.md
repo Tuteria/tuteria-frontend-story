@@ -17,6 +17,18 @@ cd shared-lib
 git clone  git@gitlab.com:tuteria/v2/shared-lib.git
 ```
 
+clone the mobile-lib
+```
+cd packages
+rm -rf mobile-lib
+git clone git@gitlab.com:tuteria/mobile-lib.git
+git checkout develop
+git pull
+yarn install
+git checkout web-develop
+git pull origin develop
+```
+
 install packages in the root
 ```
 cd ../..

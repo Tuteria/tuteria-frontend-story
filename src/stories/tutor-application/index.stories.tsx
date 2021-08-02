@@ -35,8 +35,9 @@ const store = RootStore.create(
       regions: allRegions,
       countries: allCountries,
       state: "Lagos",
-      region: "Agege",
-      vicinity: "Agege",
+      region: "Gbagada",
+      vicinity: "Charley boy Busstop",
+      address: "10, Lanre awolokun street",
     },
     personalInfo: {
       firstName: "Abiola",
@@ -46,42 +47,43 @@ const store = RootStore.create(
       country: "Nigeria",
       dateOfBirth: "1998-10-12",
       phone: "2347035209922",
+      whatsappNo: "2348152957065",
       state: "Lagos",
-      vicinity: "Agege",
-      region: "Agege",
+      vicinity: "Charley boy Busstop",
+      region: "Gbagada",
       address: "Irabor Street Koto",
     },
     educationWorkHistory: {
       educations: [
-        {
-          school: "Ikeja Grammar school",
-          country: "Nigeria",
-          course: "Chemistry",
-          degree: "MBBS",
-          startYear: "2006",
-          endYear: "2020",
-          grade: "First Class",
-        },
-        {
-          school: "University of Lagos",
-          country: "Nigeria",
-          course: "Organic Chemistry",
-          degree: "MBBS",
-          startYear: "2006",
-          endYear: "2020",
-          grade: "First Class",
-        },
+        // {
+        //   school: "Ikeja Grammar school",
+        //   country: "Nigeria",
+        //   course: "Chemistry",
+        //   degree: "MBBS",
+        //   startYear: "2006",
+        //   endYear: "2020",
+        //   grade: "First Class",
+        // },
+        // {
+        //   school: "University of Lagos",
+        //   country: "Nigeria",
+        //   course: "Organic Chemistry",
+        //   degree: "MBBS",
+        //   startYear: "2006",
+        //   endYear: "2020",
+        //   grade: "First Class",
+        // },
       ],
       workHistories: [
-        {
-          company: "Tuteria Limited",
-          role: "CEO",
-          isTeachingRole: false,
-          startYear: "2015",
-          endYear: "2020",
-          isCurrent: true,
-          showOnProfile: true,
-        },
+        // {
+        //   company: "Tuteria Limited",
+        //   role: "CEO",
+        //   isTeachingRole: false,
+        //   startYear: "2015",
+        //   endYear: "2020",
+        //   isCurrent: true,
+        //   showOnProfile: true,
+        // },
       ],
     },
     // teachingProfile: {
@@ -137,7 +139,7 @@ const store = RootStore.create(
   },
   // { adapter }
   {
-    saveTutorInfo: (key, value, slug) => {
+    saveTutorInfo: (key: string, value: any, slug: string) => {
       console.log({ key, value, slug });
       return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -146,41 +148,41 @@ const store = RootStore.create(
       });
     },
     toNextPath: async () => {},
-    remoteDeleteImage: async (file) => {
-      console.log(file);
-    },
-    uploadApiHandler: async (files, progressCallback) => {
-      console.log(files); //this is where cloudinary implementation is used.
-      return files.map((o) => ({
-        name: o.name,
-        size: o.size?.toString(),
-        public_id: "the_public_id",
-        url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
-      }));
-    },
-    onLogin: async (values, bag) => {},
-    onResetPassword: async (values) => {},
-    saveTutorAvailability: async (values) => {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(values);
-        }, 1000);
-      });
-    },
-    saveCurrentLocation: async (values) => {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(values);
-        }, 1000);
-      });
-    },
-    saveExemptedAreas: async (values) => {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(values);
-        }, 1000);
-      });
-    },
+    // remoteDeleteImage: async (file) => {
+    //   console.log(file);
+    // },
+    // uploadApiHandler: async (files: any, progressCallback: any) => {
+    //   console.log(files); //this is where cloudinary implementation is used.
+    //   return files.map((o) => ({
+    //     name: o.name,
+    //     size: o.size?.toString(),
+    //     public_id: "the_public_id",
+    //     url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+    //   }));
+    // },
+    // onLogin: async (values, bag) => {},
+    // onResetPassword: async (values) => {},
+    // saveTutorAvailability: async (values) => {
+    //   return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve(values);
+    //     }, 1000);
+    //   });
+    // },
+    // saveCurrentLocation: async (values) => {
+    //   return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve(values);
+    //     }, 1000);
+    //   });
+    // },
+    // saveExemptedAreas: async (values) => {
+    //   return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve(values);
+    //     }, 1000);
+    //   });
+    // },
   }
 );
 const initialSteps = [
