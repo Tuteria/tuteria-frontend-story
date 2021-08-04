@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/mobile-lib/src/bootstrap";
 import LoginAndResetPasswordComponent from "@tuteria/mobile-lib/src/components/LoginAndResetPassword";
 import { OverlayRouter } from "@tuteria/mobile-lib/src/components/OverlayRouter";
-import TutorPageWrapper from "@tuteria/mobile-lib/src/components/TutorPageWrapper";
+import MobileMenu from "@tuteria/mobile-lib/src/components/TutorPageWrapper/MobileMenus";
 import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
 import {
   SAMPLETUTORSUBJECTS,
@@ -48,20 +48,7 @@ const JobListStory = observer(({ jobListStore }: any) => {
 
   return (
     <OverlayRouter>
-      <TutorPageWrapper
-        defaultMenu="Jobs"
-        videoDetails={{}}
-        alertProps={{
-          hasCompletedProfile: true,
-          hasUpdatedSchedule: true,
-          hasSetPrice: false,
-          hasWhatsappNumber: false,
-          completeProfileLink: "",
-          updateScheduleLink: "",
-          setPriceLink: "",
-          setWhatsappNumber: (no) => saveWhatsapp(no),
-        }}
-      >
+      <Box>
         <JobListPageComponent
           agent={{}}
           host=""
@@ -74,7 +61,8 @@ const JobListStory = observer(({ jobListStore }: any) => {
           // bookings={sampleBookings}
           tutorInfo={sampleTutorInfo}
         />
-      </TutorPageWrapper>
+        <MobileMenu defaultMenu="Jobs" />
+      </Box>
     </OverlayRouter>
   );
 });
@@ -101,22 +89,8 @@ const AvailabilityComponent = observer(
 
     return (
       <Box height="100vh" overflow="auto">
-        <TutorPageWrapper
-          defaultMenu={"Schedule"}
-          videoDetails={{}}
-          alertProps={{
-            hasCompletedProfile: true,
-            hasUpdatedSchedule: false,
-            hasSetPrice: true,
-            hasWhatsappNumber: false,
-            completeProfileLink: "",
-            updateScheduleLink: "",
-            setPriceLink: "",
-            setWhatsappNumber: (no) => saveWhatsapp(no),
-          }}
-        >
-          <Availability store={store.availability} />
-        </TutorPageWrapper>
+        <Availability store={store.availability} />
+        <MobileMenu defaultMenu="Schedule" />
       </Box>
     );
   }
@@ -168,22 +142,10 @@ export const SubjectPage = ({}) => {
   }
 
   return (
-    <TutorPageWrapper
-      defaultMenu={"Subjects"}
-      videoDetails={{}}
-      alertProps={{
-        hasCompletedProfile: true,
-        hasUpdatedSchedule: true,
-        hasSetPrice: true,
-        hasWhatsappNumber: false,
-        completeProfileLink: "",
-        updateScheduleLink: "",
-        setPriceLink: "",
-        setWhatsappNumber: (no) => saveWhatsapp(no),
-      }}
-    >
+    <Box>
       <Subject store={jobListStore.subject} />
-    </TutorPageWrapper>
+      <MobileMenu defaultMenu="Subjects" />
+    </Box>
   );
 };
 
