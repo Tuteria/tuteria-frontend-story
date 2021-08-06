@@ -1,4 +1,3 @@
-import { Browser } from "@capacitor/browser";
 import { IonRouterOutlet } from "@ionic/react";
 import ThemeProvider from "@tuteria/mobile-lib/src/bootstrap";
 import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
@@ -23,12 +22,6 @@ import React, { useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
 
 const appPages = [
-  { title: "Jobs", url: "/page/Jobs" },
-  {
-    title: "Schedule",
-    url: "/page/Schedule",
-  },
-  { title: "Subjects", url: "/page/Subjects" },
   {
     title: "Lessons",
     url: "/page/Bookings",
@@ -65,16 +58,15 @@ const JobListView = observer(({ jobListStore }) => {
   }, []);
 
   return (
-    <Page name="Jobs">
-      <JobListPageComponent
-        agent={{}}
-        host=""
-        store={jobListStore}
-        bookings={jobListStore.bookings}
-        // bookings={sampleBookings}
-        tutorInfo={sampleTutorInfo}
-      />
-    </Page>
+    // <Page name="Jobs">
+    <JobListPageComponent
+      agent={{}}
+      host=""
+      store={jobListStore}
+      bookings={jobListStore.bookings}
+      // bookings={sampleBookings}
+      tutorInfo={sampleTutorInfo}
+    />
   );
 });
 
@@ -84,9 +76,9 @@ const SubjectView: React.FC<{ store: ISubjectStore }> = observer(
       store.initializeSubjectStore(SAMPLETUTORSUBJECTS);
     }, []);
     return (
-      <Page name="Subjects">
-        <Subject store={store} />
-      </Page>
+      // <Page name="Subjects">
+      <Subject store={store} />
+      // </Page>
     );
   }
 );
@@ -120,9 +112,9 @@ const AvailabilityView = observer(({ store }: any) => {
   }, []);
 
   return (
-    <Page name="Schedule">
-      <Availability store={store.availability} />
-    </Page>
+    // <Page name="Schedule">
+    <Availability store={store.availability} />
+    //  </Page>
   );
 });
 
@@ -139,22 +131,24 @@ const PageStory: React.FC<{ jobListStore: IRootStore }> = observer(
         appPages={appPages}
         mode="dev"
         store={jobListStore}
-        initialEntries={["/", "/page/Schedule"]}
+        initialEntries={["/", "/page/Jobs"]}
         initialIndex={1}
       >
         <IonRouterOutlet id="main">
-          <Route path="/" exact={true}>
-            <Redirect to="/page/Schedule" />
-          </Route>
-          <Route path="/page/Jobs" exact={true}>
-            <JobListView jobListStore={jobListStore} />
-          </Route>
-          <Route path="/page/Subjects" exact={true}>
-            <SubjectView store={jobListStore.subject} />
-          </Route>
-          <Route path="/page/Schedule" exact={true}>
-            <AvailabilityView store={jobListStore} />
-          </Route>
+          <Page name="Jobs" store={jobListStore}>
+            <Route path="/" exact={true}>
+              <Redirect to="/page/Jobs" />
+            </Route>
+            <Route path="/page/Jobs" exact={true}>
+              <JobListView jobListStore={jobListStore} />
+            </Route>
+            <Route path="/page/Subjects" exact={true}>
+              <SubjectView store={jobListStore.subject} />
+            </Route>
+            <Route path="/page/Schedule" exact={true}>
+              <AvailabilityView store={jobListStore} />
+            </Route>
+          </Page>
         </IonRouterOutlet>
       </AppRouter>
     );
