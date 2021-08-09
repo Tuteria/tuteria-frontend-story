@@ -265,6 +265,7 @@ const initialSteps = [
 
 export const TutorPage = () => {
   const countries = allCountries.map((country) => country.name);
+  console.log({ store });
   return (
     <TutorPageWrapper>
       <Suspense fallback={<h1>Still Loading…</h1>}>
