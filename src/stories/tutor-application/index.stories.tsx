@@ -1,9 +1,21 @@
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { RootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
-import React from "react";
+import React, { Suspense } from "react";
 import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
 import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
+const PersonalInfo = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
+);
+const LocationInfo = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/LocationInfo")
+);
+const WorkHistory = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/WorkHistory")
+);
+const EducationHistory = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/EducationHistory")
+);
 
 export default {
   title: "Tutor Application/Pages",
@@ -252,5 +264,29 @@ const initialSteps = [
 ];
 
 export const TutorPage = () => {
-  return <TutorPageWrapper store={store} allCountries={allCountries} />;
+  const countries = allCountries.map((country) => country.name);
+  return (
+    <TutorPageWrapper>
+      <Suspense fallback={<h1>Still Loading…</h1>}>
+        <PersonalInfo
+          store={store}
+          countries={countries}
+          onSubmit={(formData: any) => {
+            store.toNextPath();
+          }}
+        />
+
+        <LocationInfo
+          store={store}
+          onSubmit={(formData: any) => {
+            store.toNextPath(); //moving to the next page.
+          }}
+        />
+
+        <EducationHistory store={store} countries={allCountries} />
+
+        <WorkHistory store={store} countries={allCountries} />
+      </Suspense>
+    </TutorPageWrapper>
+  );
 };
