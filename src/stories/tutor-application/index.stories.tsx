@@ -266,12 +266,10 @@ const initialSteps = [
 ];
 
 export const TutorPage = () => {
-  const countries = allCountries.map((country) => country.name);
   return (
     <TutorPageWrapper>
       <PersonalInfo
         store={store}
-        countries={countries}
         onSubmit={(formData: any) => {
           store.toNextPath();
         }}
@@ -284,9 +282,9 @@ export const TutorPage = () => {
         }}
       />
 
-      <EducationHistory store={store} countries={allCountries} />
+      <EducationHistory store={store} />
 
-      <WorkHistory store={store} countries={allCountries} />
+      <WorkHistory store={store} />
     </TutorPageWrapper>
   );
 };
