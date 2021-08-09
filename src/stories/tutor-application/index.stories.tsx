@@ -22,7 +22,9 @@ export default {
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <Story />
+        <Suspense fallback={<h1>Still Loading…</h1>}>
+          <Story />
+        </Suspense>
       </ThemeProvider>
     ),
   ],
@@ -265,29 +267,26 @@ const initialSteps = [
 
 export const TutorPage = () => {
   const countries = allCountries.map((country) => country.name);
-  console.log({ store });
   return (
     <TutorPageWrapper>
-      <Suspense fallback={<h1>Still Loading…</h1>}>
-        <PersonalInfo
-          store={store}
-          countries={countries}
-          onSubmit={(formData: any) => {
-            store.toNextPath();
-          }}
-        />
+      <PersonalInfo
+        store={store}
+        countries={countries}
+        onSubmit={(formData: any) => {
+          store.toNextPath();
+        }}
+      />
 
-        <LocationInfo
-          store={store}
-          onSubmit={(formData: any) => {
-            store.toNextPath(); //moving to the next page.
-          }}
-        />
+      <LocationInfo
+        store={store}
+        onSubmit={(formData: any) => {
+          store.toNextPath(); //moving to the next page.
+        }}
+      />
 
-        <EducationHistory store={store} countries={allCountries} />
+      <EducationHistory store={store} countries={allCountries} />
 
-        <WorkHistory store={store} countries={allCountries} />
-      </Suspense>
+      <WorkHistory store={store} countries={allCountries} />
     </TutorPageWrapper>
   );
 };
