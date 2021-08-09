@@ -199,71 +199,71 @@ const store = RootStore.create(
     // },
   }
 );
-const initialSteps = [
-  {
-    stepName: "What is this about?",
-    path: "/overview",
-    canEditStep: true,
-    isCompleted: false,
-    nextButtonText: "Get started",
-  },
-  {
-    stepName: "Personal details",
-    path: "/personal-details",
-    canEditStep: true,
-    isCompleted: true,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "Education and work",
-    path: "/education-work",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "Teaching background",
-    path: "/teaching-background",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "Photo and ID",
-    path: "/photo-id",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "Availability",
-    path: "/availability",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "Agreements",
-    path: "/agreements",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "New developments",
-    path: "/new-developments",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Ok, sounds great",
-  },
-  {
-    stepName: "Final submission",
-    path: "/submission",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Submit",
-  },
-];
+// const initialSteps = [
+//   {
+//     stepName: "What is this about?",
+//     path: "/overview",
+//     canEditStep: true,
+//     isCompleted: false,
+//     nextButtonText: "Get started",
+//   },
+//   {
+//     stepName: "Personal details",
+//     path: "/personal-details",
+//     canEditStep: true,
+//     isCompleted: true,
+//     nextButtonText: "Next",
+//   },
+//   {
+//     stepName: "Education and work",
+//     path: "/education-work",
+//     canEditStep: false,
+//     isCompleted: false,
+//     nextButtonText: "Next",
+//   },
+//   {
+//     stepName: "Teaching background",
+//     path: "/teaching-background",
+//     canEditStep: false,
+//     isCompleted: false,
+//     nextButtonText: "Next",
+//   },
+//   {
+//     stepName: "Photo and ID",
+//     path: "/photo-id",
+//     canEditStep: false,
+//     isCompleted: false,
+//     nextButtonText: "Next",
+//   },
+//   {
+//     stepName: "Availability",
+//     path: "/availability",
+//     canEditStep: false,
+//     isCompleted: false,
+//     nextButtonText: "Next",
+//   },
+//   {
+//     stepName: "Agreements",
+//     path: "/agreements",
+//     canEditStep: false,
+//     isCompleted: false,
+//     nextButtonText: "Next",
+//   },
+//   {
+//     stepName: "New developments",
+//     path: "/new-developments",
+//     canEditStep: false,
+//     isCompleted: false,
+//     nextButtonText: "Ok, sounds great",
+//   },
+//   {
+//     stepName: "Final submission",
+//     path: "/submission",
+//     canEditStep: false,
+//     isCompleted: false,
+//     nextButtonText: "Submit",
+//   },
+// ];
 
 export const TutorPage = () => {
   return (
