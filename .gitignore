@@ -121,4 +121,3 @@ startup.sh
 .vercel
 .vscode
 packages/mobile-lib
-packages/shared-lib

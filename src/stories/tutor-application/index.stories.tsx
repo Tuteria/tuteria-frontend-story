@@ -1,16 +1,30 @@
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { RootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
-import React from "react";
+import React, { Suspense } from "react";
 import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
 import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
+const PersonalInfo = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
+);
+const LocationInfo = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/LocationInfo")
+);
+const WorkHistory = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/WorkHistory")
+);
+const EducationHistory = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/EducationHistory")
+);
 
 export default {
   title: "Tutor Application/Pages",
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <Story />
+        <Suspense fallback={<h1>Still Loading…</h1>}>
+          <Story />
+        </Suspense>
       </ThemeProvider>
     ),
   ],
@@ -34,10 +48,10 @@ const store = RootStore.create(
       country: "Nigeria",
       regions: allRegions,
       countries: allCountries,
-      state: "Lagos",
-      region: "Gbagada",
-      vicinity: "Charley boy Busstop",
-      address: "10, Lanre awolokun street",
+      // state: "Lagos",
+      // region: "Gbagada",
+      // vicinity: "Charley boy Busstop",
+      // address: "10, Lanre awolokun street",
     },
     personalInfo: {
       firstName: "Abiola",
@@ -55,15 +69,15 @@ const store = RootStore.create(
     },
     educationWorkHistory: {
       educations: [
-        // {
-        //   school: "Ikeja Grammar school",
-        //   country: "Nigeria",
-        //   course: "Chemistry",
-        //   degree: "MBBS",
-        //   startYear: "2006",
-        //   endYear: "2020",
-        //   grade: "First Class",
-        // },
+        {
+          school: "Ikeja Grammar school",
+          country: "Nigeria",
+          course: "Chemistry",
+          degree: "MBBS",
+          startYear: "2006",
+          endYear: "2020",
+          grade: "First Class",
+        },
         // {
         //   school: "University of Lagos",
         //   country: "Nigeria",
@@ -75,15 +89,15 @@ const store = RootStore.create(
         // },
       ],
       workHistories: [
-        // {
-        //   company: "Tuteria Limited",
-        //   role: "CEO",
-        //   isTeachingRole: false,
-        //   startYear: "2015",
-        //   endYear: "2020",
-        //   isCurrent: true,
-        //   showOnProfile: true,
-        // },
+        {
+          company: "Tuteria Limited",
+          role: "CEO",
+          isTeachingRole: false,
+          startYear: "2015",
+          endYear: "2020",
+          isCurrent: true,
+          showOnProfile: true,
+        },
       ],
     },
     // teachingProfile: {
@@ -185,72 +199,92 @@ const store = RootStore.create(
     // },
   }
 );
-const initialSteps = [
-  {
-    stepName: "What is this about?",
-    path: "/overview",
-    canEditStep: true,
-    isCompleted: false,
-    nextButtonText: "Get started",
-  },
-  {
-    stepName: "Personal details",
-    path: "/personal-details",
-    canEditStep: true,
-    isCompleted: true,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "Education and work",
-    path: "/education-work",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "Teaching background",
-    path: "/teaching-background",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "Photo and ID",
-    path: "/photo-id",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "Availability",
-    path: "/availability",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "Agreements",
-    path: "/agreements",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "New developments",
-    path: "/new-developments",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Ok, sounds great",
-  },
-  {
-    stepName: "Final submission",
-    path: "/submission",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Submit",
-  },
-];
+// const initialSteps = [
+//   {
+//     stepName: "What is this about?",
+//     path: "/overview",
+//     canEditStep: true,
+//     isCompleted: false,
+//     nextButtonText: "Get started",
+//   },
+//   {
+//     stepName: "Personal details",
+//     path: "/personal-details",
+//     canEditStep: true,
+//     isCompleted: true,
+//     nextButtonText: "Next",
+//   },
+//   {
+//     stepName: "Education and work",
+//     path: "/education-work",
+//     canEditStep: false,
+//     isCompleted: false,
+//     nextButtonText: "Next",
+//   },
+//   {
+//     stepName: "Teaching background",
+//     path: "/teaching-background",
+//     canEditStep: false,
+//     isCompleted: false,
+//     nextButtonText: "Next",
+//   },
+//   {
+//     stepName: "Photo and ID",
+//     path: "/photo-id",
+//     canEditStep: false,
+//     isCompleted: false,
+//     nextButtonText: "Next",
+//   },
+//   {
+//     stepName: "Availability",
+//     path: "/availability",
+//     canEditStep: false,
+//     isCompleted: false,
+//     nextButtonText: "Next",
+//   },
+//   {
+//     stepName: "Agreements",
+//     path: "/agreements",
+//     canEditStep: false,
+//     isCompleted: false,
+//     nextButtonText: "Next",
+//   },
+//   {
+//     stepName: "New developments",
+//     path: "/new-developments",
+//     canEditStep: false,
+//     isCompleted: false,
+//     nextButtonText: "Ok, sounds great",
+//   },
+//   {
+//     stepName: "Final submission",
+//     path: "/submission",
+//     canEditStep: false,
+//     isCompleted: false,
+//     nextButtonText: "Submit",
+//   },
+// ];
 
 export const TutorPage = () => {
-  return <TutorPageWrapper store={store} allCountries={allCountries} />;
+  return (
+    <TutorPageWrapper>
+      <PersonalInfo
+        store={store}
+        onSubmit={(formData: any) => {
+          store.toNextPath();
+        }}
+      />
+
+      <LocationInfo
+        store={store}
+        onSubmit={(formData: any) => {
+          store.toNextPath(); //moving to the next page.
+        }}
+      />
+
+      <EducationHistory store={store} />
+
+      <WorkHistory store={store} />
+    </TutorPageWrapper>
+  );
 };
