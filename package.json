@@ -40,6 +40,7 @@
     ]
   },
   "dependencies": {
+    "@capacitor/browser": "^1.0.2",
     "@capacitor/cli": "3.1.1",
     "@chakra-ui/react": "1.6.4",
     "@emotion/react": "^11",
