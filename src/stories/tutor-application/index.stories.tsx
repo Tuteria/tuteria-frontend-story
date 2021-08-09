@@ -34,10 +34,10 @@ const store = RootStore.create(
       country: "Nigeria",
       regions: allRegions,
       countries: allCountries,
-      state: "Lagos",
-      region: "Gbagada",
-      vicinity: "Charley boy Busstop",
-      address: "10, Lanre awolokun street",
+      // state: "Lagos",
+      // region: "Gbagada",
+      // vicinity: "Charley boy Busstop",
+      // address: "10, Lanre awolokun street",
     },
     personalInfo: {
       firstName: "Abiola",
@@ -55,15 +55,15 @@ const store = RootStore.create(
     },
     educationWorkHistory: {
       educations: [
-        // {
-        //   school: "Ikeja Grammar school",
-        //   country: "Nigeria",
-        //   course: "Chemistry",
-        //   degree: "MBBS",
-        //   startYear: "2006",
-        //   endYear: "2020",
-        //   grade: "First Class",
-        // },
+        {
+          school: "Ikeja Grammar school",
+          country: "Nigeria",
+          course: "Chemistry",
+          degree: "MBBS",
+          startYear: "2006",
+          endYear: "2020",
+          grade: "First Class",
+        },
         // {
         //   school: "University of Lagos",
         //   country: "Nigeria",
@@ -75,15 +75,15 @@ const store = RootStore.create(
         // },
       ],
       workHistories: [
-        // {
-        //   company: "Tuteria Limited",
-        //   role: "CEO",
-        //   isTeachingRole: false,
-        //   startYear: "2015",
-        //   endYear: "2020",
-        //   isCurrent: true,
-        //   showOnProfile: true,
-        // },
+        {
+          company: "Tuteria Limited",
+          role: "CEO",
+          isTeachingRole: false,
+          startYear: "2015",
+          endYear: "2020",
+          isCurrent: true,
+          showOnProfile: true,
+        },
       ],
     },
     // teachingProfile: {
