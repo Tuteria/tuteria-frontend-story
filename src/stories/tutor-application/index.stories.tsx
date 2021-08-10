@@ -200,7 +200,20 @@ async function getTutorData() {
 
 export const TutorPage = () => {
   React.useEffect(() => {
-    getTutorData().then((res) => store.initializeStore(res));
+    getTutorData().then(
+      (res: {
+        locationInfo: any;
+        personalInfo: any;
+        educationWorkHistory: any;
+      }) => {
+        const { locationInfo, personalInfo, educationWorkHistory } = res;
+        store.initializeStore({
+          locationInfo,
+          personalInfo,
+          educationWorkHistory,
+        });
+      }
+    );
   }, []);
 
   return (

@@ -7,6 +7,7 @@ import WorkHistoryPage from "@tuteria/shared-lib/src/tutor-revamp/WorkHistory";
 import React from "react";
 import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
 import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
+import SubjectPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectPage";
 
 export default {
   title: "Tutor Application/Forms",
@@ -251,7 +252,6 @@ export const PersonalInfo = () => {
     // >
     <PersonalInfoForm
       store={store}
-      countries={allCountries.map((country) => country.name)}
       onSubmit={(formData: any) => {
         console.log("Form Data", formData);
         store.toNextPath(); //moving to the next page.
@@ -292,7 +292,7 @@ export const EducationHistory = () => {
     //     store.saveEducationAndWorkHistory();
     //   }}
     // >
-    <EducationHistoryPage store={store} countries={allCountries} />
+    <EducationHistoryPage store={store} />
     // </PageWrapper>
   );
 };
@@ -308,7 +308,11 @@ export const WorkHistory = () => {
     //     store.saveEducationAndWorkHistory();
     //   }}
     // >
-    <WorkHistoryPage store={store} countries={allCountries} />
+    <WorkHistoryPage store={store} />
     // </PageWrapper>
   );
+};
+
+export const SubjectCreationPage = () => {
+  return <SubjectPage />;
 };
