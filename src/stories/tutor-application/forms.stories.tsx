@@ -7,7 +7,6 @@ import WorkHistoryPage from "@tuteria/shared-lib/src/tutor-revamp/WorkHistory";
 import React from "react";
 import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
 import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
-import SubjectPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectPage";
 
 export default {
   title: "Tutor Application/Forms",
@@ -244,12 +243,6 @@ const initialSteps = [
 export const PersonalInfo = () => {
   store.initializeForm("personal-info");
   return (
-    // <PageWrapper
-    //   store={store}
-    //   updateSteps={initialSteps}
-    //   currentRoute="/personal-details"
-    //   onNextClick={() => {}}
-    // >
     <PersonalInfoForm
       store={store}
       onSubmit={(formData: any) => {
@@ -257,18 +250,11 @@ export const PersonalInfo = () => {
         store.toNextPath(); //moving to the next page.
       }}
     />
-    // </PageWrapper>
   );
 };
 export const LocationInfo = () => {
   store.initializeForm("location-info");
   return (
-    // <PageWrapper
-    //   store={store}
-    //   updateSteps={initialSteps}
-    //   currentRoute="/personal-details"
-    //   onNextClick={() => {}}
-    // >
     <LocationInfoForm
       store={store}
       onSubmit={(formData: any) => {
@@ -276,43 +262,14 @@ export const LocationInfo = () => {
         store.toNextPath(); //moving to the next page.
       }}
     />
-    // </PageWrapper>
   );
 };
 
 export const EducationHistory = () => {
   store.initializeForm("education-history");
-  return (
-    // <PageWrapper
-    //   store={store}
-    //   reverify
-    //   updateSteps={initialSteps}
-    //   currentRoute="/education-work"
-    //   onNextClick={() => {
-    //     store.saveEducationAndWorkHistory();
-    //   }}
-    // >
-    <EducationHistoryPage store={store} />
-    // </PageWrapper>
-  );
+  return <EducationHistoryPage store={store} />;
 };
 export const WorkHistory = () => {
   store.initializeForm("work-history");
-  return (
-    // <PageWrapper
-    //   store={store}
-    //   reverify
-    //   updateSteps={initialSteps}
-    //   currentRoute="/education-work"
-    //   onNextClick={() => {
-    //     store.saveEducationAndWorkHistory();
-    //   }}
-    // >
-    <WorkHistoryPage store={store} />
-    // </PageWrapper>
-  );
-};
-
-export const SubjectCreationPage = () => {
-  return <SubjectPage />;
+  return <WorkHistoryPage store={store} />;
 };
