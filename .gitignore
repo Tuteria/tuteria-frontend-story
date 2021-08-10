@@ -120,4 +120,5 @@ startup.sh
 .vercel
 .vercel
 .vscode
+storybook-static
 packages/mobile-lib
