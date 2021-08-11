@@ -1,9 +1,9 @@
+import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
+import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { RootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
 import React, { Suspense } from "react";
-import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
-import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
 );
@@ -30,19 +30,58 @@ export default {
   ],
 };
 
-const adapter = {
-  saveTutorInfo: (key: any, value: any, slug: any) => {
-    console.log({ key, value, slug });
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({});
-      }, 3000);
-    });
-  },
-};
-
 const store = RootStore.create(
+  {},
   {
+    saveTutorInfo: (key: string, value: any, slug: string) => {
+      console.log({ key, value, slug });
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({});
+        }, 3000);
+      });
+    },
+    toNextPath: async () => {},
+    // remoteDeleteImage: async (file) => {
+    //   console.log(file);
+    // },
+    // uploadApiHandler: async (files: any, progressCallback: any) => {
+    //   console.log(files); //this is where cloudinary implementation is used.
+    //   return files.map((o) => ({
+    //     name: o.name,
+    //     size: o.size?.toString(),
+    //     public_id: "the_public_id",
+    //     url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+    //   }));
+    // },
+    // onLogin: async (values, bag) => {},
+    // onResetPassword: async (values) => {},
+    // saveTutorAvailability: async (values) => {
+    //   return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve(values);
+    //     }, 1000);
+    //   });
+    // },
+    // saveCurrentLocation: async (values) => {
+    //   return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve(values);
+    //     }, 1000);
+    //   });
+    // },
+    // saveExemptedAreas: async (values) => {
+    //   return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve(values);
+    //     }, 1000);
+    //   });
+    // },
+  }
+);
+
+async function getTutorData() {
+  const data = {
     userIsloggedIn: true,
     locationInfo: {
       country: "Nigeria",
@@ -150,122 +189,27 @@ const store = RootStore.create(
     //   taxP: 5,
     // },
     slug: "tutor-101",
-  },
-  // { adapter }
-  {
-    saveTutorInfo: (key: string, value: any, slug: string) => {
-      console.log({ key, value, slug });
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve({});
-        }, 3000);
-      });
-    },
-    toNextPath: async () => {},
-    // remoteDeleteImage: async (file) => {
-    //   console.log(file);
-    // },
-    // uploadApiHandler: async (files: any, progressCallback: any) => {
-    //   console.log(files); //this is where cloudinary implementation is used.
-    //   return files.map((o) => ({
-    //     name: o.name,
-    //     size: o.size?.toString(),
-    //     public_id: "the_public_id",
-    //     url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
-    //   }));
-    // },
-    // onLogin: async (values, bag) => {},
-    // onResetPassword: async (values) => {},
-    // saveTutorAvailability: async (values) => {
-    //   return new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //       resolve(values);
-    //     }, 1000);
-    //   });
-    // },
-    // saveCurrentLocation: async (values) => {
-    //   return new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //       resolve(values);
-    //     }, 1000);
-    //   });
-    // },
-    // saveExemptedAreas: async (values) => {
-    //   return new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //       resolve(values);
-    //     }, 1000);
-    //   });
-    // },
-  }
-);
-// const initialSteps = [
-//   {
-//     stepName: "What is this about?",
-//     path: "/overview",
-//     canEditStep: true,
-//     isCompleted: false,
-//     nextButtonText: "Get started",
-//   },
-//   {
-//     stepName: "Personal details",
-//     path: "/personal-details",
-//     canEditStep: true,
-//     isCompleted: true,
-//     nextButtonText: "Next",
-//   },
-//   {
-//     stepName: "Education and work",
-//     path: "/education-work",
-//     canEditStep: false,
-//     isCompleted: false,
-//     nextButtonText: "Next",
-//   },
-//   {
-//     stepName: "Teaching background",
-//     path: "/teaching-background",
-//     canEditStep: false,
-//     isCompleted: false,
-//     nextButtonText: "Next",
-//   },
-//   {
-//     stepName: "Photo and ID",
-//     path: "/photo-id",
-//     canEditStep: false,
-//     isCompleted: false,
-//     nextButtonText: "Next",
-//   },
-//   {
-//     stepName: "Availability",
-//     path: "/availability",
-//     canEditStep: false,
-//     isCompleted: false,
-//     nextButtonText: "Next",
-//   },
-//   {
-//     stepName: "Agreements",
-//     path: "/agreements",
-//     canEditStep: false,
-//     isCompleted: false,
-//     nextButtonText: "Next",
-//   },
-//   {
-//     stepName: "New developments",
-//     path: "/new-developments",
-//     canEditStep: false,
-//     isCompleted: false,
-//     nextButtonText: "Ok, sounds great",
-//   },
-//   {
-//     stepName: "Final submission",
-//     path: "/submission",
-//     canEditStep: false,
-//     isCompleted: false,
-//     nextButtonText: "Submit",
-//   },
-// ];
+  };
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(data);
+    }, 1000);
+  });
+}
+
+type TutorStoreType = {
+  locationInfo: any;
+  personalInfo: any;
+  educationWorkHistory: any;
+};
 
 export const TutorPage = () => {
+  React.useEffect(() => {
+    getTutorData().then((res: TutorStoreType) => {
+      store.initializeStore(res);
+    });
+  }, []);
+
   return (
     <TutorPageWrapper>
       <PersonalInfo
