@@ -1,10 +1,9 @@
+import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
+import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { RootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
 import React, { Suspense } from "react";
-import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
-import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
-import { resolve } from "url";
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
 );
@@ -202,17 +201,17 @@ async function getTutorData() {
   });
 }
 
+type TutorStoreType = {
+  locationInfo: any;
+  personalInfo: any;
+  educationWorkHistory: any;
+};
+
 export const TutorPage = () => {
   React.useEffect(() => {
-    getTutorData().then(
-      (res: {
-        locationInfo: any;
-        personalInfo: any;
-        educationWorkHistory: any;
-      }) => {
-        store.initializeStore(res);
-      }
-    );
+    getTutorData().then((res: TutorStoreType) => {
+      store.initializeStore(res);
+    });
   }, []);
 
   return (
