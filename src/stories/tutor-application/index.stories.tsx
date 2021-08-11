@@ -18,6 +18,10 @@ const EducationHistory = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/EducationHistory")
 );
 
+const SubjectPage = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/SubjectPage")
+);
+
 export default {
   title: "Tutor Application/Pages",
   decorators: [
@@ -206,12 +210,7 @@ export const TutorPage = () => {
         personalInfo: any;
         educationWorkHistory: any;
       }) => {
-        const { locationInfo, personalInfo, educationWorkHistory } = res;
-        store.initializeStore({
-          locationInfo,
-          personalInfo,
-          educationWorkHistory,
-        });
+        store.initializeStore(res);
       }
     );
   }, []);
@@ -235,6 +234,7 @@ export const TutorPage = () => {
       <EducationHistory store={store} />
 
       <WorkHistory store={store} />
+      <SubjectPage />
     </TutorPageWrapper>
   );
 };
