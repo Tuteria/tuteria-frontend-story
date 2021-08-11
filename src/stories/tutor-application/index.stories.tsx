@@ -206,12 +206,7 @@ type TutorStoreType = {
 export const TutorPage = () => {
   React.useEffect(() => {
     getTutorData().then((res: TutorStoreType) => {
-      const { locationInfo, personalInfo, educationWorkHistory } = res;
-      store.initializeStore({
-        locationInfo,
-        personalInfo,
-        educationWorkHistory,
-      });
+      store.initializeStore(res);
     });
   }, []);
 
