@@ -18,7 +18,7 @@ const EducationHistory = React.lazy(
 );
 
 const SubjectPage = React.lazy(
-  () => import("@tuteria/shared-lib/src/tutor-revamp/SubjectPage")
+  () => import("@tuteria/shared-lib/src/tutor-revamp/Subject")
 );
 
 export default {
@@ -43,6 +43,13 @@ const store = RootStore.create(
         setTimeout(() => {
           resolve({});
         }, 3000);
+      });
+    },
+    submitSelectedSubjects: (data) => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(data);
+        }, 1000);
       });
     },
     toNextPath: async () => {},
@@ -91,10 +98,10 @@ async function getTutorData() {
       country: "Nigeria",
       regions: allRegions,
       countries: allCountries,
-      // state: "Lagos",
-      // region: "Gbagada",
-      // vicinity: "Charley boy Busstop",
-      // address: "10, Lanre awolokun street",
+      state: "Lagos",
+      region: "Gbagada",
+      vicinity: "Charley boy Busstop",
+      address: "10, Lanre awolokun street",
     },
     personalInfo: {
       firstName: "Abiola",
@@ -109,6 +116,8 @@ async function getTutorData() {
       vicinity: "Charley boy Busstop",
       region: "Gbagada",
       address: "Irabor Street Koto",
+      primaryLanguage: "English",
+      medium: "Facebook",
     },
     educationWorkHistory: {
       educations: [
@@ -233,7 +242,7 @@ export const TutorPage = () => {
       <EducationHistory store={store} />
 
       <WorkHistory store={store} />
-      <SubjectPage />
+      <SubjectPage store={store.subject} />
     </TutorPageWrapper>
   );
 };
