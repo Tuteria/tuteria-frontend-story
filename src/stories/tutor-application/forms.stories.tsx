@@ -4,10 +4,8 @@ import EducationHistoryPage from "@tuteria/shared-lib/src/tutor-revamp/Education
 import LocationInfoForm from "@tuteria/shared-lib/src/tutor-revamp/LocationInfo";
 import PersonalInfoForm from "@tuteria/shared-lib/src/tutor-revamp/PersonalInfo";
 import WorkHistoryPage from "@tuteria/shared-lib/src/tutor-revamp/WorkHistory";
-import SubjectPage, {
-  SubjectCreation,
-  SubjectList,
-} from "@tuteria/shared-lib/src/tutor-revamp/Subject";
+import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
+import SubjectCreation from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
 import React from "react";
 import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
 import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
@@ -282,6 +280,6 @@ export const SubjectCreationPage = () => {
   return <SubjectCreation store={store.subject} />;
 };
 
-export const TutorSubjectPage = () => {
-  return <SubjectList store={store.subject} />;
+export const SubjectPage = () => {
+  return <TutorSubjectsPage store={store.subject} />;
 };

@@ -17,7 +17,7 @@ const EducationHistory = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/EducationHistory")
 );
 
-const SubjectPage = React.lazy(
+const TutorSubjectsPage = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/Subject")
 );
 
@@ -242,7 +242,7 @@ export const TutorPage = () => {
       <EducationHistory store={store} />
 
       <WorkHistory store={store} />
-      <SubjectPage store={store.subject} />
+      <TutorSubjectsPage store={store.subject} />
     </TutorPageWrapper>
   );
 };
