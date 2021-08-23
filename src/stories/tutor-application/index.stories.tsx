@@ -152,6 +152,59 @@ async function getTutorData() {
         },
       ],
     },
+    subject: {
+      tutorSubjects: [
+        {
+          name: "Logic",
+          category: "Academics",
+          subcategory: "Secondary",
+          status: "pending",
+        },
+        {
+          name: "Business Studies",
+          category: "Academics",
+          subcategory: "Secondary",
+          status: "pending",
+        },
+        {
+          name: "French",
+          category: "Academics",
+          subcategory: "Secondary",
+          status: "denied",
+        },
+        {
+          name: "Spanish",
+          category: "Academics",
+          subcategory: "Secondary",
+          status: "denied",
+        },
+        {
+          name: "Recognition",
+          category: "Academics",
+          subcategory: "Primary",
+          status: "not-started",
+        },
+
+        {
+          name: "Aptitude",
+          category: "Academics",
+          subcategory: "Adult",
+          status: "pending",
+        },
+        {
+          name: "Speaking",
+          category: "Exam Prep",
+          subcategory: "GMAT",
+          status: "in-progress",
+        },
+        {
+          name: "Listening",
+          category: "Exam Prep",
+          subcategory: "IELTS",
+          status: "active",
+        },
+      ],
+    },
     // teachingProfile: {
     //   classGroup: ["Lower Primary", "Pre-primary"],
     //   curriculums: ["British", "Nigerian"],
@@ -214,6 +267,7 @@ type TutorStoreType = {
   locationInfo: any;
   personalInfo: any;
   educationWorkHistory: any;
+  subject: any;
 };
 
 export const TutorPage = () => {
