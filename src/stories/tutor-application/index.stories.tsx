@@ -259,7 +259,7 @@ async function getTutorData() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(data);
-    }, 1000);
+    }, 3000);
   });
 }
 
@@ -278,7 +278,7 @@ export const TutorPage = () => {
   }, []);
 
   return (
-    <TutorPageWrapper>
+    <TutorPageWrapper store={store}>
       <PersonalInfo
         store={store}
         onSubmit={(formData: any) => {
