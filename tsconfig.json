@@ -19,5 +19,6 @@
 
     "composite": true,
     "jsx": "react"
-  }
+  },
+  "include": ["src/**/*", "src/**/*.json"]
 }

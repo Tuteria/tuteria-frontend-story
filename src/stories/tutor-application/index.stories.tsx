@@ -3,6 +3,7 @@ import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { RootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
+import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
 import React, { Suspense } from "react";
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
@@ -98,118 +99,120 @@ async function getTutorData() {
       country: "Nigeria",
       regions: allRegions,
       countries: allCountries,
-      // state: "Lagos",
-      // region: "Gbagada",
-      // vicinity: "Charley boy Busstop",
-      // address: "10, Lanre awolokun street",
+      state: "Lagos",
+      region: "Gbagada",
+      vicinity: "Charley boy Busstop",
+      address: "10, Lanre awolokun street",
     },
     personalInfo: {
-      // firstName: "Abiola",
-      // lastName: "Oyeniyi",
-      // email: "james@example.com",
-      // gender: "female",
-      // country: "Nigeria",
-      // dateOfBirth: "1998-10-12",
-      // phone: "2347035209922",
-      // whatsappNo: "2348152957065",
-      // state: "Lagos",
-      // vicinity: "Charley boy Busstop",
-      // region: "Gbagada",
-      // address: "Irabor Street Koto",
-      // primaryLanguage: "English",
-      // medium: "Facebook",
+      firstName: "Abiola",
+      lastName: "Oyeniyi",
+      email: "james@example.com",
+      gender: "female",
+      country: "Nigeria",
+      dateOfBirth: "1998-10-12",
+      phone: "2347035209922",
+      whatsappNo: "2348152957065",
+      state: "Lagos",
+      vicinity: "Charley boy Busstop",
+      region: "Gbagada",
+      address: "Irabor Street Koto",
+      primaryLanguage: "English",
+      medium: "Facebook",
     },
     educationWorkHistory: {
       educations: [
-        //   {
-        //     school: "Ikeja Grammar school",
-        //     country: "Nigeria",
-        //     course: "Chemistry",
-        //     degree: "MBBS",
-        //     startYear: "2006",
-        //     endYear: "2020",
-        //     grade: "First Class",
-        //   },
-        //   {
-        //     school: "University of Lagos",
-        //     country: "Nigeria",
-        //     course: "Organic Chemistry",
-        //     degree: "MBBS",
-        //     startYear: "2006",
-        //     endYear: "2020",
-        //     grade: "First Class",
-        //   },
-        // ],
-        // workHistories: [
-        //   {
-        //     company: "Tuteria Limited",
-        //     role: "CEO",
-        //     isTeachingRole: false,
-        //     startYear: "2015",
-        //     endYear: "2020",
-        //     isCurrent: true,
-        //     showOnProfile: true,
-        //   },
+        {
+          school: "Ikeja Grammar school",
+          country: "Nigeria",
+          course: "Chemistry",
+          degree: "MBBS",
+          speciality: "Mathematics",
+          startYear: "2006",
+          endYear: "2020",
+          grade: "First Class",
+        },
+        {
+          school: "University of Lagos",
+          country: "Nigeria",
+          course: "Organic Chemistry",
+          speciality: "Mathematics",
+          degree: "MBBS",
+          startYear: "2006",
+          endYear: "2020",
+          grade: "First Class",
+        },
+      ],
+      workHistories: [
+        {
+          company: "Tuteria Limited",
+          role: "CEO",
+          isTeachingRole: false,
+          startYear: "2015",
+          endYear: "2020",
+          isCurrent: true,
+          showOnProfile: true,
+        },
       ],
     },
     subject: {
       tutorSubjects: [
-        // {
-        //   id: 1,
-        //   name: "Logic",
-        //   category: "Academics",
-        //   subcategory: "Secondary",
-        //   status: "pending",
-        // },
-        // {
-        //   id: 2,
-        //   name: "Business Studies",
-        //   category: "Academics",
-        //   subcategory: "Secondary",
-        //   status: "pending",
-        // },
-        // {
-        //   id: 3,
-        //   name: "French",
-        //   category: "Academics",
-        //   subcategory: "Secondary",
-        //   status: "denied",
-        // },
-        // {
-        //   id: 4,
-        //   name: "Spanish",
-        //   category: "Academics",
-        //   subcategory: "Secondary",
-        //   status: "denied",
-        // },
-        // {
-        //   id: 5,
-        //   name: "Recognition",
-        //   category: "Academics",
-        //   subcategory: "Primary",
-        //   status: "not-started",
-        // },
-        // {
-        //   id: 5,
-        //   name: "Aptitude",
-        //   category: "Academics",
-        //   subcategory: "Adult",
-        //   status: "pending",
-        // },
-        // {
-        //   id: 6,
-        //   name: "Speaking",
-        //   category: "Exam Prep",
-        //   subcategory: "IELTS",
-        //   status: "in-progress",
-        // },
-        // {
-        //   id: 7,
-        //   name: "Listening",
-        //   category: "Exam Prep",
-        //   subcategory: "IELTS",
-        //   status: "active",
-        // },
+        {
+          id: 1,
+          name: "Logic",
+          category: "Academics",
+          subcategory: "Secondary",
+          status: "pending",
+        },
+        {
+          id: 2,
+          name: "Business Studies",
+          category: "Academics",
+          subcategory: "Secondary",
+          status: "pending",
+        },
+        {
+          id: 3,
+          name: "French",
+          category: "Academics",
+          subcategory: "Secondary",
+          status: "denied",
+        },
+        {
+          id: 4,
+          name: "Spanish",
+          category: "Academics",
+          subcategory: "Secondary",
+          status: "denied",
+        },
+        {
+          id: 5,
+          name: "Recognition",
+          category: "Academics",
+          subcategory: "Primary",
+          status: "not-started",
+        },
+        {
+          id: 5,
+          name: "Aptitude",
+          category: "Academics",
+          subcategory: "Adult",
+          status: "pending",
+        },
+        {
+          id: 6,
+          name: "Speaking",
+          category: "Exam Prep",
+          subcategory: "IELTS",
+          status: "in-progress",
+        },
+        {
+          id: 7,
+          name: "Listening",
+          category: "Exam Prep",
+          subcategory: "IELTS",
+          status: "active",
+        },
       ],
     },
     // teachingProfile: {
@@ -266,7 +269,7 @@ async function getTutorData() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(data);
-    }, 2000);
+    }, 3000);
   });
 }
 
@@ -278,11 +281,17 @@ type TutorStoreType = {
 };
 
 export const TutorPage = () => {
+  const [loading, setLoading] = React.useState(true);
   React.useEffect(() => {
     getTutorData().then((res: TutorStoreType) => {
       store.initializeStore(res);
+      setLoading(false);
     });
   }, []);
+
+  if (loading) {
+    return <LoadingState />;
+  }
 
   return (
     <TutorPageWrapper store={store}>
