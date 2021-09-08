@@ -7,7 +7,7 @@ import React from "react";
 import "katex/dist/katex.min.css";
 
 export default {
-  title: "Tutor Application/Quiz",
+  title: "Tutor Application/Pages/Quiz",
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
