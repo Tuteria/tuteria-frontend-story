@@ -6,6 +6,7 @@ import "katex/dist/katex.min.css";
 import { linkTo } from "@storybook/addon-links";
 import { RootStore } from "@tuteria/shared-lib/src/stores";
 import DATA from "@tuteria/shared-lib/src/tutor-revamp/quizzes/sample-quiz-data";
+import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
 
 export default {
   title: "Tutor Application/Pages/Subject Test",
@@ -31,11 +32,31 @@ const store = RootStore.create(
   }
 );
 
+const params = "General Mathematics";
+
 export const SubjectTest = () => {
+  const [loading, setLoading] = React.useState(false);
+
+  const navigateToQuiz = () => {
+    linkTo("Tutor Application/Pages/Quiz", "Quiz")();
+  };
+
+  React.useEffect(() => {
+    store.subject.setTestSubject(params);
+    if (store.subject.listOfTestableSubjects.length === 0) {
+      setLoading(true);
+      store.subject.fetchQuizQuestions().then((res) => navigateToQuiz());
+    }
+  });
+
+  if (loading) {
+    return <LoadingState text="Fetching questions..." />;
+  }
+
   return (
     <TestPage
       store={store}
-      navigateToQuiz={() => linkTo("Tutor Application/Pages/Quiz", "Quiz")()}
+      navigateToQuiz={navigateToQuiz}
       navigateBack={() => linkTo("Tutor Application/Pages", "Tutor Page")()}
     />
   );

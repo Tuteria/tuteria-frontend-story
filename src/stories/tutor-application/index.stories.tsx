@@ -5,6 +5,7 @@ import { RootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
 import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
 import React, { Suspense } from "react";
+import { linkTo } from "@storybook/addon-links";
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
 );
@@ -38,6 +39,14 @@ export default {
 const store = RootStore.create(
   {},
   {
+    deleteSubject: (id: string) => {
+      console.log({ id });
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(id);
+        }, 3000);
+      });
+    },
     saveTutorInfo: (key: string, value: any, slug: string) => {
       console.log({ key, value, slug });
       return new Promise((resolve, reject) => {
@@ -159,17 +168,17 @@ async function getTutorData() {
       tutorSubjects: [
         {
           id: 1,
-          name: "Logic",
+          name: "General Mathematics",
           category: "Academics",
           subcategory: "Secondary",
-          status: "pending",
+          status: "not-started",
         },
         {
           id: 2,
-          name: "Business Studies",
+          name: "English",
           category: "Academics",
           subcategory: "Secondary",
-          status: "pending",
+          status: "not-started",
         },
         {
           id: 3,
@@ -312,7 +321,12 @@ export const TutorPage = () => {
       <EducationHistory store={store} />
 
       <WorkHistory store={store} />
-      <TutorSubjectsPage store={store.subject} />
+      <TutorSubjectsPage
+        store={store.subject}
+        onTakeTest={() =>
+          linkTo("Tutor Application/Pages/Subject Test", "Subject Test")()
+        }
+      />
     </TutorPageWrapper>
   );
 };
