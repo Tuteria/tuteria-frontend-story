@@ -55,5 +55,14 @@ export const Quiz = () => {
 };
 
 export const Results = () => {
-  return <ResultsPage />;
+  return (
+    <ResultsPage
+      navigateToSubjectForm={() =>
+        linkTo("Tutor Application/Pages/Tutor Pages", "Tutor Page")()
+      }
+      navigateBack={() =>
+        linkTo("Tutor Application/Pages/Tutor Pages", "Tutor Page")()
+      }
+    />
+  );
 };

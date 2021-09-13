@@ -3,8 +3,11 @@ import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { RootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
-import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
 import React, { Suspense } from "react";
+import DATA from "@tuteria/shared-lib/src/tutor-revamp/quizzes/sample-quiz-data";
+import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
+import TestPage from "@tuteria/shared-lib/src/tutor-revamp/TestPage";
+import "katex/dist/katex.min.css";
 import { linkTo } from "@storybook/addon-links";
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
@@ -60,6 +63,13 @@ const store = RootStore.create(
         setTimeout(() => {
           resolve(data);
         }, 1000);
+      });
+    },
+    fetchQuizQuestions: async (quizSubjects) => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({ quiz: DATA.quiz, quizSubjects });
+        }, 2000);
       });
     },
     toNextPath: async () => {},
@@ -323,10 +333,39 @@ export const TutorPage = () => {
       <WorkHistory store={store} />
       <TutorSubjectsPage
         store={store.subject}
-        onTakeTest={() =>
-          linkTo("Tutor Application/Pages/Subject Test", "Subject Test")()
-        }
+        onTakeTest={() => linkTo("Tutor Application/Pages", "Subject Test")()}
       />
     </TutorPageWrapper>
+  );
+};
+
+// This variable will come from query parameters
+const params = "General Mathematics";
+
+export const SubjectTest = () => {
+  const [loading, setLoading] = React.useState(false);
+
+  const navigateToQuiz = () => {
+    linkTo("Tutor Application/Pages/Quiz", "Quiz")();
+  };
+
+  React.useEffect(() => {
+    store.subject.setTestSubject(params);
+    if (store.subject.listOfTestableSubjects.length === 0) {
+      setLoading(true);
+      store.subject.fetchQuizQuestions().then((res) => navigateToQuiz());
+    }
+  }, []);
+
+  if (loading) {
+    return <LoadingState text="Fetching questions..." />;
+  }
+
+  return (
+    <TestPage
+      store={store}
+      navigateToQuiz={navigateToQuiz}
+      navigateBack={() => linkTo("Tutor Application/Pages", "Tutor Page")()}
+    />
   );
 };
