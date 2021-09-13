@@ -32,6 +32,7 @@ const store = RootStore.create(
   }
 );
 
+// This variable will come from query parameters
 const params = "General Mathematics";
 
 export const SubjectTest = () => {
@@ -47,7 +48,7 @@ export const SubjectTest = () => {
       setLoading(true);
       store.subject.fetchQuizQuestions().then((res) => navigateToQuiz());
     }
-  });
+  }, []);
 
   if (loading) {
     return <LoadingState text="Fetching questions..." />;
