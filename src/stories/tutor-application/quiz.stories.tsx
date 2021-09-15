@@ -44,12 +44,16 @@ export const Quiz = () => {
   }, []);
 
   function redirect() {
-    linkTo("Tutor Application/Pages/Quiz", "Results")();
+    if (store.quizResults.passedQuiz) {
+      linkTo("Tutor Application/Pages", "Subject Edit")();
+    } else {
+      linkTo("Tutor Application/Pages", "Tutor Page")();
+    }
   }
 
   return (
     <Box>
-      <QuizPage index={0} store={store} onSubmit={redirect} />
+      <QuizPage index={0} store={store} navigate={redirect} />
     </Box>
   );
 };
@@ -57,12 +61,14 @@ export const Quiz = () => {
 export const Results = () => {
   return (
     <ResultsPage
-      navigateToSubjectForm={() =>
-        linkTo("Tutor Application/Pages/Tutor Pages", "Tutor Page")()
-      }
-      navigateBack={() =>
-        linkTo("Tutor Application/Pages/Tutor Pages", "Tutor Page")()
-      }
+      navigate={() => {}}
+      quizResults={{
+        completionRate: 100,
+        correctAnswers: 19,
+        passRate: 0,
+        passedQuiz: true,
+        questionsAnswered: 21,
+      }}
     />
   );
 };
