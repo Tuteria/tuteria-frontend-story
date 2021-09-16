@@ -58,6 +58,7 @@ export const Education = () => {
     >
       <EducationComponent
         handleSubmit={(values) => console.log(values)}
+        countries={[]}
         initialValues={{
           school: "Michigan State University",
           country: "",
