@@ -9,6 +9,7 @@ import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/Lo
 import TestPage from "@tuteria/shared-lib/src/tutor-revamp/TestPage";
 import "katex/dist/katex.min.css";
 import { linkTo } from "@storybook/addon-links";
+import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCreationForm";
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
 );
@@ -368,4 +369,8 @@ export const SubjectTest = () => {
       navigateBack={() => linkTo("Tutor Application/Pages", "Tutor Page")()}
     />
   );
+};
+
+export const SubjectCreation = () => {
+  return <SubjectCreationPage />;
 };

@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import QuizPage from "@tuteria/shared-lib/src/tutor-revamp/quizzes/QuizPage";
-import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
 import DATA from "@tuteria/shared-lib/src/tutor-revamp/quizzes/sample-quiz-data";
 import QuizStore from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
 import React from "react";
@@ -45,7 +44,7 @@ export const Quiz = () => {
 
   function redirect() {
     if (store.quizResults.passedQuiz) {
-      linkTo("Tutor Application/Pages", "Subject Edit")();
+      linkTo("Tutor Application/Pages", "Subject Creation")();
     } else {
       linkTo("Tutor Application/Pages", "Tutor Page")();
     }
@@ -55,20 +54,5 @@ export const Quiz = () => {
     <Box>
       <QuizPage index={0} store={store} navigate={redirect} />
     </Box>
-  );
-};
-
-export const Results = () => {
-  return (
-    <ResultsPage
-      navigate={() => {}}
-      quizResults={{
-        completionRate: 100,
-        correctAnswers: 19,
-        passRate: 0,
-        passedQuiz: true,
-        questionsAnswered: 21,
-      }}
-    />
   );
 };
