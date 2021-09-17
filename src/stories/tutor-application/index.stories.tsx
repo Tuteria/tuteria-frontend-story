@@ -8,6 +8,7 @@ import DATA from "@tuteria/shared-lib/src/tutor-revamp/quizzes/sample-quiz-data"
 import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
 import TestPage from "@tuteria/shared-lib/src/tutor-revamp/TestPage";
 import "katex/dist/katex.min.css";
+import "react-phone-input-2/lib/style.css";
 import { linkTo } from "@storybook/addon-links";
 import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCreationForm";
 const PersonalInfo = React.lazy(
@@ -72,41 +73,6 @@ const adapter = {
     });
   },
   toNextPath: async () => {},
-  // remoteDeleteImage: async (file) => {
-  //   console.log(file);
-  // },
-  // uploadApiHandler: async (files: any, progressCallback: any) => {
-  //   console.log(files); //this is where cloudinary implementation is used.
-  //   return files.map((o) => ({
-  //     name: o.name,
-  //     size: o.size?.toString(),
-  //     public_id: "the_public_id",
-  //     url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
-  //   }));
-  // },
-  // onLogin: async (values, bag) => {},
-  // onResetPassword: async (values) => {},
-  // saveTutorAvailability: async (values) => {
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       resolve(values);
-  //     }, 1000);
-  //   });
-  // },
-  // saveCurrentLocation: async (values) => {
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       resolve(values);
-  //     }, 1000);
-  //   });
-  // },
-  // saveExemptedAreas: async (values) => {
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       resolve(values);
-  //     }, 1000);
-  //   });
-  // },
 };
 
 const store = RootStore.create(
@@ -239,55 +205,11 @@ async function getTutorData() {
         },
       ],
     },
-    // teachingProfile: {
-    //   classGroup: ["Lower Primary", "Pre-primary"],
-    //   curriculums: ["British", "Nigerian"],
-    //   examExperience: {
-    //     exams: [
-    //       "Common Entrance Exam",
-    //       "Cambridge Checkpoint",
-    //       "13+ Entrance Exam",
-    //     ],
-    //     schools: ["Greensprings", "Grange"],
-    //   },
-    //   specialNeeds: ["ADD/ADHD", "Dyslexia"],
-    //   tutorDisabilities: ["ADD/ADHD"],
-    //   onlineProfile: {
-    //     acceptsOnline: true,
-    //     hasComputer: true,
-    //     hasInternet: true,
-    //   },
-    // },
-    // availability: {
-    //   availability: {
-    //     Monday: ["Morning", "Late afternoon"],
-    //     Wednesday: ["Evening", "Early evening"],
-    //   },
-    //   maxDays: 3,
-    //   maxHours: 1,
-    //   maxStudents: 3,
-    // },
     identity: {
       profilePhotoId: "hello/holla",
       profilePhoto:
         "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
-      isIdVerified: true,
-      // uploadStore: {
-      //   files: [
-      //     {
-      //       name: "sample.png",
-      //       url:
-      //         "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
-      //     },
-      //   ],
-      // },
     },
-    // agreement: {
-    //   lessonPercent: true,
-    //   amountEarned: 567650,
-    //   contractAgreement: true,
-    //   taxP: 5,
-    // },
     slug: "tutor-101",
   };
   return new Promise((resolve) => {
