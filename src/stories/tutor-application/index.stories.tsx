@@ -40,75 +40,79 @@ export default {
   ],
 };
 
+const adapter = {
+  deleteSubject: (id: string) => {
+    console.log({ id });
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(id);
+      }, 3000);
+    });
+  },
+  saveTutorInfo: (key: string, value: any, slug: string) => {
+    console.log({ key, value, slug });
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({});
+      }, 3000);
+    });
+  },
+  submitSelectedSubjects: (data) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(data);
+      }, 1000);
+    });
+  },
+  fetchQuizQuestions: async (quizSubjects) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({ quiz: DATA.quiz, quizSubjects });
+      }, 2000);
+    });
+  },
+  toNextPath: async () => {},
+  // remoteDeleteImage: async (file) => {
+  //   console.log(file);
+  // },
+  // uploadApiHandler: async (files: any, progressCallback: any) => {
+  //   console.log(files); //this is where cloudinary implementation is used.
+  //   return files.map((o) => ({
+  //     name: o.name,
+  //     size: o.size?.toString(),
+  //     public_id: "the_public_id",
+  //     url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+  //   }));
+  // },
+  // onLogin: async (values, bag) => {},
+  // onResetPassword: async (values) => {},
+  // saveTutorAvailability: async (values) => {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       resolve(values);
+  //     }, 1000);
+  //   });
+  // },
+  // saveCurrentLocation: async (values) => {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       resolve(values);
+  //     }, 1000);
+  //   });
+  // },
+  // saveExemptedAreas: async (values) => {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       resolve(values);
+  //     }, 1000);
+  //   });
+  // },
+};
+
 const store = RootStore.create(
   {},
   {
-    deleteSubject: (id: string) => {
-      console.log({ id });
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(id);
-        }, 3000);
-      });
-    },
-    saveTutorInfo: (key: string, value: any, slug: string) => {
-      console.log({ key, value, slug });
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve({});
-        }, 3000);
-      });
-    },
-    submitSelectedSubjects: (data) => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(data);
-        }, 1000);
-      });
-    },
-    fetchQuizQuestions: async (quizSubjects) => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve({ quiz: DATA.quiz, quizSubjects });
-        }, 2000);
-      });
-    },
-    toNextPath: async () => {},
-    // remoteDeleteImage: async (file) => {
-    //   console.log(file);
-    // },
-    // uploadApiHandler: async (files: any, progressCallback: any) => {
-    //   console.log(files); //this is where cloudinary implementation is used.
-    //   return files.map((o) => ({
-    //     name: o.name,
-    //     size: o.size?.toString(),
-    //     public_id: "the_public_id",
-    //     url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
-    //   }));
-    // },
-    // onLogin: async (values, bag) => {},
-    // onResetPassword: async (values) => {},
-    // saveTutorAvailability: async (values) => {
-    //   return new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //       resolve(values);
-    //     }, 1000);
-    //   });
-    // },
-    // saveCurrentLocation: async (values) => {
-    //   return new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //       resolve(values);
-    //     }, 1000);
-    //   });
-    // },
-    // saveExemptedAreas: async (values) => {
-    //   return new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //       resolve(values);
-    //     }, 1000);
-    //   });
-    // },
+    adapter,
   }
 );
 
