@@ -11,6 +11,8 @@ import "katex/dist/katex.min.css";
 import "react-phone-input-2/lib/style.css";
 import { linkTo } from "@storybook/addon-links";
 import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCreationForm";
+import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
+
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
 );
@@ -316,4 +318,8 @@ export const SubjectCreation = () => {
     });
   }, []);
   return <SubjectCreationPage store={store.subject} />;
+};
+
+export const Login = () => {
+  return <LoginPage />;
 };
