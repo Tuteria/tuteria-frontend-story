@@ -58,6 +58,13 @@ const adapter = {
       }, 3000);
     });
   },
+  updateTutorSubjectInfo: (values: any) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(values);
+      }, 3000);
+    });
+  },
   submitSelectedSubjects: (data) => {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -153,6 +160,8 @@ async function getTutorData() {
           category: "Academics",
           subcategory: "Secondary",
           status: "not-started",
+          title: "This is title from tutor subject for general mathematics",
+          description: "This is a description for general mathematics",
         },
         {
           id: 2,
@@ -188,6 +197,8 @@ async function getTutorData() {
           category: "Academics",
           subcategory: "Adult",
           status: "pending",
+          title: "This is title from tutor subject for Aptitude",
+          description: "This is a description for Aptitude",
         },
         {
           id: 6,
@@ -298,5 +309,11 @@ export const SubjectTest = () => {
 };
 
 export const SubjectCreation = () => {
-  return <SubjectCreationPage />;
+  React.useEffect(() => {
+    getTutorData().then((res: TutorStoreType) => {
+      store.initializeStore(res);
+      // setLoading(false);
+    });
+  }, []);
+  return <SubjectCreationPage store={store.subject} />;
 };
