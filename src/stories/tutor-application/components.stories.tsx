@@ -1,19 +1,18 @@
+import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
 import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
-import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
-import { RootStore } from "@tuteria/shared-lib/src/stores";
-import EducationHistoryPage from "@tuteria/shared-lib/src/tutor-revamp/EducationHistory";
-import LocationInfoForm from "@tuteria/shared-lib/src/tutor-revamp/LocationInfo";
-import PersonalInfoForm from "@tuteria/shared-lib/src/tutor-revamp/PersonalInfo";
-import WorkHistoryPage from "@tuteria/shared-lib/src/tutor-revamp/WorkHistory";
 import {
   OverlayRouter,
   OverlayWrapper,
 } from "@tuteria/shared-lib/src/components/OverlayRouter";
+import { RootStore } from "@tuteria/shared-lib/src/stores";
+import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
+import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
+import SubjectAdditionPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
 import React from "react";
 
 export default {
-  title: "Tutor Application/Forms",
+  title: "Tutor Application/Components",
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
@@ -137,111 +136,40 @@ const store = RootStore.create({
       "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
     isIdVerified: true,
   },
-
   slug: "tutor-101",
 });
-const initialSteps = [
-  {
-    stepName: "What is this about?",
-    path: "/overview",
-    canEditStep: true,
-    isCompleted: false,
-    nextButtonText: "Get started",
-  },
-  {
-    stepName: "Personal details",
-    path: "/personal-details",
-    canEditStep: true,
-    isCompleted: true,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "Education and work",
-    path: "/education-work",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "Teaching background",
-    path: "/teaching-background",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "Photo and ID",
-    path: "/photo-id",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "Availability",
-    path: "/availability",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "Agreements",
-    path: "/agreements",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Next",
-  },
-  {
-    stepName: "New developments",
-    path: "/new-developments",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Ok, sounds great",
-  },
-  {
-    stepName: "Final submission",
-    path: "/submission",
-    canEditStep: false,
-    isCompleted: false,
-    nextButtonText: "Submit",
-  },
-];
 
-export const PersonalInfo = () => {
-  store.initializeForm("personal-info");
+export const Results = () => {
   return (
-    <PersonalInfoForm
-      store={store}
-      onSubmit={(formData: any) => {
-        console.log("Form Data", formData);
-        store.toNextPath(); //moving to the next page.
-      }}
-    />
-  );
-};
-export const LocationInfo = () => {
-  store.initializeForm("location-info");
-  return (
-    <LocationInfoForm
-      store={store}
-      onSubmit={(formData: any) => {
-        console.log("Form Data", formData);
-        store.toNextPath(); //moving to the next page.
+    <ResultsPage
+      navigate={() => {}}
+      quizResults={{
+        completionRate: 100,
+        correctAnswers: 19,
+        passRate: 0,
+        passedQuiz: true,
+        questionsAnswered: 21,
       }}
     />
   );
 };
 
-export const EducationHistory = () => {
-  store.initializeForm("education-history");
+export const SubjectAddition = () => {
   return (
     <OverlayRouter>
       <OverlayWrapper>
-        <EducationHistoryPage store={store} />;
+        <SubjectAdditionPage onSubmit={() => {}} store={store.subject} />;
       </OverlayWrapper>
     </OverlayRouter>
   );
 };
-export const WorkHistory = () => {
-  store.initializeForm("work-history");
-  return <WorkHistoryPage store={store} />;
+
+export const SubjectTable = () => {
+  return (
+    <OverlayRouter>
+      <OverlayWrapper>
+        <TutorSubjectsPage onTakeTest={() => {}} store={store.subject} />;
+      </OverlayWrapper>
+    </OverlayRouter>
+  );
 };
