@@ -1,5 +1,6 @@
 import App from "@tuteria/mobile-lib/src/App";
 import { SampleType } from "@tuteria/mobile-lib/src/store";
+import React from "react";
 
 export default {
   title: "Components/Sidebar",

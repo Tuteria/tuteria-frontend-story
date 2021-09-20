@@ -67,6 +67,7 @@
     "@types/react-router-dom": "^5.1.7",
     "framer-motion": "^4",
     "ionicons": "^5.4.0",
+    "katex": "^0.13.18",
     "lodash.isempty": "^4.4.0",
     "pluralize": "^8.0.0",
     "react": "^17.0.1",
