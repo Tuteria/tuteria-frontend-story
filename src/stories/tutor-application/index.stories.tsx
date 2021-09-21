@@ -164,6 +164,8 @@ async function getTutorData() {
           status: "not-started",
           title: "This is title from tutor subject for general mathematics",
           description: "This is a description for general mathematics",
+          teachingStyle: "Terrorize my students",
+          trackRecords: "Cries everywhere",
         },
         {
           id: 2,
@@ -311,12 +313,19 @@ export const SubjectTest = () => {
 };
 
 export const SubjectCreation = () => {
+  const [loading, setLoading] = React.useState(true);
   React.useEffect(() => {
     getTutorData().then((res: TutorStoreType) => {
       store.initializeStore(res);
-      // setLoading(false);
+      store.subject.setCurrentSubjectId(1);
+      setLoading(false);
     });
   }, []);
+
+  if (loading) {
+    return <LoadingState text="Fetching subject info..." />;
+  }
+
   return <SubjectCreationPage store={store.subject} />;
 };
 
