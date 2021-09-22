@@ -11,6 +11,8 @@ import "katex/dist/katex.min.css";
 import "react-phone-input-2/lib/style.css";
 import { linkTo } from "@storybook/addon-links";
 import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCreationForm";
+import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
+
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
 );
@@ -55,6 +57,13 @@ const adapter = {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve({});
+      }, 3000);
+    });
+  },
+  updateTutorSubjectInfo: (values: any) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(values);
       }, 3000);
     });
   },
@@ -153,6 +162,10 @@ async function getTutorData() {
           category: "Academics",
           subcategory: "Secondary",
           status: "not-started",
+          title: "This is title from tutor subject for general mathematics",
+          description: "This is a description for general mathematics",
+          teachingStyle: "Terrorize my students",
+          trackRecords: "Cries everywhere",
         },
         {
           id: 2,
@@ -188,6 +201,8 @@ async function getTutorData() {
           category: "Academics",
           subcategory: "Adult",
           status: "pending",
+          title: "This is title from tutor subject for Aptitude",
+          description: "This is a description for Aptitude",
         },
         {
           id: 6,
@@ -298,5 +313,22 @@ export const SubjectTest = () => {
 };
 
 export const SubjectCreation = () => {
-  return <SubjectCreationPage />;
+  const [loading, setLoading] = React.useState(true);
+  React.useEffect(() => {
+    getTutorData().then((res: TutorStoreType) => {
+      store.initializeStore(res);
+      store.subject.setCurrentSubjectId(1);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) {
+    return <LoadingState text="Fetching subject info..." />;
+  }
+
+  return <SubjectCreationPage store={store.subject} />;
+};
+
+export const Login = () => {
+  return <LoginPage />;
 };
