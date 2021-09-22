@@ -1,6 +1,6 @@
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
-import allCountries from "@tuteria/mobile-lib/src/data/countries.json";
-import allRegions from "@tuteria/mobile-lib/src/data/regions.json";
+import allCountries from "@tuteria/shared-lib/src/data/countries.json";
+import allRegions from "@tuteria/shared-lib/src/data/regions.json";
 import {
   OverlayRouter,
   OverlayWrapper,
