@@ -230,7 +230,7 @@ async function getTutorData() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(data);
-    }, 3000);
+    }, 1000);
   });
 }
 
@@ -323,7 +323,7 @@ export const SubjectCreation = () => {
   }, []);
 
   if (loading) {
-    return <LoadingState text="Fetching subject info..." />;
+    return <LoadingState text="Fetching subject details..." />;
   }
 
   return <SubjectCreationPage store={store.subject} />;
