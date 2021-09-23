@@ -8,6 +8,7 @@ import {
 import { RootStore } from "@tuteria/shared-lib/src/stores";
 import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
 import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
+import { SubjectsCardMobile } from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditForm";
 import SubjectAdditionPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
 import React from "react";
 import { Box } from "@chakra-ui/react";
@@ -252,6 +253,19 @@ export const EmptySubjectTable = () => {
         <Box w="1000px" mx="auto">
           <TutorSubjectsPage onTakeTest={() => {}} store={store2.subject} />
         </Box>
+      </OverlayWrapper>
+    </OverlayRouter>
+  );
+};
+
+export const SubjectCardView = () => {
+  return (
+    <OverlayRouter>
+      <OverlayWrapper>
+        <SubjectsCardMobile
+          currentSubjects={store.subject.tutorSubjects}
+          store={store.subject}
+        />
       </OverlayWrapper>
     </OverlayRouter>
   );
