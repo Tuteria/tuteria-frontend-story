@@ -1,8 +1,10 @@
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
-import { RootStore } from "@tuteria/shared-lib/src/stores";
+import { IRootStore, RootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
+import storage from "@tuteria/shared-lib/src/storage";
+import { observer } from "mobx-react-lite";
 import React, { Suspense } from "react";
 import DATA from "@tuteria/shared-lib/src/tutor-revamp/quizzes/sample-quiz-data";
 import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
@@ -11,7 +13,13 @@ import "katex/dist/katex.min.css";
 import "react-phone-input-2/lib/style.css";
 import { linkTo } from "@storybook/addon-links";
 import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCreationForm";
+import {
+  SAMPLE_TUTERIA_SUBJECTS,
+  SAMPLE_TUTOR_DATA,
+  SAMPLE_TUTOR_SUBJECTS,
+} from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
+import { scrollToId } from "@tuteria/shared-lib/src/utils/functions";
 
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
@@ -42,8 +50,11 @@ export default {
     ),
   ],
 };
-
+const REGION_KEY = "TEST-REGIONS-VICINITIES";
+const COUNTRY_KEY = "TEST-COUNTRIES";
 const adapter = {
+  regionKey: REGION_KEY,
+  countryKey: COUNTRY_KEY,
   deleteSubject: (id: string) => {
     console.log({ id });
     return new Promise((resolve, reject) => {
@@ -82,6 +93,28 @@ const adapter = {
     });
   },
   toNextPath: async () => {},
+  async fetchTutorSubjects() {
+    let tutor_data = SAMPLE_TUTOR_SUBJECTS;
+    return await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          tutorSubjects: tutor_data.map((tx) => {
+            return {
+              id: tx.pk,
+              name: tx.skill.name,
+              category: tx.category,
+              status: tx.status,
+              title: tx.heading || "",
+              description: tx.description || "",
+              teachingStyle: tx.teachingStyle,
+              trackRecords: tx.trackRecords,
+            };
+          }),
+          tuteriaSubjects: SAMPLE_TUTERIA_SUBJECTS,
+        });
+      }, 1000);
+    });
+  },
 };
 
 const store = RootStore.create(
@@ -108,7 +141,7 @@ async function getTutorData() {
       lastName: "Oyeniyi",
       email: "james@example.com",
       gender: "female",
-      country: "Nigeria",
+      nationality: "Nigeria",
       dateOfBirth: "1998-10-12",
       phone: "2347035209922",
       whatsappNo: "2348152957065",
@@ -241,13 +274,119 @@ type TutorStoreType = {
   subject: any;
 };
 
+const TutorPageComponent: React.FC<{
+  store: IRootStore;
+  onTakeTest: any;
+}> = observer(({ store, onTakeTest, ...rest }) => {
+  const percentObj = {
+    "child-details": 20,
+    "teacher-selection": 40,
+    "lesson-schedule": 60,
+    "lesson-location": 80,
+    "contact-information": 100,
+  };
+
+  const stepsArray: any = [
+    { key: "personal-info", name: "Personal Info", completed: false },
+    { key: "location-info", name: "Location Info", completed: false },
+    {
+      key: "education-history",
+      name: "Education History",
+      completed: false,
+    },
+    { key: "work-history", name: "Work History", completed: false },
+    { key: "subject-addition", name: "Subject Selection", completed: false },
+  ];
+  const [formIndex, setFormIndex] = React.useState(1);
+  // const { isOpen, onOpen, onClose } = useOverlayDisclosure("/modal");
+  const [loadingText, setLoadingText] = React.useState("");
+  const [steps, setSteps] = React.useState<any[]>(stepsArray);
+  const [activeStep, setActiveStep] = React.useState("personal-info");
+
+  React.useEffect(() => {}, []);
+
+  const handleFormSubmit = (id, presentStep) => {
+    setFormIndex((index) => index + 1);
+    setActiveStep(id);
+    setSteps(
+      [...steps].map((object) => {
+        if (object.key === presentStep) {
+          return {
+            ...object,
+            completed: true,
+          };
+        } else return object;
+      })
+    );
+    scrollToId(id);
+  };
+
+  return (
+    <TutorPageWrapper
+      formIndex={formIndex}
+      steps={steps}
+      activeStep={activeStep}
+      store={store}
+    >
+      <PersonalInfo
+        store={store}
+        currentEditableForm={activeStep}
+        onSubmit={(formData: any) => {
+          store.personalInfo.onFormSubmit(formData);
+          store.onFormSubmit(formData, "personal-info").then(() => {
+            handleFormSubmit("location-info", "personal-info");
+          });
+        }}
+      />
+
+      <LocationInfo
+        store={store}
+        onSubmit={(formData: any) => {
+          store.locationInfo.updateFields(formData);
+          store.onFormSubmit(formData, "location-info").then(() => {
+            handleFormSubmit("education-history", "location-info");
+          });
+        }}
+      />
+
+      <EducationHistory
+        store={store}
+        onSubmit={(formData: any) => {
+          store.onFormSubmit(formData, "education-history").then(() => {
+            handleFormSubmit("work-history", "education-history");
+          });
+        }}
+      />
+
+      <WorkHistory
+        store={store}
+        onSubmit={(formData: any) => {
+          store.onFormSubmit(formData, "work-history").then(() => {
+            handleFormSubmit("subject-addition", "work-history");
+          });
+        }}
+      />
+      <TutorSubjectsPage
+        store={store.subject}
+        onTakeTest={onTakeTest}
+        onSubmit={(formData: any) => {
+          store.onFormSubmit(formData, "subject-addition").then(() => {
+            // handleFormSubmit("subject-selection", "work-history");
+          });
+        }}
+      />
+    </TutorPageWrapper>
+  );
+});
+
 export const TutorPage = () => {
   const [loading, setLoading] = React.useState(true);
+
   React.useEffect(() => {
-    getTutorData().then((res: TutorStoreType) => {
-      store.initializeStore(res);
-      setLoading(false);
-    });
+    storage.set(adapter.regionKey, allRegions);
+    storage.set(adapter.countryKey, allCountries);
+    store.initializeTutorData(allRegions, allCountries, SAMPLE_TUTOR_DATA);
+    setLoading(false);
   }, []);
 
   if (loading) {
@@ -255,29 +394,12 @@ export const TutorPage = () => {
   }
 
   return (
-    <TutorPageWrapper store={store}>
-      <PersonalInfo
-        store={store}
-        onSubmit={(formData: any) => {
-          store.toNextPath();
-        }}
-      />
-
-      <LocationInfo
-        store={store}
-        onSubmit={(formData: any) => {
-          store.toNextPath(); //moving to the next page.
-        }}
-      />
-
-      <EducationHistory store={store} />
-
-      <WorkHistory store={store} />
-      <TutorSubjectsPage
-        store={store.subject}
-        onTakeTest={() => linkTo("Tutor Application/Pages", "Subject Test")()}
-      />
-    </TutorPageWrapper>
+    <TutorPageComponent
+      store={store}
+      onTakeTest={() => {
+        linkTo("Tutor Application/Pages", "Subject Test")();
+      }}
+    />
   );
 };
 
