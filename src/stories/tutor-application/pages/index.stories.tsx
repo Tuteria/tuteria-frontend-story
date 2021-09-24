@@ -20,6 +20,8 @@ import {
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import { scrollToId } from "@tuteria/shared-lib/src/utils/functions";
+import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
+import { PhotoVerification } from "@tuteria/shared-lib/src/tutor-revamp/PhotoIdentity";
 
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
@@ -114,6 +116,42 @@ const adapter = {
         });
       }, 1000);
     });
+  },
+  uploadApiHandler: async (files, progressCallback) => {
+    console.log(files); //this is where cloudinary implementation is used.
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          files.map((o) => ({
+            name: o.name,
+            size: o.size?.toString(),
+            public_id: "the_public_id",
+            url:
+              "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+          }))
+        );
+      }, 2000);
+    });
+    // return files.map((o) => ({
+    //   name: o.name,
+    //   size: o.size?.toString(),
+    //   public_id: "the_public_id",
+    //   url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+    // }));
+  },
+  cloudinaryApiHandler: (files, progressCallback) => {
+    let promises = files.map((o) =>
+      uploadToCloudinary(o, progressCallback).then((b) => {
+        let { original_filename, bytes, secure_url } = b.data;
+        let newFile = {
+          name: original_filename,
+          size: `${Math.round(bytes / 1000)}KB`,
+          url: secure_url,
+        };
+        return newFile;
+      })
+    );
+    return Promise.all(promises);
   },
 };
 
@@ -375,6 +413,7 @@ const TutorPageComponent: React.FC<{
           });
         }}
       />
+      <PhotoVerification store={store.identity} />
     </TutorPageWrapper>
   );
 });

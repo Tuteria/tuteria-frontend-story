@@ -10,6 +10,7 @@ import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
 import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
 import { SubjectsCardMobile } from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditForm";
 import SubjectAdditionPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
+import { PhotoVerification } from "@tuteria/shared-lib/src/tutor-revamp/PhotoIdentity";
 import React from "react";
 import { Box } from "@chakra-ui/react";
 
@@ -205,7 +206,7 @@ const store2 = RootStore.create({
     profilePhotoId: "hello/holla",
     profilePhoto:
       "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
-    isIdVerified: true,
+    isIdVerified: false,
   },
   slug: "tutor-101",
 });
@@ -266,6 +267,15 @@ export const SubjectCardView = () => {
           currentSubjects={store.subject.tutorSubjects}
           store={store.subject}
         />
+      </OverlayWrapper>
+    </OverlayRouter>
+  );
+};
+export const Verification = () => {
+  return (
+    <OverlayRouter>
+      <OverlayWrapper>
+        <PhotoVerification store={store.identity} />
       </OverlayWrapper>
     </OverlayRouter>
   );
