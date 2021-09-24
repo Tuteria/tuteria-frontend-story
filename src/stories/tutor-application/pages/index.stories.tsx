@@ -474,12 +474,12 @@ export const SubjectTest = () => {
   );
 };
 
+let pk = 209528;
 export const SubjectCreation = () => {
   const [loading, setLoading] = React.useState(true);
   React.useEffect(() => {
-    getTutorData().then((res: TutorStoreType) => {
-      store.initializeStore(res);
-      store.subject.setCurrentSubjectId(1);
+    store.fetchTutorSubjects().then((res) => {
+      store.subject.setCurrentSubjectId(pk);
       setLoading(false);
     });
   }, []);
