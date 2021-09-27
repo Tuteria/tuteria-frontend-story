@@ -22,7 +22,10 @@ import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import { scrollToId } from "@tuteria/shared-lib/src/utils/functions";
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
 import { PhotoVerification } from "@tuteria/shared-lib/src/tutor-revamp/PhotoIdentity";
-
+import FormWrapper from "@tuteria/shared-lib/src/components/FormWrapper";
+import personalInfoData from "@tuteria/shared-lib/src/tutor-revamp/formData/personalInfo.json";
+import educationHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/educationHistory.json";
+import workHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/workHistory.json";
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
 );
@@ -339,9 +342,11 @@ const TutorPageComponent: React.FC<{
   // const { isOpen, onOpen, onClose } = useOverlayDisclosure("/modal");
   const [loadingText, setLoadingText] = React.useState("");
   const [steps, setSteps] = React.useState<any[]>(stepsArray);
-  const [activeStep, setActiveStep] = React.useState("personal-info");
+  const [activeStep, setActiveStep] = React.useState(store.currentEditableForm);
 
-  React.useEffect(() => {}, []);
+  React.useEffect(() => {
+    scrollToId(activeStep);
+  }, []);
 
   const handleFormSubmit = (id, presentStep) => {
     setFormIndex((index) => index + 1);
@@ -358,6 +363,7 @@ const TutorPageComponent: React.FC<{
     );
     scrollToId(id);
   };
+  const countries = store.locationInfo.countries.map((country) => country.name);
 
   return (
     <TutorPageWrapper
@@ -366,54 +372,103 @@ const TutorPageComponent: React.FC<{
       activeStep={activeStep}
       store={store}
     >
-      <PersonalInfo
-        store={store}
-        currentEditableForm={activeStep}
-        onSubmit={(formData: any) => {
-          store.personalInfo.onFormSubmit(formData);
-          store.onFormSubmit(formData, "personal-info").then(() => {
-            handleFormSubmit("location-info", "personal-info");
-          });
-        }}
-      />
+      <FormWrapper currentEditableForm={activeStep} activeForm={formIndex}>
+        <PersonalInfo
+          formHeader={personalInfoData.formTitle.header}
+          formSummary={[
+            store.personalInfo.firstName,
+            store.personalInfo.nationality,
+            store.personalInfo.email,
+            store.personalInfo.dateOfBirth,
+            store.personalInfo.phone,
+            store.personalInfo.gender,
+          ]}
+          lockedDescription={personalInfoData.formTitle.subHeader}
+          label="personal-info"
+          rootStore={store}
+          loading={store.loading}
+          countries={countries}
+          viewModel={store.locationInfo}
+          store={store.personalInfo}
+          onSubmit={(formData: any) => {
+            store.personalInfo.onFormSubmit(formData);
+            store.onFormSubmit(formData, "personal-info").then(() => {
+              handleFormSubmit("location-info", "personal-info");
+            });
+          }}
+        />
 
-      <LocationInfo
-        store={store}
-        onSubmit={(formData: any) => {
-          store.locationInfo.updateFields(formData);
-          store.onFormSubmit(formData, "location-info").then(() => {
-            handleFormSubmit("education-history", "location-info");
-          });
-        }}
-      />
+        <LocationInfo
+          store={store.locationInfo}
+          rootStore={store}
+          label="location-info"
+          formHeader={"Location Information"}
+          lockedDescription="Enter your location"
+          loading={store.loading}
+          formSummary={[
+            store.locationInfo.country,
+            store.locationInfo.state,
+            store.locationInfo.region,
+            store.locationInfo.vicinity,
+          ]}
+          onSubmit={(formData: any) => {
+            store.locationInfo.updateFields(formData);
+            store.onFormSubmit(formData, "location-info").then(() => {
+              handleFormSubmit("education-history", "location-info");
+            });
+          }}
+        />
+        <EducationHistory
+          store={store.educationWorkHistory}
+          formHeader={educationHistoryData.formTitle.header}
+          formsetDescription={`Please we would love to know more about your education`}
+          rootStore={store}
+          loading={store.loading}
+          isDisabled={!(store.educationWorkHistory.educations.length > 0)}
+          displayType="complex"
+          label="education-history"
+          lockedDescription={educationHistoryData.formTitle.subHeader}
+          buttonText={educationHistoryData.buttonText.saveAndContinue}
+          textData={educationHistoryData}
+          completed={store.educationWorkHistory.educationCompleted}
+          onSubmit={(formData: any) => {
+            store.onFormSubmit(formData, "education-history").then(() => {
+              handleFormSubmit("work-history", "education-history");
+            });
+          }}
+        />
 
-      <EducationHistory
-        store={store}
-        onSubmit={(formData: any) => {
-          store.onFormSubmit(formData, "education-history").then(() => {
-            handleFormSubmit("work-history", "education-history");
-          });
-        }}
-      />
-
-      <WorkHistory
-        store={store}
-        onSubmit={(formData: any) => {
-          store.onFormSubmit(formData, "work-history").then(() => {
-            handleFormSubmit("subject-addition", "work-history");
-          });
-        }}
-      />
-      <TutorSubjectsPage
-        store={store.subject}
-        onTakeTest={onTakeTest}
-        onSubmit={(formData: any) => {
-          store.onFormSubmit(formData, "subject-addition").then(() => {
-            // handleFormSubmit("subject-selection", "work-history");
-          });
-        }}
-      />
-      <PhotoVerification store={store.identity} />
+        <WorkHistory
+          store={store.educationWorkHistory}
+          formHeader={"Work History"}
+          formsetDescription={`Please we would love to know more about your working experience`}
+          rootStore={store}
+          loading={store.loading}
+          displayType="complex"
+          label="work-history"
+          isDisabled={store.educationWorkHistory.workHistories.length === 0}
+          lockedDescription={"Enter your work history"}
+          buttonText={workHistoryData.buttonText.saveAndContinue}
+          textData={workHistoryData}
+          completed={store.educationWorkHistory.workCompleted}
+          onSubmit={(formData: any) => {
+            store.onFormSubmit(formData, "work-history").then(() => {
+              handleFormSubmit("subject-addition", "work-history");
+            });
+          }}
+        />
+        {/* 
+        <TutorSubjectsPage
+          store={store.subject}
+          onTakeTest={onTakeTest}
+          onSubmit={(formData: any) => {
+            store.onFormSubmit(formData, "subject-addition").then(() => {
+              // handleFormSubmit("subject-selection", "work-history");
+            });
+          }}
+        />
+        <PhotoVerification store={store.identity} /> */}
+      </FormWrapper>
     </TutorPageWrapper>
   );
 });
