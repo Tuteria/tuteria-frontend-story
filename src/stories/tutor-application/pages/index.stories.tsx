@@ -185,7 +185,7 @@ const store = RootStore.create(
 //       nationality: "Nigeria",
 //       dateOfBirth: "1998-10-12",
 //       phone: "2347035209922",
-//       whatsappNo: "2348152957065",
+//       whatsappNumber: "2348152957065",
 //       state: "Lagos",
 //       vicinity: "Charley boy Busstop",
 //       region: "Gbagada",
@@ -319,13 +319,13 @@ const TutorPageComponent: React.FC<{
   store: IRootStore;
   onTakeTest: any;
 }> = observer(({ store, onTakeTest, ...rest }) => {
-  const percentObj = {
-    "child-details": 20,
-    "teacher-selection": 40,
-    "lesson-schedule": 60,
-    "lesson-location": 80,
-    "contact-information": 100,
-  };
+  // const percentObj = {
+  //   "child-details": 20,
+  //   "teacher-selection": 40,
+  //   "lesson-schedule": 60,
+  //   "lesson-location": 80,
+  //   "contact-information": 100,
+  // };
 
   const stepsArray: any = [
     { key: "personal-info", name: "Personal Info", completed: false },
@@ -364,7 +364,6 @@ const TutorPageComponent: React.FC<{
     scrollToId(id);
   };
   const countries = store.locationInfo.countries.map((country) => country.name);
-
   return (
     <TutorPageWrapper
       formIndex={formIndex}
