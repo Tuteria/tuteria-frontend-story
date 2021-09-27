@@ -406,8 +406,36 @@ export const TutorPage = () => {
 // This variable will come from query parameters
 const params = "General Mathematics";
 
+const SubjectTestComponent: React.FC<{
+  store: IRootStore;
+  tuteriaSubject: string;
+  toSubjectPage: () => void;
+  onNextClick: () => void;
+}> = observer(({ store, tuteriaSubject, toSubjectPage, onNextClick }) => {
+  return (
+    <TestPage
+      heading={tuteriaSubject}
+      description={`Choose the ${tuteriaSubject} subjects you would love to tutor, we will be
+      testing you in your specific choices`}
+      testableSubjects={store.subject.listOfTestableSubjects}
+      onSubjectSelect={store.subject.setQuizSubjects}
+      toSubjectPage={toSubjectPage}
+      buttonProps={{
+        loadingText: "Fetching questions",
+        isLoading: store.subject.loading,
+        isDisabled: store.subject.quizSubjects.length == 0,
+        onClick: onNextClick,
+      }}
+    />
+  );
+});
+
 export const SubjectTest = () => {
   const [loading, setLoading] = React.useState(false);
+
+  const navigateToSubject = () => {
+    linkTo("Tutor Application/Pages", "Tutor Page")();
+  };
 
   const navigateToQuiz = () => {
     linkTo("Tutor Application/Pages/Quiz", "Quiz")();
@@ -424,12 +452,12 @@ export const SubjectTest = () => {
   if (loading) {
     return <LoadingState text="Fetching questions..." />;
   }
-
   return (
-    <TestPage
+    <SubjectTestComponent
       store={store}
-      navigateToQuiz={navigateToQuiz}
-      navigateBack={() => linkTo("Tutor Application/Pages", "Tutor Page")()}
+      tuteriaSubject="General Mathematics"
+      toSubjectPage={navigateToSubject}
+      onNextClick={navigateToQuiz}
     />
   );
 };
