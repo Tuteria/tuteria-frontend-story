@@ -20,7 +20,13 @@ import {
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import { scrollToId } from "@tuteria/shared-lib/src/utils/functions";
-
+import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
+import { PhotoVerification } from "@tuteria/shared-lib/src/tutor-revamp/PhotoIdentity";
+import FormWrapper from "@tuteria/shared-lib/src/components/FormWrapper";
+import personalInfoData from "@tuteria/shared-lib/src/tutor-revamp/formData/personalInfo.json";
+import educationHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/educationHistory.json";
+import workHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/workHistory.json";
+import subjectData from "@tuteria/shared-lib/src/tutor-revamp/formData/subject.json";
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
 );
@@ -93,11 +99,13 @@ const adapter = {
     });
   },
   toNextPath: async () => {},
-  async fetchTutorSubjects() {
+  async getTutorSubjects() {
     let tutor_data = SAMPLE_TUTOR_SUBJECTS;
+    // if session storage exists return the tuteria subjects else fetch
     return await new Promise((resolve) => {
       setTimeout(() => {
         resolve({
+          // tutorSubjects: [],
           tutorSubjects: tutor_data.map((tx) => {
             return {
               id: tx.pk,
@@ -115,6 +123,42 @@ const adapter = {
       }, 1000);
     });
   },
+  uploadApiHandler: async (files, progressCallback) => {
+    console.log(files); //this is where cloudinary implementation is used.
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          files.map((o) => ({
+            name: o.name,
+            size: o.size?.toString(),
+            public_id: "the_public_id",
+            url:
+              "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+          }))
+        );
+      }, 2000);
+    });
+    // return files.map((o) => ({
+    //   name: o.name,
+    //   size: o.size?.toString(),
+    //   public_id: "the_public_id",
+    //   url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+    // }));
+  },
+  cloudinaryApiHandler: (files, progressCallback) => {
+    let promises = files.map((o) =>
+      uploadToCloudinary(o, progressCallback).then((b) => {
+        let { original_filename, bytes, secure_url } = b.data;
+        let newFile = {
+          name: original_filename,
+          size: `${Math.round(bytes / 1000)}KB`,
+          url: secure_url,
+        };
+        return newFile;
+      })
+    );
+    return Promise.all(promises);
+  },
 };
 
 const store = RootStore.create(
@@ -124,148 +168,148 @@ const store = RootStore.create(
   }
 );
 
-async function getTutorData() {
-  const data = {
-    userIsloggedIn: true,
-    locationInfo: {
-      country: "Nigeria",
-      regions: allRegions,
-      countries: allCountries,
-      state: "Lagos",
-      region: "Gbagada",
-      vicinity: "Charley boy Busstop",
-      address: "10, Lanre awolokun street",
-    },
-    personalInfo: {
-      firstName: "Abiola",
-      lastName: "Oyeniyi",
-      email: "james@example.com",
-      gender: "female",
-      nationality: "Nigeria",
-      dateOfBirth: "1998-10-12",
-      phone: "2347035209922",
-      whatsappNo: "2348152957065",
-      state: "Lagos",
-      vicinity: "Charley boy Busstop",
-      region: "Gbagada",
-      address: "Irabor Street Koto",
-      primaryLanguage: "English",
-      medium: "Facebook",
-    },
-    educationWorkHistory: {
-      educations: [
-        {
-          school: "Ikeja Grammar school",
-          country: "Nigeria",
-          course: "Chemistry",
-          degree: "MBBS",
-          speciality: "Mathematics",
-          startYear: "2006",
-          endYear: "2020",
-          grade: "First Class",
-        },
-        {
-          school: "University of Lagos",
-          country: "Nigeria",
-          course: "Organic Chemistry",
-          speciality: "Mathematics",
-          degree: "MBBS",
-          startYear: "2006",
-          endYear: "2020",
-          grade: "First Class",
-        },
-      ],
-      workHistories: [
-        {
-          company: "Tuteria Limited",
-          role: "CEO",
-          isTeachingRole: false,
-          startYear: "2015",
-          endYear: "2020",
-          isCurrent: true,
-          showOnProfile: true,
-        },
-      ],
-    },
-    subject: {
-      tutorSubjects: [
-        {
-          id: 1,
-          name: "General Mathematics",
-          category: "Academics",
-          subcategory: "Secondary",
-          status: "not-started",
-          title: "This is title from tutor subject for general mathematics",
-          description: "This is a description for general mathematics",
-          teachingStyle: "Terrorize my students",
-          trackRecords: "Cries everywhere",
-        },
-        {
-          id: 2,
-          name: "English",
-          category: "Academics",
-          subcategory: "Secondary",
-          status: "not-started",
-        },
-        {
-          id: 3,
-          name: "French",
-          category: "Academics",
-          subcategory: "Secondary",
-          status: "denied",
-        },
-        {
-          id: 4,
-          name: "Spanish",
-          category: "Academics",
-          subcategory: "Secondary",
-          status: "denied",
-        },
-        {
-          id: 5,
-          name: "Recognition",
-          category: "Academics",
-          subcategory: "Primary",
-          status: "not-started",
-        },
-        {
-          id: 5,
-          name: "Aptitude",
-          category: "Academics",
-          subcategory: "Adult",
-          status: "pending",
-          title: "This is title from tutor subject for Aptitude",
-          description: "This is a description for Aptitude",
-        },
-        {
-          id: 6,
-          name: "Speaking",
-          category: "Exam Prep",
-          subcategory: "IELTS",
-          status: "in-progress",
-        },
-        {
-          id: 7,
-          name: "Listening",
-          category: "Exam Prep",
-          subcategory: "IELTS",
-          status: "active",
-        },
-      ],
-    },
-    identity: {
-      profilePhotoId: "hello/holla",
-      profilePhoto:
-        "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
-    },
-    slug: "tutor-101",
-  };
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(data);
-    }, 1000);
-  });
-}
+// async function getTutorData() {
+//   const data = {
+//     userIsloggedIn: true,
+//     locationInfo: {
+//       country: "Nigeria",
+//       regions: allRegions,
+//       countries: allCountries,
+//       state: "Lagos",
+//       region: "Gbagada",
+//       vicinity: "Charley boy Busstop",
+//       address: "10, Lanre awolokun street",
+//     },
+//     personalInfo: {
+//       firstName: "Abiola",
+//       lastName: "Oyeniyi",
+//       email: "james@example.com",
+//       gender: "female",
+//       nationality: "Nigeria",
+//       dateOfBirth: "1998-10-12",
+//       phone: "2347035209922",
+//       whatsappNumber: "2348152957065",
+//       state: "Lagos",
+//       vicinity: "Charley boy Busstop",
+//       region: "Gbagada",
+//       address: "Irabor Street Koto",
+//       primaryLanguage: "English",
+//       medium: "Facebook",
+//     },
+//     educationWorkHistory: {
+//       educations: [
+//         {
+//           school: "Ikeja Grammar school",
+//           country: "Nigeria",
+//           course: "Chemistry",
+//           degree: "MBBS",
+//           speciality: "Mathematics",
+//           startYear: "2006",
+//           endYear: "2020",
+//           grade: "First Class",
+//         },
+//         {
+//           school: "University of Lagos",
+//           country: "Nigeria",
+//           course: "Organic Chemistry",
+//           speciality: "Mathematics",
+//           degree: "MBBS",
+//           startYear: "2006",
+//           endYear: "2020",
+//           grade: "First Class",
+//         },
+//       ],
+//       workHistories: [
+//         {
+//           company: "Tuteria Limited",
+//           role: "CEO",
+//           isTeachingRole: false,
+//           startYear: "2015",
+//           endYear: "2020",
+//           isCurrent: true,
+//           showOnProfile: true,
+//         },
+//       ],
+//     },
+//     subject: {
+//       tutorSubjects: [
+//         {
+//           id: 1,
+//           name: "General Mathematics",
+//           category: "Academics",
+//           subcategory: "Secondary",
+//           status: "not-started",
+//           title: "This is title from tutor subject for general mathematics",
+//           description: "This is a description for general mathematics",
+//           teachingStyle: "Terrorize my students",
+//           trackRecords: "Cries everywhere",
+//         },
+//         {
+//           id: 2,
+//           name: "English",
+//           category: "Academics",
+//           subcategory: "Secondary",
+//           status: "not-started",
+//         },
+//         {
+//           id: 3,
+//           name: "French",
+//           category: "Academics",
+//           subcategory: "Secondary",
+//           status: "denied",
+//         },
+//         {
+//           id: 4,
+//           name: "Spanish",
+//           category: "Academics",
+//           subcategory: "Secondary",
+//           status: "denied",
+//         },
+//         {
+//           id: 5,
+//           name: "Recognition",
+//           category: "Academics",
+//           subcategory: "Primary",
+//           status: "not-started",
+//         },
+//         {
+//           id: 5,
+//           name: "Aptitude",
+//           category: "Academics",
+//           subcategory: "Adult",
+//           status: "pending",
+//           title: "This is title from tutor subject for Aptitude",
+//           description: "This is a description for Aptitude",
+//         },
+//         {
+//           id: 6,
+//           name: "Speaking",
+//           category: "Exam Prep",
+//           subcategory: "IELTS",
+//           status: "in-progress",
+//         },
+//         {
+//           id: 7,
+//           name: "Listening",
+//           category: "Exam Prep",
+//           subcategory: "IELTS",
+//           status: "active",
+//         },
+//       ],
+//     },
+//     identity: {
+//       profilePhotoId: "hello/holla",
+//       profilePhoto:
+//         "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+//     },
+//     slug: "tutor-101",
+//   };
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(data);
+//     }, 1000);
+//   });
+// }
 
 type TutorStoreType = {
   locationInfo: any;
@@ -278,13 +322,13 @@ const TutorPageComponent: React.FC<{
   store: IRootStore;
   onTakeTest: any;
 }> = observer(({ store, onTakeTest, ...rest }) => {
-  const percentObj = {
-    "child-details": 20,
-    "teacher-selection": 40,
-    "lesson-schedule": 60,
-    "lesson-location": 80,
-    "contact-information": 100,
-  };
+  // const percentObj = {
+  //   "child-details": 20,
+  //   "teacher-selection": 40,
+  //   "lesson-schedule": 60,
+  //   "lesson-location": 80,
+  //   "contact-information": 100,
+  // };
 
   const stepsArray: any = [
     { key: "personal-info", name: "Personal Info", completed: false },
@@ -301,13 +345,16 @@ const TutorPageComponent: React.FC<{
   // const { isOpen, onOpen, onClose } = useOverlayDisclosure("/modal");
   const [loadingText, setLoadingText] = React.useState("");
   const [steps, setSteps] = React.useState<any[]>(stepsArray);
-  const [activeStep, setActiveStep] = React.useState("personal-info");
+  const [activeStep, setActiveStep] = React.useState(store.currentEditableForm);
 
-  React.useEffect(() => {}, []);
+  React.useEffect(() => {
+    scrollToId(activeStep);
+  }, []);
 
   const handleFormSubmit = (id, presentStep) => {
     setFormIndex((index) => index + 1);
     setActiveStep(id);
+    store.setEditableForm(id);
     setSteps(
       [...steps].map((object) => {
         if (object.key === presentStep) {
@@ -320,7 +367,7 @@ const TutorPageComponent: React.FC<{
     );
     scrollToId(id);
   };
-
+  const countries = store.locationInfo.countries.map((country) => country.name);
   return (
     <TutorPageWrapper
       formIndex={formIndex}
@@ -328,53 +375,122 @@ const TutorPageComponent: React.FC<{
       activeStep={activeStep}
       store={store}
     >
-      <PersonalInfo
-        store={store}
+      <FormWrapper
+        rootStore={store}
         currentEditableForm={activeStep}
-        onSubmit={(formData: any) => {
-          store.personalInfo.onFormSubmit(formData);
-          store.onFormSubmit(formData, "personal-info").then(() => {
-            handleFormSubmit("location-info", "personal-info");
-          });
-        }}
-      />
+        activeForm={formIndex}
+      >
+        <PersonalInfo
+          formHeader={personalInfoData.formTitle.header}
+          formSummary={[
+            store.personalInfo.firstName,
+            store.personalInfo.nationality,
+            store.personalInfo.email,
+            store.personalInfo.dateOfBirth,
+            store.personalInfo.phone,
+            store.personalInfo.gender,
+          ]}
+          lockedDescription={personalInfoData.formTitle.subHeader}
+          label="personal-info"
+          loading={store.loading}
+          countries={countries}
+          viewModel={store.locationInfo}
+          store={store.personalInfo}
+          onSubmit={(formData: any) => {
+            store.personalInfo.onFormSubmit(formData);
+            store.onFormSubmit(formData, "personal-info").then(() => {
+              handleFormSubmit("location-info", "personal-info");
+            });
+          }}
+        />
 
-      <LocationInfo
-        store={store}
-        onSubmit={(formData: any) => {
-          store.locationInfo.updateFields(formData);
-          store.onFormSubmit(formData, "location-info").then(() => {
-            handleFormSubmit("education-history", "location-info");
-          });
-        }}
-      />
+        <LocationInfo
+          store={store.locationInfo}
+          label="location-info"
+          formHeader={"Location Information"}
+          lockedDescription="Enter your location"
+          loading={store.loading}
+          formSummary={[
+            store.locationInfo.country,
+            store.locationInfo.state,
+            store.locationInfo.region,
+            store.locationInfo.vicinity,
+          ]}
+          onSubmit={(formData: any) => {
+            store.locationInfo.updateFields(formData);
+            store.onFormSubmit(formData, "location-info").then(() => {
+              handleFormSubmit("education-history", "location-info");
+            });
+          }}
+        />
+        <EducationHistory
+          store={store.educationWorkHistory}
+          formHeader={educationHistoryData.formTitle.header}
+          formsetDescription={`Please we would love to know more about your education`}
+          rootStore={store}
+          loading={store.loading}
+          isDisabled={!(store.educationWorkHistory.educations.length > 0)}
+          displayType="complex"
+          label="education-history"
+          lockedDescription={educationHistoryData.formTitle.subHeader}
+          buttonText={educationHistoryData.buttonText.saveAndContinue}
+          textData={educationHistoryData}
+          completed={store.educationWorkHistory.educationCompleted}
+          onSubmit={(formData: any) => {
+            store.onFormSubmit(formData, "education-history").then(() => {
+              handleFormSubmit("work-history", "education-history");
+            });
+          }}
+        />
 
-      <EducationHistory
-        store={store}
-        onSubmit={(formData: any) => {
-          store.onFormSubmit(formData, "education-history").then(() => {
-            handleFormSubmit("work-history", "education-history");
-          });
-        }}
-      />
-
-      <WorkHistory
-        store={store}
-        onSubmit={(formData: any) => {
-          store.onFormSubmit(formData, "work-history").then(() => {
-            handleFormSubmit("subject-addition", "work-history");
-          });
-        }}
-      />
-      <TutorSubjectsPage
-        store={store.subject}
-        onTakeTest={onTakeTest}
-        onSubmit={(formData: any) => {
-          store.onFormSubmit(formData, "subject-addition").then(() => {
-            // handleFormSubmit("subject-selection", "work-history");
-          });
-        }}
-      />
+        <WorkHistory
+          store={store.educationWorkHistory}
+          formHeader={"Work History"}
+          formsetDescription={`Please we would love to know more about your working experience`}
+          loading={store.loading}
+          displayType="complex"
+          label="work-history"
+          isDisabled={store.educationWorkHistory.workHistories.length === 0}
+          lockedDescription={"Enter your work history"}
+          buttonText={workHistoryData.buttonText.saveAndContinue}
+          textData={workHistoryData}
+          completed={store.educationWorkHistory.workCompleted}
+          onSubmit={(formData: any) => {
+            store.onFormSubmit(formData, "work-history").then(() => {
+              handleFormSubmit("subject-addition", "work-history");
+            });
+          }}
+        />
+        <TutorSubjectsPage
+          formHeader={subjectData.lockedForm.title}
+          lockedDescription={subjectData.lockedForm.description}
+          store={store.subject}
+          label="subject-addition"
+          completed={
+            store.subject.tutorSubjects.length > 0 &&
+            activeStep === "subject-addition"
+          }
+          showWelcomeModal={
+            activeStep === "subject-addition" &&
+            store.subject.tutorSubjects.length === 0
+          }
+          currentStep={activeStep}
+          isCollapsed={false}
+          onTakeTest={onTakeTest}
+          onSubmit={(formData: any) => {
+            store.onFormSubmit(formData, "subject-addition").then(() => {
+              // handleFormSubmit("subject-selection", "work-history");
+            });
+          }}
+        />
+        <PhotoVerification
+          formHeader={"Identity Verifications"}
+          lockedDescription="Verify your identity in order to complete steps"
+          isCollapsed={false}
+          store={store.identity}
+          onSubmit={(formData: any) => {}}
+        />
+      </FormWrapper>
     </TutorPageWrapper>
   );
 });
@@ -386,6 +502,7 @@ export const TutorPage = () => {
     storage.set(adapter.regionKey, allRegions);
     storage.set(adapter.countryKey, allCountries);
     store.initializeTutorData(allRegions, allCountries, SAMPLE_TUTOR_DATA);
+    store.fetchTutorSubjects();
     setLoading(false);
   }, []);
 
@@ -438,12 +555,12 @@ export const SubjectTest = () => {
   );
 };
 
+let pk = 209528;
 export const SubjectCreation = () => {
   const [loading, setLoading] = React.useState(true);
   React.useEffect(() => {
-    getTutorData().then((res: TutorStoreType) => {
-      store.initializeStore(res);
-      store.subject.setCurrentSubjectId(1);
+    store.fetchTutorSubjects().then((res) => {
+      store.subject.setCurrentSubjectId(pk);
       setLoading(false);
     });
   }, []);
