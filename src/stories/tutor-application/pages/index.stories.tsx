@@ -26,6 +26,7 @@ import FormWrapper from "@tuteria/shared-lib/src/components/FormWrapper";
 import personalInfoData from "@tuteria/shared-lib/src/tutor-revamp/formData/personalInfo.json";
 import educationHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/educationHistory.json";
 import workHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/workHistory.json";
+import subjectData from "@tuteria/shared-lib/src/tutor-revamp/formData/subject.json";
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
 );
@@ -103,18 +104,19 @@ const adapter = {
     return await new Promise((resolve) => {
       setTimeout(() => {
         resolve({
-          tutorSubjects: tutor_data.map((tx) => {
-            return {
-              id: tx.pk,
-              name: tx.skill.name,
-              category: tx.category,
-              status: tx.status,
-              title: tx.heading || "",
-              description: tx.description || "",
-              teachingStyle: tx.teachingStyle,
-              trackRecords: tx.trackRecords,
-            };
-          }),
+          tutorSubjects: [],
+          // tutorSubjects: tutor_data.map((tx) => {
+          //   return {
+          //     id: tx.pk,
+          //     name: tx.skill.name,
+          //     category: tx.category,
+          //     status: tx.status,
+          //     title: tx.heading || "",
+          //     description: tx.description || "",
+          //     teachingStyle: tx.teachingStyle,
+          //     trackRecords: tx.trackRecords,
+          //   };
+          // }),
           tuteriaSubjects: SAMPLE_TUTERIA_SUBJECTS,
         });
       }, 1000);
@@ -351,6 +353,7 @@ const TutorPageComponent: React.FC<{
   const handleFormSubmit = (id, presentStep) => {
     setFormIndex((index) => index + 1);
     setActiveStep(id);
+    store.setEditableForm(id);
     setSteps(
       [...steps].map((object) => {
         if (object.key === presentStep) {
@@ -371,7 +374,11 @@ const TutorPageComponent: React.FC<{
       activeStep={activeStep}
       store={store}
     >
-      <FormWrapper currentEditableForm={activeStep} activeForm={formIndex}>
+      <FormWrapper
+        rootStore={store}
+        currentEditableForm={activeStep}
+        activeForm={formIndex}
+      >
         <PersonalInfo
           formHeader={personalInfoData.formTitle.header}
           formSummary={[
@@ -384,7 +391,6 @@ const TutorPageComponent: React.FC<{
           ]}
           lockedDescription={personalInfoData.formTitle.subHeader}
           label="personal-info"
-          rootStore={store}
           loading={store.loading}
           countries={countries}
           viewModel={store.locationInfo}
@@ -399,7 +405,6 @@ const TutorPageComponent: React.FC<{
 
         <LocationInfo
           store={store.locationInfo}
-          rootStore={store}
           label="location-info"
           formHeader={"Location Information"}
           lockedDescription="Enter your location"
@@ -441,7 +446,6 @@ const TutorPageComponent: React.FC<{
           store={store.educationWorkHistory}
           formHeader={"Work History"}
           formsetDescription={`Please we would love to know more about your working experience`}
-          rootStore={store}
           loading={store.loading}
           displayType="complex"
           label="work-history"
@@ -456,9 +460,21 @@ const TutorPageComponent: React.FC<{
             });
           }}
         />
-        {/* 
         <TutorSubjectsPage
+          formHeader={subjectData.lockedForm.title}
+          lockedDescription={subjectData.lockedForm.description}
           store={store.subject}
+          label="subject-addition"
+          completed={
+            store.subject.tutorSubjects.length > 0 &&
+            activeStep === "subject-addition"
+          }
+          showWelcomeModal={
+            activeStep === "subject-addition" &&
+            store.subject.tutorSubjects.length === 0
+          }
+          currentStep={activeStep}
+          isCollapsed={false}
           onTakeTest={onTakeTest}
           onSubmit={(formData: any) => {
             store.onFormSubmit(formData, "subject-addition").then(() => {
@@ -466,7 +482,13 @@ const TutorPageComponent: React.FC<{
             });
           }}
         />
-        <PhotoVerification store={store.identity} /> */}
+        <PhotoVerification
+          formHeader={"Identity Verifications"}
+          lockedDescription="Verify your identity in order to complete steps"
+          isCollapsed={false}
+          store={store.identity}
+          onSubmit={(formData: any) => {}}
+        />
       </FormWrapper>
     </TutorPageWrapper>
   );
