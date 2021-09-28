@@ -54,6 +54,9 @@ const Agreements = React.lazy(
 const LearningProcess = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/NewDevelopment")
 );
+const PasswordSection = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/PasswordSection")
+);
 
 export default {
   title: "Tutor Application/Pages",
@@ -192,6 +195,7 @@ const TutorPageComponent: React.FC<{
 }> = observer(({ store, onTakeTest, ...rest }) => {
   const stepsArray: any = [
     { key: "personal-info", name: "Personal Info", completed: false },
+    { key: "password-info", name: "Password Info", completed: false },
     { key: "location-info", name: "Location Info", completed: false },
     {
       key: "education-history",
@@ -259,9 +263,22 @@ const TutorPageComponent: React.FC<{
           onSubmit={(formData: any) => {
             store.personalInfo.onFormSubmit(formData);
             store.onFormSubmit(formData, "personal-info").then(() => {
-              handleFormSubmit("location-info", "personal-info");
+              handleFormSubmit("password-info", "personal-info");
             });
           }}
+        />
+        <PasswordSection
+          formHeader={"Password"}
+          label="password-info"
+          lockedDescription="Set your password"
+          isCollapsed={false}
+          onSubmit={(formData: any) => {
+            store.password.onFormSubmit(formData);
+            store.onFormSubmit(formData, "password-info").then(() => {
+              handleFormSubmit("location-info", "password-info");
+            });
+          }}
+          store={store.password}
         />
 
         <LocationInfo
