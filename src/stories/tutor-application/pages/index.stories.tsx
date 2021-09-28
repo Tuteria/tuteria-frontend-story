@@ -131,7 +131,8 @@ const adapter = {
             name: o.name,
             size: o.size?.toString(),
             public_id: "the_public_id",
-            url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+            url:
+              "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
           }))
         );
       }, 2000);
@@ -186,7 +187,7 @@ const store = RootStore.create(
 //       nationality: "Nigeria",
 //       dateOfBirth: "1998-10-12",
 //       phone: "2347035209922",
-//       whatsappNo: "2348152957065",
+//       whatsappNumber: "2348152957065",
 //       state: "Lagos",
 //       vicinity: "Charley boy Busstop",
 //       region: "Gbagada",
@@ -320,13 +321,13 @@ const TutorPageComponent: React.FC<{
   store: IRootStore;
   onTakeTest: any;
 }> = observer(({ store, onTakeTest, ...rest }) => {
-  const percentObj = {
-    "child-details": 20,
-    "teacher-selection": 40,
-    "lesson-schedule": 60,
-    "lesson-location": 80,
-    "contact-information": 100,
-  };
+  // const percentObj = {
+  //   "child-details": 20,
+  //   "teacher-selection": 40,
+  //   "lesson-schedule": 60,
+  //   "lesson-location": 80,
+  //   "contact-information": 100,
+  // };
 
   const stepsArray: any = [
     { key: "personal-info", name: "Personal Info", completed: false },
@@ -366,7 +367,6 @@ const TutorPageComponent: React.FC<{
     scrollToId(id);
   };
   const countries = store.locationInfo.countries.map((country) => country.name);
-
   return (
     <TutorPageWrapper
       formIndex={formIndex}
@@ -550,12 +550,12 @@ export const SubjectTest = () => {
   );
 };
 
+let pk = 209528;
 export const SubjectCreation = () => {
   const [loading, setLoading] = React.useState(true);
   React.useEffect(() => {
-    getTutorData().then((res: TutorStoreType) => {
-      store.initializeStore(res);
-      store.subject.setCurrentSubjectId(1);
+    store.fetchTutorSubjects().then((res) => {
+      store.subject.setCurrentSubjectId(pk);
       setLoading(false);
     });
   }, []);
