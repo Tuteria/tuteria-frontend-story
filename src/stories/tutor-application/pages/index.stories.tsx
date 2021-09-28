@@ -8,7 +8,9 @@ import { observer } from "mobx-react-lite";
 import React, { Suspense } from "react";
 import DATA from "@tuteria/shared-lib/src/tutor-revamp/quizzes/sample-quiz-data";
 import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
-import TestPage from "@tuteria/shared-lib/src/tutor-revamp/TestPage";
+import TestPage, {
+  SelectQuizzesToTake,
+} from "@tuteria/shared-lib/src/tutor-revamp/TestPage";
 import "katex/dist/katex.min.css";
 import "react-phone-input-2/lib/style.css";
 import { linkTo } from "@storybook/addon-links";
@@ -58,6 +60,7 @@ export default {
 };
 const REGION_KEY = "TEST-REGIONS-VICINITIES";
 const COUNTRY_KEY = "TEST-COUNTRIES";
+const TUTERIA_SUBJECTS_KEY = "TEST-TUTERIA-SUBJECTS";
 const adapter = {
   regionKey: REGION_KEY,
   countryKey: COUNTRY_KEY,
@@ -132,8 +135,7 @@ const adapter = {
             name: o.name,
             size: o.size?.toString(),
             public_id: "the_public_id",
-            url:
-              "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+            url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
           }))
         );
       }, 2000);
@@ -159,9 +161,16 @@ const adapter = {
     );
     return Promise.all(promises);
   },
+  takeTest: (subjects: string[]) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(subjects);
+      });
+    });
+  },
 };
 
-const store = RootStore.create(
+const store: IRootStore = RootStore.create(
   {},
   {
     adapter,
@@ -520,37 +529,44 @@ export const TutorPage = () => {
   );
 };
 
+const navigateToSubject = () => {
+  linkTo("Tutor Application/Pages", "Tutor Page")();
+};
+
 // This variable will come from query parameters
-const params = "General Mathematics";
+const params = "general-mathematics";
 
 export const SubjectTest = () => {
   const [loading, setLoading] = React.useState(false);
 
-  const navigateToSubject = () => {
-    linkTo("Tutor Application/Pages", "Tutor Page")();
-  };
-
-  const navigateToQuiz = () => {
-    linkTo("Tutor Application/Pages/Quiz", "Quiz")();
-  };
+  const onNextClick = (subjects) => console.log(subjects);
 
   React.useEffect(() => {
-    store.subject.setTestSubject(params);
-    if (store.subject.listOfTestableSubjects.length === 0) {
-      setLoading(true);
-      store.subject.fetchQuizQuestions().then((res) => navigateToQuiz());
-    }
+    // store2.subject.setTestSubject(params);
+    // if (store.subject.listOfTestableSubjects.length === 0) {
+    //   setLoading(true);
+    //   store.subject.fetchQuizQuestions().then((res) => navigateToQuiz());
+    // }
+    setLoading(true);
+    store
+      .fetchTutorSubjects(params)
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {
-    return <LoadingState text="Fetching questions..." />;
+    return <LoadingState text="Fetching Subjects..." />;
   }
   return (
     <SelectQuizzesToTake
       store={store}
-      tuteriaSubject="General Mathematics"
       toSubjectPage={navigateToSubject}
-      onNextClick={navigateToQuiz}
+      onNextClick={onNextClick}
     />
   );
 };
