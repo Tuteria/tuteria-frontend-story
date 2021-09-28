@@ -406,30 +406,6 @@ export const TutorPage = () => {
 // This variable will come from query parameters
 const params = "General Mathematics";
 
-const SubjectTestComponent: React.FC<{
-  store: IRootStore;
-  tuteriaSubject: string;
-  toSubjectPage: () => void;
-  onNextClick: () => void;
-}> = observer(({ store, tuteriaSubject, toSubjectPage, onNextClick }) => {
-  return (
-    <TestPage
-      heading={tuteriaSubject}
-      description={`Choose the ${tuteriaSubject} subjects you would love to tutor, we will be
-      testing you in your specific choices`}
-      testableSubjects={store.subject.listOfTestableSubjects}
-      onSubjectSelect={store.subject.setQuizSubjects}
-      toSubjectPage={toSubjectPage}
-      buttonProps={{
-        loadingText: "Fetching questions",
-        isLoading: store.subject.loading,
-        isDisabled: store.subject.quizSubjects.length == 0,
-        onClick: onNextClick,
-      }}
-    />
-  );
-});
-
 export const SubjectTest = () => {
   const [loading, setLoading] = React.useState(false);
 
@@ -453,7 +429,7 @@ export const SubjectTest = () => {
     return <LoadingState text="Fetching questions..." />;
   }
   return (
-    <SubjectTestComponent
+    <SelectQuizzesToTake
       store={store}
       tuteriaSubject="General Mathematics"
       toSubjectPage={navigateToSubject}
