@@ -101,22 +101,23 @@ const adapter = {
   toNextPath: async () => {},
   async getTutorSubjects() {
     let tutor_data = SAMPLE_TUTOR_SUBJECTS;
+    // if session storage exists return the tuteria subjects else fetch
     return await new Promise((resolve) => {
       setTimeout(() => {
         resolve({
-          tutorSubjects: [],
-          // tutorSubjects: tutor_data.map((tx) => {
-          //   return {
-          //     id: tx.pk,
-          //     name: tx.skill.name,
-          //     category: tx.category,
-          //     status: tx.status,
-          //     title: tx.heading || "",
-          //     description: tx.description || "",
-          //     teachingStyle: tx.teachingStyle,
-          //     trackRecords: tx.trackRecords,
-          //   };
-          // }),
+          // tutorSubjects: [],
+          tutorSubjects: tutor_data.map((tx) => {
+            return {
+              id: tx.pk,
+              name: tx.skill.name,
+              category: tx.category,
+              status: tx.status,
+              title: tx.heading || "",
+              description: tx.description || "",
+              teachingStyle: tx.teachingStyle,
+              trackRecords: tx.trackRecords,
+            };
+          }),
           tuteriaSubjects: SAMPLE_TUTERIA_SUBJECTS,
         });
       }, 1000);
