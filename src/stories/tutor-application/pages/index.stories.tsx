@@ -44,6 +44,17 @@ const TutorSubjectsPage = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/Subject")
 );
 
+const ScheduleCard = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/Schedule")
+);
+
+const Agreements = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/Agreements")
+);
+const LearningProcess = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/NewDevelopment")
+);
+
 export default {
   title: "Tutor Application/Pages",
   decorators: [
@@ -168,149 +179,6 @@ const store = RootStore.create(
   }
 );
 
-// async function getTutorData() {
-//   const data = {
-//     userIsloggedIn: true,
-//     locationInfo: {
-//       country: "Nigeria",
-//       regions: allRegions,
-//       countries: allCountries,
-//       state: "Lagos",
-//       region: "Gbagada",
-//       vicinity: "Charley boy Busstop",
-//       address: "10, Lanre awolokun street",
-//     },
-//     personalInfo: {
-//       firstName: "Abiola",
-//       lastName: "Oyeniyi",
-//       email: "james@example.com",
-//       gender: "female",
-//       nationality: "Nigeria",
-//       dateOfBirth: "1998-10-12",
-//       phone: "2347035209922",
-//       whatsappNumber: "2348152957065",
-//       state: "Lagos",
-//       vicinity: "Charley boy Busstop",
-//       region: "Gbagada",
-//       address: "Irabor Street Koto",
-//       primaryLanguage: "English",
-//       medium: "Facebook",
-//     },
-//     educationWorkHistory: {
-//       educations: [
-//         {
-//           school: "Ikeja Grammar school",
-//           country: "Nigeria",
-//           course: "Chemistry",
-//           degree: "MBBS",
-//           speciality: "Mathematics",
-//           startYear: "2006",
-//           endYear: "2020",
-//           grade: "First Class",
-//         },
-//         {
-//           school: "University of Lagos",
-//           country: "Nigeria",
-//           course: "Organic Chemistry",
-//           speciality: "Mathematics",
-//           degree: "MBBS",
-//           startYear: "2006",
-//           endYear: "2020",
-//           grade: "First Class",
-//         },
-//       ],
-//       workHistories: [
-//         {
-//           company: "Tuteria Limited",
-//           role: "CEO",
-//           isTeachingRole: false,
-//           startYear: "2015",
-//           endYear: "2020",
-//           isCurrent: true,
-//           showOnProfile: true,
-//         },
-//       ],
-//     },
-//     subject: {
-//       tutorSubjects: [
-//         {
-//           id: 1,
-//           name: "General Mathematics",
-//           category: "Academics",
-//           subcategory: "Secondary",
-//           status: "not-started",
-//           title: "This is title from tutor subject for general mathematics",
-//           description: "This is a description for general mathematics",
-//           teachingStyle: "Terrorize my students",
-//           trackRecords: "Cries everywhere",
-//         },
-//         {
-//           id: 2,
-//           name: "English",
-//           category: "Academics",
-//           subcategory: "Secondary",
-//           status: "not-started",
-//         },
-//         {
-//           id: 3,
-//           name: "French",
-//           category: "Academics",
-//           subcategory: "Secondary",
-//           status: "denied",
-//         },
-//         {
-//           id: 4,
-//           name: "Spanish",
-//           category: "Academics",
-//           subcategory: "Secondary",
-//           status: "denied",
-//         },
-//         {
-//           id: 5,
-//           name: "Recognition",
-//           category: "Academics",
-//           subcategory: "Primary",
-//           status: "not-started",
-//         },
-//         {
-//           id: 5,
-//           name: "Aptitude",
-//           category: "Academics",
-//           subcategory: "Adult",
-//           status: "pending",
-//           title: "This is title from tutor subject for Aptitude",
-//           description: "This is a description for Aptitude",
-//         },
-//         {
-//           id: 6,
-//           name: "Speaking",
-//           category: "Exam Prep",
-//           subcategory: "IELTS",
-//           status: "in-progress",
-//         },
-//         {
-//           id: 7,
-//           name: "Listening",
-//           category: "Exam Prep",
-//           subcategory: "IELTS",
-//           status: "active",
-//         },
-//       ],
-//     },
-//     identity: {
-//       profilePhotoId: "hello/holla",
-//       profilePhoto:
-//         "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
-//     },
-//     slug: "tutor-101",
-//   };
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve(data);
-//     }, 1000);
-//   });
-// }
-
 type TutorStoreType = {
   locationInfo: any;
   personalInfo: any;
@@ -322,14 +190,6 @@ const TutorPageComponent: React.FC<{
   store: IRootStore;
   onTakeTest: any;
 }> = observer(({ store, onTakeTest, ...rest }) => {
-  // const percentObj = {
-  //   "child-details": 20,
-  //   "teacher-selection": 40,
-  //   "lesson-schedule": 60,
-  //   "lesson-location": 80,
-  //   "contact-information": 100,
-  // };
-
   const stepsArray: any = [
     { key: "personal-info", name: "Personal Info", completed: false },
     { key: "location-info", name: "Location Info", completed: false },
@@ -488,6 +348,30 @@ const TutorPageComponent: React.FC<{
           lockedDescription="Verify your identity in order to complete steps"
           isCollapsed={false}
           store={store.identity}
+          onSubmit={(formData: any) => {}}
+        />
+        <ScheduleCard
+          handleChange={() => {}}
+          formHeader={"Tutor Schedule"}
+          lockedDescription="select your teaching schedule"
+          isCollapsed={false}
+          store={store.schedule}
+          onSubmit={(formData: any) => {}}
+        />
+
+        <Agreements
+          formHeader={"Tutor Agreements"}
+          lockedDescription="Tutor agreements"
+          isCollapsed={false}
+          store={store.agreement}
+          onSubmit={(formData: any) => {}}
+        />
+
+        <LearningProcess
+          formHeader={"New development"}
+          lockedDescription="Learning process"
+          isCollapsed={false}
+          store={store.agreement}
           onSubmit={(formData: any) => {}}
         />
       </FormWrapper>
