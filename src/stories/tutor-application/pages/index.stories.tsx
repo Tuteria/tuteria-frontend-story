@@ -21,12 +21,11 @@ import {
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import { scrollToId } from "@tuteria/shared-lib/src/utils/functions";
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
-import { PhotoVerification } from "@tuteria/shared-lib/src/tutor-revamp/PhotoIdentity";
 import FormWrapper from "@tuteria/shared-lib/src/components/FormWrapper";
 import personalInfoData from "@tuteria/shared-lib/src/tutor-revamp/formData/personalInfo.json";
 import educationHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/educationHistory.json";
 import workHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/workHistory.json";
-import subjectData from "@tuteria/shared-lib/src/tutor-revamp/formData/subject.json";
+import subjectContents from "@tuteria/shared-lib/src/tutor-revamp/formData/subject.json";
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
 );
@@ -40,6 +39,9 @@ const EducationHistory = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/EducationHistory")
 );
 
+const VerificationIdentity = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity")
+);
 const TutorSubjectsPage = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/Subject")
 );
@@ -194,16 +196,17 @@ const TutorPageComponent: React.FC<{
   onTakeTest: any;
 }> = observer(({ store, onTakeTest, ...rest }) => {
   const stepsArray: any = [
-    { key: "personal-info", name: "Personal Info", completed: false },
-    { key: "password-info", name: "Password Info", completed: false },
-    { key: "location-info", name: "Location Info", completed: false },
+    { key: "personal-info", name: "Personal Information", completed: false },
+    { key: "password-info", name: "Password Information", completed: false },
+    { key: "location-info", name: "Location Information", completed: false },
     {
       key: "education-history",
       name: "Education History",
       completed: false,
     },
     { key: "work-history", name: "Work History", completed: false },
-    { key: "subject-addition", name: "Subject Selection", completed: false },
+    { key: "subject-selection", name: "Subject Selection", completed: false },
+    { key: "verification", name: "Identity Verification", completed: false },
   ];
   const [formIndex, setFormIndex] = React.useState(1);
   // const { isOpen, onOpen, onClose } = useOverlayDisclosure("/modal");
@@ -268,13 +271,14 @@ const TutorPageComponent: React.FC<{
           }}
         />
         <PasswordSection
-          formHeader={"Password"}
+          formHeader={"Password Information"}
           label="password-info"
           lockedDescription="Set your password"
           isCollapsed={false}
           onSubmit={(formData: any) => {
             store.password.onFormSubmit(formData);
             store.onFormSubmit(formData, "password-info").then(() => {
+              store.setPasswordStatus(true);
               handleFormSubmit("location-info", "password-info");
             });
           }}
@@ -334,35 +338,36 @@ const TutorPageComponent: React.FC<{
           completed={store.educationWorkHistory.workCompleted}
           onSubmit={(formData: any) => {
             store.onFormSubmit(formData, "work-history").then(() => {
-              handleFormSubmit("subject-addition", "work-history");
+              handleFormSubmit("subject-selection", "work-history");
             });
           }}
         />
         <TutorSubjectsPage
-          formHeader={subjectData.lockedForm.title}
-          lockedDescription={subjectData.lockedForm.description}
+          formHeader={subjectContents.lockedForm.title}
+          lockedDescription={subjectContents.lockedForm.description}
           store={store.subject}
-          label="subject-addition"
+          label="Subject Selection"
           completed={
             store.subject.tutorSubjects.length > 0 &&
-            activeStep === "subject-addition"
+            activeStep === "subject-selection"
           }
           showWelcomeModal={
-            activeStep === "subject-addition" &&
+            activeStep === "subject-selection" &&
             store.subject.tutorSubjects.length === 0
           }
           currentStep={activeStep}
           isCollapsed={false}
           onTakeTest={onTakeTest}
           onSubmit={(formData: any) => {
-            store.onFormSubmit(formData, "subject-addition").then(() => {
+            store.onFormSubmit(formData, "subject-selection").then(() => {
               // handleFormSubmit("subject-selection", "work-history");
             });
           }}
         />
-        <PhotoVerification
-          formHeader={"Identity Verifications"}
+        <VerificationIdentity
+          formHeader={"Identity Verification"}
           lockedDescription="Verify your identity in order to complete steps"
+          label="verification"
           isCollapsed={false}
           store={store.identity}
           onSubmit={(formData: any) => {}}
