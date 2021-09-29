@@ -542,11 +542,6 @@ export const SubjectTest = () => {
   const onNextClick = (subjects) => console.log(subjects);
 
   React.useEffect(() => {
-    // store2.subject.setTestSubject(params);
-    // if (store.subject.listOfTestableSubjects.length === 0) {
-    //   setLoading(true);
-    //   store.subject.fetchQuizQuestions().then((res) => navigateToQuiz());
-    // }
     setLoading(true);
     store
       .fetchTutorSubjects(params)
