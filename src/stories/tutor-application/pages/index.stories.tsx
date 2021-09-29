@@ -1,5 +1,6 @@
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
+import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { IRootStore, RootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
@@ -74,9 +75,11 @@ export default {
 };
 const REGION_KEY = "TEST-REGIONS-VICINITIES";
 const COUNTRY_KEY = "TEST-COUNTRIES";
+const SUPPORTED_COUNTRIES_KEY = "TEST-SUPPORTED-COUNTRIES";
 const adapter = {
   regionKey: REGION_KEY,
   countryKey: COUNTRY_KEY,
+  supportedCountriesKey: SUPPORTED_COUNTRIES_KEY,
   deleteSubject: (id: string) => {
     console.log({ id });
     return new Promise((resolve, reject) => {
@@ -407,7 +410,13 @@ export const TutorPage = () => {
   React.useEffect(() => {
     storage.set(adapter.regionKey, allRegions);
     storage.set(adapter.countryKey, allCountries);
-    store.initializeTutorData(allRegions, allCountries, SAMPLE_TUTOR_DATA);
+    storage.set(adapter.supportedCountriesKey, supportedCountries);
+    store.initializeTutorData(
+      allRegions,
+      allCountries,
+      supportedCountries,
+      SAMPLE_TUTOR_DATA
+    );
     store.fetchTutorSubjects();
     setLoading(false);
   }, []);
