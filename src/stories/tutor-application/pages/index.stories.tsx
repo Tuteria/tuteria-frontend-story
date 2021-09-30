@@ -27,6 +27,8 @@ import personalInfoData from "@tuteria/shared-lib/src/tutor-revamp/formData/pers
 import educationHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/educationHistory.json";
 import workHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/workHistory.json";
 import subjectContents from "@tuteria/shared-lib/src/tutor-revamp/formData/subject.json";
+import { FormStepType } from "@tuteria/shared-lib/src/stores/types";
+
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
 );
@@ -88,8 +90,8 @@ const adapter = {
       }, 3000);
     });
   },
-  saveTutorInfo: (key: string, value: any, slug: string) => {
-    console.log({ key, value, slug });
+  saveTutorInfo: (key: string, value: any, slug: string, nextStep: string) => {
+    console.log({ key, value, slug, nextStep });
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve({});
@@ -198,6 +200,7 @@ const TutorPageComponent: React.FC<{
   store: IRootStore;
   onTakeTest: any;
 }> = observer(({ store, onTakeTest, ...rest }) => {
+  let nextStep: FormStepType;
   const stepsArray: any = [
     { key: "personal-info", name: "Personal Information", completed: false },
     { key: "password-info", name: "Password Information", completed: false },
@@ -209,10 +212,14 @@ const TutorPageComponent: React.FC<{
     },
     { key: "work-history", name: "Work History", completed: false },
     { key: "subject-selection", name: "Subject Selection", completed: false },
-    { key: "verification", name: "Identity Verification", completed: false },
+    {
+      key: "verification-info",
+      name: "Identity Verification",
+      completed: false,
+    },
+    { key: "schedule-info", name: "Schedule Information", completed: false },
   ];
   const [formIndex, setFormIndex] = React.useState(1);
-  // const { isOpen, onOpen, onClose } = useOverlayDisclosure("/modal");
   const [loadingText, setLoadingText] = React.useState("");
   const [steps, setSteps] = React.useState<any[]>(stepsArray);
   const [activeStep, setActiveStep] = React.useState(store.currentEditableForm);
@@ -221,7 +228,7 @@ const TutorPageComponent: React.FC<{
     scrollToId(activeStep);
   }, []);
 
-  const handleFormSubmit = (id, presentStep) => {
+  const handleFormSubmit = (id: FormStepType, presentStep: FormStepType) => {
     setFormIndex((index) => index + 1);
     setActiveStep(id);
     store.setEditableForm(id);
@@ -268,8 +275,9 @@ const TutorPageComponent: React.FC<{
           store={store.personalInfo}
           onSubmit={(formData: any) => {
             store.personalInfo.onFormSubmit(formData);
-            store.onFormSubmit(formData, "personal-info").then(() => {
-              handleFormSubmit("password-info", "personal-info");
+            nextStep = store.hasPassword ? "location-info" : "password-info";
+            store.onFormSubmit(formData, "personal-info", nextStep).then(() => {
+              handleFormSubmit(nextStep, "personal-info");
             });
           }}
         />
@@ -279,10 +287,11 @@ const TutorPageComponent: React.FC<{
           lockedDescription="Set your password"
           isCollapsed={false}
           onSubmit={(formData: any) => {
+            nextStep = "location-info";
             store.password.onFormSubmit(formData);
-            store.onFormSubmit(formData, "password-info").then(() => {
+            store.onFormSubmit(formData, "password-info", nextStep).then(() => {
               store.setPasswordStatus(true);
-              handleFormSubmit("location-info", "password-info");
+              handleFormSubmit(nextStep, "password-info");
             });
           }}
           store={store.password}
@@ -301,9 +310,10 @@ const TutorPageComponent: React.FC<{
             store.locationInfo.vicinity,
           ]}
           onSubmit={(formData: any) => {
+            nextStep = "education-history";
             store.locationInfo.updateFields(formData);
-            store.onFormSubmit(formData, "location-info").then(() => {
-              handleFormSubmit("education-history", "location-info");
+            store.onFormSubmit(formData, "location-info", nextStep).then(() => {
+              handleFormSubmit(nextStep, "location-info");
             });
           }}
         />
@@ -321,9 +331,12 @@ const TutorPageComponent: React.FC<{
           textData={educationHistoryData}
           completed={store.educationWorkHistory.educationCompleted}
           onSubmit={(formData: any) => {
-            store.onFormSubmit(formData, "education-history").then(() => {
-              handleFormSubmit("work-history", "education-history");
-            });
+            nextStep = "work-history";
+            store
+              .onFormSubmit(formData, "education-history", nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, "education-history");
+              });
           }}
         />
 
@@ -340,8 +353,9 @@ const TutorPageComponent: React.FC<{
           textData={workHistoryData}
           completed={store.educationWorkHistory.workCompleted}
           onSubmit={(formData: any) => {
-            store.onFormSubmit(formData, "work-history").then(() => {
-              handleFormSubmit("subject-selection", "work-history");
+            nextStep = "subject-selection";
+            store.onFormSubmit(formData, "work-history", nextStep).then(() => {
+              handleFormSubmit(nextStep, "work-history");
             });
           }}
         />
@@ -351,8 +365,11 @@ const TutorPageComponent: React.FC<{
           store={store.subject}
           label="Subject Selection"
           completed={
-            store.subject.tutorSubjects.length > 0 &&
-            activeStep === "subject-selection"
+            (store.subject.tutorSubjects.length > 0 &&
+              activeStep === "subject-selection") ||
+            (store.subject.tutorSubjects.length === 0 &&
+              activeStep === "subject-selection") ||
+            store.subject.tutorSubjects.length > 0
           }
           showWelcomeModal={
             activeStep === "subject-selection" &&
@@ -361,19 +378,27 @@ const TutorPageComponent: React.FC<{
           currentStep={activeStep}
           isCollapsed={false}
           onTakeTest={onTakeTest}
-          onSubmit={(formData: any) => {
-            store.onFormSubmit(formData, "subject-selection").then(() => {
-              // handleFormSubmit("subject-selection", "work-history");
-            });
+          onSubmit={async (formData: any) => {
+            nextStep = "verification-info";
+            await store.onFormSubmit(formData, "subject-selection", nextStep);
+            handleFormSubmit(nextStep, "subject-selection");
           }}
         />
         <VerificationIdentity
           formHeader={"Identity Verification"}
           lockedDescription="Verify your identity in order to complete steps"
-          label="verification"
+          label="verification-info"
           isCollapsed={false}
+          currentStep={activeStep}
           store={store.identity}
-          onSubmit={(formData: any) => {}}
+          onSubmit={(formData: any) => {
+            nextStep = "schedule-info";
+            store
+              .onFormSubmit(formData, "verification-info", nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, "verification-info");
+              });
+          }}
         />
         <ScheduleCard
           handleChange={() => {}}
