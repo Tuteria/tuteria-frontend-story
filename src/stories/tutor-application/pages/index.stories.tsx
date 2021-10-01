@@ -1,5 +1,6 @@
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
+import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { IRootStore, RootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
@@ -21,12 +22,13 @@ import {
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import { scrollToId } from "@tuteria/shared-lib/src/utils/functions";
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
-import { PhotoVerification } from "@tuteria/shared-lib/src/tutor-revamp/PhotoIdentity";
 import FormWrapper from "@tuteria/shared-lib/src/components/FormWrapper";
 import personalInfoData from "@tuteria/shared-lib/src/tutor-revamp/formData/personalInfo.json";
 import educationHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/educationHistory.json";
 import workHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/workHistory.json";
-import subjectData from "@tuteria/shared-lib/src/tutor-revamp/formData/subject.json";
+import subjectContents from "@tuteria/shared-lib/src/tutor-revamp/formData/subject.json";
+import { FormStepType } from "@tuteria/shared-lib/src/stores/types";
+
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
 );
@@ -40,8 +42,25 @@ const EducationHistory = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/EducationHistory")
 );
 
+const VerificationIdentity = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity")
+);
 const TutorSubjectsPage = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/Subject")
+);
+
+const ScheduleCard = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/Schedule")
+);
+
+const Agreements = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/Agreements")
+);
+const LearningProcess = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/NewDevelopment")
+);
+const PasswordSection = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/PasswordSection")
 );
 
 export default {
@@ -58,9 +77,11 @@ export default {
 };
 const REGION_KEY = "TEST-REGIONS-VICINITIES";
 const COUNTRY_KEY = "TEST-COUNTRIES";
+const SUPPORTED_COUNTRIES_KEY = "TEST-SUPPORTED-COUNTRIES";
 const adapter = {
   regionKey: REGION_KEY,
   countryKey: COUNTRY_KEY,
+  supportedCountriesKey: SUPPORTED_COUNTRIES_KEY,
   deleteSubject: (id: string) => {
     console.log({ id });
     return new Promise((resolve, reject) => {
@@ -69,8 +90,8 @@ const adapter = {
       }, 3000);
     });
   },
-  saveTutorInfo: (key: string, value: any, slug: string) => {
-    console.log({ key, value, slug });
+  saveTutorInfo: (key: string, value: any, slug: string, nextStep: string) => {
+    console.log({ key, value, slug, nextStep });
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve({});
@@ -101,22 +122,23 @@ const adapter = {
   toNextPath: async () => {},
   async getTutorSubjects() {
     let tutor_data = SAMPLE_TUTOR_SUBJECTS;
+    // if session storage exists return the tuteria subjects else fetch
     return await new Promise((resolve) => {
       setTimeout(() => {
         resolve({
-          tutorSubjects: [],
-          // tutorSubjects: tutor_data.map((tx) => {
-          //   return {
-          //     id: tx.pk,
-          //     name: tx.skill.name,
-          //     category: tx.category,
-          //     status: tx.status,
-          //     title: tx.heading || "",
-          //     description: tx.description || "",
-          //     teachingStyle: tx.teachingStyle,
-          //     trackRecords: tx.trackRecords,
-          //   };
-          // }),
+          // tutorSubjects: [],
+          tutorSubjects: tutor_data.map((tx) => {
+            return {
+              id: tx.pk,
+              name: tx.skill.name,
+              category: tx.category,
+              status: tx.status,
+              title: tx.heading || "",
+              description: tx.description || "",
+              teachingStyle: tx.teachingStyle,
+              trackRecords: tx.trackRecords,
+            };
+          }),
           tuteriaSubjects: SAMPLE_TUTERIA_SUBJECTS,
         });
       }, 1000);
@@ -167,149 +189,6 @@ const store = RootStore.create(
   }
 );
 
-// async function getTutorData() {
-//   const data = {
-//     userIsloggedIn: true,
-//     locationInfo: {
-//       country: "Nigeria",
-//       regions: allRegions,
-//       countries: allCountries,
-//       state: "Lagos",
-//       region: "Gbagada",
-//       vicinity: "Charley boy Busstop",
-//       address: "10, Lanre awolokun street",
-//     },
-//     personalInfo: {
-//       firstName: "Abiola",
-//       lastName: "Oyeniyi",
-//       email: "james@example.com",
-//       gender: "female",
-//       nationality: "Nigeria",
-//       dateOfBirth: "1998-10-12",
-//       phone: "2347035209922",
-//       whatsappNumber: "2348152957065",
-//       state: "Lagos",
-//       vicinity: "Charley boy Busstop",
-//       region: "Gbagada",
-//       address: "Irabor Street Koto",
-//       primaryLanguage: "English",
-//       medium: "Facebook",
-//     },
-//     educationWorkHistory: {
-//       educations: [
-//         {
-//           school: "Ikeja Grammar school",
-//           country: "Nigeria",
-//           course: "Chemistry",
-//           degree: "MBBS",
-//           speciality: "Mathematics",
-//           startYear: "2006",
-//           endYear: "2020",
-//           grade: "First Class",
-//         },
-//         {
-//           school: "University of Lagos",
-//           country: "Nigeria",
-//           course: "Organic Chemistry",
-//           speciality: "Mathematics",
-//           degree: "MBBS",
-//           startYear: "2006",
-//           endYear: "2020",
-//           grade: "First Class",
-//         },
-//       ],
-//       workHistories: [
-//         {
-//           company: "Tuteria Limited",
-//           role: "CEO",
-//           isTeachingRole: false,
-//           startYear: "2015",
-//           endYear: "2020",
-//           isCurrent: true,
-//           showOnProfile: true,
-//         },
-//       ],
-//     },
-//     subject: {
-//       tutorSubjects: [
-//         {
-//           id: 1,
-//           name: "General Mathematics",
-//           category: "Academics",
-//           subcategory: "Secondary",
-//           status: "not-started",
-//           title: "This is title from tutor subject for general mathematics",
-//           description: "This is a description for general mathematics",
-//           teachingStyle: "Terrorize my students",
-//           trackRecords: "Cries everywhere",
-//         },
-//         {
-//           id: 2,
-//           name: "English",
-//           category: "Academics",
-//           subcategory: "Secondary",
-//           status: "not-started",
-//         },
-//         {
-//           id: 3,
-//           name: "French",
-//           category: "Academics",
-//           subcategory: "Secondary",
-//           status: "denied",
-//         },
-//         {
-//           id: 4,
-//           name: "Spanish",
-//           category: "Academics",
-//           subcategory: "Secondary",
-//           status: "denied",
-//         },
-//         {
-//           id: 5,
-//           name: "Recognition",
-//           category: "Academics",
-//           subcategory: "Primary",
-//           status: "not-started",
-//         },
-//         {
-//           id: 5,
-//           name: "Aptitude",
-//           category: "Academics",
-//           subcategory: "Adult",
-//           status: "pending",
-//           title: "This is title from tutor subject for Aptitude",
-//           description: "This is a description for Aptitude",
-//         },
-//         {
-//           id: 6,
-//           name: "Speaking",
-//           category: "Exam Prep",
-//           subcategory: "IELTS",
-//           status: "in-progress",
-//         },
-//         {
-//           id: 7,
-//           name: "Listening",
-//           category: "Exam Prep",
-//           subcategory: "IELTS",
-//           status: "active",
-//         },
-//       ],
-//     },
-//     identity: {
-//       profilePhotoId: "hello/holla",
-//       profilePhoto:
-//         "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
-//     },
-//     slug: "tutor-101",
-//   };
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve(data);
-//     }, 1000);
-//   });
-// }
-
 type TutorStoreType = {
   locationInfo: any;
   personalInfo: any;
@@ -321,27 +200,26 @@ const TutorPageComponent: React.FC<{
   store: IRootStore;
   onTakeTest: any;
 }> = observer(({ store, onTakeTest, ...rest }) => {
-  // const percentObj = {
-  //   "child-details": 20,
-  //   "teacher-selection": 40,
-  //   "lesson-schedule": 60,
-  //   "lesson-location": 80,
-  //   "contact-information": 100,
-  // };
-
+  let nextStep: FormStepType;
   const stepsArray: any = [
-    { key: "personal-info", name: "Personal Info", completed: false },
-    { key: "location-info", name: "Location Info", completed: false },
+    { key: "personal-info", name: "Personal Information", completed: false },
+    { key: "password-info", name: "Password Information", completed: false },
+    { key: "location-info", name: "Location Information", completed: false },
     {
       key: "education-history",
       name: "Education History",
       completed: false,
     },
     { key: "work-history", name: "Work History", completed: false },
-    { key: "subject-addition", name: "Subject Selection", completed: false },
+    { key: "subject-selection", name: "Subject Selection", completed: false },
+    {
+      key: "verification-info",
+      name: "Identity Verification",
+      completed: false,
+    },
+    { key: "schedule-info", name: "Schedule Information", completed: false },
   ];
   const [formIndex, setFormIndex] = React.useState(1);
-  // const { isOpen, onOpen, onClose } = useOverlayDisclosure("/modal");
   const [loadingText, setLoadingText] = React.useState("");
   const [steps, setSteps] = React.useState<any[]>(stepsArray);
   const [activeStep, setActiveStep] = React.useState(store.currentEditableForm);
@@ -350,7 +228,7 @@ const TutorPageComponent: React.FC<{
     scrollToId(activeStep);
   }, []);
 
-  const handleFormSubmit = (id, presentStep) => {
+  const handleFormSubmit = (id: FormStepType, presentStep: FormStepType) => {
     setFormIndex((index) => index + 1);
     setActiveStep(id);
     store.setEditableForm(id);
@@ -397,10 +275,26 @@ const TutorPageComponent: React.FC<{
           store={store.personalInfo}
           onSubmit={(formData: any) => {
             store.personalInfo.onFormSubmit(formData);
-            store.onFormSubmit(formData, "personal-info").then(() => {
-              handleFormSubmit("location-info", "personal-info");
+            nextStep = store.hasPassword ? "location-info" : "password-info";
+            store.onFormSubmit(formData, "personal-info", nextStep).then(() => {
+              handleFormSubmit(nextStep, "personal-info");
             });
           }}
+        />
+        <PasswordSection
+          formHeader={"Password Information"}
+          label="password-info"
+          lockedDescription="Set your password"
+          isCollapsed={false}
+          onSubmit={(formData: any) => {
+            nextStep = "location-info";
+            store.password.onFormSubmit(formData);
+            store.onFormSubmit(formData, "password-info", nextStep).then(() => {
+              store.setPasswordStatus(true);
+              handleFormSubmit(nextStep, "password-info");
+            });
+          }}
+          store={store.password}
         />
 
         <LocationInfo
@@ -416,9 +310,10 @@ const TutorPageComponent: React.FC<{
             store.locationInfo.vicinity,
           ]}
           onSubmit={(formData: any) => {
+            nextStep = "education-history";
             store.locationInfo.updateFields(formData);
-            store.onFormSubmit(formData, "location-info").then(() => {
-              handleFormSubmit("education-history", "location-info");
+            store.onFormSubmit(formData, "location-info", nextStep).then(() => {
+              handleFormSubmit(nextStep, "location-info");
             });
           }}
         />
@@ -436,9 +331,12 @@ const TutorPageComponent: React.FC<{
           textData={educationHistoryData}
           completed={store.educationWorkHistory.educationCompleted}
           onSubmit={(formData: any) => {
-            store.onFormSubmit(formData, "education-history").then(() => {
-              handleFormSubmit("work-history", "education-history");
-            });
+            nextStep = "work-history";
+            store
+              .onFormSubmit(formData, "education-history", nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, "education-history");
+              });
           }}
         />
 
@@ -455,38 +353,75 @@ const TutorPageComponent: React.FC<{
           textData={workHistoryData}
           completed={store.educationWorkHistory.workCompleted}
           onSubmit={(formData: any) => {
-            store.onFormSubmit(formData, "work-history").then(() => {
-              handleFormSubmit("subject-addition", "work-history");
+            nextStep = "subject-selection";
+            store.onFormSubmit(formData, "work-history", nextStep).then(() => {
+              handleFormSubmit(nextStep, "work-history");
             });
           }}
         />
         <TutorSubjectsPage
-          formHeader={subjectData.lockedForm.title}
-          lockedDescription={subjectData.lockedForm.description}
+          formHeader={subjectContents.lockedForm.title}
+          lockedDescription={subjectContents.lockedForm.description}
           store={store.subject}
-          label="subject-addition"
+          label="Subject Selection"
           completed={
-            store.subject.tutorSubjects.length > 0 &&
-            activeStep === "subject-addition"
+            (store.subject.tutorSubjects.length > 0 &&
+              activeStep === "subject-selection") ||
+            (store.subject.tutorSubjects.length === 0 &&
+              activeStep === "subject-selection") ||
+            store.subject.tutorSubjects.length > 0
           }
           showWelcomeModal={
-            activeStep === "subject-addition" &&
+            activeStep === "subject-selection" &&
             store.subject.tutorSubjects.length === 0
           }
           currentStep={activeStep}
           isCollapsed={false}
           onTakeTest={onTakeTest}
-          onSubmit={(formData: any) => {
-            store.onFormSubmit(formData, "subject-addition").then(() => {
-              // handleFormSubmit("subject-selection", "work-history");
-            });
+          onSubmit={async (formData: any) => {
+            nextStep = "verification-info";
+            await store.onFormSubmit(formData, "subject-selection", nextStep);
+            handleFormSubmit(nextStep, "subject-selection");
           }}
         />
-        <PhotoVerification
-          formHeader={"Identity Verifications"}
+        <VerificationIdentity
+          formHeader={"Identity Verification"}
           lockedDescription="Verify your identity in order to complete steps"
+          label="verification-info"
           isCollapsed={false}
+          currentStep={activeStep}
           store={store.identity}
+          onSubmit={(formData: any) => {
+            nextStep = "schedule-info";
+            store
+              .onFormSubmit(formData, "verification-info", nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, "verification-info");
+              });
+          }}
+        />
+        <ScheduleCard
+          handleChange={() => {}}
+          formHeader={"Tutor Schedule"}
+          lockedDescription="select your teaching schedule"
+          isCollapsed={false}
+          store={store.schedule}
+          onSubmit={(formData: any) => {}}
+        />
+
+        <Agreements
+          formHeader={"Tutor Agreements"}
+          lockedDescription="Tutor agreements"
+          isCollapsed={false}
+          store={store.agreement}
+          onSubmit={(formData: any) => {}}
+        />
+
+        <LearningProcess
+          formHeader={"New development"}
+          lockedDescription="Learning process"
+          isCollapsed={false}
+          store={store.agreement}
           onSubmit={(formData: any) => {}}
         />
       </FormWrapper>
@@ -500,7 +435,13 @@ export const TutorPage = () => {
   React.useEffect(() => {
     storage.set(adapter.regionKey, allRegions);
     storage.set(adapter.countryKey, allCountries);
-    store.initializeTutorData(allRegions, allCountries, SAMPLE_TUTOR_DATA);
+    storage.set(adapter.supportedCountriesKey, supportedCountries);
+    store.initializeTutorData(
+      allRegions,
+      allCountries,
+      supportedCountries,
+      SAMPLE_TUTOR_DATA
+    );
     store.fetchTutorSubjects();
     setLoading(false);
   }, []);
