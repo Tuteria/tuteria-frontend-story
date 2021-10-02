@@ -12,8 +12,10 @@ import { SubjectsCardMobile } from "@tuteria/shared-lib/src/tutor-revamp/Subject
 import SubjectAdditionPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
 import { PhotoVerification } from "@tuteria/shared-lib/src/tutor-revamp/PhotoIdentity";
 import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUploader";
+import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity";
 import React from "react";
 import { Box } from "@chakra-ui/react";
+import PasswordSection from "@tuteria/shared-lib/src/tutor-revamp/PasswordSection";
 
 export default {
   title: "Tutor Application/Components",
@@ -202,7 +204,7 @@ const store2 = RootStore.create({
   subject: {
     tutorSubjects: [],
   },
-  currentEditableForm: "subject-addition",
+  currentEditableForm: "subject-selection",
   identity: {
     profilePhotoId: "hello/holla",
     profilePhoto:
@@ -235,6 +237,19 @@ export const SubjectAddition = () => {
         <SubjectAdditionPage onSubmit={() => {}} store={store.subject} />;
       </OverlayWrapper>
     </OverlayRouter>
+  );
+};
+
+export const Password = () => {
+  return (
+    <PasswordSection
+      formHeader={"Password Information"}
+      label="password-info"
+      lockedDescription="Set your password"
+      isCollapsed={false}
+      onSubmit={(formData: any) => {}}
+      store={store.password}
+    />
   );
 };
 
@@ -276,7 +291,7 @@ export const Verification = () => {
   return (
     <OverlayRouter>
       <OverlayWrapper>
-        <PhotoVerification store={store.identity} />
+        <VerificationIdentity store={store.identity} />
       </OverlayWrapper>
     </OverlayRouter>
   );
