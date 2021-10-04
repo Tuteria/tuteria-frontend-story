@@ -14,12 +14,12 @@ import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCre
 import "katex/dist/katex.min.css";
 import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
 import { initializeStore } from "@tuteria/shared-lib/src/stores";
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
-import { useState } from "markdown-to-jsx/node_modules/@types/react";
+import { SAMPLE_TUTERIA_SUBJECTS } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 
 export default {
   title: "Tutor Application/Pages",
@@ -79,18 +79,30 @@ const navigateToSubject = () => {
 };
 
 // This variable will come from query parameters
-const params = "general-mathematics";
 
+const subjectInfo = SAMPLE_TUTERIA_SUBJECTS[0];
 export const SubjectTest = () => {
   const [loading, setLoading] = React.useState(false);
+  const [testableSubjects, setTestableSubjects] = React.useState([]);
 
-  const onNextClick = () => console.log("Generating Quiz");
+  const onNextClick = (selectedQuizzesToTake) => {
+    console.log(selectedQuizzesToTake);
+    console.log("Generating Quiz");
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({});
+      }, 3000);
+    });
+  };
 
   React.useEffect(() => {
     setLoading(true);
-    store
-      .fetchTutorSubjects(params)
+    adapter
+      .getTutorSubjects()
       .then(() => {
+        // this is supposed to filter the user subjects from the tuteria subjects
+        let result = subjectInfo.subjects.map((o) => o.name);
+        setTestableSubjects(result);
         setLoading(false);
       })
       .catch((error) => {
@@ -104,9 +116,10 @@ export const SubjectTest = () => {
   }
   return (
     <SelectQuizzesToTake
-      store={store}
+      generateQuiz={onNextClick}
+      testSubject={subjectInfo.name}
+      testableSubjects={testableSubjects}
       toSubjectPage={navigateToSubject}
-      onNextClick={onNextClick}
     />
   );
 };
