@@ -123,13 +123,14 @@ const TutorPageComponent: React.FC<{
           store={store.personalInfo}
           onSubmit={(formData: any) => {
             store.personalInfo.onFormSubmit(formData);
-            nextStep = store.hasPassword ? "location-info" : "password-info";
+            // nextStep = store.hasPassword ? "location-info" : "password-info";
+            nextStep = "location-info";
             store.onFormSubmit(formData, "personal-info", nextStep).then(() => {
               handleFormSubmit(nextStep, "personal-info");
             });
           }}
         />
-        <PasswordSection
+        {/* <PasswordSection
           formHeader={"Password Information"}
           label="password-info"
           lockedDescription="Set your password"
@@ -143,7 +144,7 @@ const TutorPageComponent: React.FC<{
             });
           }}
           store={store.password}
-        />
+        /> */}
 
         <LocationInfo
           store={store.locationInfo}
