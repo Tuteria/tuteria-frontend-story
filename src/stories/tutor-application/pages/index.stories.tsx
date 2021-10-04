@@ -6,9 +6,11 @@ import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
 import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 import storage from "@tuteria/shared-lib/src/storage";
+import TestPage, {
+  SelectQuizzesToTake,
+} from "@tuteria/shared-lib/src/tutor-revamp/TestPage";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCreationForm";
-import TestPage from "@tuteria/shared-lib/src/tutor-revamp/TestPage";
 import "katex/dist/katex.min.css";
 import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
 import { initializeStore } from "@tuteria/shared-lib/src/stores";
@@ -72,32 +74,39 @@ export const TutorPage = () => {
   );
 };
 
-// This variable will come from query parameters
-const params = "General Mathematics";
-
-const navigateToQuiz = () => {
-  linkTo("Tutor Application/Pages/Quiz", "Quiz")();
+const navigateToSubject = () => {
+  linkTo("Tutor Application/Pages", "Tutor Page")();
 };
+
+// This variable will come from query parameters
+const params = "general-mathematics";
+
 export const SubjectTest = () => {
   const [loading, setLoading] = React.useState(false);
 
+  const onNextClick = () => console.log("Generating Quiz");
+
   React.useEffect(() => {
-    store.subject.setTestSubject(params);
-    if (store.subject.listOfTestableSubjects.length === 0) {
-      setLoading(true);
-      store.subject.fetchQuizQuestions().then((res) => navigateToQuiz());
-    }
+    setLoading(true);
+    store
+      .fetchTutorSubjects(params)
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {
-    return <LoadingState text="Fetching questions..." />;
+    return <LoadingState text="Fetching Subjects..." />;
   }
-
   return (
-    <TestPage
+    <SelectQuizzesToTake
       store={store}
-      navigateToQuiz={navigateToQuiz}
-      navigateBack={() => linkTo("Tutor Application/Pages", "Tutor Page")()}
+      toSubjectPage={navigateToSubject}
+      onNextClick={onNextClick}
     />
   );
 };
