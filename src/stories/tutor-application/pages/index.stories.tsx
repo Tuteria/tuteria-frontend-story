@@ -1,4 +1,5 @@
 import { linkTo } from "@storybook/addon-links";
+import { Box, Text, Input, Button } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
@@ -15,6 +16,8 @@ import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
+import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
+import { useState } from "markdown-to-jsx/node_modules/@types/react";
 
 export default {
   title: "Tutor Application/Pages",
@@ -123,6 +126,16 @@ export const Login = () => {
       onOTPSubmit={() => {}}
       onEmailSubmit={() => {}}
       onNavigate={() => {}}
+    />
+  );
+};
+
+export const LandingPage = () => {
+  return (
+    <LandingView
+      onSubmit={(data) => {
+        console.log(data);
+      }}
     />
   );
 };
