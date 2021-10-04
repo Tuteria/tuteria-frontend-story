@@ -117,5 +117,12 @@ export const SubjectCreation = () => {
 };
 
 export const Login = () => {
-  return <LoginPage />;
+  return (
+    <LoginPage
+      onResendOTP={() => {}}
+      onOTPSubmit={() => {}}
+      onEmailSubmit={() => {}}
+      onNavigate={() => {}}
+    />
+  );
 };
