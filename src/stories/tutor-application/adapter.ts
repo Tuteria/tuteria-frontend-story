@@ -111,10 +111,10 @@ const adapter = {
     );
     return Promise.all(promises);
   },
-  takeTest: (subjects: string[]) => {
+  generateQuiz: (subjects: string[]) => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(subjects);
+        resolve([]);
       });
     });
   },

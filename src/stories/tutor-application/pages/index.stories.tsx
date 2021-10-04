@@ -194,7 +194,7 @@ const navigateToQuiz = () => {
 export const SubjectTest = () => {
   const [loading, setLoading] = React.useState(false);
 
-  const onNextClick = (subjects) => console.log(subjects);
+  const onNextClick = () => console.log("Generating Quiz");
 
   React.useEffect(() => {
     setLoading(true);
