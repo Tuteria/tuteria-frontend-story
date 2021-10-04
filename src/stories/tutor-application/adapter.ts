@@ -1,15 +1,45 @@
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
 import {
   SAMPLE_TUTERIA_SUBJECTS,
+  SAMPLE_TUTOR_DATA,
   SAMPLE_TUTOR_SUBJECTS,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 
 import DATA from "@tuteria/shared-lib/src/tutor-revamp/quizzes/sample-quiz-data";
+import { AdapterType } from "@tuteria/shared-lib/src/stores/types";
 
 const REGION_KEY = "TEST-REGIONS-VICINITIES";
 const COUNTRY_KEY = "TEST-COUNTRIES";
 const SUPPORTED_COUNTRIES_KEY = "TEST-SUPPORTED-COUNTRIES";
 
+type PersonalInfoType = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  gender: string;
+  subscription: boolean;
+  nationality: string;
+  dateOfBirth: string;
+  phone: string;
+  whatsappNumber: string;
+  primaryLanguage: string;
+  medium: string;
+  alternateNo: string;
+};
+
+type LocationInfoType = {
+  exemptedAreas: any[];
+  lessonType: any[];
+  state: string;
+  vicinity: string;
+  region: string;
+  address: string;
+  country: string;
+};
+type SubmissionType = {
+  "personal-info": PersonalInfoType;
+  "location-info": LocationInfoType;
+};
 const adapter = {
   regionKey: REGION_KEY,
   countryKey: COUNTRY_KEY,
@@ -22,7 +52,26 @@ const adapter = {
       }, 3000);
     });
   },
-  saveTutorInfo: (key: string, value: any, slug: string, nextStep: string) => {
+  cleanTutorData(existingData, key, data: SubmissionType) {
+    let result: any = {};
+    let value = data[key];
+    if (key === "personal-info") {
+      result.personalInfo = { ...existingData.personalInfo, ...value };
+    }
+    if (key == "location-info") {
+      let { exemptedAreas, lessonType, ...rest } = value;
+      result.personalInfo = { ...existingData.personalInfo, ...rest };
+      result.availability = {
+        ...existingData.availability,
+        exemptedAreas,
+        preferredLessonType: lessonType,
+      };
+    }
+    return result;
+  },
+  async saveTutorInfo(key: string, value: any, slug: string, nextStep: string) {
+    let tutorInfo = SAMPLE_TUTOR_DATA;
+    let data = this.cleanTutorData(tutorInfo, key, { [key]: value });
     console.log({ key, value, slug, nextStep });
     return new Promise((resolve, reject) => {
       setTimeout(() => {
