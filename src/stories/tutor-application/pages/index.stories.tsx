@@ -4,16 +4,16 @@ import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/Lo
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
 import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
-import { SAMPLE_TUTOR_DATA } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import storage from "@tuteria/shared-lib/src/storage";
-import { IRootStore, RootStore } from "@tuteria/shared-lib/src/stores";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCreationForm";
 import TestPage from "@tuteria/shared-lib/src/tutor-revamp/TestPage";
 import "katex/dist/katex.min.css";
+import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
+import { initializeStore } from "@tuteria/shared-lib/src/stores";
 import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
-import adapter from "../adapter";
+import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
 
 export default {
@@ -28,8 +28,8 @@ export default {
     ),
   ],
 };
-
-const store: IRootStore = RootStore.create({}, { adapter });
+const adapter = loadAdapter(testAdapter);
+const store = initializeStore(testAdapter);
 
 type TutorStoreType = {
   locationInfo: any;
@@ -49,7 +49,7 @@ export const TutorPage = () => {
       allRegions,
       allCountries,
       supportedCountries,
-      SAMPLE_TUTOR_DATA
+      testAdapter.loadExistingTutorInfo()
     );
     store.fetchTutorSubjects();
     setLoading(false);
