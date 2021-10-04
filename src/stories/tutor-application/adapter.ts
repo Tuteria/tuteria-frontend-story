@@ -5,7 +5,7 @@ import {
   SAMPLE_TUTOR_SUBJECTS,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 
-import DATA from "@tuteria/shared-lib/src/tutor-revamp/quizzes/sample-quiz-data";
+import DATA from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import { AdapterType } from "@tuteria/shared-lib/src/stores/types";
 
 const REGION_KEY = "TEST-REGIONS-VICINITIES";
@@ -72,10 +72,10 @@ const adapter = {
   async saveTutorInfo(key: string, value: any, slug: string, nextStep: string) {
     let tutorInfo = SAMPLE_TUTOR_DATA;
     let data = this.cleanTutorData(tutorInfo, key, { [key]: value });
-    console.log({ key, value, slug, nextStep });
+    console.log({ data });
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve({});
+        resolve(data);
       }, 3000);
     });
   },
