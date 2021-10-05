@@ -68,6 +68,8 @@ const TutorPageComponent: React.FC<{
   onTakeTest: any;
 }> = ({ store, onTakeTest, ...rest }) => {
   let nextStep: FormStepType;
+  const toast = useToast();
+
   const [formIndex, setFormIndex] = React.useState(1);
   const [steps, setSteps] = React.useState<any[]>(stepsArray);
   const [activeStep, setActiveStep] = React.useState(store.currentEditableForm);
@@ -92,6 +94,16 @@ const TutorPageComponent: React.FC<{
     );
     scrollToId(id);
   };
+  function onError() {
+    toast({
+      title: `An error occured.`,
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+      position: "top",
+    });
+  }
+
   const countries = store.locationInfo.countries.map((country) => country.name);
   return (
     <TutorPageWrapper
@@ -125,9 +137,15 @@ const TutorPageComponent: React.FC<{
             store.personalInfo.onFormSubmit(formData);
             // nextStep = store.hasPassword ? "location-info" : "password-info";
             nextStep = "location-info";
-            store.onFormSubmit(formData, "personal-info", nextStep).then(() => {
-              handleFormSubmit(nextStep, "personal-info");
-            });
+            store
+              .onFormSubmit(formData, "personal-info", nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, "personal-info");
+              })
+              .catch((error) => {
+                onError();
+                throw error;
+              });
           }}
         />
         {/* <PasswordSection
@@ -161,9 +179,15 @@ const TutorPageComponent: React.FC<{
           onSubmit={(formData: any) => {
             nextStep = "education-history";
             store.locationInfo.updateFields(formData);
-            store.onFormSubmit(formData, "location-info", nextStep).then(() => {
-              handleFormSubmit(nextStep, "location-info");
-            });
+            store
+              .onFormSubmit(formData, "location-info", nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, "location-info");
+              })
+              .catch((error) => {
+                onError();
+                throw error;
+              });
           }}
         />
         <EducationHistory
@@ -185,6 +209,10 @@ const TutorPageComponent: React.FC<{
               .onFormSubmit(formData, "education-history", nextStep)
               .then(() => {
                 handleFormSubmit(nextStep, "education-history");
+              })
+              .catch((error) => {
+                onError();
+                throw error;
               });
           }}
         />
@@ -203,9 +231,15 @@ const TutorPageComponent: React.FC<{
           completed={store.educationWorkHistory.workCompleted}
           onSubmit={(formData: any) => {
             nextStep = "subject-selection";
-            store.onFormSubmit(formData, "work-history", nextStep).then(() => {
-              handleFormSubmit(nextStep, "work-history");
-            });
+            store
+              .onFormSubmit(formData, "work-history", nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, "work-history");
+              })
+              .catch((error) => {
+                onError();
+                throw error;
+              });
           }}
         />
         <TutorSubjectsPage
@@ -227,10 +261,17 @@ const TutorPageComponent: React.FC<{
           currentStep={activeStep}
           isCollapsed={false}
           onTakeTest={onTakeTest}
-          onSubmit={async (formData: any) => {
+          onSubmit={(formData: any) => {
             nextStep = "verification-info";
-            await store.onFormSubmit(formData, "subject-selection", nextStep);
-            handleFormSubmit(nextStep, "subject-selection");
+            store
+              .onFormSubmit(formData, "subject-selection", nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, "subject-selection");
+              })
+              .catch((error) => {
+                onError();
+                throw error;
+              });
           }}
         />
         <VerificationIdentity
