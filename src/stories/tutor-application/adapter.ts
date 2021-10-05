@@ -86,4 +86,11 @@ export const testAdapter: ServerAdapterType = {
     );
     return Promise.all(promises);
   },
+  generateQuiz: (subjects: string[]) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve([]);
+      });
+    });
+  },
 };

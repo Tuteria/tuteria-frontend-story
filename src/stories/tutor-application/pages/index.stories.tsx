@@ -1,16 +1,18 @@
 import { linkTo } from "@storybook/addon-links";
+import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
 import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
+import { SAMPLE_TUTERIA_SUBJECTS } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import storage from "@tuteria/shared-lib/src/storage";
-import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
-import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCreationForm";
-import TestPage from "@tuteria/shared-lib/src/tutor-revamp/TestPage";
-import "katex/dist/katex.min.css";
-import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
 import { initializeStore } from "@tuteria/shared-lib/src/stores";
+import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
+import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
+import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCreationForm";
+import QuizSelectionView from "@tuteria/shared-lib/src/tutor-revamp/QuizSelectionView";
+import "katex/dist/katex.min.css";
 import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
@@ -69,32 +71,52 @@ export const TutorPage = () => {
   );
 };
 
-// This variable will come from query parameters
-const params = "General Mathematics";
-
-const navigateToQuiz = () => {
-  linkTo("Tutor Application/Pages/Quiz", "Quiz")();
+const navigateToSubject = () => {
+  linkTo("Tutor Application/Pages", "Tutor Page")();
 };
+
+// This variable will come from query parameters
+
+const subjectInfo = SAMPLE_TUTERIA_SUBJECTS[0];
 export const SubjectTest = () => {
   const [loading, setLoading] = React.useState(false);
+  const [testableSubjects, setTestableSubjects] = React.useState([]);
+
+  const onNextClick = (selectedQuizzesToTake) => {
+    console.log(selectedQuizzesToTake);
+    console.log("Generating Quiz");
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({});
+      }, 3000);
+    });
+  };
 
   React.useEffect(() => {
-    store.subject.setTestSubject(params);
-    if (store.subject.listOfTestableSubjects.length === 0) {
-      setLoading(true);
-      store.subject.fetchQuizQuestions().then((res) => navigateToQuiz());
-    }
+    setLoading(true);
+    adapter
+      .getTutorSubjects()
+      .then(() => {
+        // this is supposed to filter the user subjects from the tuteria subjects
+        let result = subjectInfo.subjects.map((o) => o.name);
+        setTestableSubjects(result);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {
-    return <LoadingState text="Fetching questions..." />;
+    return <LoadingState text="Fetching Subjects..." />;
   }
-
   return (
-    <TestPage
-      store={store}
-      navigateToQuiz={navigateToQuiz}
-      navigateBack={() => linkTo("Tutor Application/Pages", "Tutor Page")()}
+    <QuizSelectionView
+      generateQuiz={onNextClick}
+      testSubject={subjectInfo.name}
+      testableSubjects={testableSubjects}
+      toSubjectPage={navigateToSubject}
     />
   );
 };
@@ -123,6 +145,16 @@ export const Login = () => {
       onOTPSubmit={() => {}}
       onEmailSubmit={() => {}}
       onNavigate={() => {}}
+    />
+  );
+};
+
+export const LandingPage = () => {
+  return (
+    <LandingView
+      onSubmit={(data) => {
+        console.log(data);
+      }}
     />
   );
 };
