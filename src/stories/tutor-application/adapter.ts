@@ -4,7 +4,7 @@ import {
   SAMPLE_TUTOR_DATA,
   SAMPLE_TUTOR_SUBJECTS,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
-import DATA from "@tuteria/shared-lib/src/tutor-revamp/quizzes/sample-quiz-data";
+import DATA from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
 
 function samplePromise(data = {}, timer = 300): Promise<any> {
@@ -30,23 +30,25 @@ export const testAdapter: ServerAdapterType = {
   },
   getTutorSubjects: async () => {
     let tutor_data = SAMPLE_TUTOR_SUBJECTS;
-    let result: { tutorSubjects: any[]; tuteriaSubjects: any[] } =
-      await samplePromise({
-        // tutorSubjects: [],
-        tutorSubjects: tutor_data.map((tx) => {
-          return {
-            id: tx.pk,
-            name: tx.skill.name,
-            category: tx.category,
-            status: tx.status,
-            title: tx.heading || "",
-            description: tx.description || "",
-            teachingStyle: tx.teachingStyle,
-            trackRecords: tx.trackRecords,
-          };
-        }),
-        tuteriaSubjects: SAMPLE_TUTERIA_SUBJECTS,
-      });
+    let result: {
+      tutorSubjects: any[];
+      tuteriaSubjects: any[];
+    } = await samplePromise({
+      // tutorSubjects: [],
+      tutorSubjects: tutor_data.map((tx) => {
+        return {
+          id: tx.pk,
+          name: tx.skill.name,
+          category: tx.category,
+          status: tx.status,
+          title: tx.heading || "",
+          description: tx.description || "",
+          teachingStyle: tx.teachingStyle,
+          trackRecords: tx.trackRecords,
+        };
+      }),
+      tuteriaSubjects: SAMPLE_TUTERIA_SUBJECTS,
+    });
     return result;
     // if session storage exists return the tuteria subjects else fetch
   },
@@ -65,7 +67,8 @@ export const testAdapter: ServerAdapterType = {
         name: o.name,
         size: o.size?.toString(),
         public_id: "the_public_id",
-        url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+        url:
+          "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
       }))
     );
   },
