@@ -212,7 +212,8 @@ const TutorPageComponent: React.FC<{
           formHeader={subjectContents.lockedForm.title}
           lockedDescription={subjectContents.lockedForm.description}
           store={store.subject}
-          label="Subject Selection"
+          label="subject-selection"
+          rootStore={store}
           completed={
             (store.subject.tutorSubjects.length > 0 &&
               activeStep === "subject-selection") ||
