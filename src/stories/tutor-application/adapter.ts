@@ -22,20 +22,41 @@ export const testAdapter: ServerAdapterType = {
   saveTutorInfo: async (data: any) => {
     return await samplePromise();
   },
+  getTuteriaSubjects: () => {
+    return SAMPLE_TUTERIA_SUBJECTS;
+  },
   loadExistingTutorInfo: () => {
-    return SAMPLE_TUTOR_DATA;
+    return { ...SAMPLE_TUTOR_DATA, currentEditableForm: "subject-selection" };
   },
   updateUserPassword: async (password_data) => {
     return await samplePromise();
+  },
+  saveTutorSubjects: async (subjects) => {
+    let existingSubjects = SAMPLE_TUTOR_SUBJECTS.map((tx) => {
+      return {
+        id: tx.pk,
+        name: tx.skill.name,
+        category: tx.category,
+        status: tx.status,
+        title: tx.heading || "",
+        description: tx.description || "",
+        teachingStyle: tx.teachingStyle,
+        trackRecords: tx.trackRecords,
+      };
+    });
+    subjects.forEach((s) => {
+      existingSubjects.push({ id: 23, name: s, category: "Academics" });
+    });
+    return await samplePromise(existingSubjects);
   },
   getTutorSubjects: async () => {
     let tutor_data = SAMPLE_TUTOR_SUBJECTS;
     let result: {
       tutorSubjects: any[];
       tuteriaSubjects: any[];
-    } = await samplePromise({
+    } = await samplePromise(
       // tutorSubjects: [],
-      tutorSubjects: tutor_data.map((tx) => {
+      tutor_data.map((tx) => {
         return {
           id: tx.pk,
           name: tx.skill.name,
@@ -46,9 +67,8 @@ export const testAdapter: ServerAdapterType = {
           teachingStyle: tx.teachingStyle,
           trackRecords: tx.trackRecords,
         };
-      }),
-      tuteriaSubjects: SAMPLE_TUTERIA_SUBJECTS,
-    });
+      })
+    );
     return result;
     // if session storage exists return the tuteria subjects else fetch
   },

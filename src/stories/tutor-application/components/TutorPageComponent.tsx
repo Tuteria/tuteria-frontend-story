@@ -10,6 +10,7 @@ import { FormStepType } from "@tuteria/shared-lib/src/stores/types";
 import { IRootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
 import { observer } from "mobx-react-lite";
+import { useToast } from "@chakra-ui/react";
 
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
@@ -247,7 +248,8 @@ const TutorPageComponent: React.FC<{
           formHeader={subjectContents.lockedForm.title}
           lockedDescription={subjectContents.lockedForm.description}
           store={store.subject}
-          label="Subject Selection"
+          label="subject-selection"
+          rootStore={store}
           completed={
             (store.subject.tutorSubjects.length > 0 &&
               activeStep === "subject-selection") ||
@@ -264,10 +266,16 @@ const TutorPageComponent: React.FC<{
           onTakeTest={onTakeTest}
           onSubmit={(formData: any) => {
             nextStep = "verification-info";
-            store
+            return store
               .onFormSubmit(formData, "subject-selection", nextStep)
               .then(() => {
-                handleFormSubmit(nextStep, "subject-selection");
+                if (
+                  store.subject.tutorSubjects.filter((x) =>
+                    ["active", "denied", "pending"].includes(x.status)
+                  ).length > 0
+                ) {
+                  handleFormSubmit(nextStep, "subject-selection");
+                }
               })
               .catch((error) => {
                 onError();

@@ -43,18 +43,25 @@ type TutorStoreType = {
 export const TutorPage = () => {
   const [loading, setLoading] = React.useState(true);
 
-  React.useEffect(() => {
+  async function initialize() {
     storage.set(adapter.regionKey, allRegions);
     storage.set(adapter.countryKey, allCountries);
     storage.set(adapter.supportedCountriesKey, supportedCountries);
+    storage.set(adapter.tuteriaSubjectsKey, testAdapter.getTuteriaSubjects());
     store.initializeTutorData(
       allRegions,
       allCountries,
       supportedCountries,
       testAdapter.loadExistingTutorInfo()
     );
-    store.fetchTutorSubjects();
+    if (store.currentEditableForm === "subject-selection") {
+      await store.fetchTutorSubjects();
+    }
     setLoading(false);
+  }
+
+  React.useEffect(() => {
+    initialize();
   }, []);
 
   if (loading) {
