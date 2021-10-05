@@ -23,7 +23,7 @@ export const testAdapter: ServerAdapterType = {
     return await samplePromise();
   },
   loadExistingTutorInfo: () => {
-    return { ...SAMPLE_TUTOR_DATA, currentEditableForm: "subject-selection" };
+    return SAMPLE_TUTOR_DATA;
   },
   updateUserPassword: async (password_data) => {
     return await samplePromise();
