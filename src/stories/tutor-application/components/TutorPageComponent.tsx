@@ -272,10 +272,16 @@ const TutorPageComponent: React.FC<{
           onTakeTest={onTakeTest}
           onSubmit={(formData: any) => {
             nextStep = "verification-info";
-            store
+            return store
               .onFormSubmit(formData, "subject-selection", nextStep)
               .then(() => {
-                handleFormSubmit(nextStep, "subject-selection");
+                if (
+                  store.subject.tutorSubjects.filter((x) =>
+                    ["active", "denied", "pending"].includes(x.status)
+                  ).length > 0
+                ) {
+                  handleFormSubmit(nextStep, "subject-selection");
+                }
               })
               .catch((error) => {
                 onError();
