@@ -17,6 +17,14 @@ import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
+import { Box } from "@chakra-ui/layout";
+import DATA, {
+  SAMPLE_QUIZ_DATA,
+} from "@tuteria/shared-lib/src/tutor-revamp/quizzes/sample-quiz-data";
+import QuizPage from "@tuteria/shared-lib/src/tutor-revamp/quizzes/QuizPage";
+import QuizStore, {
+  IQuizStore,
+} from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
 
 export default {
   title: "Tutor Application/Pages",
@@ -120,6 +128,7 @@ export const SubjectTest = () => {
   }
   return (
     <QuizSelectionView
+      canTakeQuiz={true}
       generateQuiz={onNextClick}
       testSubject={subjectInfo.name}
       testableSubjects={testableSubjects}
@@ -163,5 +172,50 @@ export const LandingPage = () => {
         console.log(data);
       }}
     />
+  );
+};
+
+const quizStore: IQuizStore = QuizStore.create(
+  {
+    // quiz: {...SAMPLE_QUIZ_DATA, questions: SAMPLE_QUIZ_DATA.questions.slice(0, 10)},
+  },
+  {
+    adapter: loadAdapter(testAdapter),
+  }
+);
+
+// This variable will come from query parameters
+const name = "General Mathematics";
+const params = "general-mathematics";
+const query = "jss-math-quiz,checkpoint-math-quiz";
+
+const quiz = {
+  ...SAMPLE_QUIZ_DATA,
+  questions: SAMPLE_QUIZ_DATA.questions.slice(0, 5),
+};
+
+export const Quiz = () => {
+  const [loaded, setLoaded] = React.useState(false);
+  React.useEffect(() => {
+    // store.initializeQuizQuestions({ questions: DATA.quiz.questions });
+    quizStore.setTestSubject(name);
+    quizStore.initializeQuiz(quiz);
+    setLoaded(true);
+  }, []);
+
+  function redirect() {
+    if (quizStore.quizResults.passedQuiz) {
+      linkTo("Tutor Application/Pages", "Subject Creation")();
+    } else {
+      linkTo("Tutor Application/Pages", "Tutor Page")();
+    }
+  }
+  if (!loaded) {
+    return <LoadingState text="Loading quiz..." />;
+  }
+  return (
+    <Box>
+      <QuizPage index={0} store={quizStore} navigate={redirect} />
+    </Box>
   );
 };
