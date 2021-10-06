@@ -65,8 +65,12 @@ const stepsArray: any = [
     completed: false,
   },
   { key: "schedule-info", name: "Schedule Information", completed: false },
-  { key: "agreements-info", name: "Schedule Information", completed: false },
-  { key: "new-development-info", name: "Agreements", completed: false },
+  { key: "agreement-info", name: "Agreements Information", completed: false },
+  {
+    key: "new-development-info",
+    name: "New Development Information",
+    completed: false,
+  },
   { key: "guarantor-info", name: "Guarantor Information", completed: false },
   { key: "special-needs", name: "Special Needs", completed: false },
 ];
@@ -306,7 +310,6 @@ const TutorPageComponent: React.FC<{
           formHeader={"Identity Verification"}
           lockedDescription="Verify your identity in order to complete steps"
           label="verification-info"
-          isCollapsed={false}
           currentStep={activeStep}
           store={store.identity}
           onSubmit={async (formData: any) => {
@@ -330,7 +333,7 @@ const TutorPageComponent: React.FC<{
             // [...Object.keys(store.schedule.availability)]
           ]}
           onSubmit={async (formData: any) => {
-            nextStep = "agreements-info";
+            nextStep = "agreement-info";
             await store
               .onFormSubmit(formData, "schedule-info", nextStep)
               .then(() => {
@@ -341,21 +344,45 @@ const TutorPageComponent: React.FC<{
 
         <Agreements
           formHeader={"Tutor Agreements"}
+          label="agreement-info"
           lockedDescription="Tutor agreements"
-          label="agreements-info"
-          isCollapsed={false}
           store={store.agreement}
-          onSubmit={(formData: any) => {}}
+          loading={store.loading}
+          formSummary={[
+            `Payment date: ${
+              store.agreement.paymentDate === true ? "Agreed" : "Not Agreed"
+            }`,
+            `Tax compliance: ${
+              store.agreement.taxCompliance === true ? "Agreed" : "Not Agreed"
+            }`,
+            `Lesson Percent: ${
+              store.agreement.lessonPercent === true ? "Agreed" : "Not Agreed"
+            }`,
+            `Contract: ${
+              store.agreement.contractAgreement === true
+                ? "Agreed"
+                : "Not Agreed"
+            }`,
+          ]}
+          onSubmit={async (formData: any) => {
+            nextStep = "new-development-info";
+            store.agreement.updateFields(formData);
+            await store
+              .onFormSubmit(formData, "agreement-info", nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, "agreement-info");
+              });
+            console.log(store.agreement.completed);
+          }}
         />
 
-        <LearningProcess
+        {/* <LearningProcess
           formHeader={"New development"}
           lockedDescription="Learning process"
-          label="new-development"
-          isCollapsed={false}
-          store={store.agreement}
+          label="new-development-info"
+          store={store.}
           onSubmit={(formData: any) => {}}
-        />
+        /> */}
 
         <GuarantorsInfoForm
           store={store.guarantor}
