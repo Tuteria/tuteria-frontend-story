@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/layout";
 import { linkTo } from "@storybook/addon-links";
 import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
@@ -10,21 +11,18 @@ import storage from "@tuteria/shared-lib/src/storage";
 import { initializeStore } from "@tuteria/shared-lib/src/stores";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
-import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCreationForm";
 import QuizSelectionView from "@tuteria/shared-lib/src/tutor-revamp/QuizSelectionView";
+import QuizPage from "@tuteria/shared-lib/src/tutor-revamp/quizzes/QuizPage";
+import QuizStore, {
+  IQuizStore,
+} from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
+import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
+import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCreationForm";
 import "katex/dist/katex.min.css";
 import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
-import { Box } from "@chakra-ui/layout";
-import DATA, {
-  SAMPLE_QUIZ_DATA,
-} from "@tuteria/shared-lib/src/tutor-revamp/quizzes/sample-quiz-data";
-import QuizPage from "@tuteria/shared-lib/src/tutor-revamp/quizzes/QuizPage";
-import QuizStore, {
-  IQuizStore,
-} from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
 
 export default {
   title: "Tutor Application/Pages",
