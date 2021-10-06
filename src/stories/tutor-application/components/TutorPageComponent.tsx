@@ -338,7 +338,7 @@ const TutorPageComponent: React.FC<{
           formHeader={"Guarantor Information"}
           lockedDescription="Information about your guarantor"
           label="guarantor-info"
-          isCollapsed={false}
+          // isCollapsed={false}
           loading={store.loading}
           formSummary={[
             store.guarantor.fullName,
