@@ -38,7 +38,7 @@ const ScheduleCard = React.lazy(
 const Agreements = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/Agreements")
 );
-const LearningProcess = React.lazy(
+const NewDevelopment = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/NewDevelopment")
 );
 const GuarantorsInfoForm = React.lazy(
@@ -66,12 +66,12 @@ const stepsArray: any = [
   },
   { key: "schedule-info", name: "Schedule Information", completed: false },
   { key: "agreement-info", name: "Agreements Information", completed: false },
+  { key: "guarantor-info", name: "Guarantor Information", completed: false },
   {
     key: "new-development-info",
     name: "New Development Information",
     completed: false,
   },
-  { key: "guarantor-info", name: "Guarantor Information", completed: false },
   { key: "special-needs", name: "Special Needs", completed: false },
 ];
 
@@ -365,24 +365,15 @@ const TutorPageComponent: React.FC<{
             }`,
           ]}
           onSubmit={async (formData: any) => {
-            nextStep = "new-development-info";
+            nextStep = "guarantor-info";
             store.agreement.updateFields(formData);
             await store
               .onFormSubmit(formData, "agreement-info", nextStep)
               .then(() => {
                 handleFormSubmit(nextStep, "agreement-info");
               });
-            console.log(store.agreement.completed);
           }}
         />
-
-        {/* <LearningProcess
-          formHeader={"New development"}
-          lockedDescription="Learning process"
-          label="new-development-info"
-          store={store.}
-          onSubmit={(formData: any) => {}}
-        /> */}
 
         <GuarantorsInfoForm
           store={store.guarantor}
@@ -399,8 +390,8 @@ const TutorPageComponent: React.FC<{
             store.guarantor.phone,
           ]}
           onSubmit={async (formData: any) => {
+            nextStep = "new-development-info";
             store.guarantor.onFormSubmit(formData);
-            nextStep = "special-needs";
             await store
               .onFormSubmit(formData, "guarantor-info", nextStep)
               .then(() => {
@@ -409,6 +400,23 @@ const TutorPageComponent: React.FC<{
               .catch((error) => {
                 onError();
                 throw error;
+              });
+          }}
+        />
+
+        <NewDevelopment
+          formHeader={"New development"}
+          lockedDescription="Learning process"
+          label="new-development-info"
+          formSummary={["New development"]}
+          store={store.others}
+          onSubmit={async (formData: any) => {
+            nextStep = "special-needs";
+            // store.agreement.updateFields(formData);
+            await store
+              .onFormSubmit(formData, "new-development-info", nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, "new-development-info");
               });
           }}
         />
