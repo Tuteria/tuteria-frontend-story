@@ -16,6 +16,7 @@ import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/Verificat
 import React from "react";
 import { Box } from "@chakra-ui/react";
 import PasswordSection from "@tuteria/shared-lib/src/tutor-revamp/PasswordSection";
+import ScheduleCard from "@tuteria/shared-lib/src/tutor-revamp/Schedule";
 
 export default {
   title: "Tutor Application/Components",
@@ -304,5 +305,25 @@ export const VideoUploader = () => {
         alert(url);
       }}
     />
+  );
+};
+
+export const Schedule = () => {
+  return (
+    <OverlayRouter>
+      <OverlayWrapper>
+        <Box px="200px">
+          <ScheduleCard
+            handleChange={() => {}}
+            formHeader={"Tutor Schedule"}
+            label="schedule-info"
+            lockedDescription="select your teaching schedule"
+            isCollapsed={false}
+            store={store.schedule}
+            onSubmit={(formData: any) => {}}
+          />
+        </Box>
+      </OverlayWrapper>
+    </OverlayRouter>
   );
 };

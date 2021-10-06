@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/layout";
 import { linkTo } from "@storybook/addon-links";
 import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
@@ -10,8 +11,13 @@ import storage from "@tuteria/shared-lib/src/storage";
 import { initializeStore } from "@tuteria/shared-lib/src/stores";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
-import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCreationForm";
 import QuizSelectionView from "@tuteria/shared-lib/src/tutor-revamp/QuizSelectionView";
+import QuizPage from "@tuteria/shared-lib/src/tutor-revamp/quizzes/QuizPage";
+import QuizStore, {
+  IQuizStore,
+} from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
+import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
+import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCreationForm";
 import "katex/dist/katex.min.css";
 import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
@@ -120,6 +126,7 @@ export const SubjectTest = () => {
   }
   return (
     <QuizSelectionView
+      canTakeQuiz={true}
       generateQuiz={onNextClick}
       testSubject={subjectInfo.name}
       testableSubjects={testableSubjects}
@@ -163,5 +170,50 @@ export const LandingPage = () => {
         console.log(data);
       }}
     />
+  );
+};
+
+const quizStore: IQuizStore = QuizStore.create(
+  {
+    // quiz: {...SAMPLE_QUIZ_DATA, questions: SAMPLE_QUIZ_DATA.questions.slice(0, 10)},
+  },
+  {
+    adapter: loadAdapter(testAdapter),
+  }
+);
+
+// This variable will come from query parameters
+const name = "General Mathematics";
+const params = "general-mathematics";
+const query = "jss-math-quiz,checkpoint-math-quiz";
+
+const quiz = {
+  ...SAMPLE_QUIZ_DATA,
+  questions: SAMPLE_QUIZ_DATA.questions.slice(0, 5),
+};
+
+export const Quiz = () => {
+  const [loaded, setLoaded] = React.useState(false);
+  React.useEffect(() => {
+    // store.initializeQuizQuestions({ questions: DATA.quiz.questions });
+    quizStore.setTestSubject(name);
+    quizStore.initializeQuiz(quiz);
+    setLoaded(true);
+  }, []);
+
+  function redirect() {
+    if (quizStore.quizResults.passedQuiz) {
+      linkTo("Tutor Application/Pages", "Subject Creation")();
+    } else {
+      linkTo("Tutor Application/Pages", "Tutor Page")();
+    }
+  }
+  if (!loaded) {
+    return <LoadingState text="Loading quiz..." />;
+  }
+  return (
+    <Box>
+      <QuizPage index={0} store={quizStore} navigate={redirect} />
+    </Box>
   );
 };
