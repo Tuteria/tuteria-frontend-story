@@ -174,9 +174,7 @@ export const LandingPage = () => {
 };
 
 const quizStore: IQuizStore = QuizStore.create(
-  {
-    // quiz: {...SAMPLE_QUIZ_DATA, questions: SAMPLE_QUIZ_DATA.questions.slice(0, 10)},
-  },
+  {},
   {
     adapter: loadAdapter(testAdapter),
   }
@@ -187,6 +185,11 @@ const name = "General Mathematics";
 const params = "general-mathematics";
 const query = "jss-math-quiz,checkpoint-math-quiz";
 
+const subjects = [
+  { name: "JSS Math", pass_mark: 70 },
+  { name: "Checkpoint Math", pass_mark: 70 },
+];
+
 const quiz = {
   ...SAMPLE_QUIZ_DATA,
   questions: SAMPLE_QUIZ_DATA.questions.slice(0, 5),
@@ -195,9 +198,9 @@ const quiz = {
 export const Quiz = () => {
   const [loaded, setLoaded] = React.useState(false);
   React.useEffect(() => {
-    // store.initializeQuizQuestions({ questions: DATA.quiz.questions });
     quizStore.setTestSubject(name);
     quizStore.initializeQuiz(quiz);
+    quizStore.setSubjectsToTake(subjects);
     setLoaded(true);
   }, []);
 
@@ -211,9 +214,17 @@ export const Quiz = () => {
   if (!loaded) {
     return <LoadingState text="Loading quiz..." />;
   }
+  async function onQuizSubmit() {
+    await quizStore.handleSubmission();
+  }
   return (
     <Box>
-      <QuizPage index={0} store={quizStore} navigate={redirect} />
+      <QuizPage
+        onQuizSubmit={onQuizSubmit}
+        index={0}
+        store={quizStore}
+        navigate={redirect}
+      />
     </Box>
   );
 };
