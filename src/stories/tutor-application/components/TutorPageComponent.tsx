@@ -113,6 +113,20 @@ const TutorPageComponent: React.FC<{
   }
 
   const countries = store.locationInfo.countries.map((country) => country.name);
+  // function onSubmitForm(formData: any, nextStep, currentStep, storeSubmission) {
+  //     store.personalInfo.onFormSubmit(formData);
+  //     store
+  //       .onFormSubmit(formData, currentStep, nextStep)
+  //       .then(() => {
+  //         handleFormSubmit(nextStep, currentStep);
+  //       })
+  //       .catch((error) => {
+  //         onError();
+  //         throw error;
+  //       });
+  //   }
+  // }
+
   return (
     <TutorPageWrapper
       formIndex={formIndex}
@@ -141,11 +155,11 @@ const TutorPageComponent: React.FC<{
           countries={countries}
           viewModel={store.locationInfo}
           store={store.personalInfo}
-          onSubmit={(formData: any) => {
+          onSubmit={async (formData: any) => {
             store.personalInfo.onFormSubmit(formData);
             // nextStep = store.hasPassword ? "location-info" : "password-info";
             nextStep = "location-info";
-            store
+            await store
               .onFormSubmit(formData, "personal-info", nextStep)
               .then(() => {
                 handleFormSubmit(nextStep, "personal-info");
@@ -184,10 +198,10 @@ const TutorPageComponent: React.FC<{
             store.locationInfo.region,
             store.locationInfo.vicinity,
           ]}
-          onSubmit={(formData: any) => {
+          onSubmit={async (formData: any) => {
             nextStep = "education-history";
             store.locationInfo.updateFields(formData);
-            store
+            await store
               .onFormSubmit(formData, "location-info", nextStep)
               .then(() => {
                 handleFormSubmit(nextStep, "location-info");
@@ -211,9 +225,9 @@ const TutorPageComponent: React.FC<{
           buttonText={educationHistoryData.buttonText.saveAndContinue}
           textData={educationHistoryData}
           completed={store.educationWorkHistory.educationCompleted}
-          onSubmit={(formData: any) => {
+          onSubmit={async (formData: any) => {
             nextStep = "work-history";
-            store
+            await store
               .onFormSubmit(formData, "education-history", nextStep)
               .then(() => {
                 handleFormSubmit(nextStep, "education-history");
@@ -237,9 +251,9 @@ const TutorPageComponent: React.FC<{
           buttonText={workHistoryData.buttonText.saveAndContinue}
           textData={workHistoryData}
           completed={store.educationWorkHistory.workCompleted}
-          onSubmit={(formData: any) => {
+          onSubmit={async (formData: any) => {
             nextStep = "subject-selection";
-            store
+            await store
               .onFormSubmit(formData, "work-history", nextStep)
               .then(() => {
                 handleFormSubmit(nextStep, "work-history");
@@ -270,9 +284,9 @@ const TutorPageComponent: React.FC<{
           currentStep={activeStep}
           isCollapsed={false}
           onTakeTest={onTakeTest}
-          onSubmit={(formData: any) => {
+          onSubmit={async (formData: any) => {
             nextStep = "verification-info";
-            return store
+            return await store
               .onFormSubmit(formData, "subject-selection", nextStep)
               .then(() => {
                 if (
@@ -296,9 +310,9 @@ const TutorPageComponent: React.FC<{
           isCollapsed={false}
           currentStep={activeStep}
           store={store.identity}
-          onSubmit={(formData: any) => {
+          onSubmit={async (formData: any) => {
             nextStep = "schedule-info";
-            store
+            await store
               .onFormSubmit(formData, "verification-info", nextStep)
               .then(() => {
                 handleFormSubmit(nextStep, "verification-info");
@@ -306,13 +320,12 @@ const TutorPageComponent: React.FC<{
           }}
         />
         <ScheduleCard
-          handleChange={() => {}}
           formHeader={"Tutor Schedule"}
           label="schedule-info"
           lockedDescription="select your teaching schedule"
           isCollapsed={false}
           store={store.schedule}
-          onSubmit={(formData: any) => {}}
+          onSubmit={async (formData: any) => {}}
         />
 
         <Agreements
@@ -347,10 +360,10 @@ const TutorPageComponent: React.FC<{
             store.guarantor.company,
             store.guarantor.phone,
           ]}
-          onSubmit={(formData: any) => {
+          onSubmit={async (formData: any) => {
             store.guarantor.onFormSubmit(formData);
             nextStep = "special-needs";
-            store
+            await store
               .onFormSubmit(formData, "guarantor-info", nextStep)
               .then(() => {
                 handleFormSubmit(nextStep, "guarantor-info");
