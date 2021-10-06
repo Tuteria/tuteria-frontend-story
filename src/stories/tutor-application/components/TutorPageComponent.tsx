@@ -81,7 +81,6 @@ const TutorPageComponent: React.FC<{
   const [formIndex, setFormIndex] = React.useState(1);
   const [steps, setSteps] = React.useState<any[]>(stepsArray);
   const [activeStep, setActiveStep] = React.useState(store.currentEditableForm);
-  console.log(activeStep);
   React.useEffect(() => {
     scrollToId(activeStep);
   }, []);
@@ -323,9 +322,21 @@ const TutorPageComponent: React.FC<{
           formHeader={"Tutor Schedule"}
           label="schedule-info"
           lockedDescription="select your teaching schedule"
-          isCollapsed={false}
           store={store.schedule}
-          onSubmit={async (formData: any) => {}}
+          formSummary={[
+            `maximum Days: ${store.schedule.maxDays}`,
+            `maximum Hours: ${store.schedule.maxHours}`,
+            `maximum Students: ${store.schedule.maxStudents}`,
+            // [...Object.keys(store.schedule.availability)]
+          ]}
+          onSubmit={async (formData: any) => {
+            nextStep = "agreements-info";
+            await store
+              .onFormSubmit(formData, "schedule-info", nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, "schedule-info");
+              });
+          }}
         />
 
         <Agreements
