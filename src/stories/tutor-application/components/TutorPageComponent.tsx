@@ -10,7 +10,6 @@ import { FormStepType } from "@tuteria/shared-lib/src/stores/types";
 import { IRootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
 import { observer } from "mobx-react-lite";
-import { useToast } from "@chakra-ui/react";
 
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
