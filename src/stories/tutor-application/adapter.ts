@@ -105,11 +105,10 @@ export const testAdapter: ServerAdapterType = {
     );
     return Promise.all(promises);
   },
-  generateQuiz: (subjects: string[]) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve([]);
-      });
-    });
+  generateQuiz: async (subjects: any) => {
+    return await samplePromise([]);
+  },
+  submitQuizResults: async (subject, answers) => {
+    return await samplePromise({ subject, answers });
   },
 };
