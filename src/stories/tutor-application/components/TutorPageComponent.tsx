@@ -38,7 +38,7 @@ const ScheduleCard = React.lazy(
 const Agreements = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/Agreements")
 );
-const LearningProcess = React.lazy(
+const NewDevelopment = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/NewDevelopment")
 );
 const GuarantorsInfoForm = React.lazy(
@@ -65,9 +65,13 @@ const stepsArray: any = [
     completed: false,
   },
   { key: "schedule-info", name: "Schedule Information", completed: false },
-  { key: "agreements-info", name: "Schedule Information", completed: false },
-  { key: "new-development-info", name: "Agreements", completed: false },
+  { key: "agreement-info", name: "Agreements Information", completed: false },
   { key: "guarantor-info", name: "Guarantor Information", completed: false },
+  {
+    key: "new-development-info",
+    name: "New Development Information",
+    completed: false,
+  },
   { key: "special-needs", name: "Special Needs", completed: false },
 ];
 
@@ -81,7 +85,6 @@ const TutorPageComponent: React.FC<{
   const [formIndex, setFormIndex] = React.useState(1);
   const [steps, setSteps] = React.useState<any[]>(stepsArray);
   const [activeStep, setActiveStep] = React.useState(store.currentEditableForm);
-  console.log(activeStep);
   React.useEffect(() => {
     scrollToId(activeStep);
   }, []);
@@ -307,7 +310,6 @@ const TutorPageComponent: React.FC<{
           formHeader={"Identity Verification"}
           lockedDescription="Verify your identity in order to complete steps"
           label="verification-info"
-          isCollapsed={false}
           currentStep={activeStep}
           store={store.identity}
           onSubmit={async (formData: any) => {
@@ -323,27 +325,54 @@ const TutorPageComponent: React.FC<{
           formHeader={"Tutor Schedule"}
           label="schedule-info"
           lockedDescription="select your teaching schedule"
-          isCollapsed={false}
           store={store.schedule}
-          onSubmit={async (formData: any) => {}}
+          formSummary={[
+            `maximum Days: ${store.schedule.maxDays}`,
+            `maximum Hours: ${store.schedule.maxHours}`,
+            `maximum Students: ${store.schedule.maxStudents}`,
+            // [...Object.keys(store.schedule.availability)]
+          ]}
+          onSubmit={async (formData: any) => {
+            nextStep = "agreement-info";
+            await store
+              .onFormSubmit(formData, "schedule-info", nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, "schedule-info");
+              });
+          }}
         />
 
         <Agreements
           formHeader={"Tutor Agreements"}
+          label="agreement-info"
           lockedDescription="Tutor agreements"
-          label="agreements-info"
-          isCollapsed={false}
           store={store.agreement}
-          onSubmit={(formData: any) => {}}
-        />
-
-        <LearningProcess
-          formHeader={"New development"}
-          lockedDescription="Learning process"
-          label="new-development"
-          isCollapsed={false}
-          store={store.agreement}
-          onSubmit={(formData: any) => {}}
+          loading={store.loading}
+          formSummary={[
+            `Payment date: ${
+              store.agreement.paymentDate === true ? "Agreed" : "Not Agreed"
+            }`,
+            `Tax compliance: ${
+              store.agreement.taxCompliance === true ? "Agreed" : "Not Agreed"
+            }`,
+            `Lesson Percent: ${
+              store.agreement.lessonPercent === true ? "Agreed" : "Not Agreed"
+            }`,
+            `Contract: ${
+              store.agreement.contractAgreement === true
+                ? "Agreed"
+                : "Not Agreed"
+            }`,
+          ]}
+          onSubmit={async (formData: any) => {
+            nextStep = "guarantor-info";
+            store.agreement.updateFields(formData);
+            await store
+              .onFormSubmit(formData, "agreement-info", nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, "agreement-info");
+              });
+          }}
         />
 
         <GuarantorsInfoForm
@@ -361,8 +390,8 @@ const TutorPageComponent: React.FC<{
             store.guarantor.phone,
           ]}
           onSubmit={async (formData: any) => {
+            nextStep = "new-development-info";
             store.guarantor.onFormSubmit(formData);
-            nextStep = "special-needs";
             await store
               .onFormSubmit(formData, "guarantor-info", nextStep)
               .then(() => {
@@ -371,6 +400,23 @@ const TutorPageComponent: React.FC<{
               .catch((error) => {
                 onError();
                 throw error;
+              });
+          }}
+        />
+
+        <NewDevelopment
+          formHeader={"New development"}
+          lockedDescription="Learning process"
+          label="new-development-info"
+          formSummary={["New development"]}
+          store={store.others}
+          onSubmit={async (formData: any) => {
+            nextStep = "special-needs";
+            // store.agreement.updateFields(formData);
+            await store
+              .onFormSubmit(formData, "new-development-info", nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, "new-development-info");
               });
           }}
         />
