@@ -14,6 +14,21 @@ function samplePromise(data = {}, timer = 300): Promise<any> {
     }, 3000);
   });
 }
+const formIds = {
+  1: "personal-info",
+  2: "password-info",
+  3: "location-info",
+  4: "education-history",
+  5: "work-history",
+  6: "subject-selection",
+  7: "verification-info",
+  8: "schedule-info",
+  9: "agreement-info",
+  10: "guarantor-info",
+  11: "new-development-info",
+  12: "special-needs",
+  13: "payment-details",
+};
 
 export const testAdapter: ServerAdapterType = {
   deleteSubject: async (id) => {

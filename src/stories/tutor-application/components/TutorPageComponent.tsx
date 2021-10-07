@@ -218,7 +218,7 @@ const TutorPageComponent: React.FC<{
         <EducationHistory
           store={store.educationWorkHistory}
           formHeader={educationHistoryData.formTitle.header}
-          formsetDescription={`Please we would love to know more about your education`}
+          formsetDescription={educationHistoryData.formTitle.subHeader}
           rootStore={store}
           loading={store.loading}
           isDisabled={!(store.educationWorkHistory.educations.length > 0)}
@@ -244,13 +244,13 @@ const TutorPageComponent: React.FC<{
 
         <WorkHistory
           store={store.educationWorkHistory}
-          formHeader={"Work History"}
-          formsetDescription={`Please we would love to know more about your working experience`}
+          formHeader={workHistoryData.formTitle.header}
+          formsetDescription={workHistoryData.formTitle.subHeader}
           loading={store.loading}
           displayType="complex"
           label="work-history"
           isDisabled={store.educationWorkHistory.workHistories.length === 0}
-          lockedDescription={"Enter your work history"}
+          lockedDescription={workHistoryData.formTitle.subHeader}
           buttonText={workHistoryData.buttonText.saveAndContinue}
           textData={workHistoryData}
           completed={store.educationWorkHistory.workCompleted}
