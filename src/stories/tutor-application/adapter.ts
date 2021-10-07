@@ -109,7 +109,12 @@ export const testAdapter: ServerAdapterType = {
   generateQuiz: async (subjects: any) => {
     return await samplePromise([]);
   },
-  submitQuizResults: async (subject, answers) => {
-    return await samplePromise({ subject, answers });
+  submitQuizResults: async (payload) => {
+    console.log(payload);
+    return await samplePromise({ payload });
+  },
+  buildQuizData: async (subjectInfo, quiz) => {
+    console.log(subjectInfo);
+    return await samplePromise(quiz[0]);
   },
 };

@@ -23,6 +23,8 @@ import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
+import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
+import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
 
 export default {
   title: "Tutor Application/Pages",
@@ -174,9 +176,7 @@ export const LandingPage = () => {
 };
 
 const quizStore: IQuizStore = QuizStore.create(
-  {
-    // quiz: {...SAMPLE_QUIZ_DATA, questions: SAMPLE_QUIZ_DATA.questions.slice(0, 10)},
-  },
+  {},
   {
     adapter: loadAdapter(testAdapter),
   }
@@ -187,6 +187,11 @@ const name = "General Mathematics";
 const params = "general-mathematics";
 const query = "jss-math-quiz,checkpoint-math-quiz";
 
+const subjects = [
+  { name: "JSS Math", pass_mark: 70 },
+  { name: "Checkpoint Math", pass_mark: 70 },
+];
+
 const quiz = {
   ...SAMPLE_QUIZ_DATA,
   questions: SAMPLE_QUIZ_DATA.questions.slice(0, 5),
@@ -194,11 +199,20 @@ const quiz = {
 
 export const Quiz = () => {
   const [loaded, setLoaded] = React.useState(false);
+  const [completed, setCompleted] = React.useState(false);
+
   React.useEffect(() => {
-    // store.initializeQuizQuestions({ questions: DATA.quiz.questions });
-    quizStore.setTestSubject(name);
-    quizStore.initializeQuiz(quiz);
-    setLoaded(true);
+    const subjectsToTake = query;
+    const newSubjectInfo = {
+      ...subjectInfo,
+      subjects: subjectInfo.subjects.filter((o) =>
+        subjectsToTake.includes(o.url)
+      ),
+    };
+    testAdapter.buildQuizData(newSubjectInfo, [quiz]).then((_quiz) => {
+      quizStore.initializeQuiz(_quiz, subjects);
+      setLoaded(true);
+    });
   }, []);
 
   function redirect() {
@@ -211,9 +225,39 @@ export const Quiz = () => {
   if (!loaded) {
     return <LoadingState text="Loading quiz..." />;
   }
+  async function onQuizSubmit() {
+    let gradedResult = gradeQuiz(
+      [
+        {
+          subject: quiz.title,
+          passmark: quiz.pass_mark,
+          questions: quiz.questions,
+        },
+      ],
+      quizStore.serverAnswerFormat,
+      quizStore.quiz.questions.length
+    );
+    let result = await quizStore.handleSubmission(gradedResult);
+    quizStore.setQuizResults(gradedResult);
+    setCompleted(true);
+    return result;
+  }
   return (
     <Box>
-      <QuizPage index={0} store={quizStore} navigate={redirect} />
+      {completed ? (
+        <ResultsPage
+          subject={name}
+          quizResults={quizStore.quizResults}
+          navigate={redirect}
+        />
+      ) : (
+        <QuizPage
+          completed={completed}
+          onQuizSubmit={onQuizSubmit}
+          index={0}
+          store={quizStore}
+        />
+      )}
     </Box>
   );
 };
