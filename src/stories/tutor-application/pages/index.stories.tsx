@@ -199,7 +199,7 @@ const quiz = {
 
 export const Quiz = () => {
   const [loaded, setLoaded] = React.useState(false);
-  const [completed, setCompleted] = React.useState(false);
+  const [completed, setCompleted] = React.useState(true);
 
   React.useEffect(() => {
     const subjectsToTake = query;
@@ -247,6 +247,7 @@ export const Quiz = () => {
       {completed ? (
         <ResultsPage
           subject={name}
+          totalQuestions={quizStore.quiz.questions.length}
           quizResults={quizStore.quizResults}
           navigate={redirect}
         />
