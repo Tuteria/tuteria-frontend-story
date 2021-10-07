@@ -41,7 +41,7 @@ export const testAdapter: ServerAdapterType = {
     return SAMPLE_TUTERIA_SUBJECTS;
   },
   loadExistingTutorInfo: () => {
-    return { ...SAMPLE_TUTOR_DATA, currentEditableForm: "work-history" };
+    return { ...SAMPLE_TUTOR_DATA, currentEditableForm: "subject-selection" };
   },
   updateUserPassword: async (password_data) => {
     return await samplePromise();
