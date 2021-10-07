@@ -5,7 +5,7 @@ import personalInfoData from "@tuteria/shared-lib/src/tutor-revamp/formData/pers
 import educationHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/educationHistory.json";
 import workHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/workHistory.json";
 import subjectContents from "@tuteria/shared-lib/src/tutor-revamp/formData/subject.json";
-import { FormStepType } from "@tuteria/shared-lib/src/stores/types";
+import { FormStepType } from "@tuteria/shared-lib/src/stores";
 import { IRootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
 import { observer } from "mobx-react-lite";
