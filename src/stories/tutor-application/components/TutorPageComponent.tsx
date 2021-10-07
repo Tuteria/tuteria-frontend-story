@@ -4,6 +4,7 @@ import FormWrapper from "@tuteria/shared-lib/src/components/FormWrapper";
 import personalInfoData from "@tuteria/shared-lib/src/tutor-revamp/formData/personalInfo.json";
 import educationHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/educationHistory.json";
 import workHistoryData from "@tuteria/shared-lib/src/tutor-revamp/formData/workHistory.json";
+import guarantorInfoData from "@tuteria/shared-lib/src/tutor-revamp/formData/guarantorInfo.json";
 import subjectContents from "@tuteria/shared-lib/src/tutor-revamp/formData/subject.json";
 import { FormStepType } from "@tuteria/shared-lib/src/stores";
 import { IRootStore } from "@tuteria/shared-lib/src/stores";
@@ -66,7 +67,7 @@ const stepsArray: any = [
   },
   { key: "schedule-info", name: "Schedule Information", completed: false },
   { key: "agreement-info", name: "Agreements Information", completed: false },
-  { key: "guarantor-info", name: "Guarantor Information", completed: false },
+  { key: "guarantors-info", name: "Guarantor Information", completed: false },
   {
     key: "new-development-info",
     name: "New Development Information",
@@ -365,7 +366,7 @@ const TutorPageComponent: React.FC<{
             }`,
           ]}
           onSubmit={async (formData: any) => {
-            nextStep = "guarantor-info";
+            nextStep = "guarantors-info";
             store.agreement.updateFields(formData);
             await store
               .onFormSubmit(formData, "agreement-info", nextStep)
@@ -376,26 +377,23 @@ const TutorPageComponent: React.FC<{
         />
 
         <GuarantorsInfoForm
-          store={store.guarantor}
-          formHeader={"Guarantor Information"}
-          lockedDescription="Information about your guarantor"
-          label="guarantor-info"
-          // isCollapsed={false}
+          store={store.educationWorkHistory}
+          formHeader={guarantorInfoData.formTitle.header}
+          formsetDescription={guarantorInfoData.formTitle.subHeader}
           loading={store.loading}
-          formSummary={[
-            store.guarantor.fullName,
-            store.guarantor.occupation,
-            store.guarantor.email,
-            store.guarantor.company,
-            store.guarantor.phone,
-          ]}
+          displayType="complex"
+          label="guarantors-info"
+          isDisabled={store.educationWorkHistory.guarantors.length === 0}
+          lockedDescription={guarantorInfoData.formTitle.subHeader}
+          buttonText={guarantorInfoData.buttonText.saveAndContinue}
+          textData={guarantorInfoData}
+          completed={store.educationWorkHistory.guarantorsCompleted}
           onSubmit={async (formData: any) => {
             nextStep = "new-development-info";
-            store.guarantor.onFormSubmit(formData);
             await store
-              .onFormSubmit(formData, "guarantor-info", nextStep)
+              .onFormSubmit(formData, "guarantors-info", nextStep)
               .then(() => {
-                handleFormSubmit(nextStep, "guarantor-info");
+                handleFormSubmit(nextStep, "guarantors-info");
               })
               .catch((error) => {
                 onError();
@@ -403,6 +401,31 @@ const TutorPageComponent: React.FC<{
               });
           }}
         />
+        {/* <WorkHistory
+          store={store.educationWorkHistory}
+          formHeader={workHistoryData.formTitle.header}
+          formsetDescription={workHistoryData.formTitle.subHeader}
+          loading={store.loading}
+          displayType="complex"
+          label="work-history"
+          isDisabled={store.educationWorkHistory.workHistories.length === 0}
+          lockedDescription={workHistoryData.formTitle.subHeader}
+          buttonText={workHistoryData.buttonText.saveAndContinue}
+          textData={workHistoryData}
+          completed={store.educationWorkHistory.workCompleted}
+          onSubmit={async (formData: any) => {
+            nextStep = "subject-selection";
+            await store
+              .onFormSubmit(formData, "work-history", nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, "work-history");
+              })
+              .catch((error) => {
+                onError();
+                throw error;
+              });
+          }}
+        /> */}
 
         <NewDevelopment
           formHeader={"New development"}
