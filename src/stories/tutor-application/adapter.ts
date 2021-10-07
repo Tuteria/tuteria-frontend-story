@@ -84,7 +84,7 @@ export const testAdapter: ServerAdapterType = {
         };
       })
     );
-    return result;
+    return { tutorSubjects: result };
     // if session storage exists return the tuteria subjects else fetch
   },
   updateTutorSubjectInfo: async (values) => {
