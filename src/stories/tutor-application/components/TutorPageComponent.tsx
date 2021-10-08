@@ -9,7 +9,6 @@ import subjectContents from "@tuteria/shared-lib/src/tutor-revamp/formData/subje
 import { FormStepType } from "@tuteria/shared-lib/src/stores";
 import { IRootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
-import banksData from "@tuteria/shared-lib/src/data/banks.json";
 import { observer } from "mobx-react-lite";
 import { useToast } from "@chakra-ui/react";
 import { STEPS } from "@tuteria/shared-lib/src/stores/rootStore";
@@ -132,9 +131,6 @@ const TutorPageComponent: React.FC<{
     });
   }
 
-  const banks = banksData[store.personalInfo.country_code].map(
-    (bank) => bank.name
-  );
   const countries = store.locationInfo.countries.map((country) => country.name);
   // function onSubmitForm(formData: any, nextStep, currentStep, storeSubmission) {
   //     store.personalInfo.onFormSubmit(formData);
@@ -422,7 +418,6 @@ const TutorPageComponent: React.FC<{
         />
         <PaymentInfo
           store={store.paymentInfo}
-          banks={banks}
           label={STEPS.PAYMENT_INFO}
           formHeader={"Payment Information"}
           lockedDescription="Enter your bank details"

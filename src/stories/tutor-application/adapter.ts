@@ -6,6 +6,7 @@ import {
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import DATA from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
+import BANK_DATA from "@tuteria/shared-lib/src/data/banks.json";
 
 function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -40,8 +41,12 @@ export const testAdapter: ServerAdapterType = {
   getTuteriaSubjects: () => {
     return SAMPLE_TUTERIA_SUBJECTS;
   },
+  fetchBanksInfo: async (countryCode) => {
+    let response = BANK_DATA[countryCode].map((bank) => bank.name);
+    return await samplePromise(response);
+  },
   loadExistingTutorInfo: () => {
-    return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[11] };
+    return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[6] };
   },
   updateUserPassword: async (password_data) => {
     return await samplePromise();

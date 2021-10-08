@@ -50,7 +50,6 @@ type TutorStoreType = {
 
 export const TutorPage = () => {
   const [loading, setLoading] = React.useState(true);
-
   async function initialize() {
     storage.set(adapter.regionKey, allRegions);
     storage.set(adapter.countryKey, allCountries);
@@ -63,7 +62,10 @@ export const TutorPage = () => {
       testAdapter.loadExistingTutorInfo()
     );
     if (store.currentEditableForm === "subject-selection") {
-      await store.fetchTutorSubjects();
+      await store.subject.fetchTutorSubjects();
+    }
+    if (store.currentEditableForm === "payment-info") {
+      await store.fetchBanksInfo();
     }
     setLoading(false);
   }
@@ -141,7 +143,7 @@ let pk = 209528;
 export const SubjectCreation = () => {
   const [loading, setLoading] = React.useState(true);
   React.useEffect(() => {
-    store.fetchTutorSubjects().then((res) => {
+    store.subject.fetchTutorSubjects().then((res) => {
       store.subject.setCurrentSubjectId(pk);
       setLoading(false);
     });
