@@ -124,3 +124,4 @@ storybook-static
 packages/mobile-lib
 packages/web-app
 packages/tutor-app
+*.pyc
