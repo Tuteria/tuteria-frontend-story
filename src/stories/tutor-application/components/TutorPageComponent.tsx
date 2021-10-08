@@ -46,6 +46,9 @@ const NewDevelopment = React.lazy(
 const GuarantorsInfoForm = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/Guarantors")
 );
+const PaymentInfo = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/PaymentInfo")
+);
 const PasswordSection = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PasswordSection")
 );
@@ -401,7 +404,7 @@ const TutorPageComponent: React.FC<{
           textData={guarantorInfoData}
           completed={store.educationWorkHistory.guarantorsCompleted}
           onSubmit={async (formData: any) => {
-            nextStep = STEPS.NEW_DEVELOPMENT;
+            nextStep = STEPS.PAYMENT_INFO;
             await store
               .onFormSubmit(formData, STEPS.GUARANTOR_INFO, nextStep)
               .then(() => {
@@ -413,31 +416,31 @@ const TutorPageComponent: React.FC<{
               });
           }}
         />
-        {/* <WorkHistory
-          store={store.educationWorkHistory}
-          formHeader={workHistoryData.formTitle.header}
-          formsetDescription={workHistoryData.formTitle.subHeader}
+        <PaymentInfo
+          store={store.paymentInfo}
+          label={STEPS.PAYMENT_INFO}
+          formHeader={"Payment Information"}
+          lockedDescription="Enter your bank details"
           loading={store.loading}
-          displayType="complex"
-          label="work-history"
-          isDisabled={store.educationWorkHistory.workHistories.length === 0}
-          lockedDescription={workHistoryData.formTitle.subHeader}
-          buttonText={workHistoryData.buttonText.saveAndContinue}
-          textData={workHistoryData}
-          completed={store.educationWorkHistory.workCompleted}
+          formSummary={[
+            store.paymentInfo.bankName,
+            store.paymentInfo.accountName,
+            store.paymentInfo.accountNumber,
+          ]}
           onSubmit={async (formData: any) => {
-            nextStep = "subject-selection";
+            nextStep = STEPS.NEW_DEVELOPMENT;
+            store.paymentInfo.updateFields(formData);
             await store
-              .onFormSubmit(formData, "work-history", nextStep)
+              .onFormSubmit(formData, STEPS.PAYMENT_INFO, nextStep)
               .then(() => {
-                handleFormSubmit(nextStep, "work-history");
+                handleFormSubmit(nextStep, STEPS.PAYMENT_INFO);
               })
               .catch((error) => {
                 onError();
                 throw error;
               });
           }}
-        /> */}
+        />
 
         <NewDevelopment
           formHeader={"New development"}
@@ -446,7 +449,7 @@ const TutorPageComponent: React.FC<{
           formSummary={["New development"]}
           store={store.others}
           onSubmit={async (formData: any) => {
-            nextStep = "special-needs";
+            nextStep = STEPS.SPECIAL_NEEDS;
             // store.agreement.updateFields(formData);
             await store
               .onFormSubmit(formData, STEPS.NEW_DEVELOPMENT, nextStep)
