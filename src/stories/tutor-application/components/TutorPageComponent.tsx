@@ -49,6 +49,10 @@ const GuarantorsInfoForm = React.lazy(
 const PaymentInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PaymentInfo")
 );
+
+const SpecialNeeds = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/SpecialNeeds")
+);
 const PasswordSection = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PasswordSection")
 );
@@ -448,6 +452,22 @@ const TutorPageComponent: React.FC<{
           label={STEPS.NEW_DEVELOPMENT}
           formSummary={["New development"]}
           store={store.others}
+          onSubmit={async (formData: any) => {
+            nextStep = STEPS.SPECIAL_NEEDS;
+            // store.agreement.updateFields(formData);
+            await store
+              .onFormSubmit(formData, STEPS.NEW_DEVELOPMENT, nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, STEPS.NEW_DEVELOPMENT);
+              });
+          }}
+        />
+        <SpecialNeeds
+          formHeader={"Special needs"}
+          lockedDescription="If you are specially trained to teach learners with disabilities, or if you have a disability, please let us know."
+          label={STEPS.SPECIAL_NEEDS}
+          formSummary={["New development"]}
+          store={store.teachingProfile}
           onSubmit={async (formData: any) => {
             nextStep = STEPS.SPECIAL_NEEDS;
             // store.agreement.updateFields(formData);
