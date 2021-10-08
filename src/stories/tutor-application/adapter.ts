@@ -25,9 +25,9 @@ const formIds = {
   8: "schedule-info",
   9: "agreement-info",
   10: "guarantors-info",
-  11: "new-development-info",
-  12: "special-needs",
-  13: "payment-details",
+  11: "payment-info",
+  12: "new-development-info",
+  13: "special-needs",
 };
 
 export const testAdapter: ServerAdapterType = {

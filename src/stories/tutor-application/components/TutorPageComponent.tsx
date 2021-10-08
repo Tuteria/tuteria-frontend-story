@@ -9,6 +9,7 @@ import subjectContents from "@tuteria/shared-lib/src/tutor-revamp/formData/subje
 import { FormStepType } from "@tuteria/shared-lib/src/stores";
 import { IRootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
+import banksData from "@tuteria/shared-lib/src/data/banks.json";
 import { observer } from "mobx-react-lite";
 import { useToast } from "@chakra-ui/react";
 
@@ -45,6 +46,9 @@ const NewDevelopment = React.lazy(
 const GuarantorsInfoForm = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/Guarantors")
 );
+const PaymentInfo = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/PaymentInfo")
+);
 const PasswordSection = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PasswordSection")
 );
@@ -68,6 +72,7 @@ const stepsArray: any = [
   { key: "schedule-info", name: "Schedule Information", completed: false },
   { key: "agreement-info", name: "Agreements Information", completed: false },
   { key: "guarantors-info", name: "Guarantor Information", completed: false },
+  { key: "payment-info", name: "Payment Information", completed: false },
   {
     key: "new-development-info",
     name: "New Development Information",
@@ -116,6 +121,9 @@ const TutorPageComponent: React.FC<{
     });
   }
 
+  const banks = banksData[store.personalInfo.country_code].map(
+    (bank) => bank.name
+  );
   const countries = store.locationInfo.countries.map((country) => country.name);
   // function onSubmitForm(formData: any, nextStep, currentStep, storeSubmission) {
   //     store.personalInfo.onFormSubmit(formData);
@@ -389,7 +397,7 @@ const TutorPageComponent: React.FC<{
           textData={guarantorInfoData}
           completed={store.educationWorkHistory.guarantorsCompleted}
           onSubmit={async (formData: any) => {
-            nextStep = "new-development-info";
+            nextStep = "payment-info";
             await store
               .onFormSubmit(formData, "guarantors-info", nextStep)
               .then(() => {
@@ -401,31 +409,32 @@ const TutorPageComponent: React.FC<{
               });
           }}
         />
-        {/* <WorkHistory
-          store={store.educationWorkHistory}
-          formHeader={workHistoryData.formTitle.header}
-          formsetDescription={workHistoryData.formTitle.subHeader}
+        <PaymentInfo
+          store={store.paymentInfo}
+          banks={banks}
+          label="payment-info"
+          formHeader={"Payment Information"}
+          lockedDescription="Enter your bank details"
           loading={store.loading}
-          displayType="complex"
-          label="work-history"
-          isDisabled={store.educationWorkHistory.workHistories.length === 0}
-          lockedDescription={workHistoryData.formTitle.subHeader}
-          buttonText={workHistoryData.buttonText.saveAndContinue}
-          textData={workHistoryData}
-          completed={store.educationWorkHistory.workCompleted}
+          formSummary={[
+            store.paymentInfo.bankName,
+            store.paymentInfo.accountName,
+            store.paymentInfo.accountNumber,
+          ]}
           onSubmit={async (formData: any) => {
-            nextStep = "subject-selection";
+            nextStep = "new-development-info";
+            store.paymentInfo.updateFields(formData);
             await store
-              .onFormSubmit(formData, "work-history", nextStep)
+              .onFormSubmit(formData, "payment-info", nextStep)
               .then(() => {
-                handleFormSubmit(nextStep, "work-history");
+                handleFormSubmit(nextStep, "payment-info");
               })
               .catch((error) => {
                 onError();
                 throw error;
               });
           }}
-        /> */}
+        />
 
         <NewDevelopment
           formHeader={"New development"}
