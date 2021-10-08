@@ -24,7 +24,7 @@ const formIds = {
   7: "verification-info",
   8: "schedule-info",
   9: "agreement-info",
-  10: "guarantor-info",
+  10: "guarantors-info",
   11: "new-development-info",
   12: "special-needs",
   13: "payment-details",
@@ -41,7 +41,7 @@ export const testAdapter: ServerAdapterType = {
     return SAMPLE_TUTERIA_SUBJECTS;
   },
   loadExistingTutorInfo: () => {
-    return { ...SAMPLE_TUTOR_DATA, currentEditableForm: "subject-selection" };
+    return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[6] };
   },
   updateUserPassword: async (password_data) => {
     return await samplePromise();
