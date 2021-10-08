@@ -14,6 +14,21 @@ function samplePromise(data = {}, timer = 300): Promise<any> {
     }, 3000);
   });
 }
+const formIds = {
+  1: "personal-info",
+  2: "password-info",
+  3: "location-info",
+  4: "education-history",
+  5: "work-history",
+  6: "subject-selection",
+  7: "verification-info",
+  8: "schedule-info",
+  9: "agreement-info",
+  10: "guarantors-info",
+  11: "new-development-info",
+  12: "special-needs",
+  13: "payment-details",
+};
 
 export const testAdapter: ServerAdapterType = {
   deleteSubject: async (id) => {
@@ -26,7 +41,7 @@ export const testAdapter: ServerAdapterType = {
     return SAMPLE_TUTERIA_SUBJECTS;
   },
   loadExistingTutorInfo: () => {
-    return { ...SAMPLE_TUTOR_DATA, currentEditableForm: "subject-selection" };
+    return { ...SAMPLE_TUTOR_DATA };
   },
   updateUserPassword: async (password_data) => {
     return await samplePromise();
@@ -87,7 +102,8 @@ export const testAdapter: ServerAdapterType = {
         name: o.name,
         size: o.size?.toString(),
         public_id: "the_public_id",
-        url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+        url:
+          "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
       }))
     );
   },
