@@ -199,7 +199,7 @@ const quiz = {
 
 export const Quiz = () => {
   const [loaded, setLoaded] = React.useState(false);
-  const [completed, setCompleted] = React.useState(true);
+  const [completed, setCompleted] = React.useState(false);
 
   React.useEffect(() => {
     const subjectsToTake = query;
@@ -235,7 +235,8 @@ export const Quiz = () => {
         },
       ],
       quizStore.serverAnswerFormat,
-      quizStore.quiz.questions.length
+      quizStore.quiz.questions.length,
+      quizStore.subjectsToTake
     );
     let result = await quizStore.handleSubmission(gradedResult);
     quizStore.setQuizResults(gradedResult);
