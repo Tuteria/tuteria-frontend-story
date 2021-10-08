@@ -91,7 +91,8 @@ const stepsArray: any = [
 const TutorPageComponent: React.FC<{
   store: IRootStore;
   onTakeTest: any;
-}> = ({ store, onTakeTest, ...rest }) => {
+  onEditSubject: (subject: any) => any;
+}> = ({ store, onTakeTest, onEditSubject, ...rest }) => {
   let nextStep: any;
   const toast = useToast();
 
@@ -303,6 +304,7 @@ const TutorPageComponent: React.FC<{
           currentStep={activeStep}
           isCollapsed={false}
           onTakeTest={onTakeTest}
+          onEditSubject={onEditSubject}
           onSubmit={async (formData: any) => {
             nextStep = STEPS.VERIFICATION;
             return await store

@@ -81,7 +81,11 @@ export const TutorPage = () => {
   return (
     <TutorPageComponent
       store={store}
-      onTakeTest={() => {
+      onEditSubject={(subject) => {
+        // linkTo("")
+      }}
+      onTakeTest={(subject) => {
+        console.log({ subject });
         linkTo("Tutor Application/Pages", "Subject Test")();
       }}
     />
