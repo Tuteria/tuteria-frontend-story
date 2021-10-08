@@ -11,6 +11,7 @@ import { IRootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
 import { observer } from "mobx-react-lite";
 import { useToast } from "@chakra-ui/react";
+import { STEPS } from "@tuteria/shared-lib/src/stores/rootStore";
 
 const PersonalInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PersonalInfo")
@@ -50,37 +51,45 @@ const PasswordSection = React.lazy(
 );
 
 const stepsArray: any = [
-  { key: "personal-info", name: "Personal Information", completed: false },
-  { key: "password-info", name: "Password Information", completed: false },
-  { key: "location-info", name: "Location Information", completed: false },
+  { key: STEPS.PERSONAL_INFO, name: "Personal Information", completed: false },
+  { key: STEPS.PASSWORD_INFO, name: "Password Information", completed: false },
+  { key: STEPS.LOCATION_INFO, name: "Location Information", completed: false },
   {
-    key: "education-history",
+    key: STEPS.EDUCATION_HISTORY,
     name: "Education History",
     completed: false,
   },
-  { key: "work-history", name: "Work History", completed: false },
-  { key: "subject-selection", name: "Subject Selection", completed: false },
+  { key: STEPS.WORK_HISTORY, name: "Work History", completed: false },
+  { key: STEPS.SUBJECT_SELECTION, name: "Subject Selection", completed: false },
   {
-    key: "verification-info",
+    key: STEPS.VERIFICATION,
     name: "Identity Verification",
     completed: false,
   },
-  { key: "schedule-info", name: "Schedule Information", completed: false },
-  { key: "agreement-info", name: "Agreements Information", completed: false },
-  { key: "guarantors-info", name: "Guarantor Information", completed: false },
+  { key: STEPS.SCHEDULE_INFO, name: "Schedule Information", completed: false },
   {
-    key: "new-development-info",
+    key: STEPS.AGREEMENT_INFO,
+    name: "Agreements Information",
+    completed: false,
+  },
+  {
+    key: STEPS.GUARANTOR_INFO,
+    name: "Guarantor Information",
+    completed: false,
+  },
+  {
+    key: STEPS.NEW_DEVELOPMENT,
     name: "New Development Information",
     completed: false,
   },
-  { key: "special-needs", name: "Special Needs", completed: false },
+  { key: STEPS.SPECIAL_NEEDS, name: "Special Needs", completed: false },
 ];
 
 const TutorPageComponent: React.FC<{
   store: IRootStore;
   onTakeTest: any;
 }> = ({ store, onTakeTest, ...rest }) => {
-  let nextStep: FormStepType;
+  let nextStep: any;
   const toast = useToast();
 
   const [formIndex, setFormIndex] = React.useState(1);
@@ -90,7 +99,10 @@ const TutorPageComponent: React.FC<{
     scrollToId(activeStep);
   }, []);
 
-  const handleFormSubmit = (id: FormStepType, presentStep: FormStepType) => {
+  const handleFormSubmit = (
+    id: FormStepType | string,
+    presentStep: FormStepType | string
+  ) => {
     setFormIndex((index) => index + 1);
     setActiveStep(id);
     store.setEditableForm(id);
@@ -154,7 +166,7 @@ const TutorPageComponent: React.FC<{
             store.personalInfo.gender,
           ]}
           lockedDescription={personalInfoData.formTitle.subHeader}
-          label="personal-info"
+          label={STEPS.PERSONAL_INFO}
           loading={store.loading}
           countries={countries}
           viewModel={store.locationInfo}
@@ -162,11 +174,11 @@ const TutorPageComponent: React.FC<{
           onSubmit={async (formData: any) => {
             store.personalInfo.onFormSubmit(formData);
             // nextStep = store.hasPassword ? "location-info" : "password-info";
-            nextStep = "location-info";
+            nextStep = STEPS.LOCATION_INFO;
             await store
-              .onFormSubmit(formData, "personal-info", nextStep)
+              .onFormSubmit(formData, STEPS.PERSONAL_INFO, nextStep)
               .then(() => {
-                handleFormSubmit(nextStep, "personal-info");
+                handleFormSubmit(nextStep, STEPS.PERSONAL_INFO);
               })
               .catch((error) => {
                 onError();
@@ -192,7 +204,7 @@ const TutorPageComponent: React.FC<{
 
         <LocationInfo
           store={store.locationInfo}
-          label="location-info"
+          label={STEPS.LOCATION_INFO}
           formHeader={"Location Information"}
           lockedDescription="Enter your location"
           loading={store.loading}
@@ -203,12 +215,12 @@ const TutorPageComponent: React.FC<{
             store.locationInfo.vicinity,
           ]}
           onSubmit={async (formData: any) => {
-            nextStep = "education-history";
+            nextStep = STEPS.EDUCATION_HISTORY;
             store.locationInfo.updateFields(formData);
             await store
-              .onFormSubmit(formData, "location-info", nextStep)
+              .onFormSubmit(formData, STEPS.LOCATION_INFO, nextStep)
               .then(() => {
-                handleFormSubmit(nextStep, "location-info");
+                handleFormSubmit(nextStep, STEPS.LOCATION_INFO);
               })
               .catch((error) => {
                 onError();
@@ -224,17 +236,17 @@ const TutorPageComponent: React.FC<{
           loading={store.loading}
           isDisabled={!(store.educationWorkHistory.educations.length > 0)}
           displayType="complex"
-          label="education-history"
+          label={STEPS.EDUCATION_HISTORY}
           lockedDescription={educationHistoryData.formTitle.subHeader}
           buttonText={educationHistoryData.buttonText.saveAndContinue}
           textData={educationHistoryData}
           completed={store.educationWorkHistory.educationCompleted}
           onSubmit={async (formData: any) => {
-            nextStep = "work-history";
+            nextStep = STEPS.WORK_HISTORY;
             await store
-              .onFormSubmit(formData, "education-history", nextStep)
+              .onFormSubmit(formData, STEPS.EDUCATION_HISTORY, nextStep)
               .then(() => {
-                handleFormSubmit(nextStep, "education-history");
+                handleFormSubmit(nextStep, STEPS.EDUCATION_HISTORY);
               })
               .catch((error) => {
                 onError();
@@ -249,18 +261,18 @@ const TutorPageComponent: React.FC<{
           formsetDescription={workHistoryData.formTitle.subHeader}
           loading={store.loading}
           displayType="complex"
-          label="work-history"
+          label={STEPS.WORK_HISTORY}
           isDisabled={store.educationWorkHistory.workHistories.length === 0}
           lockedDescription={workHistoryData.formTitle.subHeader}
           buttonText={workHistoryData.buttonText.saveAndContinue}
           textData={workHistoryData}
           completed={store.educationWorkHistory.workCompleted}
           onSubmit={async (formData: any) => {
-            nextStep = "subject-selection";
+            nextStep = STEPS.SUBJECT_SELECTION;
             await store
-              .onFormSubmit(formData, "work-history", nextStep)
+              .onFormSubmit(formData, STEPS.WORK_HISTORY, nextStep)
               .then(() => {
-                handleFormSubmit(nextStep, "work-history");
+                handleFormSubmit(nextStep, STEPS.WORK_HISTORY);
               })
               .catch((error) => {
                 onError();
@@ -272,33 +284,33 @@ const TutorPageComponent: React.FC<{
           formHeader={subjectContents.lockedForm.title}
           lockedDescription={subjectContents.lockedForm.description}
           store={store.subject}
-          label="subject-selection"
+          label={STEPS.SUBJECT_SELECTION}
           rootStore={store}
           completed={
             (store.subject.tutorSubjects.length > 0 &&
-              activeStep === "subject-selection") ||
+              activeStep === STEPS.SUBJECT_SELECTION) ||
             (store.subject.tutorSubjects.length === 0 &&
-              activeStep === "subject-selection") ||
+              activeStep === STEPS.SUBJECT_SELECTION) ||
             store.subject.tutorSubjects.length > 0
           }
           showWelcomeModal={
-            activeStep === "subject-selection" &&
+            activeStep === STEPS.SUBJECT_SELECTION &&
             store.subject.tutorSubjects.length === 0
           }
           currentStep={activeStep}
           isCollapsed={false}
           onTakeTest={onTakeTest}
           onSubmit={async (formData: any) => {
-            nextStep = "verification-info";
+            nextStep = STEPS.VERIFICATION;
             return await store
-              .onFormSubmit(formData, "subject-selection", nextStep)
+              .onFormSubmit(formData, STEPS.SUBJECT_SELECTION, nextStep)
               .then(() => {
                 if (
                   store.subject.tutorSubjects.filter((x) =>
                     ["active", "denied", "pending"].includes(x.status)
                   ).length > 0
                 ) {
-                  handleFormSubmit(nextStep, "subject-selection");
+                  handleFormSubmit(nextStep, STEPS.SUBJECT_SELECTION);
                 }
               })
               .catch((error) => {
@@ -310,21 +322,21 @@ const TutorPageComponent: React.FC<{
         <VerificationIdentity
           formHeader={"Identity Verification"}
           lockedDescription="Verify your identity in order to complete steps"
-          label="verification-info"
+          label={STEPS.VERIFICATION}
           currentStep={activeStep}
           store={store.identity}
           onSubmit={async (formData: any) => {
-            nextStep = "schedule-info";
+            nextStep = STEPS.SCHEDULE_INFO;
             await store
-              .onFormSubmit(formData, "verification-info", nextStep)
+              .onFormSubmit(formData, STEPS.VERIFICATION, nextStep)
               .then(() => {
-                handleFormSubmit(nextStep, "verification-info");
+                handleFormSubmit(nextStep, STEPS.VERIFICATION);
               });
           }}
         />
         <ScheduleCard
           formHeader={"Tutor Schedule"}
-          label="schedule-info"
+          label={STEPS.SCHEDULE_INFO}
           lockedDescription="select your teaching schedule"
           store={store.schedule}
           formSummary={[
@@ -334,18 +346,18 @@ const TutorPageComponent: React.FC<{
             // [...Object.keys(store.schedule.availability)]
           ]}
           onSubmit={async (formData: any) => {
-            nextStep = "agreement-info";
+            nextStep = STEPS.AGREEMENT_INFO;
             await store
-              .onFormSubmit(formData, "schedule-info", nextStep)
+              .onFormSubmit(formData, STEPS.SCHEDULE_INFO, nextStep)
               .then(() => {
-                handleFormSubmit(nextStep, "schedule-info");
+                handleFormSubmit(nextStep, STEPS.SCHEDULE_INFO);
               });
           }}
         />
 
         <Agreements
           formHeader={"Tutor Agreements"}
-          label="agreement-info"
+          label={STEPS.AGREEMENT_INFO}
           lockedDescription="Tutor agreements"
           store={store.agreement}
           loading={store.loading}
@@ -366,12 +378,12 @@ const TutorPageComponent: React.FC<{
             }`,
           ]}
           onSubmit={async (formData: any) => {
-            nextStep = "guarantors-info";
+            nextStep = STEPS.GUARANTOR_INFO;
             store.agreement.updateFields(formData);
             await store
-              .onFormSubmit(formData, "agreement-info", nextStep)
+              .onFormSubmit(formData, STEPS.AGREEMENT_INFO, nextStep)
               .then(() => {
-                handleFormSubmit(nextStep, "agreement-info");
+                handleFormSubmit(nextStep, STEPS.AGREEMENT_INFO);
               });
           }}
         />
@@ -382,18 +394,18 @@ const TutorPageComponent: React.FC<{
           formsetDescription={guarantorInfoData.formTitle.subHeader}
           loading={store.loading}
           displayType="complex"
-          label="guarantors-info"
+          label={STEPS.GUARANTOR_INFO}
           isDisabled={store.educationWorkHistory.guarantors.length === 0}
           lockedDescription={guarantorInfoData.formTitle.subHeader}
           buttonText={guarantorInfoData.buttonText.saveAndContinue}
           textData={guarantorInfoData}
           completed={store.educationWorkHistory.guarantorsCompleted}
           onSubmit={async (formData: any) => {
-            nextStep = "new-development-info";
+            nextStep = STEPS.NEW_DEVELOPMENT;
             await store
-              .onFormSubmit(formData, "guarantors-info", nextStep)
+              .onFormSubmit(formData, STEPS.GUARANTOR_INFO, nextStep)
               .then(() => {
-                handleFormSubmit(nextStep, "guarantors-info");
+                handleFormSubmit(nextStep, STEPS.GUARANTOR_INFO);
               })
               .catch((error) => {
                 onError();
@@ -430,16 +442,16 @@ const TutorPageComponent: React.FC<{
         <NewDevelopment
           formHeader={"New development"}
           lockedDescription="Learning process"
-          label="new-development-info"
+          label={STEPS.NEW_DEVELOPMENT}
           formSummary={["New development"]}
           store={store.others}
           onSubmit={async (formData: any) => {
             nextStep = "special-needs";
             // store.agreement.updateFields(formData);
             await store
-              .onFormSubmit(formData, "new-development-info", nextStep)
+              .onFormSubmit(formData, STEPS.NEW_DEVELOPMENT, nextStep)
               .then(() => {
-                handleFormSubmit(nextStep, "new-development-info");
+                handleFormSubmit(nextStep, STEPS.NEW_DEVELOPMENT);
               });
           }}
         />
