@@ -17,7 +17,7 @@ import QuizStore, {
   IQuizStore,
 } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
 import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
-import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCreationForm";
+import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditView";
 import "katex/dist/katex.min.css";
 import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
@@ -157,7 +157,7 @@ export const SubjectCreation = () => {
     return <LoadingState text="Fetching subject details..." />;
   }
 
-  return <SubjectCreationPage store={store.subject} />;
+  return <SubjectEditView store={store.subject} />;
 };
 
 export const Login = () => {
