@@ -89,7 +89,7 @@ const stepsArray: any = [
     name: "New Development Information",
     completed: false,
   },
-  { key: STEPS.SPECIAL_NEEDS, name: "Special Needs", completed: false },
+  { key: STEPS.TEACHING_PROFILE, name: "Teaching Profile", completed: false },
 ];
 
 const TutorPageComponent: React.FC<{
@@ -455,7 +455,7 @@ const TutorPageComponent: React.FC<{
           formSummary={["New development"]}
           store={store.others}
           onSubmit={async (formData: any) => {
-            nextStep = STEPS.SPECIAL_NEEDS;
+            nextStep = STEPS.TEACHING_PROFILE;
             // store.agreement.updateFields(formData);
             await store
               .onFormSubmit(formData, STEPS.NEW_DEVELOPMENT, nextStep)
@@ -467,16 +467,20 @@ const TutorPageComponent: React.FC<{
         <SpecialNeeds
           formHeader={"Special needs"}
           lockedDescription="If you are specially trained to teach learners with disabilities, or if you have a disability, please let us know."
-          label={STEPS.SPECIAL_NEEDS}
-          formSummary={["New development"]}
+          label={STEPS.TEACHING_PROFILE}
+          formSummary={[
+            ...store.teachingProfile.specialNeeds,
+            ...store.teachingProfile.tutorDisabilities,
+          ]}
           store={store.teachingProfile}
+          loading={store.loading}
           onSubmit={async (formData: any) => {
-            nextStep = STEPS.SPECIAL_NEEDS;
+            nextStep = STEPS.PASSWORD_INFO;
             // store.agreement.updateFields(formData);
             await store
-              .onFormSubmit(formData, STEPS.NEW_DEVELOPMENT, nextStep)
+              .onFormSubmit(formData, STEPS.TEACHING_PROFILE, nextStep)
               .then(() => {
-                handleFormSubmit(nextStep, STEPS.NEW_DEVELOPMENT);
+                handleFormSubmit(nextStep, STEPS.TEACHING_PROFILE);
               });
           }}
         />
