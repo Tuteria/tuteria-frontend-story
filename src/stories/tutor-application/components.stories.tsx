@@ -12,7 +12,7 @@ import { SubjectsCardMobile } from "@tuteria/shared-lib/src/tutor-revamp/Subject
 import SubjectAdditionPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
 import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity";
 import React from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, CheckboxGroup, Collapse, Switch } from "@chakra-ui/react";
 import PasswordSection from "@tuteria/shared-lib/src/tutor-revamp/PasswordSection";
 import ScheduleCard from "@tuteria/shared-lib/src/tutor-revamp/Schedule";
 
@@ -313,5 +313,27 @@ export const Schedule = () => {
         </Box>
       </OverlayWrapper>
     </OverlayRouter>
+  );
+};
+export const SwitchS = () => {
+  const [defaultValue, onChange] = React.useState([]);
+  const [display, setDisplay] = React.useState(false);
+  return (
+    <>
+      <Switch
+        color={"blue.500"}
+        size="md"
+        defaultIsChecked={display}
+        onChange={() => setDisplay(!display)}
+      />
+      <Collapse in={display}>
+        <CheckboxGroup
+          value={defaultValue}
+          onChange={(value) => onChange(value)}
+        >
+          <Box>Hellow</Box>
+        </CheckboxGroup>
+      </Collapse>
+    </>
   );
 };
