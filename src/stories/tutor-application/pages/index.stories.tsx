@@ -17,7 +17,7 @@ import QuizStore, {
   IQuizStore,
 } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
 import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
-import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectCreationForm";
+import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditView";
 import "katex/dist/katex.min.css";
 import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
@@ -50,7 +50,6 @@ type TutorStoreType = {
 
 export const TutorPage = () => {
   const [loading, setLoading] = React.useState(true);
-
   async function initialize() {
     storage.set(adapter.regionKey, allRegions);
     storage.set(adapter.countryKey, allCountries);
@@ -63,7 +62,10 @@ export const TutorPage = () => {
       testAdapter.loadExistingTutorInfo()
     );
     if (store.currentEditableForm === "subject-selection") {
-      await store.fetchTutorSubjects();
+      await store.subject.fetchTutorSubjects();
+    }
+    if (store.currentEditableForm === "payment-info") {
+      await store.fetchBanksInfo();
     }
     setLoading(false);
   }
@@ -79,7 +81,11 @@ export const TutorPage = () => {
   return (
     <TutorPageComponent
       store={store}
-      onTakeTest={() => {
+      onEditSubject={(subject) => {
+        // linkTo("")
+      }}
+      onTakeTest={(subject) => {
+        console.log({ subject });
         linkTo("Tutor Application/Pages", "Subject Test")();
       }}
     />
@@ -137,11 +143,11 @@ export const SubjectTest = () => {
   );
 };
 
-let pk = 209528;
+let pk = 209601;
 export const SubjectCreation = () => {
   const [loading, setLoading] = React.useState(true);
   React.useEffect(() => {
-    store.fetchTutorSubjects().then((res) => {
+    store.subject.fetchTutorSubjects().then((res) => {
       store.subject.setCurrentSubjectId(pk);
       setLoading(false);
     });
@@ -151,7 +157,7 @@ export const SubjectCreation = () => {
     return <LoadingState text="Fetching subject details..." />;
   }
 
-  return <SubjectCreationPage store={store.subject} />;
+  return <SubjectEditView store={store.subject} />;
 };
 
 export const Login = () => {

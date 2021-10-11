@@ -6,6 +6,7 @@ import {
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import DATA from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
+import BANK_DATA from "@tuteria/shared-lib/src/data/banks.json";
 
 function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -24,10 +25,10 @@ const formIds = {
   7: "verification-info",
   8: "schedule-info",
   9: "agreement-info",
-  10: "guarantor-info",
-  11: "new-development-info",
-  12: "special-needs",
-  13: "payment-details",
+  10: "guarantors-info",
+  11: "payment-info",
+  12: "new-development-info",
+  13: "special-needs",
 };
 
 export const testAdapter: ServerAdapterType = {
@@ -40,8 +41,12 @@ export const testAdapter: ServerAdapterType = {
   getTuteriaSubjects: () => {
     return SAMPLE_TUTERIA_SUBJECTS;
   },
+  fetchBanksInfo: async (countryCode) => {
+    let response = BANK_DATA[countryCode].map((bank) => bank.name);
+    return await samplePromise(response);
+  },
   loadExistingTutorInfo: () => {
-    return { ...SAMPLE_TUTOR_DATA, currentEditableForm: "subject-selection" };
+    return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[6] };
   },
   updateUserPassword: async (password_data) => {
     return await samplePromise();
@@ -71,18 +76,13 @@ export const testAdapter: ServerAdapterType = {
       tuteriaSubjects: any[];
     } = await samplePromise(
       // tutorSubjects: [],
-      tutor_data.map((tx) => {
-        return {
-          id: tx.pk,
-          name: tx.skill.name,
-          category: tx.category,
-          status: tx.status,
-          title: tx.heading || "",
-          description: tx.description || "",
-          teachingStyle: tx.teachingStyle,
-          trackRecords: tx.trackRecords,
-        };
-      })
+      {
+        tutorSubjects: tutor_data.map((tx) => {
+          return {
+            ...tx,
+          };
+        }),
+      }
     );
     return result;
     // if session storage exists return the tuteria subjects else fetch
