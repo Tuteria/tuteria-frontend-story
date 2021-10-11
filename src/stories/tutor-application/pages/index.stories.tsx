@@ -221,6 +221,31 @@ export const Quiz = () => {
     });
   }, []);
 
+  const handleBeforeUnload = (event) => {
+    const e = event || window.event;
+    e.preventDefault();
+    if (e) {
+      e.returnValue = "";
+    }
+    return "";
+  };
+
+  const handleUnload = async (event) => {
+    await new Promise((resolve) => {
+      console.log("Leaving page");
+      resolve({});
+    });
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("unload", handleUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("unload", handleUnload);
+    };
+  }, []);
+
   function redirect() {
     if (quizStore.quizResults.passedQuiz) {
       linkTo("Tutor Application/Pages", "Subject Creation")();
