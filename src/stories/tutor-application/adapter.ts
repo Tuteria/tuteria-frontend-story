@@ -51,33 +51,18 @@ export const testAdapter: ServerAdapterType = {
     return await samplePromise();
   },
   saveTutorSubjects: async (subjects) => {
-    let existingSubjects: any = SAMPLE_TUTOR_SUBJECTS.map(
-      (tx: {
-        id: number;
-        name: string;
-        title: string;
-        description: string;
-        category: string;
-        certifications: any[];
-        tuteriaStatus: number;
-        status: string;
-        teachingStyle: string;
-        trackRecords: string;
-        teachingRequirements: any[];
-        preliminaryQuestions: any[];
-      }) => {
-        return {
-          id: tx.id,
-          name: tx.name,
-          category: tx.category,
-          status: tx.status,
-          title: tx.title || "",
-          description: tx.description || "",
-          teachingStyle: tx.teachingStyle,
-          trackRecords: tx.trackRecords,
-        };
-      }
-    );
+    let existingSubjects: any = SAMPLE_TUTOR_SUBJECTS.map((tx) => {
+      return {
+        id: tx.id,
+        name: tx.name,
+        category: tx.category,
+        status: tx.status,
+        title: tx.title || "",
+        description: tx.description || "",
+        teachingStyle: tx.teachingStyle,
+        trackRecords: tx.trackRecords,
+      };
+    });
     subjects.forEach((s) => {
       existingSubjects.push({ id: 23, name: s, category: "Academics" });
     });
