@@ -10,6 +10,8 @@ import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
 import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
 import { SubjectsCardMobile } from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditForm";
 import SubjectAdditionPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
+import { PhotoVerification } from "@tuteria/shared-lib/src/tutor-revamp/PhotoIdentity";
+import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUploader";
 import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity";
 import React from "react";
 import { Box, CheckboxGroup, Collapse, Switch } from "@chakra-ui/react";
@@ -293,6 +295,16 @@ export const Verification = () => {
         <VerificationIdentity store={store.identity} />
       </OverlayWrapper>
     </OverlayRouter>
+  );
+};
+
+export const VideoUploader = () => {
+  return (
+    <VideoUploaderComponent
+      onSubmit={async (url) => {
+        alert(url);
+      }}
+    />
   );
 };
 
