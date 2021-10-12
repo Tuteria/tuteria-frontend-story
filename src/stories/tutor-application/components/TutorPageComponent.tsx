@@ -126,6 +126,7 @@ const TutorPageComponent: React.FC<{
     );
     scrollToId(id);
   };
+
   function onError() {
     toast({
       title: `An error occured.`,
@@ -242,7 +243,7 @@ const TutorPageComponent: React.FC<{
           formsetDescription={educationHistoryData.formTitle.subHeader}
           rootStore={store}
           loading={store.loading}
-          isDisabled={!(store.educationWorkHistory.educations.length > 0)}
+          isDisabled={store.educationWorkHistory.educations.length === 0}
           displayType="complex"
           label={STEPS.EDUCATION_HISTORY}
           lockedDescription={educationHistoryData.formTitle.subHeader}
