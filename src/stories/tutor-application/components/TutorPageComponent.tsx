@@ -453,8 +453,9 @@ const TutorPageComponent: React.FC<{
           formHeader={"New development"}
           lockedDescription="Learning process"
           label={STEPS.NEW_DEVELOPMENT}
-          formSummary={["New development"]}
+          formSummary={["Read the details of new tutoring process"]}
           store={store.others}
+          loading={store.loading}
           onSubmit={async (formData: any) => {
             nextStep = STEPS.TEACHING_PROFILE;
             // store.agreement.updateFields(formData);

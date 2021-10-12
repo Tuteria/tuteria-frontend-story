@@ -17,18 +17,17 @@ function samplePromise(data = {}, timer = 300): Promise<any> {
 }
 const formIds = {
   1: "personal-info",
-  2: "password-info",
-  3: "location-info",
-  4: "education-history",
-  5: "work-history",
-  6: "subject-selection",
-  7: "verification-info",
-  8: "schedule-info",
-  9: "agreement-info",
-  10: "guarantors-info",
-  11: "payment-info",
-  12: "new-development-info",
-  13: "teaching-profile",
+  2: "location-info",
+  3: "education-history",
+  4: "work-history",
+  5: "subject-selection",
+  6: "verification-info",
+  7: "schedule-info",
+  8: "agreement-info",
+  9: "guarantors-info",
+  10: "payment-info",
+  11: "new-development-info",
+  12: "teaching-profile",
 };
 
 export const testAdapter: ServerAdapterType = {
@@ -46,7 +45,7 @@ export const testAdapter: ServerAdapterType = {
     return await samplePromise(response);
   },
   loadExistingTutorInfo: () => {
-    return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[13] };
+    return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[12] };
   },
   updateUserPassword: async (password_data) => {
     return await samplePromise();
