@@ -243,13 +243,13 @@ const TutorPageComponent: React.FC<{
           formsetDescription={educationHistoryData.formTitle.subHeader}
           rootStore={store}
           loading={store.loading}
-          isDisabled={store.educationWorkHistory.educations.length === 0}
           displayType="complex"
           label={STEPS.EDUCATION_HISTORY}
           lockedDescription={educationHistoryData.formTitle.subHeader}
           buttonText={educationHistoryData.buttonText.saveAndContinue}
           textData={educationHistoryData}
           completed={store.educationWorkHistory.educationCompleted}
+          shouldDisplayButton={store.educationWorkHistory.canSave}
           onSubmit={async (formData: any) => {
             nextStep = STEPS.WORK_HISTORY;
             await store
@@ -271,7 +271,7 @@ const TutorPageComponent: React.FC<{
           loading={store.loading}
           displayType="complex"
           label={STEPS.WORK_HISTORY}
-          isDisabled={store.educationWorkHistory.workHistories.length === 0}
+          shouldDisplayButton={store.educationWorkHistory.canSave}
           lockedDescription={workHistoryData.formTitle.subHeader}
           buttonText={workHistoryData.buttonText.saveAndContinue}
           textData={workHistoryData}
@@ -405,7 +405,7 @@ const TutorPageComponent: React.FC<{
           loading={store.loading}
           displayType="complex"
           label={STEPS.GUARANTOR_INFO}
-          isDisabled={store.educationWorkHistory.guarantors.length === 0}
+          shouldDisplayButton={store.educationWorkHistory.canSave}
           lockedDescription={guarantorInfoData.formTitle.subHeader}
           buttonText={guarantorInfoData.buttonText.saveAndContinue}
           textData={guarantorInfoData}
