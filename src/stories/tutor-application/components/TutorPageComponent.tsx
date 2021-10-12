@@ -1,3 +1,4 @@
+import { useToast } from "@chakra-ui/react";
 import React from "react";
 import { scrollToId } from "@tuteria/shared-lib/src/utils/functions";
 import FormWrapper from "@tuteria/shared-lib/src/components/FormWrapper";
@@ -10,7 +11,6 @@ import { FormStepType } from "@tuteria/shared-lib/src/stores";
 import { IRootStore } from "@tuteria/shared-lib/src/stores";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
 import { observer } from "mobx-react-lite";
-import { useToast } from "@chakra-ui/react";
 import { STEPS } from "@tuteria/shared-lib/src/stores/rootStore";
 
 const PersonalInfo = React.lazy(
