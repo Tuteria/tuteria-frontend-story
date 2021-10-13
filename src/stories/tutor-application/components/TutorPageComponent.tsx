@@ -59,7 +59,7 @@ const PasswordSection = React.lazy(
 
 const stepsArray: any = [
   { key: STEPS.PERSONAL_INFO, name: "Personal Information", completed: false },
-  { key: STEPS.PASSWORD_INFO, name: "Password Information", completed: false },
+  // { key: STEPS.PASSWORD_INFO, name: "Password Information", completed: false },
   { key: STEPS.LOCATION_INFO, name: "Location Information", completed: false },
   {
     key: STEPS.EDUCATION_HISTORY,

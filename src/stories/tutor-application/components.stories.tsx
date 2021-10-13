@@ -327,25 +327,3 @@ export const Schedule = () => {
     </OverlayRouter>
   );
 };
-export const SwitchS = () => {
-  const [defaultValue, onChange] = React.useState([]);
-  const [display, setDisplay] = React.useState(false);
-  return (
-    <>
-      <Switch
-        color={"blue.500"}
-        size="md"
-        defaultIsChecked={display}
-        onChange={() => setDisplay(!display)}
-      />
-      <Collapse in={display}>
-        <CheckboxGroup
-          value={defaultValue}
-          onChange={(value) => onChange(value)}
-        >
-          <Box>Hellow</Box>
-        </CheckboxGroup>
-      </Collapse>
-    </>
-  );
-};

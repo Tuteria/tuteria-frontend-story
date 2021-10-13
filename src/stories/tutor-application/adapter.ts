@@ -12,7 +12,7 @@ function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(data);
-    }, 3000);
+    }, 2000);
   });
 }
 const formIds = {
