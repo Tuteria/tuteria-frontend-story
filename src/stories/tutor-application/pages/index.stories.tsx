@@ -42,13 +42,6 @@ export default {
 const adapter = loadAdapter(testAdapter);
 const store = initializeStore(testAdapter);
 
-type TutorStoreType = {
-  locationInfo: any;
-  personalInfo: any;
-  educationWorkHistory: any;
-  subject: any;
-};
-
 export const TutorPage = () => {
   const [loading, setLoading] = React.useState(true);
   async function initialize() {
@@ -62,13 +55,17 @@ export const TutorPage = () => {
       supportedCountries,
       testAdapter.loadExistingTutorInfo()
     );
-    if (store.currentEditableForm === "subject-selection") {
-      await store.subject.fetchTutorSubjects();
+    if (!store.completed) {
+      if (store.currentEditableForm === "subject-selection") {
+        await store.subject.fetchTutorSubjects();
+      }
+      if (store.currentEditableForm === "payment-info") {
+        await store.fetchBanksInfo();
+      }
+      setLoading(false);
+    } else {
+      linkTo("Tutor Application/Pages", "CompletedPage")();
     }
-    if (store.currentEditableForm === "payment-info") {
-      await store.fetchBanksInfo();
-    }
-    setLoading(false);
   }
 
   React.useEffect(() => {
