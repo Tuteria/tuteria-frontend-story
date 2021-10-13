@@ -206,7 +206,13 @@ const quiz = {
 };
 
 export const CompletedPage = () => {
-  return <CompletedApplicationPage />;
+  return (
+    <CompletedApplicationPage
+      firstName="Chidi"
+      isPremium={true}
+      photo="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200"
+    />
+  );
 };
 
 export const Quiz = () => {
