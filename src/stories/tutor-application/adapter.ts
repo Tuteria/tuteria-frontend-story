@@ -54,7 +54,7 @@ export const testAdapter: ServerAdapterType = {
     let existingSubjects = SAMPLE_TUTOR_SUBJECTS.map((tx) => {
       return {
         id: tx.pk,
-        name: tx.skill.name,
+        name: tx.name,
         category: tx.category,
         status: tx.status,
         title: tx.heading || "",
