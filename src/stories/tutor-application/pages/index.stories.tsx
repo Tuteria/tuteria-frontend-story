@@ -18,6 +18,7 @@ import QuizStore, {
 } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
 import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditView";
+import VerificationPage from "@tuteria/shared-lib/src/tutor-revamp/VerificationPage";
 import "katex/dist/katex.min.css";
 import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
@@ -179,6 +180,9 @@ export const LandingPage = () => {
       }}
     />
   );
+};
+export const Verification = () => {
+  return <VerificationPage />;
 };
 
 const quizStore: IQuizStore = QuizStore.create(

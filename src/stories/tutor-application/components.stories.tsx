@@ -11,6 +11,7 @@ import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
 import { SubjectsCardMobile } from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditForm";
 import SubjectAdditionPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
 import { PhotoVerification } from "@tuteria/shared-lib/src/tutor-revamp/PhotoIdentity";
+import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
 import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUploader";
 import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity";
 import React from "react";
@@ -28,6 +29,123 @@ export default {
     ),
   ],
 };
+
+// const store = RootStore.create({
+//   userIsloggedIn: true,
+//   locationInfo: {
+//     country: "Nigeria",
+//     regions: allRegions,
+//     countries: allCountries,
+//     state: "Lagos",
+//     region: "Agege",
+//     vicinity: "Agege",
+//   },
+//   personalInfo: {
+//     firstName: "Abiola",
+//     lastName: "Oyeniyi",
+//     email: "james@example.com",
+//     gender: "female",
+//     country: "Nigeria",
+//     dateOfBirth: "1998-10-12",
+//     phone: "2347035209922",
+//     state: "Lagos",
+//     vicinity: "Agege",
+//     region: "Agege",
+//     address: "Irabor Street Koto",
+//   },
+//   educationWorkHistory: {
+//     educations: [
+//       {
+//         school: "Ikeja Grammar school",
+//         country: "Nigeria",
+//         course: "Chemistry",
+//         degree: "MBBS",
+//         startYear: "2006",
+//         endYear: "2020",
+//         grade: "First Class",
+//       },
+//       {
+//         school: "University of Lagos",
+//         country: "Nigeria",
+//         course: "Organic Chemistry",
+//         degree: "MBBS",
+//         startYear: "2006",
+//         endYear: "2020",
+//         grade: "First Class",
+//       },
+//     ],
+//     workHistories: [
+//       {
+//         company: "Tuteria Limited",
+//         role: "CEO",
+//         isTeachingRole: false,
+//         startYear: "2015",
+//         endYear: "2020",
+//         isCurrent: true,
+//         showOnProfile: true,
+//       },
+//     ],
+//   },
+//   subject: {
+//     tutorSubjects: [
+//       {
+//         name: "Logic",
+//         category: "Academics",
+//         subcategory: "Secondary",
+//         status: "pending",
+//       },
+//       {
+//         name: "Business Studies",
+//         category: "Academics",
+//         subcategory: "Secondary",
+//         status: "pending",
+//       },
+//       {
+//         name: "French",
+//         category: "Academics",
+//         subcategory: "Secondary",
+//         status: "denied",
+//       },
+//       {
+//         name: "Spanish",
+//         category: "Academics",
+//         subcategory: "Secondary",
+//         status: "denied",
+//       },
+//       {
+//         name: "Recognition",
+//         category: "Academics",
+//         subcategory: "Primary",
+//         status: "not-started",
+//       },
+//       {
+//         name: "Aptitude",
+//         category: "Academics",
+//         subcategory: "Adult",
+//         status: "pending",
+//       },
+//       {
+//         name: "Speaking",
+//         category: "Exam Prep",
+//         subcategory: "GMAT",
+//         status: "in-progress",
+//       },
+//       {
+//         name: "Listening",
+//         category: "Exam Prep",
+//         subcategory: "IELTS",
+//         status: "active",
+//       },
+//     ],
+//   },
+//   identity: {
+//     profilePhotoId: "hello/holla",
+//     profilePhoto:
+//       "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+//     isIdVerified: true,
+//   },
+//   slug: "tutor-101",
+// });
 
 const store = RootStore.create({
   userIsloggedIn: true,
@@ -88,122 +206,24 @@ const store = RootStore.create({
   subject: {
     tutorSubjects: [
       {
-        name: "Logic",
-        category: "Academics",
-        subcategory: "Secondary",
-        status: "pending",
-      },
-      {
-        name: "Business Studies",
-        category: "Academics",
-        subcategory: "Secondary",
-        status: "pending",
-      },
-      {
-        name: "French",
-        category: "Academics",
-        subcategory: "Secondary",
-        status: "denied",
-      },
-      {
-        name: "Spanish",
-        category: "Academics",
-        subcategory: "Secondary",
-        status: "denied",
-      },
-      {
-        name: "Recognition",
-        category: "Academics",
-        subcategory: "Primary",
-        status: "not-started",
-      },
-      {
-        name: "Aptitude",
-        category: "Academics",
-        subcategory: "Adult",
-        status: "pending",
-      },
-      {
-        name: "Speaking",
-        category: "Exam Prep",
-        subcategory: "GMAT",
-        status: "in-progress",
-      },
-      {
-        name: "Listening",
-        category: "Exam Prep",
-        subcategory: "IELTS",
+        id: 209601,
+        name: "History",
+        title: "This is the best history teacher in the world",
+        description:
+          "I have taught over 200 tutors with a large following for the following",
+        certifications: [
+          { name: "BSC", institution: "Cambridge" },
+          { name: "BA", institution: "LASU" },
+        ],
+        tuteriaStatus: 5,
         status: "active",
+        teachingStyle: "A practical approach",
+        trackRecords: "Taught Buhari's daughter",
+        teachingRequirements: ["Calculator", "Log book", "Graph book"],
+        preliminaryQuestions: [],
+        canTakeTest: false,
       },
     ],
-  },
-  identity: {
-    profilePhotoId: "hello/holla",
-    profilePhoto:
-      "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
-    isIdVerified: true,
-  },
-  slug: "tutor-101",
-});
-
-const store2 = RootStore.create({
-  userIsloggedIn: true,
-  locationInfo: {
-    country: "Nigeria",
-    regions: allRegions,
-    countries: allCountries,
-    state: "Lagos",
-    region: "Agege",
-    vicinity: "Agege",
-  },
-  personalInfo: {
-    firstName: "Abiola",
-    lastName: "Oyeniyi",
-    email: "james@example.com",
-    gender: "female",
-    country: "Nigeria",
-    dateOfBirth: "1998-10-12",
-    phone: "2347035209922",
-    state: "Lagos",
-    vicinity: "Agege",
-    region: "Agege",
-    address: "Irabor Street Koto",
-  },
-  educationWorkHistory: {
-    educations: [
-      {
-        school: "Ikeja Grammar school",
-        country: "Nigeria",
-        course: "Chemistry",
-        degree: "MBBS",
-        startYear: "2006",
-        endYear: "2020",
-        grade: "First Class",
-      },
-      {
-        school: "University of Lagos",
-        country: "Nigeria",
-        course: "Organic Chemistry",
-        degree: "MBBS",
-        startYear: "2006",
-        endYear: "2020",
-        grade: "First Class",
-      },
-    ],
-    workHistories: [
-      {
-        company: "Tuteria Limited",
-        role: "CEO",
-        isTeachingRole: false,
-        startYear: "2015",
-        endYear: "2020",
-        isCurrent: true,
-        showOnProfile: true,
-      },
-    ],
-  },
-  subject: {
-    tutorSubjects: [],
   },
   currentEditableForm: "subject-selection",
   identity: {
@@ -269,7 +289,7 @@ export const EmptySubjectTable = () => {
     <OverlayRouter>
       <OverlayWrapper>
         <Box w="1000px" mx="auto">
-          <TutorSubjectsPage onTakeTest={() => {}} store={store2.subject} />
+          <TutorSubjectsPage onTakeTest={() => {}} store={store.subject} />
         </Box>
       </OverlayWrapper>
     </OverlayRouter>
@@ -326,4 +346,8 @@ export const Schedule = () => {
       </OverlayWrapper>
     </OverlayRouter>
   );
+};
+export const TutorPreview = () => {
+  store.subject.setCurrentSubjectId(209601);
+  return <TutorProfile store={store.subject} />;
 };
