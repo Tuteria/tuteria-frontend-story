@@ -12,7 +12,7 @@ function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(data);
-    }, 3000);
+    }, 2000);
   });
 }
 const formIds = {
@@ -130,7 +130,8 @@ export const testAdapter: ServerAdapterType = {
     let result = await samplePromise([
       {
         public_id: slug,
-        url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+        url:
+          "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
         quality: false,
       },
     ]);
@@ -146,7 +147,8 @@ export const testAdapter: ServerAdapterType = {
         name: o.name,
         size: o.size?.toString(),
         public_id: "the_public_id",
-        url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+        url:
+          "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
       }))
     );
   },
