@@ -1,10 +1,10 @@
-import { Box } from "@chakra-ui/layout";
 import { linkTo } from "@storybook/addon-links";
 import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
+import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 import { SAMPLE_TUTERIA_SUBJECTS } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import storage from "@tuteria/shared-lib/src/storage";
@@ -12,19 +12,17 @@ import { initializeStore } from "@tuteria/shared-lib/src/stores";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
 import QuizSelectionView from "@tuteria/shared-lib/src/tutor-revamp/QuizSelectionView";
-import QuizPage from "@tuteria/shared-lib/src/tutor-revamp/quizzes/QuizPage";
+import QuizPage from "@tuteria/shared-lib/src/tutor-revamp/quizzes/Quiz";
+import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
 import QuizStore, {
   IQuizStore,
 } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
-import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditView";
 import "katex/dist/katex.min.css";
 import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
-import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
-import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
 
 export default {
   title: "Tutor Application/Pages",
@@ -221,31 +219,6 @@ export const Quiz = () => {
     });
   }, []);
 
-  const handleBeforeUnload = (event) => {
-    const e = event || window.event;
-    e.preventDefault();
-    if (e) {
-      e.returnValue = "";
-    }
-    return "";
-  };
-
-  const handleUnload = async (event) => {
-    await new Promise((resolve) => {
-      console.log("Leaving page");
-      resolve({});
-    });
-  };
-
-  React.useEffect(() => {
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    window.addEventListener("unload", handleUnload);
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-      window.removeEventListener("unload", handleUnload);
-    };
-  }, []);
-
   function redirect() {
     if (quizStore.quizResults.passedQuiz) {
       linkTo("Tutor Application/Pages", "Subject Creation")();
@@ -253,9 +226,7 @@ export const Quiz = () => {
       linkTo("Tutor Application/Pages", "Tutor Page")();
     }
   }
-  if (!loaded) {
-    return <LoadingState text="Loading quiz..." />;
-  }
+
   async function onQuizSubmit() {
     let gradedResult = gradeQuiz(
       [
@@ -274,23 +245,18 @@ export const Quiz = () => {
     setCompleted(true);
     return result;
   }
+
+  if (!loaded) {
+    return <LoadingState text="Loading quiz..." />;
+  }
+
   return (
-    <Box>
-      {completed ? (
-        <ResultsPage
-          subject={name}
-          totalQuestions={quizStore.quiz.questions.length}
-          quizResults={quizStore.quizResults}
-          navigate={redirect}
-        />
-      ) : (
-        <QuizPage
-          completed={completed}
-          onQuizSubmit={onQuizSubmit}
-          index={0}
-          store={quizStore}
-        />
-      )}
-    </Box>
+    <QuizPage
+      store={quizStore}
+      quizName={name}
+      hasCompletedQuiz={completed}
+      onNavigate={redirect}
+      onSubmitQuiz={onQuizSubmit}
+    />
   );
 };
