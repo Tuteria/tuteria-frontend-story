@@ -1,30 +1,30 @@
-import { Box } from "@chakra-ui/layout";
 import { linkTo } from "@storybook/addon-links";
 import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
+import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 import { SAMPLE_TUTERIA_SUBJECTS } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import storage from "@tuteria/shared-lib/src/storage";
-import { initializeStore } from "@tuteria/shared-lib/src/stores";
+import { initializeStore, TutorSubject } from "@tuteria/shared-lib/src/stores";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
 import QuizSelectionView from "@tuteria/shared-lib/src/tutor-revamp/QuizSelectionView";
-import QuizPage from "@tuteria/shared-lib/src/tutor-revamp/quizzes/QuizPage";
+import QuizPage from "@tuteria/shared-lib/src/tutor-revamp/quizzes/Quiz";
+import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
 import QuizStore, {
   IQuizStore,
 } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
-import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditView";
+import VerificationPage from "@tuteria/shared-lib/src/tutor-revamp/VerificationPage";
 import "katex/dist/katex.min.css";
 import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
-import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
-import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
+import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
 
 export default {
   title: "Tutor Application/Pages",
@@ -41,13 +41,6 @@ export default {
 const adapter = loadAdapter(testAdapter);
 const store = initializeStore(testAdapter);
 
-type TutorStoreType = {
-  locationInfo: any;
-  personalInfo: any;
-  educationWorkHistory: any;
-  subject: any;
-};
-
 export const TutorPage = () => {
   const [loading, setLoading] = React.useState(true);
   async function initialize() {
@@ -61,13 +54,17 @@ export const TutorPage = () => {
       supportedCountries,
       testAdapter.loadExistingTutorInfo()
     );
-    if (store.currentEditableForm === "subject-selection") {
-      await store.subject.fetchTutorSubjects();
+    if (!store.completed) {
+      if (store.currentEditableForm === "subject-selection") {
+        await store.subject.fetchTutorSubjects();
+      }
+      if (store.currentEditableForm === "payment-info") {
+        await store.fetchBanksInfo();
+      }
+      setLoading(false);
+    } else {
+      linkTo("Tutor Application/Pages", "CompletedPage")();
     }
-    if (store.currentEditableForm === "payment-info") {
-      await store.fetchBanksInfo();
-    }
-    setLoading(false);
   }
 
   React.useEffect(() => {
@@ -99,6 +96,7 @@ const navigateToSubject = () => {
 // This variable will come from query parameters
 
 const subjectInfo = SAMPLE_TUTERIA_SUBJECTS[0];
+
 export const SubjectTest = () => {
   const [loading, setLoading] = React.useState(false);
   const [testableSubjects, setTestableSubjects] = React.useState([]);
@@ -144,20 +142,28 @@ export const SubjectTest = () => {
 };
 
 let pk = 209601;
+const subjectStore = TutorSubject.create(
+  {},
+  { adapter: loadAdapter(testAdapter) }
+);
 export const SubjectCreation = () => {
   const [loading, setLoading] = React.useState(true);
   React.useEffect(() => {
-    store.subject.fetchTutorSubjects().then((res) => {
-      store.subject.setCurrentSubjectId(pk);
+    testAdapter.getTutorSubjects({ pk }).then(({ tutorSubjects }) => {
       setLoading(false);
+      subjectStore.initialize(tutorSubjects[0]);
     });
+    // store.subject.fetchTutorSubjects().then((res) => {
+    //   store.subject.setCurrentSubjectId(pk);
+    //   setLoading(false);
+    // });
   }, []);
 
   if (loading) {
     return <LoadingState text="Fetching subject details..." />;
   }
 
-  return <SubjectEditView store={store.subject} />;
+  return <SubjectEditView store={subjectStore} />;
 };
 
 export const Login = () => {
@@ -180,6 +186,9 @@ export const LandingPage = () => {
     />
   );
 };
+export const Verification = () => {
+  return <VerificationPage />;
+};
 
 const quizStore: IQuizStore = QuizStore.create(
   {},
@@ -201,6 +210,16 @@ const subjects = [
 const quiz = {
   ...SAMPLE_QUIZ_DATA,
   questions: SAMPLE_QUIZ_DATA.questions.slice(0, 5),
+};
+
+export const CompletedPage = () => {
+  return (
+    <CompletedApplicationPage
+      firstName="Chidi"
+      isPremium={true}
+      photo="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200"
+    />
+  );
 };
 
 export const Quiz = () => {
@@ -228,9 +247,7 @@ export const Quiz = () => {
       linkTo("Tutor Application/Pages", "Tutor Page")();
     }
   }
-  if (!loaded) {
-    return <LoadingState text="Loading quiz..." />;
-  }
+
   async function onQuizSubmit() {
     let gradedResult = gradeQuiz(
       [
@@ -241,29 +258,26 @@ export const Quiz = () => {
         },
       ],
       quizStore.serverAnswerFormat,
-      quizStore.quiz.questions.length
+      quizStore.quiz.questions.length,
+      quizStore.subjectsToTake
     );
     let result = await quizStore.handleSubmission(gradedResult);
     quizStore.setQuizResults(gradedResult);
     setCompleted(true);
     return result;
   }
+
+  if (!loaded) {
+    return <LoadingState text="Loading quiz..." />;
+  }
+
   return (
-    <Box>
-      {completed ? (
-        <ResultsPage
-          subject={name}
-          quizResults={quizStore.quizResults}
-          navigate={redirect}
-        />
-      ) : (
-        <QuizPage
-          completed={completed}
-          onQuizSubmit={onQuizSubmit}
-          index={0}
-          store={quizStore}
-        />
-      )}
-    </Box>
+    <QuizPage
+      store={quizStore}
+      quizName={name}
+      hasCompletedQuiz={completed}
+      onNavigate={redirect}
+      onSubmitQuiz={onQuizSubmit}
+    />
   );
 };
