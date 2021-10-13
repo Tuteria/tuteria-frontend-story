@@ -30,6 +30,9 @@ const formIds = {
   12: "teaching-profile",
 };
 
+function loadExistingTutorInfo() {
+  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[6] };
+}
 export const testAdapter: ServerAdapterType = {
   deleteSubject: async (id) => {
     return await samplePromise(id);
@@ -44,9 +47,7 @@ export const testAdapter: ServerAdapterType = {
     let response = BANK_DATA[countryCode].map((bank) => bank.name);
     return await samplePromise(response);
   },
-  loadExistingTutorInfo: () => {
-    return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[3] };
-  },
+  loadExistingTutorInfo,
   updateUserPassword: async (password_data) => {
     return await samplePromise();
   },
@@ -94,6 +95,26 @@ export const testAdapter: ServerAdapterType = {
   },
   fetchQuizQuestions: async (quizSubjects) => {
     return await samplePromise({ quiz: DATA.quiz, quizSubjects });
+  },
+  async uploadAndVerifyProfile(uploadedFile) {
+    let { slug } = loadExistingTutorInfo();
+    // this is useful for the parameters to send to cloudinary
+    let folder = "profile_pics";
+    let checkQuality = true;
+    let uniqudId = `${slug}-profile-pic`;
+    let result = await samplePromise([
+      {
+        public_id: slug,
+        url:
+          "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+        quality: false,
+      },
+    ]);
+    return {
+      profile_id: result[0].public_id,
+      url: result[0].url,
+      quality: true,
+    };
   },
   uploadApiHandler: async (files: any[]) => {
     return await samplePromise(

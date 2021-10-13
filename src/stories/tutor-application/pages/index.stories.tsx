@@ -26,6 +26,7 @@ import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
 import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
 import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
+import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
 
 export default {
   title: "Tutor Application/Pages",
@@ -42,13 +43,6 @@ export default {
 const adapter = loadAdapter(testAdapter);
 const store = initializeStore(testAdapter);
 
-type TutorStoreType = {
-  locationInfo: any;
-  personalInfo: any;
-  educationWorkHistory: any;
-  subject: any;
-};
-
 export const TutorPage = () => {
   const [loading, setLoading] = React.useState(true);
   async function initialize() {
@@ -62,13 +56,17 @@ export const TutorPage = () => {
       supportedCountries,
       testAdapter.loadExistingTutorInfo()
     );
-    if (store.currentEditableForm === "subject-selection") {
-      await store.subject.fetchTutorSubjects();
+    if (!store.completed) {
+      if (store.currentEditableForm === "subject-selection") {
+        await store.subject.fetchTutorSubjects();
+      }
+      if (store.currentEditableForm === "payment-info") {
+        await store.fetchBanksInfo();
+      }
+      setLoading(false);
+    } else {
+      linkTo("Tutor Application/Pages", "CompletedPage")();
     }
-    if (store.currentEditableForm === "payment-info") {
-      await store.fetchBanksInfo();
-    }
-    setLoading(false);
   }
 
   React.useEffect(() => {
@@ -207,6 +205,10 @@ const quiz = {
   questions: SAMPLE_QUIZ_DATA.questions.slice(0, 5),
 };
 
+export const CompletedPage = () => {
+  return <CompletedApplicationPage />;
+};
+
 export const Quiz = () => {
   const [loaded, setLoaded] = React.useState(false);
   const [completed, setCompleted] = React.useState(false);
@@ -223,6 +225,31 @@ export const Quiz = () => {
       quizStore.initializeQuiz(_quiz, subjects);
       setLoaded(true);
     });
+  }, []);
+
+  const handleBeforeUnload = (event) => {
+    const e = event || window.event;
+    e.preventDefault();
+    if (e) {
+      e.returnValue = "";
+    }
+    return "";
+  };
+
+  const handleUnload = async (event) => {
+    await new Promise((resolve) => {
+      console.log("Leaving page");
+      resolve({});
+    });
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("unload", handleUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("unload", handleUnload);
+    };
   }, []);
 
   function redirect() {
@@ -245,7 +272,8 @@ export const Quiz = () => {
         },
       ],
       quizStore.serverAnswerFormat,
-      quizStore.quiz.questions.length
+      quizStore.quiz.questions.length,
+      quizStore.subjectsToTake
     );
     let result = await quizStore.handleSubmission(gradedResult);
     quizStore.setQuizResults(gradedResult);
@@ -257,6 +285,7 @@ export const Quiz = () => {
       {completed ? (
         <ResultsPage
           subject={name}
+          totalQuestions={quizStore.quiz.questions.length}
           quizResults={quizStore.quizResults}
           navigate={redirect}
         />
