@@ -8,7 +8,7 @@ import allRegions from "@tuteria/shared-lib/src/data/regions.json";
 import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 import { SAMPLE_TUTERIA_SUBJECTS } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import storage from "@tuteria/shared-lib/src/storage";
-import { initializeStore } from "@tuteria/shared-lib/src/stores";
+import { initializeStore, TutorSubject } from "@tuteria/shared-lib/src/stores";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
 import QuizSelectionView from "@tuteria/shared-lib/src/tutor-revamp/QuizSelectionView";
@@ -97,6 +97,7 @@ const navigateToSubject = () => {
 // This variable will come from query parameters
 
 const subjectInfo = SAMPLE_TUTERIA_SUBJECTS[0];
+
 export const SubjectTest = () => {
   const [loading, setLoading] = React.useState(false);
   const [testableSubjects, setTestableSubjects] = React.useState([]);
@@ -142,20 +143,28 @@ export const SubjectTest = () => {
 };
 
 let pk = 209601;
+const subjectStore = TutorSubject.create(
+  {},
+  { adapter: loadAdapter(testAdapter) }
+);
 export const SubjectCreation = () => {
   const [loading, setLoading] = React.useState(true);
   React.useEffect(() => {
-    store.subject.fetchTutorSubjects().then((res) => {
-      store.subject.setCurrentSubjectId(pk);
+    testAdapter.getTutorSubjects({ pk }).then(({ tutorSubjects }) => {
       setLoading(false);
+      subjectStore.initialize(tutorSubjects[0]);
     });
+    // store.subject.fetchTutorSubjects().then((res) => {
+    //   store.subject.setCurrentSubjectId(pk);
+    //   setLoading(false);
+    // });
   }, []);
 
   if (loading) {
     return <LoadingState text="Fetching subject details..." />;
   }
 
-  return <SubjectEditView store={store.subject} />;
+  return <SubjectEditView store={subjectStore} />;
 };
 
 export const Login = () => {
