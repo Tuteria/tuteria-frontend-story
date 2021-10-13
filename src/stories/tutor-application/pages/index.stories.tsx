@@ -25,6 +25,7 @@ import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
 import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
 import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
+import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
 
 export default {
   title: "Tutor Application/Pages",
@@ -201,6 +202,10 @@ const subjects = [
 const quiz = {
   ...SAMPLE_QUIZ_DATA,
   questions: SAMPLE_QUIZ_DATA.questions.slice(0, 5),
+};
+
+export const CompletedPage = () => {
+  return <CompletedApplicationPage />;
 };
 
 export const Quiz = () => {
