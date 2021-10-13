@@ -311,7 +311,7 @@ const TutorPageComponent: React.FC<{
           onTakeTest={onTakeTest}
           onEditSubject={onEditSubject}
           onSubmit={async (formData: any) => {
-            nextStep = STEPS.VERIFICATION;
+            nextStep = STEPS.SCHEDULE_INFO;
             return await store
               .onFormSubmit(formData, STEPS.SUBJECT_SELECTION, nextStep)
               .then(() => {
@@ -329,21 +329,7 @@ const TutorPageComponent: React.FC<{
               });
           }}
         />
-        <VerificationIdentity
-          formHeader={"Identity Verification"}
-          lockedDescription="Verify your identity in order to complete steps"
-          label={STEPS.VERIFICATION}
-          currentStep={activeStep}
-          store={store.identity}
-          onSubmit={async (formData: any) => {
-            nextStep = STEPS.SCHEDULE_INFO;
-            await store
-              .onFormSubmit(formData, STEPS.VERIFICATION, nextStep)
-              .then(() => {
-                handleFormSubmit(nextStep, STEPS.VERIFICATION);
-              });
-          }}
-        />
+
         <ScheduleCard
           formHeader={"Tutor Schedule"}
           label={STEPS.SCHEDULE_INFO}
@@ -435,7 +421,7 @@ const TutorPageComponent: React.FC<{
             store.paymentInfo.accountNumber,
           ]}
           onSubmit={async (formData: any) => {
-            nextStep = STEPS.NEW_DEVELOPMENT;
+            nextStep = STEPS.VERIFICATION;
             store.paymentInfo.updateFields(formData);
             await store
               .onFormSubmit(formData, STEPS.PAYMENT_INFO, nextStep)
@@ -448,7 +434,28 @@ const TutorPageComponent: React.FC<{
               });
           }}
         />
-
+        <VerificationIdentity
+          formHeader={"Upload profile photo and ID"}
+          lockedDescription="Verify your identity in order to complete steps"
+          label={STEPS.VERIFICATION}
+          currentStep={activeStep}
+          store={store.identity}
+          loading={store.loading}
+          isCollapsed={true}
+          buttonText="Save and Continue"
+          buttonIsDisabled={!store.identity.completed}
+          // displayType="complex"
+          formSummary={["Profile Picture uploaded", "Identity Uploaded"]}
+          completed={store.identity.completed}
+          onSubmit={async (formData: any) => {
+            nextStep = STEPS.NEW_DEVELOPMENT;
+            await store
+              .onFormSubmit(formData, STEPS.VERIFICATION, nextStep)
+              .then(() => {
+                handleFormSubmit(nextStep, STEPS.VERIFICATION);
+              });
+          }}
+        />
         <NewDevelopment
           formHeader={"New development"}
           lockedDescription="Learning process"
