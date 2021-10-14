@@ -48,16 +48,17 @@ export const TutorPage = () => {
     storage.set(adapter.countryKey, allCountries);
     storage.set(adapter.supportedCountriesKey, supportedCountries);
     storage.set(adapter.tuteriaSubjectsKey, testAdapter.getTuteriaSubjects());
-    store.initializeTutorData(
-      allRegions,
-      allCountries,
-      supportedCountries,
-      testAdapter.loadExistingTutorInfo()
-    );
-    if (!store.completed) {
-      if (store.currentEditableForm === "subject-selection") {
+    store
+      .initializeTutorData(
+        allRegions,
+        allCountries,
+        supportedCountries,
+        testAdapter.loadExistingTutorInfo()
+      )
+      .then(async (res) => {
         await store.subject.fetchTutorSubjects();
-      }
+      });
+    if (!store.completed) {
       setLoading(false);
     } else {
       linkTo("Tutor Application/Pages", "CompletedPage")();

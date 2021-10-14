@@ -31,7 +31,7 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[5] };
+  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[7] };
 }
 export const testAdapter: ServerAdapterType = {
   deleteSubject: async (id) => {
@@ -65,7 +65,7 @@ export const testAdapter: ServerAdapterType = {
       };
     });
     subjects.forEach((s) => {
-      existingSubjects.push({ id: 23, name: s, category: "Academics" });
+      existingSubjects.push({ id: 23, ...s, category: "Academics" });
     });
     return await samplePromise(existingSubjects);
   },
@@ -130,7 +130,8 @@ export const testAdapter: ServerAdapterType = {
     let result = await samplePromise([
       {
         public_id: slug,
-        url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+        url:
+          "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
         quality: false,
       },
     ]);
@@ -146,7 +147,8 @@ export const testAdapter: ServerAdapterType = {
         name: o.name,
         size: o.size?.toString(),
         public_id: "the_public_id",
-        url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+        url:
+          "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
       }))
     );
   },
