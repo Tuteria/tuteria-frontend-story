@@ -58,13 +58,11 @@ export const TutorPage = () => {
       if (store.currentEditableForm === "subject-selection") {
         await store.subject.fetchTutorSubjects();
       }
-      if (store.currentEditableForm === "payment-info") {
-        await store.fetchBanksInfo();
-      }
       setLoading(false);
     } else {
       linkTo("Tutor Application/Pages", "CompletedPage")();
     }
+    await store.fetchBanksInfo();
   }
 
   React.useEffect(() => {
