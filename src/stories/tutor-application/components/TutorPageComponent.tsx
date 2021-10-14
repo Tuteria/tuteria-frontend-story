@@ -63,7 +63,11 @@ const stepsArray: any = [
     completed: false,
   },
   { key: STEPS.WORK_HISTORY, name: "Work History", completed: false },
-  { key: STEPS.SUBJECT_SELECTION, name: "Subject Selection", completed: false },
+  {
+    key: STEPS.SUBJECT_SELECTION,
+    name: "Subject Selection",
+    completed: false,
+  },
   {
     key: STEPS.VERIFICATION,
     name: "Identity Verification",
@@ -286,6 +290,15 @@ const TutorPageComponent: React.FC<{
             activeStep === STEPS.SUBJECT_SELECTION &&
             store.subject.tutorSubjects.length === 0
           }
+          displayType="complex"
+          buttonIsDisabled={
+            (store.subject.tutorSubjects.length > 0 &&
+              activeStep === STEPS.SUBJECT_SELECTION) ||
+            (store.subject.tutorSubjects.length === 0 &&
+              activeStep === STEPS.SUBJECT_SELECTION) ||
+            store.subject.tutorSubjects.length > 0
+          }
+          buttonText="Save and Continue"
           currentStep={activeStep}
           isCollapsed={false}
           onTakeTest={onTakeTest}

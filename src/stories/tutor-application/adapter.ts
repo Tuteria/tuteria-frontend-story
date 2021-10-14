@@ -31,7 +31,7 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[6] };
+  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[10] };
 }
 export const testAdapter: ServerAdapterType = {
   deleteSubject: async (id) => {
@@ -84,7 +84,7 @@ export const testAdapter: ServerAdapterType = {
         }),
       }
     );
-    if (subjectInfo.pk) {
+    if (subjectInfo?.pk) {
       return {
         tutorSubjects: [result.tutorSubjects[0]],
       };
