@@ -31,7 +31,7 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[7] };
+  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[10] };
 }
 export const testAdapter: ServerAdapterType = {
   deleteSubject: async (id) => {
@@ -43,8 +43,8 @@ export const testAdapter: ServerAdapterType = {
   getTuteriaSubjects: () => {
     return SAMPLE_TUTERIA_SUBJECTS;
   },
-  fetchBanksInfo: async (countryCode) => {
-    let response = BANK_DATA[countryCode].map((bank) => bank.name);
+  fetchBanksInfo: async (supportedCountryName) => {
+    let response = BANK_DATA[supportedCountryName].map((bank) => bank.name);
     return await samplePromise(response);
   },
   loadExistingTutorInfo,
