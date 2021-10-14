@@ -274,7 +274,7 @@ const TutorPageComponent: React.FC<{
           }}
         />
         <TutorSubjectsPage
-          formHeader={subjectContents.lockedForm.title}
+          formHeader=""
           lockedDescription={subjectContents.lockedForm.description}
           store={store.subject}
           label={STEPS.SUBJECT_SELECTION}
@@ -300,7 +300,7 @@ const TutorPageComponent: React.FC<{
           }
           buttonText="Save and Continue"
           currentStep={activeStep}
-          isCollapsed={false}
+          isCollapsed={true}
           onTakeTest={onTakeTest}
           onEditSubject={onEditSubject}
           onSubmit={async (formData: any) => {

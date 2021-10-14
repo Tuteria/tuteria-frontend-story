@@ -31,7 +31,7 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[10] };
+  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[5] };
 }
 export const testAdapter: ServerAdapterType = {
   deleteSubject: async (id) => {
