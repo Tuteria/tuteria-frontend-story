@@ -152,6 +152,7 @@ export const SubjectCreation = () => {
     testAdapter.getTutorSubjects({ pk }).then(({ tutorSubjects }) => {
       setLoading(false);
       subjectStore.initialize(tutorSubjects[0]);
+      console.log(JSON.parse(JSON.stringify(subjectStore)));
     });
     // store.subject.fetchTutorSubjects().then((res) => {
     //   store.subject.setCurrentSubjectId(pk);
