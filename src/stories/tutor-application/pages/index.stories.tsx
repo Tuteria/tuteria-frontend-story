@@ -8,7 +8,11 @@ import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data"
 import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 import { SAMPLE_TUTERIA_SUBJECTS } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import storage from "@tuteria/shared-lib/src/storage";
-import { initializeStore, TutorSubject } from "@tuteria/shared-lib/src/stores";
+import {
+  buildProfileInfo,
+  initializeStore,
+  TutorSubject,
+} from "@tuteria/shared-lib/src/stores";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
 import QuizSelectionView from "@tuteria/shared-lib/src/tutor-revamp/QuizSelectionView";
@@ -18,6 +22,7 @@ import QuizStore, {
   IQuizStore,
 } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
 import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditView";
+import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
 import VerificationPage from "@tuteria/shared-lib/src/tutor-revamp/VerificationPage";
 import "katex/dist/katex.min.css";
 import React, { Suspense } from "react";
@@ -25,6 +30,7 @@ import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
 import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
+import { SUBJECT_EDIT_STEPS } from "@tuteria/shared-lib/src/stores/subject";
 
 export default {
   title: "Tutor Application/Pages",
@@ -48,21 +54,18 @@ export const TutorPage = () => {
     storage.set(adapter.countryKey, allCountries);
     storage.set(adapter.supportedCountriesKey, supportedCountries);
     storage.set(adapter.tuteriaSubjectsKey, testAdapter.getTuteriaSubjects());
-    store.initializeTutorData(
+    await store.initializeTutorData(
       allRegions,
       allCountries,
       supportedCountries,
       testAdapter.loadExistingTutorInfo()
     );
-    await store.subject.fetchTutorSubjects();
     if (!store.completed) {
-      if (store.currentEditableForm === "payment-info") {
-        await store.fetchBanksInfo();
-      }
       setLoading(false);
     } else {
       linkTo("Tutor Application/Pages", "CompletedPage")();
     }
+    await store.fetchBanksInfo();
   }
 
   React.useEffect(() => {
@@ -162,7 +165,22 @@ export const SubjectCreation = () => {
     return <LoadingState text="Fetching subject details..." />;
   }
 
-  return <SubjectEditView store={subjectStore} />;
+  return (
+    <SubjectEditView store={subjectStore}>
+      {(currentForm) => {
+        if (currentForm === SUBJECT_EDIT_STEPS.PREVIEW) {
+          return (
+            <TutorProfile
+              {...buildProfileInfo(
+                store,
+                subjectStore
+              )} /*onBackClick={onBackClick}*/
+            />
+          );
+        }
+      }}
+    </SubjectEditView>
+  );
 };
 
 export const Login = () => {

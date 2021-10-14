@@ -790,6 +790,12 @@ let subjectGroup = [
 export const TutorPreview = () => {
   store.subject.setCurrentSubjectId(209601);
   return (
-    <TutorProfile data={data} instance={instance} subjectGroup={subjectGroup} />
+    <Box h="100vh" overflowX="hidden">
+      <TutorProfile
+        data={data}
+        instance={instance}
+        subjectGroup={subjectGroup}
+      />
+    </Box>
   );
 };
