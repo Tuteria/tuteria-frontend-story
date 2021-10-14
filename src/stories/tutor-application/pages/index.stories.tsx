@@ -8,7 +8,11 @@ import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data"
 import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 import { SAMPLE_TUTERIA_SUBJECTS } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import storage from "@tuteria/shared-lib/src/storage";
-import { initializeStore, TutorSubject } from "@tuteria/shared-lib/src/stores";
+import {
+  buildProfileInfo,
+  initializeStore,
+  TutorSubject,
+} from "@tuteria/shared-lib/src/stores";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
 import QuizSelectionView from "@tuteria/shared-lib/src/tutor-revamp/QuizSelectionView";
@@ -50,21 +54,22 @@ export const TutorPage = () => {
     storage.set(adapter.countryKey, allCountries);
     storage.set(adapter.supportedCountriesKey, supportedCountries);
     storage.set(adapter.tuteriaSubjectsKey, testAdapter.getTuteriaSubjects());
-    store.initializeTutorData(
-      allRegions,
-      allCountries,
-      supportedCountries,
-      testAdapter.loadExistingTutorInfo()
-    );
-    await store.subject.fetchTutorSubjects();
+    store
+      .initializeTutorData(
+        allRegions,
+        allCountries,
+        supportedCountries,
+        testAdapter.loadExistingTutorInfo()
+      )
+      .then(async (res) => {
+        await store.subject.fetchTutorSubjects();
+      });
     if (!store.completed) {
-      if (store.currentEditableForm === "payment-info") {
-        await store.fetchBanksInfo();
-      }
       setLoading(false);
     } else {
       linkTo("Tutor Application/Pages", "CompletedPage")();
     }
+    await store.fetchBanksInfo();
   }
 
   React.useEffect(() => {
@@ -167,7 +172,14 @@ export const SubjectCreation = () => {
     <SubjectEditView store={subjectStore}>
       {(currentForm) => {
         if (currentForm === SUBJECT_EDIT_STEPS.PREVIEW) {
-          return <TutorProfile store={store} /*onBackClick={onBackClick}*/ />;
+          return (
+            <TutorProfile
+              {...buildProfileInfo(
+                store,
+                subjectStore
+              )} /*onBackClick={onBackClick}*/
+            />
+          );
         }
       }}
     </SubjectEditView>
