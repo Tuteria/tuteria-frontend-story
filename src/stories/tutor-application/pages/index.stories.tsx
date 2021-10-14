@@ -54,10 +54,8 @@ export const TutorPage = () => {
       supportedCountries,
       testAdapter.loadExistingTutorInfo()
     );
+    await store.subject.fetchTutorSubjects();
     if (!store.completed) {
-      if (store.currentEditableForm === "subject-selection") {
-        await store.subject.fetchTutorSubjects();
-      }
       if (store.currentEditableForm === "payment-info") {
         await store.fetchBanksInfo();
       }

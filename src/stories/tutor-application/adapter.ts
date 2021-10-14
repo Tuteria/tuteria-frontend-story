@@ -31,7 +31,7 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[5] };
+  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[7] };
 }
 export const testAdapter: ServerAdapterType = {
   deleteSubject: async (id) => {
@@ -65,7 +65,7 @@ export const testAdapter: ServerAdapterType = {
       };
     });
     subjects.forEach((s) => {
-      existingSubjects.push({ id: 23, name: s, category: "Academics" });
+      existingSubjects.push({ id: 23, ...s, category: "Academics" });
     });
     return await samplePromise(existingSubjects);
   },
