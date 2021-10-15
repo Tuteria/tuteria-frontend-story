@@ -25,6 +25,10 @@ import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
 import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
+import {
+  OverlayRouter,
+  OverlayWrapper,
+} from "@tuteria/shared-lib/src/components/OverlayRouter";
 
 export default {
   title: "Tutor Application/Pages",
@@ -186,7 +190,37 @@ export const LandingPage = () => {
   );
 };
 export const Verification = () => {
-  return <VerificationPage />;
+  return (
+    <OverlayRouter>
+      <OverlayWrapper>
+        <VerificationPage
+          store={store.educationWorkHistory}
+          educations={[
+            {
+              school: "Ikeja Grammar school",
+              country: "Nigeria",
+              course: "Chemistry",
+              degree: "MBBS",
+              speciality: "Biological and Physical Sciences",
+              startYear: "2006",
+              endYear: "2020",
+              grade: "First Class",
+            },
+            {
+              school: "University of Lagos",
+              country: "Nigeria",
+              course: "Organic Chemistry",
+              speciality: "Business, Finance and Administration",
+              degree: "MBBS",
+              startYear: "2006",
+              endYear: "2020",
+              grade: "First Class",
+            },
+          ]}
+        />
+      </OverlayWrapper>
+    </OverlayRouter>
+  );
 };
 
 const quizStore: IQuizStore = QuizStore.create(
