@@ -53,16 +53,8 @@ const TutorPageComponent: React.FC<{
   store: IRootStore;
   onTakeTest: any;
   onEditSubject: (subject: any) => any;
-  onSumbitApplication?: () => any;
-  applicationLoading?: boolean;
-}> = ({
-  store,
-  onTakeTest,
-  onEditSubject,
-  onSumbitApplication,
-  applicationLoading,
-  ...rest
-}) => {
+  onNextStep?: () => any;
+}> = ({ store, onTakeTest, onEditSubject, onNextStep, ...rest }) => {
   const { getFormWrapperProps, formIndex, steps, activeStep, completedForm } =
     useTutorApplicationFlow(store);
 
@@ -100,10 +92,14 @@ const TutorPageComponent: React.FC<{
       </FormWrapper>
       <Stack>
         <Button
-          onClick={onSumbitApplication}
+          onClick={() => {
+            store.submitApplication().then(() => {
+              onNextStep();
+            });
+          }}
           colorScheme="blue"
           size="lg"
-          isLoading={applicationLoading}
+          isLoading={store.applicationLoading}
           isDisabled={!completedForm}
         >
           Submit Application

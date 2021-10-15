@@ -1,4 +1,7 @@
-import { ServerAdapterType } from "@tuteria/shared-lib/src/adapter";
+import {
+  AdapterType,
+  ServerAdapterType,
+} from "@tuteria/shared-lib/src/adapter";
 import {
   SAMPLE_TUTERIA_SUBJECTS,
   SAMPLE_TUTOR_DATA,
@@ -7,6 +10,8 @@ import {
 import DATA from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
 import BANK_DATA from "@tuteria/shared-lib/src/data/banks.json";
+import storage from "@tuteria/shared-lib/src/local-storage";
+import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 
 function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -31,14 +36,14 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[6] };
+  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[9] };
 }
 export const testAdapter: ServerAdapterType = {
   deleteSubject: async (id) => {
     return await samplePromise(id);
   },
   saveTutorInfo: async (data: any) => {
-    return await samplePromise();
+    return await samplePromise("tutorToken");
   },
   getTuteriaSubjects: () => {
     return SAMPLE_TUTERIA_SUBJECTS;
@@ -175,5 +180,23 @@ export const testAdapter: ServerAdapterType = {
   buildQuizData: async (subjectInfo, quiz) => {
     console.log(subjectInfo);
     return await samplePromise(quiz[0]);
+  },
+  initializeApplication: async (
+    adapter: AdapterType,
+    { regions, countries, tuteriaSubjects }
+  ) => {
+    storage.set(adapter.regionKey, regions);
+    storage.set(adapter.countryKey, countries);
+    storage.set(adapter.supportedCountriesKey, supportedCountries);
+    storage.set(adapter.tuteriaSubjectsKey, tuteriaSubjects);
+    return await samplePromise({
+      staticData: { regions, countries, supportedCountries },
+      tutorInfo: loadExistingTutorInfo(),
+      subjectData: {
+        tutorSubjects: SAMPLE_TUTOR_SUBJECTS,
+        tuteriaSubjects: tuteriaSubjects,
+        supportedCountries,
+      },
+    });
   },
 };
