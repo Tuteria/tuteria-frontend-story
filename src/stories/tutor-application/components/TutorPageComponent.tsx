@@ -51,7 +51,7 @@ const TeachingProfile = React.lazy(
 
 const TutorPageComponent: React.FC<{
   store: IRootStore;
-  onTakeTest: any;
+  onTakeTest: (subject: string) => string;
   onEditSubject: (subject: any) => any;
   onNextStep?: () => any;
 }> = ({ store, onTakeTest, onEditSubject, onNextStep, ...rest }) => {

@@ -1,3 +1,4 @@
+import { useToast } from "@chakra-ui/react";
 import { linkTo } from "@storybook/addon-links";
 import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
@@ -84,11 +85,11 @@ export const TutorPage = () => {
       <TutorPageComponent
         store={store}
         onEditSubject={(subject) => {
-          navigate("/skills");
+          return "/skills";
         }}
         onTakeTest={(subject) => {
           console.log({ subject });
-          navigate("/quiz/select-skill");
+          return "/quiz/select-skill";
         }}
         onNextStep={() => {
           navigate("/verify");
@@ -104,10 +105,12 @@ const navigateToSubject = () => {
 
 // This variable will come from query parameters
 
-const subjectInfo = SAMPLE_TUTERIA_SUBJECTS[0];
+const subjectInfo = SAMPLE_TUTERIA_SUBJECTS[2];
 
 export const TestSelectionPage = () => {
+  const toast = useToast();
   const [testableSubjects, setTestableSubjects] = React.useState([]);
+  const [canTakeQuiz, setTakeQuiz] = React.useState(true);
 
   const onNextClick = (selectedQuizzesToTake) => {
     console.log(selectedQuizzesToTake);
@@ -120,24 +123,40 @@ export const TestSelectionPage = () => {
   };
 
   async function initialize(setLoading) {
-    adapter
-      .getTutorSubjects()
-      .then(() => {
-        // this is supposed to filter the user subjects from the tuteria subjects
-        let result = subjectInfo.subjects.map((o) => o.name);
-        setTestableSubjects(result);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
+    try {
+      let response = await testAdapter.initializeApplication(adapter, {
+        regions: [],
+        countries: [],
+        tuteriaSubjects: subjectInfo.subjects,
       });
+      let foundSubject = testAdapter.getTutorSubject(
+        response.subjectData.tutorSubjects,
+        subjectInfo
+      );
+      if (foundSubject) {
+        setTakeQuiz(true);
+        setTestableSubjects(foundSubject.quizzes.map((o) => o.name));
+        setLoading(false);
+      } else {
+        setTakeQuiz(false);
+        toast({
+          title: `Not permitted to take ${subjectInfo.name} quiz`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      }
+    } catch (error) {
+      setLoading(false);
+      throw error;
+    }
   }
 
   return (
     <LoadingStateWrapper initialize={initialize} text="Fetching Subjects...">
       <QuizSelectionView
-        canTakeQuiz={true}
+        canTakeQuiz={canTakeQuiz}
         generateQuiz={onNextClick}
         testSubject={subjectInfo.name}
         testableSubjects={testableSubjects}
