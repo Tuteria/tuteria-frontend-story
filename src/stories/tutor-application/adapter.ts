@@ -74,28 +74,8 @@ export const testAdapter: ServerAdapterType = {
     });
     return await samplePromise(existingSubjects);
   },
-  getTutorSubjects: async (subjectInfo) => {
-    let tutor_data = SAMPLE_TUTOR_SUBJECTS;
-    let result: {
-      tutorSubjects: any[];
-      tuteriaSubjects: any[];
-    } = await samplePromise(
-      // tutorSubjects: [],
-      {
-        tutorSubjects: tutor_data.map((tx) => {
-          return {
-            ...tx,
-          };
-        }),
-      }
-    );
-    if (subjectInfo?.pk) {
-      return {
-        tutorSubjects: [result.tutorSubjects[0]],
-      };
-    }
-    return result;
-    // if session storage exists return the tuteria subjects else fetch
+  getTutorSubject: (tutorSubjects, subjectInfo) => {
+    return { ...SAMPLE_TUTOR_SUBJECTS[0], quizzes: subjectInfo.subjects };
   },
   updateTutorSubjectInfo: async (values, subject_id) => {
     console.log(values);
