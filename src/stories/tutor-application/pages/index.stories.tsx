@@ -1,7 +1,7 @@
 import { linkTo } from "@storybook/addon-links";
 import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
-import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
+import { LoadingStateWrapper } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
 import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
@@ -11,6 +11,7 @@ import {
   initializeStore,
   TutorSubject,
 } from "@tuteria/shared-lib/src/stores";
+import { APPLICATION_STEPS } from "@tuteria/shared-lib/src/stores/rootStore";
 import { SUBJECT_EDIT_STEPS } from "@tuteria/shared-lib/src/stores/subject";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
@@ -25,7 +26,6 @@ import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditVie
 import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
 import VerificationPage from "@tuteria/shared-lib/src/tutor-revamp/VerificationPage";
 import "katex/dist/katex.min.css";
-import { APPLICATION_STEPS } from "@tuteria/shared-lib/src/stores/rootStore";
 import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
@@ -50,13 +50,13 @@ function navigate(path: string) {
   let options = {
     "/verify": "Verification",
     "/complete": "Completed Page",
-    "/skills": "",
+    "/skills": "EditSubjectPage",
+    "/quiz/select-skill": "TestSelectionPage",
   };
   linkTo("Tutor Application/Pages", options["path"])();
 }
 export const TutorPage = () => {
-  const [loading, setLoading] = React.useState(true);
-  async function initialize() {
+  async function initialize(setLoading) {
     let result = await testAdapter.initializeApplication(adapter, {
       regions: allRegions,
       countries: allCountries,
@@ -79,28 +79,22 @@ export const TutorPage = () => {
     await store.fetchBanksInfo();
   }
 
-  React.useEffect(() => {
-    initialize();
-  }, []);
-
-  if (loading) {
-    return <LoadingState />;
-  }
-
   return (
-    <TutorPageComponent
-      store={store}
-      onEditSubject={(subject) => {
-        navigate("/skills");
-      }}
-      onTakeTest={(subject) => {
-        console.log({ subject });
-        linkTo("Tutor Application/Pages", "Subject Test")();
-      }}
-      onNextStep={() => {
-        linkTo("Tutor Application/Pages", "Verification")();
-      }}
-    />
+    <LoadingStateWrapper initialize={initialize}>
+      <TutorPageComponent
+        store={store}
+        onEditSubject={(subject) => {
+          navigate("/skills");
+        }}
+        onTakeTest={(subject) => {
+          console.log({ subject });
+          navigate("/quiz/select-skill");
+        }}
+        onNextStep={() => {
+          navigate("/verify");
+        }}
+      />
+    </LoadingStateWrapper>
   );
 };
 
@@ -112,8 +106,7 @@ const navigateToSubject = () => {
 
 const subjectInfo = SAMPLE_TUTERIA_SUBJECTS[0];
 
-export const SubjectTest = () => {
-  const [loading, setLoading] = React.useState(false);
+export const TestSelectionPage = () => {
   const [testableSubjects, setTestableSubjects] = React.useState([]);
 
   const onNextClick = (selectedQuizzesToTake) => {
@@ -126,8 +119,7 @@ export const SubjectTest = () => {
     });
   };
 
-  React.useEffect(() => {
-    setLoading(true);
+  async function initialize(setLoading) {
     adapter
       .getTutorSubjects()
       .then(() => {
@@ -140,19 +132,18 @@ export const SubjectTest = () => {
         console.log(error);
         setLoading(false);
       });
-  }, []);
-
-  if (loading) {
-    return <LoadingState text="Fetching Subjects..." />;
   }
+
   return (
-    <QuizSelectionView
-      canTakeQuiz={true}
-      generateQuiz={onNextClick}
-      testSubject={subjectInfo.name}
-      testableSubjects={testableSubjects}
-      toSubjectPage={navigateToSubject}
-    />
+    <LoadingStateWrapper initialize={initialize} text="Fetching Subjects...">
+      <QuizSelectionView
+        canTakeQuiz={true}
+        generateQuiz={onNextClick}
+        testSubject={subjectInfo.name}
+        testableSubjects={testableSubjects}
+        toSubjectPage={navigateToSubject}
+      />
+    </LoadingStateWrapper>
   );
 };
 
@@ -161,39 +152,35 @@ const subjectStore = TutorSubject.create(
   {},
   { adapter: loadAdapter(testAdapter) }
 );
-export const SubjectCreation = () => {
-  const [loading, setLoading] = React.useState(true);
-  React.useEffect(() => {
+export const EditSubjectPage = () => {
+  async function initialize(setLoading) {
     testAdapter.getTutorSubjects({ pk }).then(({ tutorSubjects }) => {
       setLoading(false);
       subjectStore.initialize(tutorSubjects[0]);
       console.log(JSON.parse(JSON.stringify(subjectStore)));
     });
-    // store.subject.fetchTutorSubjects().then((res) => {
-    //   store.subject.setCurrentSubjectId(pk);
-    //   setLoading(false);
-    // });
-  }, []);
-
-  if (loading) {
-    return <LoadingState text="Fetching subject details..." />;
   }
 
   return (
-    <SubjectEditView store={subjectStore}>
-      {(currentForm) => {
-        if (currentForm === SUBJECT_EDIT_STEPS.PREVIEW) {
-          return (
-            <TutorProfile
-              {...buildProfileInfo(
-                store,
-                subjectStore
-              )} /*onBackClick={onBackClick}*/
-            />
-          );
-        }
-      }}
-    </SubjectEditView>
+    <LoadingStateWrapper
+      text="Fetching subject details..."
+      initialize={initialize}
+    >
+      <SubjectEditView store={subjectStore}>
+        {(currentForm) => {
+          if (currentForm === SUBJECT_EDIT_STEPS.PREVIEW) {
+            return (
+              <TutorProfile
+                {...buildProfileInfo(
+                  store,
+                  subjectStore
+                )} /*onBackClick={onBackClick}*/
+              />
+            );
+          }
+        }}
+      </SubjectEditView>
+    </LoadingStateWrapper>
   );
 };
 
@@ -219,8 +206,7 @@ export const LandingPage = () => {
 };
 
 export const Verification = () => {
-  const [loading, setLoading] = React.useState(true);
-  async function initialize() {
+  async function initialize(setLoading) {
     let result = await testAdapter.initializeApplication(adapter, {
       regions: [],
       countries: [],
@@ -238,23 +224,21 @@ export const Verification = () => {
     }
   }
 
-  React.useEffect(() => {
-    initialize();
-  }, []);
-
-  if (loading) {
-    return <LoadingState text="Fetching Tutor details..." />;
-  }
   return (
-    <VerificationPage
-      sendVerification={() => {}}
-      isEmailVerified={store.emailVerified}
-      store={store.educationWorkHistory}
-      onNextStep={async () => {
-        await store.submitApplication(true);
-        linkTo("Tutor Application/Pages", "Completed Page")();
-      }}
-    />
+    <LoadingStateWrapper
+      text="Fetching Tutor details..."
+      initialize={initialize}
+    >
+      <VerificationPage
+        sendVerification={() => {}}
+        isEmailVerified={store.emailVerified}
+        store={store.educationWorkHistory}
+        onNextStep={async () => {
+          await store.submitApplication(true);
+          linkTo("Tutor Application/Pages", "Completed Page")();
+        }}
+      />
+    </LoadingStateWrapper>
   );
 };
 
@@ -291,10 +275,9 @@ export const CompletedPage = () => {
 };
 
 export const Quiz = () => {
-  const [loaded, setLoaded] = React.useState(false);
   const [completed, setCompleted] = React.useState(false);
 
-  React.useEffect(() => {
+  async function initialize(setLoaded) {
     const subjectsToTake = query;
     const newSubjectInfo = {
       ...subjectInfo,
@@ -306,7 +289,7 @@ export const Quiz = () => {
       quizStore.initializeQuiz(_quiz, subjects);
       setLoaded(true);
     });
-  }, []);
+  }
 
   function redirect() {
     if (quizStore.quizResults.passedQuiz) {
@@ -334,18 +317,15 @@ export const Quiz = () => {
     setCompleted(true);
     return result;
   }
-
-  if (!loaded) {
-    return <LoadingState text="Loading quiz..." />;
-  }
-
   return (
-    <QuizPage
-      store={quizStore}
-      quizName={name}
-      hasCompletedQuiz={completed}
-      onNavigate={redirect}
-      onSubmitQuiz={onQuizSubmit}
-    />
+    <LoadingStateWrapper text="Loading quiz..." initialize={initialize}>
+      <QuizPage
+        store={quizStore}
+        quizName={name}
+        hasCompletedQuiz={completed}
+        onNavigate={redirect}
+        onSubmitQuiz={onQuizSubmit}
+      />
+    </LoadingStateWrapper>
   );
 };
