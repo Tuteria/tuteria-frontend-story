@@ -11,6 +11,7 @@ import DATA from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
 import BANK_DATA from "@tuteria/shared-lib/src/data/banks.json";
 import storage from "@tuteria/shared-lib/src/local-storage";
+import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 
 function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -180,7 +181,7 @@ export const testAdapter: ServerAdapterType = {
   },
   initializeApplication: async (
     adapter: AdapterType,
-    { regions, countries, supportedCountries, tuteriaSubjects }
+    { regions, countries, tuteriaSubjects }
   ) => {
     storage.set(adapter.regionKey, regions);
     storage.set(adapter.countryKey, countries);
@@ -192,6 +193,7 @@ export const testAdapter: ServerAdapterType = {
       subjectData: {
         tutorSubjects: SAMPLE_TUTOR_SUBJECTS,
         tuteriaSubjects: tuteriaSubjects,
+        supportedCountries,
       },
     });
   },

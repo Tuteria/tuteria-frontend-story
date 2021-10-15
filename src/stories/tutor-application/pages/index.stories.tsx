@@ -5,16 +5,16 @@ import { LoadingState } from "@tuteria/shared-lib/src/components/data-display/Lo
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
 import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
-import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 import { SAMPLE_TUTERIA_SUBJECTS } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
-import storage from "@tuteria/shared-lib/src/storage";
 import {
   buildProfileInfo,
   initializeStore,
   TutorSubject,
 } from "@tuteria/shared-lib/src/stores";
+import { SUBJECT_EDIT_STEPS } from "@tuteria/shared-lib/src/stores/subject";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
+import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
 import QuizSelectionView from "@tuteria/shared-lib/src/tutor-revamp/QuizSelectionView";
 import QuizPage from "@tuteria/shared-lib/src/tutor-revamp/quizzes/Quiz";
 import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
@@ -29,8 +29,6 @@ import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
-import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
-import { SUBJECT_EDIT_STEPS } from "@tuteria/shared-lib/src/stores/subject";
 
 export default {
   title: "Tutor Application/Pages",
@@ -53,7 +51,6 @@ export const TutorPage = () => {
     let result = await testAdapter.initializeApplication(adapter, {
       regions: allRegions,
       countries: allCountries,
-      supportedCountries,
       tuteriaSubjects: testAdapter.getTuteriaSubjects(),
     });
     await store.initializeTutorData(
@@ -86,6 +83,9 @@ export const TutorPage = () => {
       onTakeTest={(subject) => {
         console.log({ subject });
         linkTo("Tutor Application/Pages", "Subject Test")();
+      }}
+      onNextStep={() => {
+        linkTo("Tutor Application/Pages", "Verification")();
       }}
     />
   );
