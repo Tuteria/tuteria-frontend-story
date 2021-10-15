@@ -50,15 +50,16 @@ const store = initializeStore(testAdapter);
 export const TutorPage = () => {
   const [loading, setLoading] = React.useState(true);
   async function initialize() {
-    storage.set(adapter.regionKey, allRegions);
-    storage.set(adapter.countryKey, allCountries);
-    storage.set(adapter.supportedCountriesKey, supportedCountries);
-    storage.set(adapter.tuteriaSubjectsKey, testAdapter.getTuteriaSubjects());
-    await store.initializeTutorData(
-      allRegions,
-      allCountries,
+    let result = await testAdapter.initializeApplication(adapter, {
+      regions: allRegions,
+      countries: allCountries,
       supportedCountries,
-      testAdapter.loadExistingTutorInfo()
+      tuteriaSubjects: testAdapter.getTuteriaSubjects(),
+    });
+    await store.initializeTutorData(
+      result.staticData,
+      result.tutorInfo,
+      result.subjectData
     );
     if (!store.completed) {
       setLoading(false);
