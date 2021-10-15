@@ -122,6 +122,7 @@ export const testAdapter: ServerAdapterType = {
   loadExistingSubject(subject_id) {
     return SAMPLE_TUTOR_SUBJECTS[0];
   },
+  modifyExistingSubject(values) {},
   async uploadAndVerifyProfile(uploadedFile) {
     let { slug } = loadExistingTutorInfo();
     // this is useful for the parameters to send to cloudinary
