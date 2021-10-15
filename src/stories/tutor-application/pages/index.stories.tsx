@@ -124,13 +124,8 @@ export const TestSelectionPage = () => {
 
   async function initialize(setLoading) {
     try {
-      let response = await testAdapter.initializeApplication(adapter, {
-        regions: [],
-        countries: [],
-        tuteriaSubjects: subjectInfo.subjects,
-      });
-      let foundSubject = testAdapter.getTutorSubject(
-        response.subjectData.tutorSubjects,
+      let { foundSubject } = await testAdapter.initializeSubject(
+        adapter,
         subjectInfo
       );
       if (foundSubject) {
@@ -173,11 +168,26 @@ const subjectStore = TutorSubject.create(
 );
 export const EditSubjectPage = () => {
   async function initialize(setLoading) {
-    testAdapter.getTutorSubjects({ pk }).then(({ tutorSubjects }) => {
-      setLoading(false);
-      subjectStore.initialize(tutorSubjects[0]);
-      console.log(JSON.parse(JSON.stringify(subjectStore)));
-    });
+    try {
+      let { foundSubject, response: result } =
+        await testAdapter.initializeSubject(
+          adapter,
+          { ...subjectInfo, id: pk },
+          "id"
+        );
+
+      if (foundSubject) {
+        await store.initializeTutorData(
+          result.staticData,
+          result.tutorInfo,
+          result.subjectData
+        );
+        subjectStore.initialize(foundSubject);
+        setLoading(false);
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 
   return (

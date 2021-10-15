@@ -38,6 +38,24 @@ const formIds = {
 function loadExistingTutorInfo() {
   return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[6] };
 }
+const initializeApplication = async (
+  adapter: AdapterType,
+  { regions, countries, tuteriaSubjects }
+) => {
+  storage.set(adapter.regionKey, regions);
+  storage.set(adapter.countryKey, countries);
+  storage.set(adapter.supportedCountriesKey, supportedCountries);
+  storage.set(adapter.tuteriaSubjectsKey, tuteriaSubjects);
+  return await samplePromise({
+    staticData: { regions, countries, supportedCountries },
+    tutorInfo: loadExistingTutorInfo(),
+    subjectData: {
+      tutorSubjects: SAMPLE_TUTOR_SUBJECTS,
+      tuteriaSubjects: tuteriaSubjects,
+      supportedCountries,
+    },
+  });
+};
 export const testAdapter: ServerAdapterType = {
   deleteSubject: async (id) => {
     return await samplePromise(id);
@@ -116,8 +134,7 @@ export const testAdapter: ServerAdapterType = {
     let result = await samplePromise([
       {
         public_id: slug,
-        url:
-          "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+        url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
         quality: false,
       },
     ]);
@@ -133,8 +150,7 @@ export const testAdapter: ServerAdapterType = {
         name: o.name,
         size: o.size?.toString(),
         public_id: "the_public_id",
-        url:
-          "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+        url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
       }))
     );
   },
@@ -168,22 +184,17 @@ export const testAdapter: ServerAdapterType = {
   submitVideoRecording: async (url) => {
     return await samplePromise(url);
   },
-  initializeApplication: async (
-    adapter: AdapterType,
-    { regions, countries, tuteriaSubjects }
-  ) => {
-    storage.set(adapter.regionKey, regions);
-    storage.set(adapter.countryKey, countries);
-    storage.set(adapter.supportedCountriesKey, supportedCountries);
-    storage.set(adapter.tuteriaSubjectsKey, tuteriaSubjects);
-    return await samplePromise({
-      staticData: { regions, countries, supportedCountries },
-      tutorInfo: loadExistingTutorInfo(),
-      subjectData: {
-        tutorSubjects: SAMPLE_TUTOR_SUBJECTS,
-        tuteriaSubjects: tuteriaSubjects,
-        supportedCountries,
-      },
+  initializeSubject: async (adapter, subjectInfo, key) => {
+    let response = await initializeApplication(adapter, {
+      regions: [],
+      countries: [],
+      tuteriaSubjects: subjectInfo.subjects,
     });
+    let foundSubject = {
+      ...SAMPLE_TUTOR_SUBJECTS[0],
+      quizzes: subjectInfo.subjects,
+    };
+    return { foundSubject, response };
   },
+  initializeApplication,
 };
