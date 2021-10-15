@@ -230,9 +230,7 @@ export const Verification = () => {
       initialize={initialize}
     >
       <VerificationPage
-        sendVerification={() => {}}
-        isEmailVerified={store.emailVerified}
-        store={store.educationWorkHistory}
+        store={store}
         onNextStep={async () => {
           await store.submitApplication(true);
           linkTo("Tutor Application/Pages", "Completed Page")();
