@@ -8,7 +8,11 @@ import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data"
 import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 import { SAMPLE_TUTERIA_SUBJECTS } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import storage from "@tuteria/shared-lib/src/storage";
-import { initializeStore, TutorSubject } from "@tuteria/shared-lib/src/stores";
+import {
+  buildProfileInfo,
+  initializeStore,
+  TutorSubject,
+} from "@tuteria/shared-lib/src/stores";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
 import QuizSelectionView from "@tuteria/shared-lib/src/tutor-revamp/QuizSelectionView";
@@ -18,6 +22,7 @@ import QuizStore, {
   IQuizStore,
 } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
 import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditView";
+import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
 import VerificationPage from "@tuteria/shared-lib/src/tutor-revamp/VerificationPage";
 import "katex/dist/katex.min.css";
 import React, { Suspense } from "react";
@@ -29,6 +34,7 @@ import {
   OverlayRouter,
   OverlayWrapper,
 } from "@tuteria/shared-lib/src/components/OverlayRouter";
+import { SUBJECT_EDIT_STEPS } from "@tuteria/shared-lib/src/stores/subject";
 
 export default {
   title: "Tutor Application/Pages",
@@ -48,20 +54,17 @@ const store = initializeStore(testAdapter);
 export const TutorPage = () => {
   const [loading, setLoading] = React.useState(true);
   async function initialize() {
-    storage.set(adapter.regionKey, allRegions);
-    storage.set(adapter.countryKey, allCountries);
-    storage.set(adapter.supportedCountriesKey, supportedCountries);
-    storage.set(adapter.tuteriaSubjectsKey, testAdapter.getTuteriaSubjects());
-    store
-      .initializeTutorData(
-        allRegions,
-        allCountries,
-        supportedCountries,
-        testAdapter.loadExistingTutorInfo()
-      )
-      .then(async (res) => {
-        await store.subject.fetchTutorSubjects();
-      });
+    let result = await testAdapter.initializeApplication(adapter, {
+      regions: allRegions,
+      countries: allCountries,
+      supportedCountries,
+      tuteriaSubjects: testAdapter.getTuteriaSubjects(),
+    });
+    await store.initializeTutorData(
+      result.staticData,
+      result.tutorInfo,
+      result.subjectData
+    );
     if (!store.completed) {
       setLoading(false);
     } else {
@@ -155,6 +158,7 @@ export const SubjectCreation = () => {
     testAdapter.getTutorSubjects({ pk }).then(({ tutorSubjects }) => {
       setLoading(false);
       subjectStore.initialize(tutorSubjects[0]);
+      console.log(JSON.parse(JSON.stringify(subjectStore)));
     });
     // store.subject.fetchTutorSubjects().then((res) => {
     //   store.subject.setCurrentSubjectId(pk);
@@ -166,7 +170,22 @@ export const SubjectCreation = () => {
     return <LoadingState text="Fetching subject details..." />;
   }
 
-  return <SubjectEditView store={subjectStore} />;
+  return (
+    <SubjectEditView store={subjectStore}>
+      {(currentForm) => {
+        if (currentForm === SUBJECT_EDIT_STEPS.PREVIEW) {
+          return (
+            <TutorProfile
+              {...buildProfileInfo(
+                store,
+                subjectStore
+              )} /*onBackClick={onBackClick}*/
+            />
+          );
+        }
+      }}
+    </SubjectEditView>
+  );
 };
 
 export const Login = () => {
@@ -190,33 +209,36 @@ export const LandingPage = () => {
   );
 };
 export const Verification = () => {
+  const [loading, setLoading] = React.useState(true);
+  async function initialize() {
+    let result = await testAdapter.initializeApplication(adapter, {
+      regions: allRegions,
+      countries: allCountries,
+      supportedCountries,
+      tuteriaSubjects: testAdapter.getTuteriaSubjects(),
+    });
+    await store.initializeTutorData(
+      result.staticData,
+      result.tutorInfo,
+      result.subjectData
+    );
+    setLoading(false);
+  }
+
+  React.useEffect(() => {
+    initialize();
+  }, []);
+
+  if (loading) {
+    return <LoadingState text="Fetching Tutor details..." />;
+  }
   return (
     <OverlayRouter>
       <OverlayWrapper>
         <VerificationPage
+          sendVerification={() => {}}
+          isEmailVerified={false}
           store={store.educationWorkHistory}
-          educations={[
-            {
-              school: "Ikeja Grammar school",
-              country: "Nigeria",
-              course: "Chemistry",
-              degree: "MBBS",
-              speciality: "Biological and Physical Sciences",
-              startYear: "2006",
-              endYear: "2020",
-              grade: "First Class",
-            },
-            {
-              school: "University of Lagos",
-              country: "Nigeria",
-              course: "Organic Chemistry",
-              speciality: "Business, Finance and Administration",
-              degree: "MBBS",
-              startYear: "2006",
-              endYear: "2020",
-              grade: "First Class",
-            },
-          ]}
         />
       </OverlayWrapper>
     </OverlayRouter>
