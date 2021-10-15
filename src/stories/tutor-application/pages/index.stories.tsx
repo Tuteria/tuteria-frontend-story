@@ -237,7 +237,7 @@ export const Verification = () => {
       <OverlayWrapper>
         <VerificationPage
           sendVerification={() => {}}
-          isEmailVerified={false}
+          isEmailVerified={store.emailVerified}
           store={store.educationWorkHistory}
         />
       </OverlayWrapper>
