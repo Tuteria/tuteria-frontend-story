@@ -25,6 +25,7 @@ import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditVie
 import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
 import VerificationPage from "@tuteria/shared-lib/src/tutor-revamp/VerificationPage";
 import "katex/dist/katex.min.css";
+import { APPLICATION_STEPS } from "@tuteria/shared-lib/src/stores/rootStore";
 import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
@@ -45,6 +46,14 @@ export default {
 const adapter = loadAdapter(testAdapter);
 const store = initializeStore(testAdapter);
 
+function navigate(path: string) {
+  let options = {
+    "/verify": "Verification",
+    "/complete": "Completed Page",
+    "/skills": "",
+  };
+  linkTo("Tutor Application/Pages", options["path"])();
+}
 export const TutorPage = () => {
   const [loading, setLoading] = React.useState(true);
   async function initialize() {
@@ -58,10 +67,14 @@ export const TutorPage = () => {
       result.tutorInfo,
       result.subjectData
     );
-    if (!store.completed) {
+    if (store.currentStep === APPLICATION_STEPS.APPLY) {
       setLoading(false);
     } else {
-      linkTo("Tutor Application/Pages", "CompletedPage")();
+      let options = {
+        [APPLICATION_STEPS.COMPLETE]: "/complete",
+        [APPLICATION_STEPS.VERIFY]: "/verify",
+      };
+      navigate(options[store.currentStep]);
     }
     await store.fetchBanksInfo();
   }
@@ -78,7 +91,7 @@ export const TutorPage = () => {
     <TutorPageComponent
       store={store}
       onEditSubject={(subject) => {
-        // linkTo("")
+        navigate("/skills");
       }}
       onTakeTest={(subject) => {
         console.log({ subject });
@@ -204,21 +217,25 @@ export const LandingPage = () => {
     />
   );
 };
+
 export const Verification = () => {
   const [loading, setLoading] = React.useState(true);
   async function initialize() {
     let result = await testAdapter.initializeApplication(adapter, {
-      regions: allRegions,
-      countries: allCountries,
-      supportedCountries,
-      tuteriaSubjects: testAdapter.getTuteriaSubjects(),
+      regions: [],
+      countries: [],
+      tuteriaSubjects: [],
     });
     await store.initializeTutorData(
       result.staticData,
-      result.tutorInfo,
+      { ...result.tutorInfo, currentStep: APPLICATION_STEPS.VERIFY },
       result.subjectData
     );
-    setLoading(false);
+    if (store.currentStep === APPLICATION_STEPS.VERIFY) {
+      setLoading(false);
+    } else {
+      navigate("/complete");
+    }
   }
 
   React.useEffect(() => {
@@ -233,6 +250,10 @@ export const Verification = () => {
       sendVerification={() => {}}
       isEmailVerified={store.emailVerified}
       store={store.educationWorkHistory}
+      onNextStep={async () => {
+        await store.submitApplication(true);
+        linkTo("Tutor Application/Pages", "Completed Page")();
+      }}
     />
   );
 };
