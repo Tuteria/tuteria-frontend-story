@@ -205,7 +205,36 @@ export const LandingPage = () => {
   );
 };
 export const Verification = () => {
-  return <VerificationPage />;
+  const [loading, setLoading] = React.useState(true);
+  async function initialize() {
+    let result = await testAdapter.initializeApplication(adapter, {
+      regions: allRegions,
+      countries: allCountries,
+      supportedCountries,
+      tuteriaSubjects: testAdapter.getTuteriaSubjects(),
+    });
+    await store.initializeTutorData(
+      result.staticData,
+      result.tutorInfo,
+      result.subjectData
+    );
+    setLoading(false);
+  }
+
+  React.useEffect(() => {
+    initialize();
+  }, []);
+
+  if (loading) {
+    return <LoadingState text="Fetching Tutor details..." />;
+  }
+  return (
+    <VerificationPage
+      sendVerification={() => {}}
+      isEmailVerified={store.emailVerified}
+      store={store.educationWorkHistory}
+    />
+  );
 };
 
 const quizStore: IQuizStore = QuizStore.create(
