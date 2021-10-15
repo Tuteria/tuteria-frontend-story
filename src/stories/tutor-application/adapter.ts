@@ -94,8 +94,8 @@ export const testAdapter: ServerAdapterType = {
   },
   updateTutorSubjectInfo: async (values, subject_id) => {
     console.log(values);
-    return await samplePromise({ values, subject_id });
     // return Promise.reject({})
+    return await samplePromise({ values, subject_id });
   },
   async saveSubjectImages(images) {
     let folder = "exhibitions";

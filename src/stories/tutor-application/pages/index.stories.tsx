@@ -147,7 +147,7 @@ const subjectStore = TutorSubject.create(
   {},
   { adapter: loadAdapter(testAdapter) }
 );
-export const SubjectCreation = () => {
+export const EditSubjectDetails = () => {
   const [loading, setLoading] = React.useState(true);
   React.useEffect(() => {
     testAdapter.getTutorSubjects({ pk }).then(({ tutorSubjects }) => {
