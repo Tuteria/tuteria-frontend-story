@@ -30,10 +30,6 @@ import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
 import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
-import {
-  OverlayRouter,
-  OverlayWrapper,
-} from "@tuteria/shared-lib/src/components/OverlayRouter";
 import { SUBJECT_EDIT_STEPS } from "@tuteria/shared-lib/src/stores/subject";
 
 export default {
@@ -233,15 +229,11 @@ export const Verification = () => {
     return <LoadingState text="Fetching Tutor details..." />;
   }
   return (
-    <OverlayRouter>
-      <OverlayWrapper>
-        <VerificationPage
-          sendVerification={() => {}}
-          isEmailVerified={store.emailVerified}
-          store={store.educationWorkHistory}
-        />
-      </OverlayWrapper>
-    </OverlayRouter>
+    <VerificationPage
+      sendVerification={() => {}}
+      isEmailVerified={store.emailVerified}
+      store={store.educationWorkHistory}
+    />
   );
 };
 
