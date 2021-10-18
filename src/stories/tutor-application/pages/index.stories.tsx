@@ -63,7 +63,7 @@ export const TutorPage = () => {
       countries: allCountries,
       tuteriaSubjects: testAdapter.getTuteriaSubjects(),
     });
-    await store.initializeTutorData(
+    store.initializeTutorData(
       result.staticData,
       result.tutorInfo,
       result.subjectData
@@ -241,7 +241,7 @@ export const Verification = () => {
       countries: [],
       tuteriaSubjects: [],
     });
-    await store.initializeTutorData(
+    store.initializeTutorData(
       result.staticData,
       { ...result.tutorInfo, currentStep: APPLICATION_STEPS.VERIFY },
       result.subjectData
