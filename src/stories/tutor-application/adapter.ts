@@ -36,8 +36,26 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[9] };
+  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[6] };
 }
+const initializeApplication = async (
+  adapter: AdapterType,
+  { regions, countries, tuteriaSubjects }
+) => {
+  storage.set(adapter.regionKey, regions);
+  storage.set(adapter.countryKey, countries);
+  storage.set(adapter.supportedCountriesKey, supportedCountries);
+  storage.set(adapter.tuteriaSubjectsKey, tuteriaSubjects);
+  return await samplePromise({
+    staticData: { regions, countries, supportedCountries },
+    tutorInfo: loadExistingTutorInfo(),
+    subjectData: {
+      tutorSubjects: SAMPLE_TUTOR_SUBJECTS,
+      tuteriaSubjects: tuteriaSubjects,
+      supportedCountries,
+    },
+  });
+};
 export const testAdapter: ServerAdapterType = {
   deleteSubject: async (id) => {
     return await samplePromise(id);
@@ -74,28 +92,8 @@ export const testAdapter: ServerAdapterType = {
     });
     return await samplePromise(existingSubjects);
   },
-  getTutorSubjects: async (subjectInfo) => {
-    let tutor_data = SAMPLE_TUTOR_SUBJECTS;
-    let result: {
-      tutorSubjects: any[];
-      tuteriaSubjects: any[];
-    } = await samplePromise(
-      // tutorSubjects: [],
-      {
-        tutorSubjects: tutor_data.map((tx) => {
-          return {
-            ...tx,
-          };
-        }),
-      }
-    );
-    if (subjectInfo?.pk) {
-      return {
-        tutorSubjects: [result.tutorSubjects[0]],
-      };
-    }
-    return result;
-    // if session storage exists return the tuteria subjects else fetch
+  getTutorSubject: (tutorSubjects, subjectInfo) => {
+    return { ...SAMPLE_TUTOR_SUBJECTS[0], quizzes: subjectInfo.subjects };
   },
   updateTutorSubjectInfo: async (values, subject_id) => {
     console.log(values);
@@ -181,22 +179,23 @@ export const testAdapter: ServerAdapterType = {
     console.log(subjectInfo);
     return await samplePromise(quiz[0]);
   },
-  initializeApplication: async (
-    adapter: AdapterType,
-    { regions, countries, tuteriaSubjects }
-  ) => {
-    storage.set(adapter.regionKey, regions);
-    storage.set(adapter.countryKey, countries);
-    storage.set(adapter.supportedCountriesKey, supportedCountries);
-    storage.set(adapter.tuteriaSubjectsKey, tuteriaSubjects);
-    return await samplePromise({
-      staticData: { regions, countries, supportedCountries },
-      tutorInfo: loadExistingTutorInfo(),
-      subjectData: {
-        tutorSubjects: SAMPLE_TUTOR_SUBJECTS,
-        tuteriaSubjects: tuteriaSubjects,
-        supportedCountries,
-      },
-    });
+  sendEmailVerification: async () => {
+    return await samplePromise("Email sent");
   },
+  submitVideoRecording: async (url) => {
+    return await samplePromise(url);
+  },
+  initializeSubject: async (adapter, subjectInfo, key) => {
+    let response = await initializeApplication(adapter, {
+      regions: [],
+      countries: [],
+      tuteriaSubjects: subjectInfo.subjects,
+    });
+    let foundSubject = {
+      ...SAMPLE_TUTOR_SUBJECTS[0],
+      quizzes: subjectInfo.subjects,
+    };
+    return { foundSubject, response };
+  },
+  initializeApplication,
 };
