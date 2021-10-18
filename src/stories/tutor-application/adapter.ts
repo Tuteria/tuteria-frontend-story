@@ -36,7 +36,7 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[6] };
+  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[1] };
 }
 const initializeApplication = async (
   adapter: AdapterType,
