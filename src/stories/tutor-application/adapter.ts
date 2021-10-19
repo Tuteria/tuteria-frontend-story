@@ -8,7 +8,9 @@ import {
   SAMPLE_TUTOR_DATA,
   SAMPLE_TUTOR_SUBJECTS,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
-import DATA from "@tuteria/shared-lib/src/data/sample-quiz-data";
+import DATA, {
+  SAMPLE_QUIZ_DATA,
+} from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
 import BANK_DATA from "@tuteria/shared-lib/src/data/banks.json";
 import storage from "@tuteria/shared-lib/src/local-storage";
@@ -38,7 +40,7 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[2] };
+  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[5] };
 }
 const initializeApplication = async (
   adapter: AdapterType,
@@ -185,9 +187,14 @@ export const testAdapter: ServerAdapterType = {
   submitQuizResults: async (payload) => {
     return await samplePromise({ payload });
   },
-  buildQuizData: async (subjectInfo, quiz) => {
+  buildQuizData: async (subjectInfo) => {
     console.log(subjectInfo);
-    return await samplePromise(quiz[0]);
+    const quiz = {
+      ...SAMPLE_QUIZ_DATA,
+      questions: SAMPLE_QUIZ_DATA.questions.slice(0, 5),
+    };
+
+    return await samplePromise(quiz);
   },
   sendEmailVerification: async () => {
     return await samplePromise("Email sent");

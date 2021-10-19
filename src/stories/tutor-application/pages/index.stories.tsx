@@ -10,6 +10,7 @@ import { SAMPLE_TUTERIA_SUBJECTS } from "@tuteria/shared-lib/src/data/tutor-appl
 import {
   buildProfileInfo,
   initializeStore,
+  ITuteriaSubject,
   TutorSubject,
 } from "@tuteria/shared-lib/src/stores";
 import { APPLICATION_STEPS } from "@tuteria/shared-lib/src/stores/rootStore";
@@ -18,7 +19,9 @@ import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
 import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
 import QuizSelectionView from "@tuteria/shared-lib/src/tutor-revamp/QuizSelectionView";
-import QuizPage from "@tuteria/shared-lib/src/tutor-revamp/quizzes/Quiz";
+import QuizPage, {
+  TuteriaQuizPage,
+} from "@tuteria/shared-lib/src/tutor-revamp/quizzes/Quiz";
 import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
 import QuizStore, {
   IQuizStore,
@@ -104,54 +107,35 @@ const navigateToSubject = () => {
 const subjectInfo = SAMPLE_TUTERIA_SUBJECTS[2];
 
 export const TestSelectionPage = () => {
-  const toast = useToast();
-  const [testableSubjects, setTestableSubjects] = React.useState([]);
   const [canTakeQuiz, setTakeQuiz] = React.useState(true);
-
-  const onNextClick = (selectedQuizzesToTake) => {
-    console.log(selectedQuizzesToTake);
-    console.log("Generating Quiz");
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({});
-      }, 3000);
-    });
-  };
+  const [inst, setInst] = React.useState(null);
 
   async function initialize(setLoading) {
     try {
-      let { foundSubject } = await testAdapter.initializeSubject(
-        adapter,
-        subjectInfo
-      );
-      if (foundSubject) {
-        setTakeQuiz(true);
-        setTestableSubjects(foundSubject.quizzes.map((o) => o.name));
-        setLoading(false);
-      } else {
-        setTakeQuiz(false);
-        toast({
-          title: `Not permitted to take ${subjectInfo.name} quiz`,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-        });
-      }
+      let result = await testAdapter.initializeApplication(adapter, {
+        regions: allRegions,
+        countries: allCountries,
+        tuteriaSubjects: testAdapter.getTuteriaSubjects(),
+      });
+      store.initializeTutorData(result);
+      store.subject.setCurrentSubjectId(209699);
+      setInst(store.subject.tuteriaSubjectForCurrentSubject);
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       throw error;
     }
   }
-
+  let _subjectInfo = store.subject.tuteriaSubjectForCurrentSubject;
+  console.log({ _subjectInfo });
   return (
     <LoadingStateWrapper initialize={initialize} text="Fetching Subjects...">
-      <QuizSelectionView
+      <TuteriaQuizPage
+        store={store.subject.currentSubject}
         canTakeQuiz={canTakeQuiz}
-        generateQuiz={onNextClick}
-        testSubject={subjectInfo.name}
-        testableSubjects={testableSubjects}
-        toSubjectPage={navigateToSubject}
+        navigateToSubject={navigateToSubject}
+        toSubjectEditPage={() => navigate("/skills")}
+        subjectInfo={inst}
       />
     </LoadingStateWrapper>
   );
@@ -187,7 +171,7 @@ export const EditSubjectPage = () => {
       text="Fetching subject details..."
       initialize={initialize}
     >
-      <SubjectEditView store={subjectStore}>
+      <SubjectEditView type="hide" store={subjectStore}>
         {(currentForm) => {
           if (currentForm === SUBJECT_EDIT_STEPS.PREVIEW) {
             return (
@@ -303,10 +287,9 @@ export const Quiz = () => {
         subjectsToTake.includes(o.url)
       ),
     };
-    testAdapter.buildQuizData(newSubjectInfo, [quiz]).then((_quiz) => {
-      quizStore.initializeQuiz(_quiz, subjects);
-      setLoaded(true);
-    });
+    let _quiz = await testAdapter.buildQuizData(newSubjectInfo, [quiz]);
+    quizStore.initializeQuiz(_quiz, subjects);
+    setLoaded(false);
   }
 
   function redirect() {
