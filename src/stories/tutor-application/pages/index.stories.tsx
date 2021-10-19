@@ -63,11 +63,7 @@ export const TutorPage = () => {
       countries: allCountries,
       tuteriaSubjects: testAdapter.getTuteriaSubjects(),
     });
-    store.initializeTutorData(
-      result.staticData,
-      result.tutorInfo,
-      result.subjectData
-    );
+    store.initializeTutorData(result);
     if (store.currentStep === APPLICATION_STEPS.APPLY) {
       setLoading(false);
     } else {
@@ -177,11 +173,7 @@ export const EditSubjectPage = () => {
         );
 
       if (foundSubject) {
-        await store.initializeTutorData(
-          result.staticData,
-          result.tutorInfo,
-          result.subjectData
-        );
+        store.initializeTutorData(result);
         subjectStore.initialize(foundSubject);
         setLoading(false);
       }
@@ -241,11 +233,10 @@ export const Verification = () => {
       countries: [],
       tuteriaSubjects: [],
     });
-    store.initializeTutorData(
-      result.staticData,
-      { ...result.tutorInfo, currentStep: APPLICATION_STEPS.VERIFY },
-      result.subjectData
-    );
+    store.initializeTutorData({
+      ...result,
+      tutorInfo: { ...result.tutorInfo, currentStep: APPLICATION_STEPS.VERIFY },
+    });
     if (store.currentStep === APPLICATION_STEPS.VERIFY) {
       setLoading(false);
     } else {
