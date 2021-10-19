@@ -17,7 +17,7 @@ function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(data);
-    }, 200);
+    }, 300);
   });
 }
 const formIds = {
