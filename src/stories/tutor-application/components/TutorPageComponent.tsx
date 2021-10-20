@@ -2,7 +2,7 @@ import { Button, Stack } from "@chakra-ui/react";
 import FormWrapper, {
   useTutorApplicationFlow,
 } from "@tuteria/shared-lib/src/components/FormWrapper";
-import { IRootStore } from "@tuteria/shared-lib/src/stores";
+import { buildProfileInfo, IRootStore } from "@tuteria/shared-lib/src/stores";
 import { STEPS } from "@tuteria/shared-lib/src/stores/rootStore";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
 import { observer } from "mobx-react-lite";
@@ -49,19 +49,18 @@ const TeachingProfile = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/SpecialNeeds")
 );
 
+const TutorProfile = React.lazy(
+  () => import("@tuteria/shared-lib/src/tutor-revamp/TutorPreview")
+);
+
 const TutorPageComponent: React.FC<{
   store: IRootStore;
   onTakeTest: (subject: string) => string;
   onEditSubject: (subject: any) => any;
   onNextStep?: () => any;
 }> = ({ store, onTakeTest, onEditSubject, onNextStep, ...rest }) => {
-  const {
-    getFormWrapperProps,
-    formIndex,
-    steps,
-    activeStep,
-    completedForm,
-  } = useTutorApplicationFlow(store);
+  const { getFormWrapperProps, formIndex, steps, activeStep, completedForm } =
+    useTutorApplicationFlow(store);
 
   return (
     <TutorPageWrapper
@@ -83,7 +82,17 @@ const TutorPageComponent: React.FC<{
         <TutorSubjectsPage
           {...getFormWrapperProps(STEPS.SUBJECT_SELECTION)}
           onTakeTest={onTakeTest}
-          onEditSubject={onEditSubject}
+          renderPreview={(subjectStore) => {
+            return (
+              <TutorProfile
+                {...buildProfileInfo(
+                  store,
+                  subjectStore
+                )} /*onBackClick={onBackClick}*/
+              />
+            );
+          }}
+          // onEditSubject={onEditSubject}
         />
 
         <ScheduleCard {...getFormWrapperProps(STEPS.SCHEDULE_INFO)} />

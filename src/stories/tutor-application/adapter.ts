@@ -1,5 +1,6 @@
 import {
   AdapterType,
+  ResponseType,
   ServerAdapterType,
 } from "@tuteria/shared-lib/src/adapter";
 import {
@@ -7,17 +8,20 @@ import {
   SAMPLE_TUTOR_DATA,
   SAMPLE_TUTOR_SUBJECTS,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
-import DATA from "@tuteria/shared-lib/src/data/sample-quiz-data";
+import DATA, {
+  SAMPLE_QUIZ_DATA,
+} from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
 import BANK_DATA from "@tuteria/shared-lib/src/data/banks.json";
 import storage from "@tuteria/shared-lib/src/local-storage";
 import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
+import educationWorkData from "@tuteria/shared-lib/src/data/educationData.json";
 
 function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(data);
-    }, 2000);
+    }, 300);
   });
 }
 const formIds = {
@@ -36,7 +40,7 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[6] };
+  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[5] };
 }
 const initializeApplication = async (
   adapter: AdapterType,
@@ -47,7 +51,16 @@ const initializeApplication = async (
   storage.set(adapter.supportedCountriesKey, supportedCountries);
   storage.set(adapter.tuteriaSubjectsKey, tuteriaSubjects);
   return await samplePromise({
-    staticData: { regions, countries, supportedCountries },
+    staticData: {
+      regions,
+      countries,
+      supportedCountries,
+      educationData: {
+        degree_data: educationWorkData.degree_data,
+        grade_data: educationWorkData.grade_data,
+        specialities: educationWorkData.specialities,
+      },
+    },
     tutorInfo: loadExistingTutorInfo(),
     subjectData: {
       tutorSubjects: SAMPLE_TUTOR_SUBJECTS,
@@ -175,9 +188,14 @@ export const testAdapter: ServerAdapterType = {
   submitQuizResults: async (payload) => {
     return await samplePromise({ payload });
   },
-  buildQuizData: async (subjectInfo, quiz) => {
+  buildQuizData: async (subjectInfo) => {
     console.log(subjectInfo);
-    return await samplePromise(quiz[0]);
+    const quiz = {
+      ...SAMPLE_QUIZ_DATA,
+      questions: SAMPLE_QUIZ_DATA.questions.slice(0, 5),
+    };
+
+    return await samplePromise(quiz);
   },
   sendEmailVerification: async () => {
     return await samplePromise("Email sent");
