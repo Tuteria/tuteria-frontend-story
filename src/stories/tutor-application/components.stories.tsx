@@ -1,23 +1,22 @@
+import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
-import allCountries from "@tuteria/shared-lib/src/data/countries.json";
-import allRegions from "@tuteria/shared-lib/src/data/regions.json";
 import {
   OverlayRouter,
   OverlayWrapper,
 } from "@tuteria/shared-lib/src/components/OverlayRouter";
+import allCountries from "@tuteria/shared-lib/src/data/countries.json";
+import allRegions from "@tuteria/shared-lib/src/data/regions.json";
 import { RootStore } from "@tuteria/shared-lib/src/stores";
-import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
-import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
-import { SubjectsCardMobile } from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditForm";
-import SubjectAdditionPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
-import { PhotoVerification } from "@tuteria/shared-lib/src/tutor-revamp/PhotoIdentity";
-import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
-import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUploader";
-import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity";
-import React from "react";
-import { Box, CheckboxGroup, Collapse, Switch } from "@chakra-ui/react";
 import PasswordSection from "@tuteria/shared-lib/src/tutor-revamp/PasswordSection";
+import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
 import ScheduleCard from "@tuteria/shared-lib/src/tutor-revamp/Schedule";
+import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
+import SubjectAdditionPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
+import { SubjectsCardMobile } from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditForm";
+import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
+import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity";
+import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUploader";
+import React from "react";
 
 export default {
   title: "Tutor Application/Components",
