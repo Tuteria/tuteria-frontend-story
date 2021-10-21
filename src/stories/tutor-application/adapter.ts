@@ -30,8 +30,8 @@ const formIds = {
   3: "education-history",
   4: "work-history",
   5: "subject-selection",
-  6: "verification-info",
-  7: "schedule-info",
+  6: "schedule-info",
+  7: "verification-info",
   8: "agreement-info",
   9: "guarantors-info",
   10: "payment-info",
@@ -40,7 +40,7 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[5] };
+  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[8] };
 }
 const initializeApplication = async (
   adapter: AdapterType,
