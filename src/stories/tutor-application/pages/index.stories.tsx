@@ -18,7 +18,6 @@ import { SUBJECT_EDIT_STEPS } from "@tuteria/shared-lib/src/stores/subject";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
 import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
-import QuizSelectionView from "@tuteria/shared-lib/src/tutor-revamp/QuizSelectionView";
 import QuizPage, {
   TuteriaQuizPage,
 } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/Quiz";
