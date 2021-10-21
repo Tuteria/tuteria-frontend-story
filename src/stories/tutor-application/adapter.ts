@@ -147,8 +147,7 @@ export const testAdapter: ServerAdapterType = {
     let result = await samplePromise([
       {
         public_id: slug,
-        url:
-          "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+        url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
         quality: false,
       },
     ]);
@@ -164,8 +163,7 @@ export const testAdapter: ServerAdapterType = {
         name: o.name,
         size: o.size?.toString(),
         public_id: "the_public_id",
-        url:
-          "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
+        url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
       }))
     );
   },
@@ -201,11 +199,14 @@ export const testAdapter: ServerAdapterType = {
 
     return await samplePromise(quiz);
   },
-  sendEmailVerification: async () => {
-    return await samplePromise("Email sent");
+  sendEmailVerification: async ({ email, code }) => {
+    if (code) {
+      return await samplePromise({ status: "Email verified", verified: true });
+    }
+    return await samplePromise(undefined);
   },
   submitVideoRecording: async (url) => {
-    return await samplePromise(url);
+    return await samplePromise({ id: "sample-video", url });
   },
   initializeSubject: async (adapter, subjectInfo, key) => {
     let response = await initializeApplication(adapter, {

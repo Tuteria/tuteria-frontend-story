@@ -1,4 +1,3 @@
-import { useToast } from "@chakra-ui/react";
 import { linkTo } from "@storybook/addon-links";
 import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
@@ -10,15 +9,16 @@ import { SAMPLE_TUTERIA_SUBJECTS } from "@tuteria/shared-lib/src/data/tutor-appl
 import {
   buildProfileInfo,
   initializeStore,
-  ITuteriaSubject,
   TutorSubject,
 } from "@tuteria/shared-lib/src/stores";
-import { APPLICATION_STEPS } from "@tuteria/shared-lib/src/stores/rootStore";
+import {
+  APPLICATION_STEPS,
+  STEPS,
+} from "@tuteria/shared-lib/src/stores/rootStore";
 import { SUBJECT_EDIT_STEPS } from "@tuteria/shared-lib/src/stores/subject";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
 import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
-import QuizSelectionView from "@tuteria/shared-lib/src/tutor-revamp/QuizSelectionView";
 import QuizPage, {
   TuteriaQuizPage,
 } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/Quiz";
@@ -219,7 +219,11 @@ export const Verification = () => {
     });
     store.initializeTutorData({
       ...result,
-      tutorInfo: { ...result.tutorInfo, currentStep: APPLICATION_STEPS.VERIFY },
+      tutorInfo: {
+        ...result.tutorInfo,
+        currentStep: APPLICATION_STEPS.VERIFY,
+        currentEditableForm: STEPS.VIDEO_SUMMARY,
+      },
     });
     if (store.currentStep === APPLICATION_STEPS.VERIFY) {
       setLoading(false);
