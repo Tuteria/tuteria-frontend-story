@@ -30,8 +30,8 @@ const formIds = {
   3: "education-history",
   4: "work-history",
   5: "subject-selection",
-  6: "schedule-info",
-  7: "verification-info",
+  6: "verification-info",
+  7: "schedule-info",
   8: "agreement-info",
   9: "guarantors-info",
   10: "payment-info",
@@ -40,7 +40,7 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[8] };
+  return { ...SAMPLE_TUTOR_DATA, appData: { currentEditableForm: formIds[5] } };
 }
 const initializeApplication = async (
   adapter: AdapterType,
@@ -59,6 +59,8 @@ const initializeApplication = async (
         degree_data: educationWorkData.degree_data,
         grade_data: educationWorkData.grade_data,
         specialities: educationWorkData.specialities,
+        sources: educationWorkData.sources,
+        languages: educationWorkData.languages,
       },
     },
     tutorInfo: loadExistingTutorInfo(),
@@ -169,6 +171,9 @@ export const testAdapter: ServerAdapterType = {
       }))
     );
   },
+  remoteDeleteImage: async (files: any[]) => {
+    return await samplePromise(files);
+  },
   cloudinaryApiHandler: async (files: any[], progressCallback) => {
     let promises = files.map((o) =>
       uploadToCloudinary(o, progressCallback).then((b) => {
@@ -207,11 +212,14 @@ export const testAdapter: ServerAdapterType = {
   beginQuiz: async (payload) => {
     return await samplePromise({});
   },
-  sendEmailVerification: async () => {
-    return await samplePromise("Email sent");
+  sendEmailVerification: async ({ email, code }) => {
+    if (code) {
+      return await samplePromise({ status: "Email verified", verified: true });
+    }
+    return await samplePromise(undefined);
   },
   submitVideoRecording: async (url) => {
-    return await samplePromise(url);
+    return await samplePromise({ id: "sample-video", url });
   },
   initializeSubject: async (adapter, subjectInfo, key) => {
     let response = await initializeApplication(adapter, {
