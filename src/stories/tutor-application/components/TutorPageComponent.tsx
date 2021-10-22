@@ -55,12 +55,17 @@ const TutorProfile = React.lazy(
 
 const TutorPageComponent: React.FC<{
   store: IRootStore;
-  onTakeTest: (subject: string) => string;
-  onEditSubject: (subject: any) => any;
+  onTakeTest?: (subject: string) => string;
+  onEditSubject?: (subject: any) => any;
   onNextStep?: () => any;
 }> = ({ store, onTakeTest, onEditSubject, onNextStep, ...rest }) => {
-  const { getFormWrapperProps, formIndex, steps, activeStep, completedForm } =
-    useTutorApplicationFlow(store);
+  const {
+    getFormWrapperProps,
+    formIndex,
+    steps,
+    activeStep,
+    completedForm,
+  } = useTutorApplicationFlow(store);
 
   return (
     <TutorPageWrapper

@@ -57,7 +57,6 @@ export const TutorPage = () => {
       };
       navigate(options[store.currentStep]);
     }
-    await store.fetchBanksInfo();
   }
 
   return (

@@ -40,6 +40,15 @@ git clone git@gitlab.com:tuteria/tutor-frontend-app.git
 yarn install
 ```
 
+clone the tuteria data app
+
+```
+cd packages
+rm -rf tuteria-data
+git clone git@gitlab.com:tuteria/v2/tuteria-data.git
+yarn install
+```
+
 install packages in the root
 
 ```
