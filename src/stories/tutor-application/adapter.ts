@@ -192,6 +192,7 @@ export const testAdapter: ServerAdapterType = {
     return await samplePromise([]);
   },
   submitQuizResults: async (payload) => {
+    debugger;
     return await samplePromise({ payload });
   },
   buildQuizData: async (subjectInfo) => {
