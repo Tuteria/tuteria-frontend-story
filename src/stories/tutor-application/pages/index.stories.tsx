@@ -149,12 +149,14 @@ const subjectStore = TutorSubject.create(
 export const EditSubjectPage = () => {
   async function initialize(setLoading) {
     try {
-      let { foundSubject, response: result } =
-        await testAdapter.initializeSubject(
-          adapter,
-          { ...subjectInfo, id: pk },
-          "id"
-        );
+      let {
+        foundSubject,
+        response: result,
+      } = await testAdapter.initializeSubject(
+        adapter,
+        { ...subjectInfo, id: pk },
+        "id"
+      );
 
       if (foundSubject) {
         store.initializeTutorData(result);
@@ -219,7 +221,12 @@ export const Verification = () => {
     });
     store.initializeTutorData({
       ...result,
-      tutorInfo: { ...result.tutorInfo, currentStep: APPLICATION_STEPS.VERIFY },
+      tutorInfo: {
+        ...result.tutorInfo,
+        appData: {
+          currentStep: APPLICATION_STEPS.VERIFY,
+        },
+      },
     });
     if (store.currentStep === APPLICATION_STEPS.VERIFY) {
       setLoading(false);
