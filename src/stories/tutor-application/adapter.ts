@@ -137,9 +137,11 @@ export const testAdapter: ServerAdapterType = {
   fetchQuizQuestions: async (quizSubjects) => {
     return await samplePromise({ quiz: DATA.quiz, quizSubjects });
   },
+  saveSubject(subject_id, subject) {},
   loadExistingSubject(subject_id) {
     return SAMPLE_TUTOR_SUBJECTS[0];
   },
+  modifyExistingSubject(values) {},
   async uploadAndVerifyProfile(uploadedFile) {
     let { slug } = loadExistingTutorInfo();
     // this is useful for the parameters to send to cloudinary
@@ -199,7 +201,16 @@ export const testAdapter: ServerAdapterType = {
       questions: SAMPLE_QUIZ_DATA.questions.slice(0, 5),
     };
 
-    return await samplePromise(quiz);
+    const quizzes = subjectInfo.subjects.map((subject) => ({
+      name: subject.name,
+      passmark: subject.pass_mark,
+      questions: SAMPLE_QUIZ_DATA.questions.slice(0, 5),
+    }));
+
+    return await samplePromise([quiz, quizzes]);
+  },
+  beginQuiz: async (payload) => {
+    return await samplePromise({});
   },
   sendEmailVerification: async ({ email, code }) => {
     if (code) {
