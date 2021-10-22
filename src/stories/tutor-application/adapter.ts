@@ -40,7 +40,7 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, appData: { currentEditableForm: formIds[3] } };
+  return { ...SAMPLE_TUTOR_DATA, appData: { currentEditableForm: formIds[5] } };
 }
 const initializeApplication = async (
   adapter: AdapterType,
