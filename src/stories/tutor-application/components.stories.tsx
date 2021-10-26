@@ -295,12 +295,14 @@ const subjectStore = TutorSubject.create(
 export const EditSubjectPage = () => {
   async function initialize(setLoading) {
     try {
-      let { foundSubject, response: result } =
-        await testAdapter.initializeSubject(
-          adapter,
-          { ...subjectInfo, id: pk },
-          "id"
-        );
+      let {
+        foundSubject,
+        response: result,
+      } = await testAdapter.initializeSubject(
+        adapter,
+        { ...subjectInfo, id: pk },
+        "id"
+      );
 
       if (foundSubject) {
         store.initializeTutorData(result);

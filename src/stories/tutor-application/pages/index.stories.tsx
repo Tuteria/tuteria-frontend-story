@@ -57,7 +57,6 @@ export const TutorPage = () => {
       };
       navigate(options[store.currentStep]);
     }
-    await store.fetchBanksInfo();
   }
 
   return (
@@ -111,7 +110,12 @@ export const Verification = () => {
     });
     store.initializeTutorData({
       ...result,
-      tutorInfo: { ...result.tutorInfo, currentStep: APPLICATION_STEPS.VERIFY },
+      tutorInfo: {
+        ...result.tutorInfo,
+        appData: {
+          currentStep: APPLICATION_STEPS.VERIFY,
+        },
+      },
     });
     if (store.currentStep === APPLICATION_STEPS.VERIFY) {
       setLoading(false);
