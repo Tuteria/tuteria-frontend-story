@@ -131,6 +131,9 @@ export const testAdapter: ServerAdapterType = {
       caption: o.public_id,
     }));
   },
+  deleteSubjectImage: async (photoId) => {
+    return await samplePromise({});
+  },
   submitSelectedSubjects: async (data) => {
     return await samplePromise();
   },
