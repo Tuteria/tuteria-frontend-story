@@ -236,4 +236,7 @@ export const testAdapter: ServerAdapterType = {
     return { foundSubject, response };
   },
   initializeApplication,
+  authenticateUser: async ({ email, otp }) => {
+    return await samplePromise({ email, otp });
+  },
 };

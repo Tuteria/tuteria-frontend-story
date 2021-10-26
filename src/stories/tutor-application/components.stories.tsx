@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import { linkTo } from "@storybook/addon-links";
 import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
@@ -28,6 +28,7 @@ import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditVie
 import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
 import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity";
 import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUploader";
+import LoginModal from "@tuteria/shared-lib/src/tutor-application/Login/LoginModal";
 import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
 import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import QuizStore, {
@@ -409,5 +410,20 @@ export const Quiz = () => {
         onSubmitQuiz={onQuizSubmit}
       />
     </LoadingStateWrapper>
+  );
+};
+
+export const LoginWithModal = () => {
+  return (
+    <LoginModal
+      render={(onOpen) => <Button onClick={onOpen}>Open Modal</Button>}
+      email=""
+      onResendOTP={testAdapter.authenticateUser}
+      onOTPSubmit={testAdapter.authenticateUser}
+      onEmailSubmit={testAdapter.authenticateUser}
+      onNavigate={(data) => {
+        console.log(data);
+      }}
+    />
   );
 };
