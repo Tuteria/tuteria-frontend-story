@@ -1,21 +1,20 @@
 import {
   AdapterType,
-  ResponseType,
   ServerAdapterType,
 } from "@tuteria/shared-lib/src/adapter";
+import BANK_DATA from "@tuteria/shared-lib/src/data/banks.json";
+import educationWorkData from "@tuteria/shared-lib/src/data/educationData.json";
+import DATA, {
+  SAMPLE_QUIZ_DATA,
+} from "@tuteria/shared-lib/src/data/sample-quiz-data";
+import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 import {
   SAMPLE_TUTERIA_SUBJECTS,
   SAMPLE_TUTOR_DATA,
   SAMPLE_TUTOR_SUBJECTS,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
-import DATA, {
-  SAMPLE_QUIZ_DATA,
-} from "@tuteria/shared-lib/src/data/sample-quiz-data";
-import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
-import BANK_DATA from "@tuteria/shared-lib/src/data/banks.json";
 import storage from "@tuteria/shared-lib/src/local-storage";
-import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
-import educationWorkData from "@tuteria/shared-lib/src/data/educationData.json";
+import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
 
 function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
