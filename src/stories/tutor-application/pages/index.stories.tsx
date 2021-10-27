@@ -14,10 +14,12 @@ import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/Landing
 import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
 import VerificationPage from "@tuteria/shared-lib/src/tutor-revamp/VerificationPage";
 import "katex/dist/katex.min.css";
+import LoginModal from "@tuteria/shared-lib/src/tutor-application/Login/LoginModal";
 import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
+import { useDisclosure } from "@chakra-ui/react";
 
 export default {
   title: "Tutor Application/Pages",
@@ -103,15 +105,37 @@ export const Login = () => {
 };
 
 export const LandingPage = () => {
+  const isUserLoggedIn = async (): Promise<{
+    loggedIn: boolean;
+    email: string;
+  }> => {
+    return await new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ loggedIn: true, email: "john@example.com" });
+      }, 200);
+    });
+  };
+
+  const onSubmit: any = async (data) => {
+    return await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({ loggedIn: false });
+      }, 200);
+    });
+  };
+  const onLogIn = async (values, key) => {
+    return await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({});
+      }, 200);
+    });
+  };
   return (
     <LandingView
-      onSubmit={(data) => {
-        console.log(data);
-      }}
-      email=""
-      onLogin={testAdapter.authenticateUser}
-      isLoggedIn={false}
-      continueUrl=""
+      onSubmit={onSubmit}
+      continueUrl="/apply"
+      onLogin={onLogIn}
+      isUserLoggedIn={isUserLoggedIn}
     />
   );
 };
