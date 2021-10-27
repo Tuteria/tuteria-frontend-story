@@ -130,7 +130,7 @@ export const testAdapter: ServerAdapterType = {
       caption: o.public_id,
     }));
   },
-  deleteMedia: async (data) => {
+  remoteDeleteImage: async (data) => {
     return await samplePromise({});
   },
   submitSelectedSubjects: async (data) => {
