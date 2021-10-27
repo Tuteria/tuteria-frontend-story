@@ -98,6 +98,11 @@ export const LandingPage = () => {
       onSubmit={(data) => {
         console.log(data);
       }}
+      email=""
+      onResendOTP={testAdapter.authenticateUser}
+      onOTPSubmit={testAdapter.authenticateUser}
+      onEmailSubmit={testAdapter.authenticateUser}
+      onNavigate={() => navigate("/complete")}
     />
   );
 };
