@@ -15,6 +15,7 @@ import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
+import TutorLandingPage from "@tuteria/shared-lib/src/tutor-application/pages/TutorLandingPage";
 
 export default {
   title: "Tutor Application/Pages",
@@ -91,14 +92,17 @@ export const Login = () => {
   );
 };
 
+// export const LandingPage = () => {
+//   return (
+//     <LandingView
+//       onSubmit={(data) => {
+//         console.log(data);
+//       }}
+//     />
+//   );
+// };
 export const LandingPage = () => {
-  return (
-    <LandingView
-      onSubmit={(data) => {
-        console.log(data);
-      }}
-    />
-  );
+  return <TutorLandingPage />;
 };
 
 export const Verification = () => {
