@@ -418,12 +418,7 @@ export const LoginWithModal = () => {
     <LoginModal
       render={(onOpen) => <Button onClick={onOpen}>Open Modal</Button>}
       email=""
-      onResendOTP={testAdapter.authenticateUser}
-      onOTPSubmit={testAdapter.authenticateUser}
-      onEmailSubmit={testAdapter.authenticateUser}
-      onNavigate={(data) => {
-        console.log(data);
-      }}
+      onLogin={testAdapter.authenticateUser}
     />
   );
 };
