@@ -5,7 +5,10 @@ import { LoadingStateWrapper } from "@tuteria/shared-lib/src/components/data-dis
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
 import { initializeStore } from "@tuteria/shared-lib/src/stores";
-import { APPLICATION_STEPS } from "@tuteria/shared-lib/src/stores/rootStore";
+import {
+  APPLICATION_STEPS,
+  STEPS,
+} from "@tuteria/shared-lib/src/stores/rootStore";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
 import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
@@ -21,7 +24,7 @@ export default {
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <Suspense fallback={<h1>Still Loading…</h1>}>
+        <Suspense fallback={null}>
           <Story />
         </Suspense>
       </ThemeProvider>
@@ -60,8 +63,9 @@ export const TutorPage = () => {
   }
 
   return (
-    <LoadingStateWrapper initialize={initialize}>
+    <LoadingStateWrapper defaultLoading={false} initialize={initialize}>
       <TutorPageComponent
+        currentStep={STEPS.LOCATION_INFO}
         store={store}
         onEditSubject={(subject) => {
           return "/skills";
