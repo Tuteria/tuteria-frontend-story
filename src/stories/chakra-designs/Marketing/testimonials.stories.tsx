@@ -9,7 +9,7 @@ import WithVideoComponent from "@tuteria/shared-lib/src/components/chakra-pro/Te
 import React from "react";
 
 export default {
-  title: "Components/Chakra Pro/Testimonials",
+  title: "Raw Designs/Marketing/Testimonials",
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>

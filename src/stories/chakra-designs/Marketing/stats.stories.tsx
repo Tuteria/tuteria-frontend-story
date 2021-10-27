@@ -1,11 +1,10 @@
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
-import SimpleWithBadgeComponent from "@tuteria/shared-lib/src/components/chakra-pro/Menu/SimpleWithBadge";
-import WithStartIcon from "@tuteria/shared-lib/src/components/chakra-pro/Menu/WithStartIcon";
+import StatsWithCardComponent from "@tuteria/shared-lib/src/components/chakra-pro/Stats/StatsWithCard";
 import React from "react";
 
 export default {
-  title: "Components/Chakra Pro/Menu",
+  title: "Raw Designs/Marketing/Stats",
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
@@ -26,9 +25,6 @@ export default {
   ],
 };
 
-export const SimpleWithBadge = () => {
-  return <SimpleWithBadgeComponent />;
-};
-export const MenuWithStartIcon = () => {
-  return <WithStartIcon />;
+export const StatsWithCard = () => {
+  return <StatsWithCardComponent />;
 };

@@ -9,7 +9,7 @@ import React from "react";
 import { Box } from "@chakra-ui/react";
 
 export default {
-  title: "Components/Chakra Pro/Heroes",
+  title: "Raw Designs/Marketing/Heroes",
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
