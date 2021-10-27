@@ -87,10 +87,17 @@ export const TutorPage = () => {
 export const Login = () => {
   return (
     <LoginPage
-      onResendOTP={() => {}}
-      onOTPSubmit={() => {}}
-      onEmailSubmit={() => {}}
-      onNavigate={() => {}}
+      onLogin={async (data, key) => {
+        console.log(key);
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (key === "otp-code") {
+              navigate("/verify");
+            }
+            resolve({});
+          }, 200);
+        });
+      }}
     />
   );
 };
