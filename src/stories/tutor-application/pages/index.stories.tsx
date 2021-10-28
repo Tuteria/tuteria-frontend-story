@@ -5,7 +5,10 @@ import { LoadingStateWrapper } from "@tuteria/shared-lib/src/components/data-dis
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
 import { initializeStore } from "@tuteria/shared-lib/src/stores";
-import { APPLICATION_STEPS } from "@tuteria/shared-lib/src/stores/rootStore";
+import {
+  APPLICATION_STEPS,
+  STEPS,
+} from "@tuteria/shared-lib/src/stores/rootStore";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
 import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
@@ -15,14 +18,13 @@ import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
-import TutorLandingPage from "@tuteria/shared-lib/src/tutor-application/pages/TutorLandingPage";
 
 export default {
   title: "Tutor Application/Pages",
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <Suspense fallback={<h1>Still Loading…</h1>}>
+        <Suspense fallback={null}>
           <Story />
         </Suspense>
       </ThemeProvider>
@@ -61,8 +63,9 @@ export const TutorPage = () => {
   }
 
   return (
-    <LoadingStateWrapper initialize={initialize}>
+    <LoadingStateWrapper defaultLoading={false} initialize={initialize}>
       <TutorPageComponent
+        currentStep={STEPS.LOCATION_INFO}
         store={store}
         onEditSubject={(subject) => {
           return "/skills";
@@ -84,10 +87,17 @@ export const TutorPage = () => {
 export const Login = () => {
   return (
     <LoginPage
-      onResendOTP={() => {}}
-      onOTPSubmit={() => {}}
-      onEmailSubmit={() => {}}
-      onNavigate={() => {}}
+      onLogin={async (data, key) => {
+        console.log(key);
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (key === "otp-code") {
+              navigate("/verify");
+            }
+            resolve({});
+          }, 200);
+        });
+      }}
     />
   );
 };
@@ -102,7 +112,39 @@ export const Login = () => {
 //   );
 // };
 export const LandingPage = () => {
-  return <TutorLandingPage />;
+  const isUserLoggedIn = async (): Promise<{
+    loggedIn: boolean;
+    email: string;
+  }> => {
+    return await new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ loggedIn: true, email: "john@example.com" });
+      }, 200);
+    });
+  };
+
+  const onSubmit: any = async (data) => {
+    return await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({ loggedIn: false });
+      }, 200);
+    });
+  };
+  const onLogIn = async (values, key) => {
+    return await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({});
+      }, 200);
+    });
+  };
+  return (
+    <LandingView
+      onSubmit={onSubmit}
+      continueUrl="/apply"
+      onLogin={onLogIn}
+      isUserLoggedIn={isUserLoggedIn}
+    />
+  );
 };
 
 export const Verification = () => {

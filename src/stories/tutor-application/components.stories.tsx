@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button, useDisclosure } from "@chakra-ui/react";
 import { linkTo } from "@storybook/addon-links";
 import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
@@ -28,6 +28,7 @@ import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditVie
 import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
 import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity";
 import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUploader";
+import LoginModal from "@tuteria/shared-lib/src/tutor-application/Login/LoginModal";
 import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
 import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import QuizStore, {
@@ -295,14 +296,12 @@ const subjectStore = TutorSubject.create(
 export const EditSubjectPage = () => {
   async function initialize(setLoading) {
     try {
-      let {
-        foundSubject,
-        response: result,
-      } = await testAdapter.initializeSubject(
-        adapter,
-        { ...subjectInfo, id: pk },
-        "id"
-      );
+      let { foundSubject, response: result } =
+        await testAdapter.initializeSubject(
+          adapter,
+          { ...subjectInfo, id: pk },
+          "id"
+        );
 
       if (foundSubject) {
         store.initializeTutorData(result);
@@ -411,5 +410,20 @@ export const Quiz = () => {
         onSubmitQuiz={onQuizSubmit}
       />
     </LoadingStateWrapper>
+  );
+};
+
+export const LoginWithModal = () => {
+  const { onOpen, isOpen, onClose } = useDisclosure();
+  return (
+    <>
+      <Button onClick={onOpen}>Open Modal</Button>
+      <LoginModal
+        isOpen={isOpen}
+        onClose={onClose}
+        email=""
+        onLogin={testAdapter.authenticateUser}
+      />
+    </>
   );
 };
