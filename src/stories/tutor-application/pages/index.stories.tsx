@@ -112,13 +112,14 @@ export const Login = () => {
 //   );
 // };
 export const LandingPage = () => {
+  const [tutors, setTutors] = React.useState([]);
   const isUserLoggedIn = async (): Promise<{
     loggedIn: boolean;
     email: string;
   }> => {
     return await new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve({ loggedIn: true, email: "john@example.com" });
+        resolve({ loggedIn: false, email: "" });
       }, 200);
     });
   };
@@ -137,12 +138,19 @@ export const LandingPage = () => {
       }, 200);
     });
   };
+
+  React.useEffect(() => {
+    testAdapter.fetchLandingPageTutors().then((res) => {
+      setTutors(res);
+    });
+  });
   return (
     <LandingView
       onSubmit={onSubmit}
       continueUrl="/apply"
       onLogin={onLogIn}
       isUserLoggedIn={isUserLoggedIn}
+      tutors={tutors}
     />
   );
 };
