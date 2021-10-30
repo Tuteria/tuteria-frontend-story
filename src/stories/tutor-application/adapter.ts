@@ -17,7 +17,7 @@ function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(data);
-    }, 300);
+    }, 200);
   });
 }
 const formIds = {
@@ -36,7 +36,7 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[6] };
+  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[9] };
 }
 const initializeApplication = async (
   adapter: AdapterType,
