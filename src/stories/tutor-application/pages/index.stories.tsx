@@ -67,7 +67,7 @@ export const TutorPage = () => {
   return (
     <LoadingStateWrapper defaultLoading={false} initialize={initialize}>
       <TutorPageComponent
-        // currentStep={STEPS.LOCATION_INFO}
+        currentStep={STEPS.NEW_DEVELOPMENT}
         store={store}
         onEditSubject={(subject) => {
           return "/skills";
