@@ -65,9 +65,9 @@ export const TutorPage = () => {
   }
 
   return (
-    <LoadingStateWrapper defaultLoading={false} initialize={initialize}>
+    <LoadingStateWrapper defaultLoading={true} initialize={initialize}>
       <TutorPageComponent
-        currentStep={STEPS.NEW_DEVELOPMENT}
+        // currentStep={store.currentEditableForm}
         store={store}
         onEditSubject={(subject) => {
           return "/skills";
