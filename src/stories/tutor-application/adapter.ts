@@ -2,22 +2,25 @@ import {
   AdapterType,
   ServerAdapterType,
 } from "@tuteria/shared-lib/src/adapter";
+import BANK_DATA from "@tuteria/shared-lib/src/data/banks.json";
+import educationWorkData from "@tuteria/shared-lib/src/data/educationData.json";
+import DATA, {
+  SAMPLE_QUIZ_DATA,
+} from "@tuteria/shared-lib/src/data/sample-quiz-data";
+import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 import {
   SAMPLE_TUTERIA_SUBJECTS,
   SAMPLE_TUTOR_DATA,
   SAMPLE_TUTOR_SUBJECTS,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
-import DATA from "@tuteria/shared-lib/src/data/sample-quiz-data";
-import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
-import BANK_DATA from "@tuteria/shared-lib/src/data/banks.json";
 import storage from "@tuteria/shared-lib/src/local-storage";
-import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
+import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
 
 function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(data);
-    }, 200);
+    }, 300);
   });
 }
 const formIds = {
@@ -36,7 +39,10 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, currentEditableForm: formIds[9] };
+  return {
+    ...SAMPLE_TUTOR_DATA,
+    appData: { currentEditableForm: formIds[11] },
+  };
 }
 const initializeApplication = async (
   adapter: AdapterType,
@@ -47,7 +53,18 @@ const initializeApplication = async (
   storage.set(adapter.supportedCountriesKey, supportedCountries);
   storage.set(adapter.tuteriaSubjectsKey, tuteriaSubjects);
   return await samplePromise({
-    staticData: { regions, countries, supportedCountries },
+    staticData: {
+      regions,
+      countries,
+      supportedCountries,
+      educationData: {
+        degree_data: educationWorkData.degree_data,
+        grade_data: educationWorkData.grade_data,
+        specialities: educationWorkData.specialities,
+        sources: educationWorkData.sources,
+        languages: educationWorkData.languages,
+      },
+    },
     tutorInfo: loadExistingTutorInfo(),
     subjectData: {
       tutorSubjects: SAMPLE_TUTOR_SUBJECTS,
@@ -116,12 +133,16 @@ export const testAdapter: ServerAdapterType = {
       caption: o.public_id,
     }));
   },
+  deleteSubjectImage: async (photoId) => {
+    return await samplePromise({});
+  },
   submitSelectedSubjects: async (data) => {
     return await samplePromise();
   },
   fetchQuizQuestions: async (quizSubjects) => {
     return await samplePromise({ quiz: DATA.quiz, quizSubjects });
   },
+  saveSubject(subject_id, subject) {},
   loadExistingSubject(subject_id) {
     return SAMPLE_TUTOR_SUBJECTS[0];
   },
@@ -154,6 +175,9 @@ export const testAdapter: ServerAdapterType = {
       }))
     );
   },
+  remoteDeleteImage: async (files: any[]) => {
+    return await samplePromise(files);
+  },
   cloudinaryApiHandler: async (files: any[], progressCallback) => {
     let promises = files.map((o) =>
       uploadToCloudinary(o, progressCallback).then((b) => {
@@ -174,15 +198,32 @@ export const testAdapter: ServerAdapterType = {
   submitQuizResults: async (payload) => {
     return await samplePromise({ payload });
   },
-  buildQuizData: async (subjectInfo, quiz) => {
+  buildQuizData: async (subjectInfo) => {
     console.log(subjectInfo);
-    return await samplePromise(quiz[0]);
+    const quiz = {
+      ...SAMPLE_QUIZ_DATA,
+      questions: SAMPLE_QUIZ_DATA.questions.slice(0, 5),
+    };
+
+    const quizzes = subjectInfo.subjects.map((subject) => ({
+      name: subject.name,
+      passmark: subject.pass_mark,
+      questions: SAMPLE_QUIZ_DATA.questions.slice(0, 5),
+    }));
+
+    return await samplePromise([quiz, quizzes]);
   },
-  sendEmailVerification: async () => {
-    return await samplePromise("Email sent");
+  beginQuiz: async (payload) => {
+    return await samplePromise({});
+  },
+  sendEmailVerification: async ({ email, code }) => {
+    if (code) {
+      return await samplePromise({ status: "Email verified", verified: true });
+    }
+    return await samplePromise(undefined);
   },
   submitVideoRecording: async (url) => {
-    return await samplePromise(url);
+    return await samplePromise({ id: "sample-video", url });
   },
   initializeSubject: async (adapter, subjectInfo, key) => {
     let response = await initializeApplication(adapter, {
@@ -197,4 +238,7 @@ export const testAdapter: ServerAdapterType = {
     return { foundSubject, response };
   },
   initializeApplication,
+  authenticateUser: async ({ email, otp }) => {
+    return await samplePromise({ email, otp });
+  },
 };
