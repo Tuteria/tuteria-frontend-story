@@ -1,43 +1,32 @@
-import { useToast } from "@chakra-ui/react";
 import { linkTo } from "@storybook/addon-links";
 import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { LoadingStateWrapper } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
-import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
-import { SAMPLE_TUTERIA_SUBJECTS } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
+import { initializeStore } from "@tuteria/shared-lib/src/stores";
 import {
-  buildProfileInfo,
-  initializeStore,
-  TutorSubject,
-} from "@tuteria/shared-lib/src/stores";
-import { APPLICATION_STEPS } from "@tuteria/shared-lib/src/stores/rootStore";
-import { SUBJECT_EDIT_STEPS } from "@tuteria/shared-lib/src/stores/subject";
+  APPLICATION_STEPS,
+  STEPS,
+} from "@tuteria/shared-lib/src/stores/rootStore";
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
 import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
-import QuizSelectionView from "@tuteria/shared-lib/src/tutor-revamp/QuizSelectionView";
-import QuizPage from "@tuteria/shared-lib/src/tutor-revamp/quizzes/Quiz";
-import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
-import QuizStore, {
-  IQuizStore,
-} from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
-import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditView";
-import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
 import VerificationPage from "@tuteria/shared-lib/src/tutor-revamp/VerificationPage";
 import "katex/dist/katex.min.css";
+import LoginModal from "@tuteria/shared-lib/src/tutor-application/Login/LoginModal";
 import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
+import { useDisclosure } from "@chakra-ui/react";
 
 export default {
   title: "Tutor Application/Pages",
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <Suspense fallback={<h1>Still Loading…</h1>}>
+        <Suspense fallback={null}>
           <Story />
         </Suspense>
       </ThemeProvider>
@@ -63,11 +52,7 @@ export const TutorPage = () => {
       countries: allCountries,
       tuteriaSubjects: testAdapter.getTuteriaSubjects(),
     });
-    await store.initializeTutorData(
-      result.staticData,
-      result.tutorInfo,
-      result.subjectData
-    );
+    store.initializeTutorData(result);
     if (store.currentStep === APPLICATION_STEPS.APPLY) {
       setLoading(false);
     } else {
@@ -77,12 +62,12 @@ export const TutorPage = () => {
       };
       navigate(options[store.currentStep]);
     }
-    await store.fetchBanksInfo();
   }
 
   return (
-    <LoadingStateWrapper initialize={initialize}>
+    <LoadingStateWrapper defaultLoading={false} initialize={initialize}>
       <TutorPageComponent
+        currentStep={STEPS.LOCATION_INFO}
         store={store}
         onEditSubject={(subject) => {
           return "/skills";
@@ -99,137 +84,58 @@ export const TutorPage = () => {
   );
 };
 
-const navigateToSubject = () => {
-  linkTo("Tutor Application/Pages", "Tutor Page")();
-};
-
 // This variable will come from query parameters
-
-const subjectInfo = SAMPLE_TUTERIA_SUBJECTS[2];
-
-export const TestSelectionPage = () => {
-  const toast = useToast();
-  const [testableSubjects, setTestableSubjects] = React.useState([]);
-  const [canTakeQuiz, setTakeQuiz] = React.useState(true);
-
-  const onNextClick = (selectedQuizzesToTake) => {
-    console.log(selectedQuizzesToTake);
-    console.log("Generating Quiz");
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({});
-      }, 3000);
-    });
-  };
-
-  async function initialize(setLoading) {
-    try {
-      let { foundSubject } = await testAdapter.initializeSubject(
-        adapter,
-        subjectInfo
-      );
-      if (foundSubject) {
-        setTakeQuiz(true);
-        setTestableSubjects(foundSubject.quizzes.map((o) => o.name));
-        setLoading(false);
-      } else {
-        setTakeQuiz(false);
-        toast({
-          title: `Not permitted to take ${subjectInfo.name} quiz`,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-        });
-      }
-    } catch (error) {
-      setLoading(false);
-      throw error;
-    }
-  }
-
-  return (
-    <LoadingStateWrapper initialize={initialize} text="Fetching Subjects...">
-      <QuizSelectionView
-        canTakeQuiz={canTakeQuiz}
-        generateQuiz={onNextClick}
-        testSubject={subjectInfo.name}
-        testableSubjects={testableSubjects}
-        toSubjectPage={navigateToSubject}
-      />
-    </LoadingStateWrapper>
-  );
-};
-
-let pk = 209601;
-const subjectStore = TutorSubject.create(
-  {},
-  { adapter: loadAdapter(testAdapter) }
-);
-export const EditSubjectPage = () => {
-  async function initialize(setLoading) {
-    try {
-      let { foundSubject, response: result } =
-        await testAdapter.initializeSubject(
-          adapter,
-          { ...subjectInfo, id: pk },
-          "id"
-        );
-
-      if (foundSubject) {
-        await store.initializeTutorData(
-          result.staticData,
-          result.tutorInfo,
-          result.subjectData
-        );
-        subjectStore.initialize(foundSubject);
-        setLoading(false);
-      }
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  return (
-    <LoadingStateWrapper
-      text="Fetching subject details..."
-      initialize={initialize}
-    >
-      <SubjectEditView store={subjectStore}>
-        {(currentForm) => {
-          if (currentForm === SUBJECT_EDIT_STEPS.PREVIEW) {
-            return (
-              <TutorProfile
-                {...buildProfileInfo(
-                  store,
-                  subjectStore
-                )} /*onBackClick={onBackClick}*/
-              />
-            );
-          }
-        }}
-      </SubjectEditView>
-    </LoadingStateWrapper>
-  );
-};
 
 export const Login = () => {
   return (
     <LoginPage
-      onResendOTP={() => {}}
-      onOTPSubmit={() => {}}
-      onEmailSubmit={() => {}}
-      onNavigate={() => {}}
+      onLogin={async (data, key) => {
+        console.log(key);
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (key === "otp-code") {
+              navigate("/verify");
+            }
+            resolve({});
+          }, 200);
+        });
+      }}
     />
   );
 };
 
 export const LandingPage = () => {
+  const isUserLoggedIn = async (): Promise<{
+    loggedIn: boolean;
+    email: string;
+  }> => {
+    return await new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ loggedIn: true, email: "john@example.com" });
+      }, 200);
+    });
+  };
+
+  const onSubmit: any = async (data) => {
+    return await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({ loggedIn: false });
+      }, 200);
+    });
+  };
+  const onLogIn = async (values, key) => {
+    return await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({});
+      }, 200);
+    });
+  };
   return (
     <LandingView
-      onSubmit={(data) => {
-        console.log(data);
-      }}
+      onSubmit={onSubmit}
+      continueUrl="/apply"
+      onLogin={onLogIn}
+      isUserLoggedIn={isUserLoggedIn}
     />
   );
 };
@@ -241,11 +147,15 @@ export const Verification = () => {
       countries: [],
       tuteriaSubjects: [],
     });
-    await store.initializeTutorData(
-      result.staticData,
-      { ...result.tutorInfo, currentStep: APPLICATION_STEPS.VERIFY },
-      result.subjectData
-    );
+    store.initializeTutorData({
+      ...result,
+      tutorInfo: {
+        ...result.tutorInfo,
+        appData: {
+          currentStep: APPLICATION_STEPS.VERIFY,
+        },
+      },
+    });
     if (store.currentStep === APPLICATION_STEPS.VERIFY) {
       setLoading(false);
     } else {
@@ -269,28 +179,6 @@ export const Verification = () => {
   );
 };
 
-const quizStore: IQuizStore = QuizStore.create(
-  {},
-  {
-    adapter: loadAdapter(testAdapter),
-  }
-);
-
-// This variable will come from query parameters
-const name = "General Mathematics";
-const params = "general-mathematics";
-const query = "jss-math-quiz,checkpoint-math-quiz";
-
-const subjects = [
-  { name: "JSS Math", pass_mark: 70 },
-  { name: "Checkpoint Math", pass_mark: 70 },
-];
-
-const quiz = {
-  ...SAMPLE_QUIZ_DATA,
-  questions: SAMPLE_QUIZ_DATA.questions.slice(0, 5),
-};
-
 export const CompletedPage = () => {
   return (
     <CompletedApplicationPage
@@ -298,61 +186,5 @@ export const CompletedPage = () => {
       isPremium={true}
       photo="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200"
     />
-  );
-};
-
-export const Quiz = () => {
-  const [completed, setCompleted] = React.useState(false);
-
-  async function initialize(setLoaded) {
-    const subjectsToTake = query;
-    const newSubjectInfo = {
-      ...subjectInfo,
-      subjects: subjectInfo.subjects.filter((o) =>
-        subjectsToTake.includes(o.url)
-      ),
-    };
-    testAdapter.buildQuizData(newSubjectInfo, [quiz]).then((_quiz) => {
-      quizStore.initializeQuiz(_quiz, subjects);
-      setLoaded(true);
-    });
-  }
-
-  function redirect() {
-    if (quizStore.quizResults.passedQuiz) {
-      linkTo("Tutor Application/Pages", "Subject Creation")();
-    } else {
-      linkTo("Tutor Application/Pages", "Tutor Page")();
-    }
-  }
-
-  async function onQuizSubmit() {
-    let gradedResult = gradeQuiz(
-      [
-        {
-          subject: quiz.title,
-          passmark: quiz.pass_mark,
-          questions: quiz.questions,
-        },
-      ],
-      quizStore.serverAnswerFormat,
-      quizStore.quiz.questions.length,
-      quizStore.subjectsToTake
-    );
-    let result = await quizStore.handleSubmission(gradedResult);
-    quizStore.setQuizResults(gradedResult);
-    setCompleted(true);
-    return result;
-  }
-  return (
-    <LoadingStateWrapper text="Loading quiz..." initialize={initialize}>
-      <QuizPage
-        store={quizStore}
-        quizName={name}
-        hasCompletedQuiz={completed}
-        onNavigate={redirect}
-        onSubmitQuiz={onQuizSubmit}
-      />
-    </LoadingStateWrapper>
   );
 };
