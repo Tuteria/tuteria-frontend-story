@@ -173,9 +173,6 @@ export const testAdapter: ServerAdapterType = {
       }))
     );
   },
-  remoteDeleteImage: async (files: any[]) => {
-    return await samplePromise(files);
-  },
   cloudinaryApiHandler: async (files: any[], progressCallback) => {
     let promises = files.map((o) =>
       uploadToCloudinary(o, progressCallback).then((b) => {
