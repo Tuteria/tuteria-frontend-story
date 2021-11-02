@@ -193,10 +193,7 @@ function navigate(path?: string) {
   linkTo("Store/Pages", "DetailPage")();
 }
 const store = TuteriaStore.create(
-  {
-    cartItems: cartData,
-    products: [...products, mainProduct],
-  },
+  {},
   {
     adapter: {
       saveUserInfo: async (userInfo, cartData) => {
@@ -206,6 +203,12 @@ const store = TuteriaStore.create(
   }
 );
 export const HomePage = () => {
+  React.useEffect(() => {
+    store.initialize({
+      cartItems: cartData,
+      products: [...products, mainProduct],
+    });
+  }, []);
   return (
     <StoreHomePage
       store={store}
@@ -224,6 +227,12 @@ export const HomePage = () => {
 };
 
 export const DetailPage = () => {
+  React.useEffect(() => {
+    store.initialize({
+      cartItems: cartData,
+      products: [...products, mainProduct],
+    });
+  }, []);
   return (
     <ProductDetailPage
       store={store}
