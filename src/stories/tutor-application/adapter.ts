@@ -29,8 +29,6 @@ const formIds = {
   2: "location-info",
   3: "education-history",
   4: "work-history",
-  5: "subject-selection",
-  6: "verification-info",
   7: "schedule-info",
   8: "agreement-info",
   9: "guarantors-info",
@@ -40,7 +38,10 @@ const formIds = {
 };
 
 function loadExistingTutorInfo() {
-  return { ...SAMPLE_TUTOR_DATA, appData: { currentEditableForm: formIds[5] } };
+  return {
+    ...SAMPLE_TUTOR_DATA,
+    appData: { currentEditableForm: formIds[11] },
+  };
 }
 const initializeApplication = async (
   adapter: AdapterType,
@@ -175,9 +176,6 @@ export const testAdapter: ServerAdapterType = {
         url: "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82",
       }))
     );
-  },
-  remoteDeleteImage: async (files: any[]) => {
-    return await samplePromise(files);
   },
   cloudinaryApiHandler: async (files: any[], progressCallback) => {
     let promises = files.map((o) =>

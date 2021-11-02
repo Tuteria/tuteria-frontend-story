@@ -2,7 +2,7 @@ import { Button, Stack } from "@chakra-ui/react";
 import FormWrapper, {
   useTutorApplicationFlow,
 } from "@tuteria/shared-lib/src/components/FormWrapper";
-import { buildProfileInfo, IRootStore } from "@tuteria/shared-lib/src/stores";
+import { IRootStore } from "@tuteria/shared-lib/src/stores";
 import { STEPS } from "@tuteria/shared-lib/src/stores/rootStore";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
 import { observer } from "mobx-react-lite";
@@ -19,13 +19,6 @@ const WorkHistory = React.lazy(
 );
 const EducationHistory = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/EducationHistory")
-);
-
-const VerificationIdentity = React.lazy(
-  () => import("@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity")
-);
-const TutorSubjectsPage = React.lazy(
-  () => import("@tuteria/shared-lib/src/tutor-revamp/Subject")
 );
 
 const ScheduleCard = React.lazy(
@@ -47,10 +40,6 @@ const PaymentInfo = React.lazy(
 
 const TeachingProfile = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/SpecialNeeds")
-);
-
-const TutorProfile = React.lazy(
-  () => import("@tuteria/shared-lib/src/tutor-revamp/TutorPreview")
 );
 
 const TutorPageComponent: React.FC<{
@@ -87,25 +76,9 @@ const TutorPageComponent: React.FC<{
         <EducationHistory {...getFormWrapperProps(STEPS.EDUCATION_HISTORY)} />
 
         <WorkHistory {...getFormWrapperProps(STEPS.WORK_HISTORY)} />
-        <TutorSubjectsPage
-          {...getFormWrapperProps(STEPS.SUBJECT_SELECTION)}
-          onTakeTest={onTakeTest}
-          renderPreview={(subjectStore) => {
-            return (
-              <TutorProfile
-                {...buildProfileInfo(
-                  store,
-                  subjectStore
-                )} /*onBackClick={onBackClick}*/
-              />
-            );
-          }}
-          // onEditSubject={onEditSubject}
-        />
 
         <ScheduleCard {...getFormWrapperProps(STEPS.SCHEDULE_INFO)} />
         <TeachingProfile {...getFormWrapperProps(STEPS.TEACHING_PROFILE)} />
-        <VerificationIdentity {...getFormWrapperProps(STEPS.VERIFICATION)} />
 
         <GuarantorsInfoForm {...getFormWrapperProps(STEPS.GUARANTOR_INFO)} />
         <PaymentInfo {...getFormWrapperProps(STEPS.PAYMENT_INFO)} />
