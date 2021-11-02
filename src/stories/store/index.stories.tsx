@@ -5,6 +5,7 @@ import StoreHomePage from "@tuteria/shared-lib/src/store/pages/Home";
 import ICheckoutPage from "@tuteria/shared-lib/src/store/pages/CheckoutPage";
 import ProductDetailPage from "@tuteria/shared-lib/src/store/pages/ProductDetail";
 import { linkTo } from "@storybook/addon-links";
+import { TuteriaStore } from "@tuteria/shared-lib/src/store/_store";
 export default {
   title: "Store/Pages",
   decorators: [
@@ -49,7 +50,7 @@ const products = [
   {
     id: "1",
     name: "Bamboo Tan",
-    currency: "USD",
+    currency: "NGN",
     price: 199,
     flag: "new",
     imageUrl:
@@ -69,7 +70,7 @@ const products = [
   {
     id: "2",
     name: "Iconic Turquoise",
-    currency: "USD",
+    currency: "NGN",
     price: 199,
     salePrice: 179.99,
     flag: "on-sale",
@@ -84,7 +85,7 @@ const products = [
   {
     id: "3",
     name: "Marble Leather",
-    currency: "USD",
+    currency: "NGN",
     price: 199,
     imageUrl:
       "https://images.unsplash.com/photo-1564594985645-4427056e22e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
@@ -97,7 +98,7 @@ const products = [
   {
     id: "4",
     name: "Silve wolf",
-    currency: "GBP",
+    currency: "NGN",
     price: 199,
     imageUrl:
       "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=680&q=80",
@@ -109,47 +110,54 @@ const products = [
   },
 ];
 
+const mainProduct = {
+  id: "5",
+  name: "All dressed",
+  currency: "NGN",
+  price: 20000,
+  description:
+    "Dress that feels a little fany for when pajamas aren’t cutting it",
+  imageUrl:
+    "https://images.unsplash.com/photo-1630759072462-d5348e577ee8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=872&q=80",
+};
 const cartData = [
   {
     id: "1",
-    price: 39.99,
-    currency: "GBP",
-    name: "Ferragamo bag",
-    description: "Tan, 40mm",
-    quantity: 3,
-    imageUrl:
-      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80",
+    quantity: 1,
   },
   {
     id: "2",
-    price: 39.99,
-    currency: "GBP",
-    name: "Bamboo Tan",
-    description: "Tan, 40mm",
-    quantity: 3,
-    imageUrl:
-      "https://images.unsplash.com/photo-1591561954557-26941169b49e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80",
+    quantity: 2,
   },
   {
     id: "3",
-    price: 39.99,
-    currency: "GBP",
-    name: "Yeezy Sneakers",
-    description: "Tan, 40mm",
     quantity: 3,
-    imageUrl:
-      "https://images.unsplash.com/photo-1604671801908-6f0c6a092c05?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1770&q=80",
   },
 ];
 
 function navigate(path?: string) {
   linkTo("Store/Pages", "DetailPage")();
 }
+const store = TuteriaStore.create(
+  {
+    cartItems: cartData,
+    products: [...products, mainProduct],
+  },
+  {
+    adapter: {
+      saveUserInfo: async (userInfo, cartData) => {
+        console.log({ userInfo, cartData });
+      },
+    },
+  }
+);
 export const HomePage = () => {
   return (
     <StoreHomePage
+      store={store}
+      heading="Everything you need to score a Band 8.0 in IELTS for Nigerians and Africans"
+      mainProduct={mainProduct}
       products={products}
-      cartData={cartData}
       toFullDetails={(item) => {
         if (item) {
           navigate();
@@ -162,7 +170,15 @@ export const HomePage = () => {
 };
 
 export const DetailPage = () => {
-  return <ProductDetailPage />;
+  return (
+    <ProductDetailPage
+      store={store}
+      product={{ ...products[1], related: [products[0], ...products.slice(2)] }}
+      toCheckoutPage={() => {
+        linkTo("Store/Pages", "Checkout Page")();
+      }}
+    />
+  );
 };
 
 export const CheckoutPage = () => {
