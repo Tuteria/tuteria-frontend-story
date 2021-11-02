@@ -1,10 +1,10 @@
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
-import HeroWithStats from "@tuteria/shared-lib/src/components/chakra-pro/Heroes/HeroWithStats";
-import TwoColumnsImage from "@tuteria/shared-lib/src/components/chakra-pro/Heroes/TwoColumnsImage";
-import WithFeaturedLogosComponent from "@tuteria/shared-lib/src/components/chakra-pro/Heroes/WithFeaturedLogos";
-import WithImageBackgroundComponent from "@tuteria/shared-lib/src/components/chakra-pro/Heroes/WithImageBackground";
-import WithScreenshotBelowComponent from "@tuteria/shared-lib/src/components/chakra-pro/Heroes/WithScreenshotBelow";
-import WithSlightCutImageComponent from "@tuteria/shared-lib/src/components/chakra-pro/Heroes/WithSlightCutImage";
+import HeroWithStats from "../../pages/components/Marketing/Heroes/HeroWithStats";
+import TwoColumnsImage from "../../pages/components/Marketing/Heroes/TwoColumnsImage";
+import WithFeaturedLogosComponent from "../../pages/components/Marketing/Heroes/WithFeaturedLogos";
+import WithImageBackgroundComponent from "../../pages/components/Marketing/Heroes/WithImageBackground";
+import WithScreenshotBelowComponent from "../../pages/components/Marketing/Heroes/WithScreenshotBelow";
+import WithSlightCutImageComponent from "../../pages/components/Marketing/Heroes/WithSlightCutImage";
 import React from "react";
 import { Box } from "@chakra-ui/react";
 

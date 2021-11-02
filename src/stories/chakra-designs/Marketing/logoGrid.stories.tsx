@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import React from "react";
-import WithLogoGridComponent from "@tuteria/shared-lib/src/components/chakra-pro/LogoGrid/WithBoxedLogo";
-import WithBrandBackgroundComponent from "@tuteria/shared-lib/src/components/chakra-pro/LogoGrid/WithBrandBackground";
+import WithLogoGridComponent from "../../pages/components/Marketing/LogoGrid/WithBoxedLogo";
+import WithBrandBackgroundComponent from "../../pages/components/Marketing/LogoGrid/WithBrandBackground";
 
 export default {
   title: "Raw Designs/Marketing/Logo Grid",
