@@ -36,6 +36,7 @@ import QuizStore, {
 } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
 import React from "react";
 import { testAdapter } from "./adapter";
+import PasswordSection from "@tuteria/shared-lib/src/tutor-revamp/PasswordSection";
 
 export default {
   title: "Tutor Application/Components",
