@@ -12,14 +12,13 @@ import {
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
 import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
-import VerificationPage from "@tuteria/shared-lib/src/tutor-revamp/VerificationPage";
+import VerificationPage from "@tuteria/shared-lib/src/tutor-application/pages/VerificationPage";
 import "katex/dist/katex.min.css";
-import LoginModal from "@tuteria/shared-lib/src/tutor-application/Login/LoginModal";
 import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
-import { useDisclosure } from "@chakra-ui/react";
+import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-application/pages/SubjectCreationPage";
 
 export default {
   title: "Tutor Application/Pages",
@@ -50,11 +49,11 @@ export const TutorPage = () => {
     let result = await testAdapter.initializeApplication(adapter, {
       regions: allRegions,
       countries: allCountries,
-      tuteriaSubjects: testAdapter.getTuteriaSubjects(),
+      tuteriaSubjects: [],
     });
     store.initializeTutorData(result);
+    setLoading(false);
     if (store.currentStep === APPLICATION_STEPS.APPLY) {
-      setLoading(false);
     } else {
       let options = {
         [APPLICATION_STEPS.COMPLETE]: "/complete",
@@ -104,6 +103,15 @@ export const Login = () => {
   );
 };
 
+// export const LandingPage = () => {
+//   return (
+//     <LandingView
+//       onSubmit={(data) => {
+//         console.log(data);
+//       }}
+//     />
+//   );
+// };
 export const LandingPage = () => {
   const isUserLoggedIn = async (): Promise<{
     loggedIn: boolean;
@@ -153,6 +161,7 @@ export const Verification = () => {
         ...result.tutorInfo,
         appData: {
           currentStep: APPLICATION_STEPS.VERIFY,
+          currentEditableForm: STEPS.VERIFY_EMAIL,
         },
       },
     });
@@ -175,6 +184,43 @@ export const Verification = () => {
           linkTo("Tutor Application/Pages", "Completed Page")();
         }}
       />
+    </LoadingStateWrapper>
+  );
+};
+
+export const SubjectCreatePage = () => {
+  async function initialize(setLoading) {
+    let result = await testAdapter.initializeApplication(adapter, {
+      regions: allRegions,
+      countries: allCountries,
+      tuteriaSubjects: testAdapter.getTuteriaSubjects(),
+    });
+    store.initializeTutorData({
+      ...result,
+      tutorInfo: {
+        ...result.tutorInfo,
+        appData: {
+          currentStep: APPLICATION_STEPS.COMPLETE,
+        },
+      },
+    });
+    if (store.currentStep === APPLICATION_STEPS.COMPLETE) {
+      setLoading(false);
+    } else {
+      let options = {
+        [APPLICATION_STEPS.APPLY]: "/apply",
+        [APPLICATION_STEPS.VERIFY]: "/verify",
+      };
+      navigate(options[store.currentStep]);
+    }
+  }
+  return (
+    <LoadingStateWrapper
+      defaultLoading={false}
+      initialize={initialize}
+      text="Loading subject details..."
+    >
+      <SubjectCreationPage store={store} />
     </LoadingStateWrapper>
   );
 };

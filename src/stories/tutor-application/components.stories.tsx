@@ -1,4 +1,4 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, useDisclosure } from "@chakra-ui/react";
 import { linkTo } from "@storybook/addon-links";
 import { loadAdapter } from "@tuteria/shared-lib/src/adapter";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
@@ -414,11 +414,16 @@ export const Quiz = () => {
 };
 
 export const LoginWithModal = () => {
+  const { onOpen, isOpen, onClose } = useDisclosure();
   return (
-    <LoginModal
-      render={(onOpen) => <Button onClick={onOpen}>Open Modal</Button>}
-      email=""
-      onLogin={testAdapter.authenticateUser}
-    />
+    <>
+      <Button onClick={onOpen}>Open Modal</Button>
+      <LoginModal
+        isOpen={isOpen}
+        onClose={onClose}
+        email=""
+        onLogin={testAdapter.authenticateUser}
+      />
+    </>
   );
 };

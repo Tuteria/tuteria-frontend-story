@@ -1,6 +1,8 @@
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
+import React from "react";
+
 export default {
-  title: "Raw Designs",
+  title: "Raw Designs/Application",
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
@@ -38,4 +40,4 @@ export {
   CustomRadioGroup,
   ButtonRadioBox,
   VerticalSteps,
-} from "../pages/ChakraProView";
+} from "../pages/ChakraProApplication";
