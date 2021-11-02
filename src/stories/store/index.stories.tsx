@@ -128,8 +128,8 @@ const products = [
     id: "2",
     name: "Iconic Turquoise",
     currency: "NGN",
-    price: 199,
-    salePrice: 179.99,
+    price: 7000,
+    salePrice: 5000,
     flag: "on-sale",
     imageUrl:
       "https://images.unsplash.com/photo-1509941943102-10c232535736?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
@@ -162,15 +162,39 @@ const products = [
     description: markDownDescription,
     images,
   },
+  {
+    id: "5",
+    name: "Marble Leather",
+    currency: "NGN",
+    price: 199,
+    imageUrl:
+      "https://images.unsplash.com/photo-1564594985645-4427056e22e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    rating: 4,
+    ratingCount: 12,
+    description: markDownDescription,
+    images,
+  },
+  {
+    id: "6",
+    name: "Silve wolf",
+    currency: "NGN",
+    price: 199,
+    imageUrl:
+      "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=680&q=80",
+    rating: 5,
+    ratingCount: 1,
+    description: markDownDescription,
+    images,
+  },
 ];
 
 const mainProduct = {
   id: "5",
-  name: "All dressed",
+  name: "Ultimate IELTS Video Course",
   currency: "NGN",
-  price: 20000,
+  price: 22520,
   description:
-    "Dress that feels a little fany for when pajamas aren’t cutting it",
+    "Nigerians 🇳🇬 now in Canada, UK, US & Australia Used this Perfect IELTS Preparatory Course to get a Band 8.0 in less than 2 weeks",
   imageUrl:
     "https://images.unsplash.com/photo-1630759072462-d5348e577ee8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=872&q=80",
 };
@@ -212,7 +236,7 @@ export const HomePage = () => {
   return (
     <StoreHomePage
       store={store}
-      heading="Everything you need to score a Band 8.0 in IELTS for Nigerians and Africans"
+      heading="Everything you need to score a Band 8.0 in IELTS"
       mainProduct={mainProduct}
       products={products}
       toFullDetails={(item) => {
