@@ -36,7 +36,6 @@ import QuizStore, {
 } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
 import React from "react";
 import { testAdapter } from "./adapter";
-import { PaymentMethods as PaymentMethodsComponent } from "@tuteria/shared-lib/src/components/payments/PaymentMethods";
 
 export default {
   title: "Tutor Application/Components",
@@ -426,31 +425,5 @@ export const LoginWithModal = () => {
         onLogin={testAdapter.authenticateUser}
       />
     </>
-  );
-};
-
-export const PaymentMethods = () => {
-  const [paymentMethod, setPaymentMethod] = React.useState("online");
-
-  return (
-    <Box margin="20px auto auto auto" maxWidth="750px" px="10px">
-      <PaymentMethodsComponent
-        amount={50000}
-        bankInfo={{
-          bankdetails: { name: "Tuteria Limited", number: "0266765638" },
-          howToPay: [
-            "Copy the bank account details below",
-            "Pay with your bank app, USSD or ATM",
-          ],
-          logoUrl: "https://ik.imagekit.io/gbudoh/GTBank_Logo_dJlcYP6KF.png",
-          logoSize: [16, 24],
-        }}
-        currency={"₦"}
-        gatewayFee={750}
-        onChange={(method: string) => setPaymentMethod(method)}
-        paymentMethod={paymentMethod}
-        selectedPlan={{ amount: 50000, discountRemoved: 0 }}
-      />
-    </Box>
   );
 };
