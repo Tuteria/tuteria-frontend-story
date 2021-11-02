@@ -6,6 +6,7 @@ import ICheckoutPage from "@tuteria/shared-lib/src/store/pages/CheckoutPage";
 import ProductDetailPage from "@tuteria/shared-lib/src/store/pages/ProductDetail";
 import { linkTo } from "@storybook/addon-links";
 import { TuteriaStore } from "@tuteria/shared-lib/src/store/_store";
+import "katex/dist/katex.min.css";
 export default {
   title: "Store/Pages",
   decorators: [
@@ -18,6 +19,63 @@ export default {
     ),
   ],
 };
+
+const markDownDescription = `Get a band 8.0 in your first sitting. This course bundle prepares you for the speaking, listening, reading, and writing modules of the test. So far, it is the only comprehensive IELTS course tailor-made for Nigerians and Africans generally. 
+
+
+This is the best online IELTS Band 8.0 Preparatory Video Course for Nigerians which is “FAIL-PROOF”, It is proven by our past students now in their dream countries to help you get a band 8.0 in one sitting even if your English is terrible (or not) and you only have less than 10 days to prepare.
+
+ 
+Popularly known as the 5-star IELTS digital bible, this fail-proof IELTS video course will teach you how to think like your IELTS examiner so that you give them exactly what they’re expecting. 
+
+It is taught by our multiple award-winning IELTS tutors from Nigeria to help you get a band 8.0.
+
+This course bundle contains real classroom sessions focusing on equipping you with proven strategies, tips, advice, skills to pass the IELTS test.
+
+
+
+**What is contained in this course bundle?**
+
+
+
+  A. The IELTS writing module master course. (Get this ONLY for 3,000 Naira - Click here to access it)
+
+  B. The IELTS speaking module master course. (Get this ONLY for 3,000 Naira - Click here to access it)
+
+  C. The IELTS reading module master course. (Get this ONLY for 3,000 Naira - Click here to access it)
+
+  D. The IELTS listening module master course. (Get this ONLY for 3,000 Naira - Click here to access it)
+
+
+
+**What you’ll get from this course**
+
+
+
+* Over 35 classroom-tailored video lessons 
+* 25+ hours of instruction 
+* Pre-assessments
+* Live worked examples
+* Exclusive essay analyses for writing tasks 1 and 2 (General and Academic)
+* In-class mock tests and exercises 
+* Attention-tracking quizzes
+* Tip flashcards
+* Writing and speaking samples and audio recordings
+* Simple exam strategies for both General and Academic Training
+* Confidence to perform well on the test date 
+* Time management strategies 
+* Real IELTS past questions 
+
+
+**Requirements** 
+
+* Intermediate English level
+* Drive to pass the IELTS test excellently  
+
+
+**Who is the course NOT for?**
+
+This course bundle is not for those who are NOT ready to pass IELTS with flying colors. `;
 const images = [
   {
     id: "01",
@@ -63,8 +121,7 @@ const products = [
         color: "purple",
       },
     ],
-    description:
-      "With a sleek design and a captivating essence, this is a modern Classic made for every occasion.",
+    description: markDownDescription,
     images,
   },
   {
@@ -78,8 +135,7 @@ const products = [
       "https://images.unsplash.com/photo-1509941943102-10c232535736?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
     rating: 4,
     ratingCount: 12,
-    description:
-      "With a sleek design and a captivating essence, this is a modern Classic made for every occasion.",
+    description: markDownDescription,
     images,
   },
   {
@@ -91,8 +147,7 @@ const products = [
       "https://images.unsplash.com/photo-1564594985645-4427056e22e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
     rating: 4,
     ratingCount: 12,
-    description:
-      "With a sleek design and a captivating essence, this is a modern Classic made for every occasion.",
+    description: markDownDescription,
     images,
   },
   {
@@ -104,8 +159,7 @@ const products = [
       "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=680&q=80",
     rating: 5,
     ratingCount: 1,
-    description:
-      "With a sleek design and a captivating essence, this is a modern Classic made for every occasion.",
+    description: markDownDescription,
     images,
   },
 ];
