@@ -113,7 +113,6 @@ export const Login = () => {
 //   );
 // };
 export const LandingPage = () => {
-  const [tutors, setTutors] = React.useState([]);
   const isUserLoggedIn = async (): Promise<{
     loggedIn: boolean;
     email: string;
@@ -140,18 +139,12 @@ export const LandingPage = () => {
     });
   };
 
-  React.useEffect(() => {
-    testAdapter.fetchLandingPageTutors().then((res) => {
-      setTutors(res);
-    });
-  });
   return (
     <LandingView
       onSubmit={onSubmit}
       continueUrl="/apply"
       onLogin={onLogIn}
       isUserLoggedIn={isUserLoggedIn}
-      tutors={tutors}
     />
   );
 };
