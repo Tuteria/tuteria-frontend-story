@@ -182,6 +182,7 @@ export const testAdapter: ServerAdapterType = {
           name: original_filename,
           size: `${Math.round(bytes / 1000)}KB`,
           url: secure_url,
+          id: original_filename,
         };
         return newFile;
       })
