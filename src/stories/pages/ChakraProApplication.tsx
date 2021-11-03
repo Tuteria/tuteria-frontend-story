@@ -1,5 +1,6 @@
 import { Text } from "@chakra-ui/react";
 import * as React from "react";
+// this is the valid codebase
 
 import { BannerWithButton } from "./components/Application/BannerWithButton";
 import { ButtonCheckBox } from "./components/Application/ButtonCheckBox";
