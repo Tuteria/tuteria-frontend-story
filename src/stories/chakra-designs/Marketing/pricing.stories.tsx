@@ -1,11 +1,11 @@
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import React from "react";
-import WithCornerBadgeComponent from "@tuteria/shared-lib/src/components/chakra-pro/Pricing/WithCornerBadge";
-import MultiColoredComponent from "@tuteria/shared-lib/src/components/chakra-pro/Pricing/MultiColored";
-import ThreeTiersWithToggleComponent from "@tuteria/shared-lib/src/components/chakra-pro/Pricing/ThreeTiersWithToggle";
-import TwoTiersWithBottomBlockComponent from "@tuteria/shared-lib/src/components/chakra-pro/Pricing/TwoTiersWithBottomBlock";
-import WithFlushedCardsComponent from "@tuteria/shared-lib/src/components/chakra-pro/Pricing/WithFlushedCards";
+import WithCornerBadgeComponent from "../../pages/components/Marketing/Pricing/WithCornerBadge";
+import MultiColoredComponent from "../../pages/components/Marketing/Pricing/MultiColored";
+import ThreeTiersWithToggleComponent from "../../pages/components/Marketing/Pricing/ThreeTiersWithToggle";
+import TwoTiersWithBottomBlockComponent from "../../pages/components/Marketing/Pricing/TwoTiersWithBottomBlock";
+import WithFlushedCardsComponent from "../../pages/components/Marketing/Pricing/WithFlushedCards";
 
 export default {
   title: "Raw Designs/Marketing/Pricing",

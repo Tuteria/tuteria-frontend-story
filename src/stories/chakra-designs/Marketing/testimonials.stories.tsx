@@ -1,11 +1,11 @@
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
-import CentredWithSliderComponent from "@tuteria/shared-lib/src/components/chakra-pro/Testimonials/CenteredWithSlider";
-import WithChatBubbleComponent from "@tuteria/shared-lib/src/components/chakra-pro/Testimonials/WithChatBubble";
-import WithLargeImageComponent from "@tuteria/shared-lib/src/components/chakra-pro/Testimonials/WithLargeImage";
-import WithRatingComponent from "@tuteria/shared-lib/src/components/chakra-pro/Testimonials/WithRating";
-import WithTwoColumnComponent from "@tuteria/shared-lib/src/components/chakra-pro/Testimonials/WithTwoColumn";
-import WithVideoComponent from "@tuteria/shared-lib/src/components/chakra-pro/Testimonials/WithVideo";
+import CentredWithSliderComponent from "../../pages/components/Marketing/Testimonials/CenteredWithSlider";
+import WithChatBubbleComponent from "../../pages/components/Marketing/Testimonials/WithChatBubble";
+import WithLargeImageComponent from "../../pages/components/Marketing/Testimonials/WithLargeImage";
+import WithRatingComponent from "../../pages/components/Marketing/Testimonials/WithRating";
+import WithTwoColumnComponent from "../../pages/components/Marketing/Testimonials/WithTwoColumn";
+import WithVideoComponent from "../../pages/components/Marketing/Testimonials/WithVideo";
 import React from "react";
 
 export default {

@@ -1,10 +1,10 @@
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import React from "react";
-import WithCardComponent from "@tuteria/shared-lib/src/components/chakra-pro/Team/WithCard";
-import WithCentredLayoutComponent from "@tuteria/shared-lib/src/components/chakra-pro/Team/WithCentredLayout";
-import WithCirclePhotoComponent from "@tuteria/shared-lib/src/components/chakra-pro/Team/WithCirclePhoto";
-import WithSquarePhotoComponent from "@tuteria/shared-lib/src/components/chakra-pro/Team/WithSquarePhoto";
+import WithCardComponent from "../../pages/components/Marketing/Team/WithCard";
+import WithCentredLayoutComponent from "../../pages/components/Marketing/Team/WithCentredLayout";
+import WithCirclePhotoComponent from "../../pages/components/Marketing/Team/WithCirclePhoto";
+import WithSquarePhotoComponent from "../../pages/components/Marketing/Team/WithSquarePhoto";
 
 export default {
   title: "Raw Designs/Marketing/Team",

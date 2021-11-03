@@ -405,6 +405,7 @@ const store = TuteriaStore.create(
 export const HomePage = () => {
   React.useEffect(() => {
     store.initialize({
+      userId: null,
       cartItems: cartData,
       products: [...products, mainProduct],
     });
@@ -429,6 +430,7 @@ export const HomePage = () => {
 export const DetailPage = () => {
   React.useEffect(() => {
     store.initialize({
+      userId: null,
       cartItems: cartData,
       products: [...products, mainProduct],
     });
@@ -452,6 +454,7 @@ export const DetailPage = () => {
 export const CheckoutPage = () => {
   React.useEffect(() => {
     store.initialize({
+      userId: null,
       cartItems: cartData,
       products: [...products, mainProduct],
     });
