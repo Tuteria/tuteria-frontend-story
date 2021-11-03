@@ -1,6 +1,6 @@
-[submodule "packages/tutor-app"]
-	path = packages/tutor-app
-	url = git@gitlab.com:tuteria/tutor-mobile-app.git
+# [submodule "packages/tutor-app"]
+# 	path = packages/tutor-app
+# 	url = git@gitlab.com:tuteria/tutor-mobile-app.git
 [submodule "packages/shared-lib"]
 	path = packages/shared-lib
 	url = git@gitlab.com:tuteria/v2/shared-lib.git

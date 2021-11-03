@@ -136,9 +136,9 @@ const products = [
     name: "Ultimate IELTS Preparatory Video Course for Nigerians",
     shortName: "Ultimate IELTS Course",
     currency: "NGN",
-    price: 22520,
-    salePrice: 18000,
-    purchases: 58000,
+    price: 68980,
+    salePrice: 22520,
+    purchases: 3277,
     relatedProducts: ["2", "3"],
     modules: ["Writing", "Listening", "Speaking"],
     course: "IELTS",
@@ -208,7 +208,8 @@ const products = [
     name: "Sample Band 9.0 Essay Write-ups",
     shortName: "Sample Band 9.0 Essays",
     currency: "NGN",
-    price: 3000,
+    salePrice: 3000,
+    price: 18000,
     relatedProducts: ["2", "3"],
     modules: ["Writing", "Listening", "Speaking"],
     course: "IELTS",
@@ -220,7 +221,7 @@ const products = [
     summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
-    salePrice: 18000,
+
     reviews: [
       {
         id: "review1",
@@ -280,7 +281,8 @@ const products = [
     name: "IELTS Listening Video Course for Nigerians",
     shortName: "IELTS Listening Course",
     currency: "NGN",
-    price: 3000,
+    price: 18000,
+    salePrice: 3000,
     purchases: 132,
     relatedProducts: ["2", "3"],
     modules: ["Writing", "Listening", "Speaking"],
@@ -292,7 +294,6 @@ const products = [
     summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
-    salePrice: 18000,
     reviews: [
       {
         id: "review1",
@@ -315,15 +316,18 @@ const products = [
 
 const mainProduct = {
   id: "5",
-  name: "Ultimate IELTS Video Course",
+  name: "The Ultimate IELTS Video Course",
+  shortName: "Ultimate IELTS Course",
   currency: "NGN",
-  price: 22520,
-  description:
-    "Nigerians 🇳🇬 now in Canada, UK, US & Australia Used this Perfect IELTS Preparatory Course to get a Band 8.0 in less than 2 weeks",
+  price: 68980,
+  salePrice: 22520,
+  purchases: 3277,
+  subtitle:
+    "Nigerians 🇳🇬 now in Canada, UK, US & Australia Used this Perfect IELTS Preparatory Course to get a Band 8.0 in less than 2 weeks.",
   imageUrl:
     "https://images.unsplash.com/photo-1602024242516-fbc9d4fda4b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-  rating: 5,
-  ratingCount: 1,
+  rating: 4.5,
+  ratingCount: 40,
   reviews: [
     {
       id: "review1",
