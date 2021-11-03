@@ -185,6 +185,23 @@ const products = [
     summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
+    reviews: [
+      {
+        id: "review1",
+        name: "Olatunde",
+        rating: 5,
+        date: "",
+        email: "tunde@email.com",
+        title: "Love the product!",
+        comment: "Love this product!",
+      },
+    ],
+    tags: [
+      {
+        name: "Exclusive 💫",
+        color: "purple",
+      },
+    ],
   },
   {
     id: "3",
@@ -203,6 +220,24 @@ const products = [
     summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
+    salePrice: 18000,
+    reviews: [
+      {
+        id: "review1",
+        name: "Olatunde",
+        rating: 5,
+        date: "",
+        email: "tunde@email.com",
+        title: "Love the product!",
+        comment: "Love this product!",
+      },
+    ],
+    tags: [
+      {
+        name: "Exclusive 💫",
+        color: "purple",
+      },
+    ],
   },
   {
     id: "4",
@@ -257,6 +292,24 @@ const products = [
     summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
+    salePrice: 18000,
+    reviews: [
+      {
+        id: "review1",
+        name: "Olatunde",
+        rating: 5,
+        date: "",
+        email: "tunde@email.com",
+        title: "Love the product!",
+        comment: "Love this product!",
+      },
+    ],
+    tags: [
+      {
+        name: "Exclusive 💫",
+        color: "purple",
+      },
+    ],
   },
 ];
 
@@ -268,7 +321,28 @@ const mainProduct = {
   description:
     "Nigerians 🇳🇬 now in Canada, UK, US & Australia Used this Perfect IELTS Preparatory Course to get a Band 8.0 in less than 2 weeks",
   imageUrl:
-    "https://images.unsplash.com/photo-1630759072462-d5348e577ee8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=872&q=80",
+    "https://images.unsplash.com/photo-1602024242516-fbc9d4fda4b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+  rating: 5,
+  ratingCount: 1,
+  reviews: [
+    {
+      id: "review1",
+      name: "Olatunde",
+      rating: 5,
+      date: "",
+      email: "tunde@email.com",
+      title: "Love the product!",
+      comment: "Love this product!",
+    },
+  ],
+  tags: [
+    {
+      name: "Exclusive 💫",
+      color: "purple",
+    },
+  ],
+  summary: shortMarkDownDescription,
+  images,
 };
 const cartData = [
   {
@@ -292,8 +366,37 @@ const store = TuteriaStore.create(
   {},
   {
     adapter: {
+      updateCartItems: (cartItems) => {
+        console.log(cartItems);
+      },
       saveUserInfo: async (userInfo, cartData) => {
         console.log({ userInfo, cartData });
+      },
+      async generateInvoice(
+        amountToBePaid,
+        userInfoWithCart: { userInfo: any; cartItems: any[] }
+      ) {
+        return await Promise.resolve({
+          amount: amountToBePaid,
+          order: "MCYN9OWEOBWA",
+          currency: "ngn",
+          base_country: "NG",
+          description: "Gold Flower",
+          discount: 0,
+          user_details: {
+            first_name: "Abiola",
+            last_name: "Oyeniyi",
+            country: "Nigeria",
+            email: "gbozee@gmail.com",
+            phone_number: "2347035209976",
+            key: "pk_test_3146e297e6d0463fea560139bc122a4aae04fedb",
+            redirect_url:
+              "https://payment.tuteria.com/paystack/verify-payment/MCYN9OWEOBWA/?amount=400000",
+            kind: "paystack",
+            js_script: "https://js.paystack.co/v1/inline.js",
+          },
+          paid: false,
+        });
       },
     },
   }
@@ -332,7 +435,12 @@ export const DetailPage = () => {
   return (
     <ProductDetailPage
       store={store}
-      product={{ ...products[1], related: [products[0], ...products.slice(4)] }}
+      product={{
+        ...products[1],
+        related: products[1].relatedProducts.map((o) =>
+          products.find((x) => x.id === o)
+        ),
+      }}
       toCheckoutPage={() => {
         linkTo("Store/Pages", "Checkout Page")();
       }}
@@ -341,54 +449,18 @@ export const DetailPage = () => {
 };
 
 export const CheckoutPage = () => {
-  const [paymentLoading, setPaymentLoading] = React.useState(false);
-
-  async function loadPaymentDetails(amount) {
-    setPaymentLoading(true);
-    try {
-      const paymentInfo = await generateInvoice({ amount });
-      if (paymentInfo.paid) {
-        setPaymentLoading(false);
-      } else {
-        return paymentInfo;
-      }
-    } catch (error) {
-      console.error(error);
-      setPaymentLoading(false);
-    }
-  }
-
-  function onPaymentSuccessful(url) {}
-
-  function onPaymentFailed() {
-    setPaymentLoading(false);
-  }
-  function onCancelPayment() {
-    setPaymentLoading(false);
-  }
+  React.useEffect(() => {
+    store.initialize({
+      cartItems: cartData,
+      products: [...products, mainProduct],
+    });
+  }, []);
   return (
     <ICheckoutPage
-      amount={50000}
-      bankInfo={{
-        bankdetails: { name: "Tuteria Limited", number: "0266765638" },
-        howToPay: [
-          "Copy the bank account details below",
-          "Pay with your bank app, USSD or ATM",
-        ],
-        logoUrl: "https://ik.imagekit.io/gbudoh/GTBank_Logo_dJlcYP6KF.png",
-        logoSize: [16, 24],
+      store={store}
+      onSuccessfulPayment={(url) => {
+        console.log(url);
       }}
-      currency={"₦"}
-      gatewayFee={750}
-      loadPaymentDetails={loadPaymentDetails}
-      paymentLoading={paymentLoading}
-      paymentProps={{
-        callback: onPaymentSuccessful,
-        onClose: onCancelPayment,
-        failureCallback: onPaymentFailed,
-        paymentLoading,
-      }}
-      selectedPlan={{ amount: 50000, discountRemoved: 0 }}
     />
   );
 };
