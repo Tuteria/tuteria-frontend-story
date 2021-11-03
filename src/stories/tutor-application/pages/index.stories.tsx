@@ -159,6 +159,7 @@ export const Verification = () => {
       ...result,
       tutorInfo: {
         ...result.tutorInfo,
+        email_verified: true,
         appData: {
           currentStep: APPLICATION_STEPS.VERIFY,
           currentEditableForm: STEPS.VERIFY_EMAIL,
