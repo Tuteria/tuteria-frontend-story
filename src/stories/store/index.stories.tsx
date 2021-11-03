@@ -375,6 +375,20 @@ const store = TuteriaStore.create(
       },
       saveUserInfo: async (userInfo, cartData) => {
         console.log({ userInfo, cartData });
+        return 23;
+      },
+      async verifyCoupon(code) {
+        return {
+          discountCode: "APPLYFIVE",
+          discountType: "percent",
+          discount: 5,
+          issuer: "Tuteria",
+          currency: "₦",
+          dateIssued: "2021-06-10",
+          dateExpired: "2021-10-31",
+          maximumCount: 10000,
+          totalUsed: 0,
+        };
       },
       async generateInvoice(
         amountToBePaid,
@@ -408,6 +422,7 @@ const store = TuteriaStore.create(
 export const HomePage = () => {
   React.useEffect(() => {
     store.initialize({
+      userId: null,
       cartItems: cartData,
       products: [...products, mainProduct],
     });
@@ -432,6 +447,7 @@ export const HomePage = () => {
 export const DetailPage = () => {
   React.useEffect(() => {
     store.initialize({
+      userId: null,
       cartItems: cartData,
       products: [...products, mainProduct],
     });
@@ -441,7 +457,7 @@ export const DetailPage = () => {
       store={store}
       product={{
         ...products[1],
-        related: products[1].relatedProducts.map((o) =>
+        relatedProducts: products[1].relatedProducts.map((o) =>
           products.find((x) => x.id === o)
         ),
       }}
@@ -455,6 +471,7 @@ export const DetailPage = () => {
 export const CheckoutPage = () => {
   React.useEffect(() => {
     store.initialize({
+      userId: null,
       cartItems: cartData,
       products: [...products, mainProduct],
     });

@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
-import StatsWithCardComponent from "@tuteria/shared-lib/src/components/chakra-pro/Stats/StatsWithCard";
+import StatsWithCardComponent from "../../pages/components/Marketing/Stats/StatsWithCard";
 import React from "react";
 
 export default {

@@ -1,14 +1,14 @@
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import React from "react";
-import TwoByTwoComponent from "@tuteria/shared-lib/src/components/chakra-pro/Features/TwoByTwo";
-import DarkWithTestimonialComponent from "@tuteria/shared-lib/src/components/chakra-pro/Features/DarkWithTestimonial";
-import WithImageComponent from "@tuteria/shared-lib/src/components/chakra-pro/Features/WithImage";
-import TabsWithIconComponent from "@tuteria/shared-lib/src/components/chakra-pro/Features/TabsWithIcon";
-import TestimonialWithVideoComponent from "@tuteria/shared-lib/src/components/chakra-pro/Features/TestimonialWithVideo";
-import ThreeColumnGridBelowComponent from "@tuteria/shared-lib/src/components/chakra-pro/Features/ThreeColumnGridBelow";
-import TwoByTwoGridComponent from "@tuteria/shared-lib/src/components/chakra-pro/Features/TwoByTwoGrid";
-import WithSixLinksComponent from "@tuteria/shared-lib/src/components/chakra-pro/Features/WithSixLinks";
+import TwoByTwoComponent from "../../pages/components/Marketing/Features/TwoByTwo";
+import DarkWithTestimonialComponent from "../../pages/components/Marketing/Features/DarkWithTestimonial";
+import WithImageComponent from "../../pages/components/Marketing/Features/WithImage";
+import TabsWithIconComponent from "../../pages/components/Marketing/Features/TabsWithIcon";
+import TestimonialWithVideoComponent from "../../pages/components/Marketing/Features/TestimonialWithVideo";
+import ThreeColumnGridBelowComponent from "../../pages/components/Marketing/Features/ThreeColumnGridBelow";
+import TwoByTwoGridComponent from "../../pages/components/Marketing/Features/TwoByTwoGrid";
+import WithSixLinksComponent from "../../pages/components/Marketing/Features/WithSixLinks";
 
 export default {
   title: "Raw Designs/Marketing/Features",

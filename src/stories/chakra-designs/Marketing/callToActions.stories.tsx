@@ -1,12 +1,12 @@
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import React from "react";
-import SimpleCenteredComponent from "@tuteria/shared-lib/src/components/chakra-pro/CallToActions/SimpleCentered";
-import CallCenterComponent from "@tuteria/shared-lib/src/components/chakra-pro/CallToActions/CallCenter";
-import MobileAppComponent from "@tuteria/shared-lib/src/components/chakra-pro/CallToActions/MobileApp";
-import WithInputComponent from "@tuteria/shared-lib/src/components/chakra-pro/CallToActions/Withinput";
-import WithRightButtonsComponent from "@tuteria/shared-lib/src/components/chakra-pro/CallToActions/WithRightButtons";
-import WithTwoActionsComponent from "@tuteria/shared-lib/src/components/chakra-pro/CallToActions/WithTwoActions";
+import SimpleCenteredComponent from "../../pages/components/Marketing/CallToActions/SimpleCentered";
+import CallCenterComponent from "../../pages/components/Marketing/CallToActions/CallCenter";
+import MobileAppComponent from "../../pages/components/Marketing/CallToActions/MobileApp";
+import WithInputComponent from "../../pages/components/Marketing/CallToActions/Withinput";
+import WithRightButtonsComponent from "../../pages/components/Marketing/CallToActions/WithRightButtons";
+import WithTwoActionsComponent from "../../pages/components/Marketing/CallToActions/WithTwoActions";
 
 export default {
   title: "Raw Designs/Marketing/Call To Actions",
