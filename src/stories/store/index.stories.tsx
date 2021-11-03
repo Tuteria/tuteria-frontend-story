@@ -42,6 +42,10 @@ function generateInvoice({ amount }) {
     paid: false,
   });
 }
+const shortMarkDownDescription = `Get a band 8.0 in your first sitting. This course bundle prepares you for the speaking, listening, reading, and writing modules of the test. 
+
+This is the best online IELTS Band 8.0 Preparatory Video Course for Nigerians which is “FAIL-PROOF”, It is proven by our past students now in their dream countries to help you get a band 8.0 in one sitting.`;
+
 const markDownDescription = `Get a band 8.0 in your first sitting. This course bundle prepares you for the speaking, listening, reading, and writing modules of the test. So far, it is the only comprehensive IELTS course tailor-made for Nigerians and Africans generally. 
 
 
@@ -129,13 +133,15 @@ const images = [
 const products = [
   {
     id: "1",
-    name: "Bamboo Tan",
+    name: "Ultimate IELTS Preparatory Video Course for Nigerians",
+    shortName: "Ultimate IELTS Course",
     currency: "NGN",
-    price: 199,
+    price: 22520,
+    purchases: 58000,
     flag: "new",
     imageUrl:
       "https://images.unsplash.com/photo-1602024242516-fbc9d4fda4b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-    rating: 4,
+    rating: 5,
     ratingCount: 1,
     tags: [
       {
@@ -143,68 +149,84 @@ const products = [
         color: "purple",
       },
     ],
+    summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
   },
   {
     id: "2",
-    name: "Iconic Turquoise",
+    name: "Complete IELTS Video Course for Nigerians",
+    shortName: "Complete IELTS Course",
     currency: "NGN",
-    price: 7000,
-    salePrice: 5000,
+    price: 27000,
+    salePrice: 10000,
     flag: "on-sale",
+    purchases: 412,
     imageUrl:
       "https://images.unsplash.com/photo-1509941943102-10c232535736?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
     rating: 4,
     ratingCount: 12,
+    summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
   },
   {
     id: "3",
-    name: "Marble Leather",
+    name: "Sample Band 9.0 Essay Write-ups",
+    shortName: "Sample Band 9.0 Essays",
     currency: "NGN",
-    price: 199,
+    price: 3000,
+    purchases: 42,
     imageUrl:
       "https://images.unsplash.com/photo-1564594985645-4427056e22e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-    rating: 4,
+    rating: 5,
     ratingCount: 12,
+    summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
   },
   {
     id: "4",
-    name: "Silve wolf",
+    name: "IELTS Speaking Task Review",
+    shortName: "Speaking Review",
     currency: "NGN",
-    price: 199,
+    price: 5000,
+    purchases: 112,
     imageUrl:
       "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=680&q=80",
     rating: 5,
     ratingCount: 1,
+    summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
   },
   {
     id: "5",
-    name: "Marble Leather",
+    name: "IELTS Writing Task Review",
+    shortName: "Writing Review",
     currency: "NGN",
-    price: 199,
+    price: 7000,
+    purchases: 129,
     imageUrl:
       "https://images.unsplash.com/photo-1564594985645-4427056e22e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
     rating: 4,
     ratingCount: 12,
+    summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
   },
   {
     id: "6",
-    name: "Silve wolf",
+    name: "IELTS Listening Video Course for Nigerians",
+    shortName: "IELTS Listening Course",
     currency: "NGN",
-    price: 199,
+    price: 3000,
+    purchases: 132,
     imageUrl:
       "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=680&q=80",
     rating: 5,
     ratingCount: 1,
+    summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
   },
@@ -282,7 +304,7 @@ export const DetailPage = () => {
   return (
     <ProductDetailPage
       store={store}
-      product={{ ...products[1], related: [products[0], ...products.slice(2)] }}
+      product={{ ...products[1], related: [products[0], ...products.slice(4)] }}
       toCheckoutPage={() => {
         linkTo("Store/Pages", "Checkout Page")();
       }}
