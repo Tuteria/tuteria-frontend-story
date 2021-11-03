@@ -42,6 +42,10 @@ function generateInvoice({ amount }) {
     paid: false,
   });
 }
+const shortMarkDownDescription = `Get a band 8.0 in your first sitting. This course bundle prepares you for the speaking, listening, reading, and writing modules of the test. 
+
+This is the best online IELTS Band 8.0 Preparatory Video Course for Nigerians which is “FAIL-PROOF”, It is proven by our past students now in their dream countries to help you get a band 8.0 in one sitting.`;
+
 const markDownDescription = `Get a band 8.0 in your first sitting. This course bundle prepares you for the speaking, listening, reading, and writing modules of the test. So far, it is the only comprehensive IELTS course tailor-made for Nigerians and Africans generally. 
 
 
@@ -129,72 +133,216 @@ const images = [
 const products = [
   {
     id: "1",
-    name: "Bamboo Tan",
+    name: "Ultimate IELTS Preparatory Video Course for Nigerians",
+    shortName: "Ultimate IELTS Course",
     currency: "NGN",
-    price: 199,
-    flag: "new",
+    price: 22520,
+    salePrice: 18000,
+    purchases: 58000,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
     imageUrl:
       "https://images.unsplash.com/photo-1602024242516-fbc9d4fda4b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-    rating: 4,
+    rating: 5,
     ratingCount: 1,
+    reviews: [
+      {
+        id: "review1",
+        name: "Olatunde",
+        rating: 5,
+        date: "",
+        email: "tunde@email.com",
+        title: "Love the product!",
+        comment: "Love this product!",
+      },
+    ],
     tags: [
       {
         name: "Exclusive 💫",
         color: "purple",
       },
     ],
+    summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
   },
   {
     id: "2",
-    name: "Iconic Turquoise",
+    name: "Complete IELTS Video Course for Nigerians",
+    shortName: "Complete IELTS Course",
     currency: "NGN",
-    price: 199,
-    salePrice: 179.99,
-    flag: "on-sale",
+    price: 27000,
+    salePrice: 10000,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
+    purchases: 412,
     imageUrl:
       "https://images.unsplash.com/photo-1509941943102-10c232535736?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
     rating: 4,
     ratingCount: 12,
+    summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
+    reviews: [
+      {
+        id: "review1",
+        name: "Olatunde",
+        rating: 5,
+        date: "",
+        email: "tunde@email.com",
+        title: "Love the product!",
+        comment: "Love this product!",
+      },
+    ],
+    tags: [
+      {
+        name: "Exclusive 💫",
+        color: "purple",
+      },
+    ],
   },
   {
     id: "3",
-    name: "Marble Leather",
+    name: "Sample Band 9.0 Essay Write-ups",
+    shortName: "Sample Band 9.0 Essays",
     currency: "NGN",
-    price: 199,
+    price: 3000,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
+    purchases: 42,
     imageUrl:
       "https://images.unsplash.com/photo-1564594985645-4427056e22e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-    rating: 4,
+    rating: 5,
     ratingCount: 12,
+    summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
+    salePrice: 18000,
+    reviews: [
+      {
+        id: "review1",
+        name: "Olatunde",
+        rating: 5,
+        date: "",
+        email: "tunde@email.com",
+        title: "Love the product!",
+        comment: "Love this product!",
+      },
+    ],
+    tags: [
+      {
+        name: "Exclusive 💫",
+        color: "purple",
+      },
+    ],
   },
   {
     id: "4",
-    name: "Silve wolf",
+    name: "IELTS Speaking Task Review",
+    shortName: "Speaking Review",
     currency: "NGN",
-    price: 199,
+    price: 5000,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
+    purchases: 112,
     imageUrl:
       "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=680&q=80",
     rating: 5,
     ratingCount: 1,
+    summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
+  },
+  {
+    id: "5",
+    name: "IELTS Writing Task Review",
+    shortName: "Writing Review",
+    currency: "NGN",
+    price: 7000,
+    purchases: 129,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
+    imageUrl:
+      "https://images.unsplash.com/photo-1564594985645-4427056e22e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    rating: 4,
+    ratingCount: 12,
+    summary: shortMarkDownDescription,
+    description: markDownDescription,
+    images,
+  },
+  {
+    id: "6",
+    name: "IELTS Listening Video Course for Nigerians",
+    shortName: "IELTS Listening Course",
+    currency: "NGN",
+    price: 3000,
+    purchases: 132,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
+    imageUrl:
+      "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=680&q=80",
+    rating: 5,
+    ratingCount: 1,
+    summary: shortMarkDownDescription,
+    description: markDownDescription,
+    images,
+    salePrice: 18000,
+    reviews: [
+      {
+        id: "review1",
+        name: "Olatunde",
+        rating: 5,
+        date: "",
+        email: "tunde@email.com",
+        title: "Love the product!",
+        comment: "Love this product!",
+      },
+    ],
+    tags: [
+      {
+        name: "Exclusive 💫",
+        color: "purple",
+      },
+    ],
   },
 ];
 
 const mainProduct = {
   id: "5",
-  name: "All dressed",
+  name: "Ultimate IELTS Video Course",
   currency: "NGN",
-  price: 20000,
+  price: 22520,
   description:
-    "Dress that feels a little fany for when pajamas aren’t cutting it",
+    "Nigerians 🇳🇬 now in Canada, UK, US & Australia Used this Perfect IELTS Preparatory Course to get a Band 8.0 in less than 2 weeks",
   imageUrl:
-    "https://images.unsplash.com/photo-1630759072462-d5348e577ee8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=872&q=80",
+    "https://images.unsplash.com/photo-1602024242516-fbc9d4fda4b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+  rating: 5,
+  ratingCount: 1,
+  reviews: [
+    {
+      id: "review1",
+      name: "Olatunde",
+      rating: 5,
+      date: "",
+      email: "tunde@email.com",
+      title: "Love the product!",
+      comment: "Love this product!",
+    },
+  ],
+  tags: [
+    {
+      name: "Exclusive 💫",
+      color: "purple",
+    },
+  ],
+  summary: shortMarkDownDescription,
+  images,
 };
 const cartData = [
   {
@@ -218,6 +366,9 @@ const store = TuteriaStore.create(
   {},
   {
     adapter: {
+      updateCartItems: (cartItems) => {
+        console.log(cartItems);
+      },
       saveUserInfo: async (userInfo, cartData) => {
         console.log({ userInfo, cartData });
       },
@@ -260,7 +411,7 @@ export const HomePage = () => {
   return (
     <StoreHomePage
       store={store}
-      heading="Everything you need to score a Band 8.0 in IELTS for Nigerians and Africans"
+      heading="Everything you need to score a Band 8.0 in IELTS"
       mainProduct={mainProduct}
       products={products}
       toFullDetails={(item) => {
@@ -284,7 +435,12 @@ export const DetailPage = () => {
   return (
     <ProductDetailPage
       store={store}
-      product={{ ...products[1], related: [products[0], ...products.slice(2)] }}
+      product={{
+        ...products[1],
+        related: products[1].relatedProducts.map((o) =>
+          products.find((x) => x.id === o)
+        ),
+      }}
       toCheckoutPage={() => {
         linkTo("Store/Pages", "Checkout Page")();
       }}
