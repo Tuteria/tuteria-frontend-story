@@ -385,7 +385,7 @@ const store = TuteriaStore.create(
           issuer: "Tuteria",
           currency: "₦",
           dateIssued: "2021-06-10",
-          dateExpired: "2021-10-31",
+          dateExpired: "2021-12-31",
           maximumCount: 10000,
           totalUsed: 0,
         };
