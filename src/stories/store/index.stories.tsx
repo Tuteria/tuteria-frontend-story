@@ -221,6 +221,32 @@ const store = TuteriaStore.create(
       saveUserInfo: async (userInfo, cartData) => {
         console.log({ userInfo, cartData });
       },
+      async generateInvoice(
+        amountToBePaid,
+        userInfoWithCart: { userInfo: any; cartItems: any[] }
+      ) {
+        return await Promise.resolve({
+          amount: amountToBePaid,
+          order: "MCYN9OWEOBWA",
+          currency: "ngn",
+          base_country: "NG",
+          description: "Gold Flower",
+          discount: 0,
+          user_details: {
+            first_name: "Abiola",
+            last_name: "Oyeniyi",
+            country: "Nigeria",
+            email: "gbozee@gmail.com",
+            phone_number: "2347035209976",
+            key: "pk_test_3146e297e6d0463fea560139bc122a4aae04fedb",
+            redirect_url:
+              "https://payment.tuteria.com/paystack/verify-payment/MCYN9OWEOBWA/?amount=400000",
+            kind: "paystack",
+            js_script: "https://js.paystack.co/v1/inline.js",
+          },
+          paid: false,
+        });
+      },
     },
   }
 );
@@ -267,54 +293,18 @@ export const DetailPage = () => {
 };
 
 export const CheckoutPage = () => {
-  const [paymentLoading, setPaymentLoading] = React.useState(false);
-
-  async function loadPaymentDetails(amount) {
-    setPaymentLoading(true);
-    try {
-      const paymentInfo = await generateInvoice({ amount });
-      if (paymentInfo.paid) {
-        setPaymentLoading(false);
-      } else {
-        return paymentInfo;
-      }
-    } catch (error) {
-      console.error(error);
-      setPaymentLoading(false);
-    }
-  }
-
-  function onPaymentSuccessful(url) {}
-
-  function onPaymentFailed() {
-    setPaymentLoading(false);
-  }
-  function onCancelPayment() {
-    setPaymentLoading(false);
-  }
+  React.useEffect(() => {
+    store.initialize({
+      cartItems: cartData,
+      products: [...products, mainProduct],
+    });
+  }, []);
   return (
     <ICheckoutPage
-      amount={50000}
-      bankInfo={{
-        bankdetails: { name: "Tuteria Limited", number: "0266765638" },
-        howToPay: [
-          "Copy the bank account details below",
-          "Pay with your bank app, USSD or ATM",
-        ],
-        logoUrl: "https://ik.imagekit.io/gbudoh/GTBank_Logo_dJlcYP6KF.png",
-        logoSize: [16, 24],
+      store={store}
+      onSuccessfulPayment={(url) => {
+        console.log(url);
       }}
-      currency={"₦"}
-      gatewayFee={750}
-      loadPaymentDetails={loadPaymentDetails}
-      paymentLoading={paymentLoading}
-      paymentProps={{
-        callback: onPaymentSuccessful,
-        onClose: onCancelPayment,
-        failureCallback: onPaymentFailed,
-        paymentLoading,
-      }}
-      selectedPlan={{ amount: 50000, discountRemoved: 0 }}
     />
   );
 };
