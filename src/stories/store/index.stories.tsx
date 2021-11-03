@@ -444,7 +444,7 @@ export const DetailPage = () => {
       store={store}
       product={{
         ...products[1],
-        related: products[1].relatedProducts.map((o) =>
+        relatedProducts: products[1].relatedProducts.map((o) =>
           products.find((x) => x.id === o)
         ),
       }}
