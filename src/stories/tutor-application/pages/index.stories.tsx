@@ -4,7 +4,7 @@ import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { LoadingStateWrapper } from "@tuteria/shared-lib/src/components/data-display/LoadingState";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
-import { initializeStore } from "@tuteria/shared-lib/src/stores";
+import { initializeStore, SubjectStore } from "@tuteria/shared-lib/src/stores";
 import {
   APPLICATION_STEPS,
   STEPS,
@@ -19,6 +19,8 @@ import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
 import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-application/pages/SubjectCreationPage";
+import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
+import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
 
 export default {
   title: "Tutor Application/Pages",
@@ -233,5 +235,35 @@ export const CompletedPage = () => {
       isPremium={true}
       photo="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200"
     />
+  );
+};
+
+const subjectStore = SubjectStore.create({}, { adapter });
+
+export const SubjectReviewPage = () => {
+  async function initialize(setLoading) {
+    let result = await testAdapter.initializeApplication(adapter, {
+      regions: allRegions,
+      countries: allCountries,
+      tuteriaSubjects: testAdapter.getTuteriaSubjects(),
+    });
+    subjectStore.initializeTutorSubjects(result.subjectData);
+  }
+  return (
+    <LoadingStateWrapper
+      defaultLoading={false}
+      initialize={initialize}
+      text="Loading subject details..."
+    >
+      <TutorPageWrapper store={store}>
+        <TutorSubjectsPage
+          store={subjectStore}
+          showWelcomeModal={false}
+          renderPreview={(subjectStore) => {
+            return null;
+          }}
+        />
+      </TutorPageWrapper>
+    </LoadingStateWrapper>
   );
 };
