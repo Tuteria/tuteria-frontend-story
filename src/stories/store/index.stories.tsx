@@ -42,6 +42,8 @@ function generateInvoice({ amount }) {
     paid: false,
   });
 }
+const shortMarkDownDescription = `Get a band 8.0 in your first sitting. This course bundle prepares you for the speaking, listening, reading, and writing modules of the test. So far, it is the only comprehensive IELTS course tailor-made for Nigerians and Africans generally. 
+`;
 const markDownDescription = `Get a band 8.0 in your first sitting. This course bundle prepares you for the speaking, listening, reading, and writing modules of the test. So far, it is the only comprehensive IELTS course tailor-made for Nigerians and Africans generally. 
 
 
@@ -129,26 +131,44 @@ const images = [
 const products = [
   {
     id: "1",
-    name: "Bamboo Tan",
+    name: "Ultimate IELTS Preparatory Video Course for Nigerians",
+    shortName: "Ultimate IELTS Course",
     currency: "NGN",
-    price: 199,
-    flag: "new",
+    price: 22520,
+    salePrice: 18000,
+    purchases: 58000,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
     imageUrl:
       "https://images.unsplash.com/photo-1602024242516-fbc9d4fda4b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-    rating: 4,
+    rating: 5,
     ratingCount: 1,
+    reviews: [
+      {
+        id: "review1",
+        name: "Olatunde",
+        rating: 5,
+        date: "",
+        email: "tunde@email.com",
+        title: "Love the product!",
+        comment: "Love this product!",
+      },
+    ],
     tags: [
       {
         name: "Exclusive 💫",
         color: "purple",
       },
     ],
+    summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
   },
   {
     id: "2",
     name: "Iconic Turquoise",
+    shortName: "Iconic Turquoise",
     currency: "NGN",
     price: 199,
     salePrice: 179.99,
@@ -159,10 +179,33 @@ const products = [
     ratingCount: 12,
     description: markDownDescription,
     images,
+    purchases: 58000,
+    relatedProducts: ["1", "4"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
+    reviews: [
+      {
+        id: "review1",
+        name: "Olatunde",
+        rating: 5,
+        date: "",
+        email: "tunde@email.com",
+        title: "Love the product!",
+        comment: "Love this product!",
+      },
+    ],
+    tags: [
+      {
+        name: "Exclusive 💫",
+        color: "purple",
+      },
+    ],
+    summary: shortMarkDownDescription,
   },
   {
     id: "3",
     name: "Marble Leather",
+    shortName: "Marble Leather",
     currency: "NGN",
     price: 199,
     imageUrl:
@@ -171,10 +214,34 @@ const products = [
     ratingCount: 12,
     description: markDownDescription,
     images,
+    salePrice: 18000,
+    purchases: 58000,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
+    reviews: [
+      {
+        id: "review1",
+        name: "Olatunde",
+        rating: 5,
+        date: "",
+        email: "tunde@email.com",
+        title: "Love the product!",
+        comment: "Love this product!",
+      },
+    ],
+    tags: [
+      {
+        name: "Exclusive 💫",
+        color: "purple",
+      },
+    ],
+    summary: shortMarkDownDescription,
   },
   {
     id: "4",
     name: "Silve wolf",
+    shortName: "Silve wolf",
     currency: "NGN",
     price: 199,
     imageUrl:
@@ -183,18 +250,67 @@ const products = [
     ratingCount: 1,
     description: markDownDescription,
     images,
+    salePrice: 18000,
+    purchases: 58000,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
+    reviews: [
+      {
+        id: "review1",
+        name: "Olatunde",
+        rating: 5,
+        date: "",
+        email: "tunde@email.com",
+        title: "Love the product!",
+        comment: "Love this product!",
+      },
+    ],
+    tags: [
+      {
+        name: "Exclusive 💫",
+        color: "purple",
+      },
+    ],
+    summary: shortMarkDownDescription,
   },
 ];
 
 const mainProduct = {
   id: "5",
-  name: "All dressed",
+  name: "Ultimate IELTS Preparatory Video Course for Nigerians22",
+  shortName: "Ultimate IELTS Course",
   currency: "NGN",
-  price: 20000,
-  description:
-    "Dress that feels a little fany for when pajamas aren’t cutting it",
+  price: 22520,
+  salePrice: 18000,
+  purchases: 58000,
+  relatedProducts: ["2", "3"],
+  modules: ["Writing", "Listening", "Speaking"],
+  course: "IELTS",
   imageUrl:
-    "https://images.unsplash.com/photo-1630759072462-d5348e577ee8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=872&q=80",
+    "https://images.unsplash.com/photo-1602024242516-fbc9d4fda4b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+  rating: 5,
+  ratingCount: 1,
+  reviews: [
+    {
+      id: "review1",
+      name: "Olatunde",
+      rating: 5,
+      date: "",
+      email: "tunde@email.com",
+      title: "Love the product!",
+      comment: "Love this product!",
+    },
+  ],
+  tags: [
+    {
+      name: "Exclusive 💫",
+      color: "purple",
+    },
+  ],
+  summary: shortMarkDownDescription,
+  description: markDownDescription,
+  images,
 };
 const cartData = [
   {
@@ -218,6 +334,9 @@ const store = TuteriaStore.create(
   {},
   {
     adapter: {
+      updateCartItems: (cartItems) => {
+        console.log(cartItems);
+      },
       saveUserInfo: async (userInfo, cartData) => {
         console.log({ userInfo, cartData });
       },
@@ -284,7 +403,12 @@ export const DetailPage = () => {
   return (
     <ProductDetailPage
       store={store}
-      product={{ ...products[1], related: [products[0], ...products.slice(2)] }}
+      product={{
+        ...products[1],
+        related: products[1].relatedProducts.map((o) =>
+          products.find((x) => x.id === o)
+        ),
+      }}
       toCheckoutPage={() => {
         linkTo("Store/Pages", "Checkout Page")();
       }}
