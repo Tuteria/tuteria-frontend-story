@@ -11,17 +11,23 @@ import {
   HStack,
   Input,
   Radio,
+  FormErrorMessage,
   RadioGroup,
   Select,
   Text,
 } from "@chakra-ui/react";
 import * as React from "react";
+import { Field, Formik } from "formik";
+import * as yup from "yup";
 
 import { chakra, HTMLChakraProps } from "@chakra-ui/react";
 import { Button, Divider, Icon } from "@chakra-ui/react";
 import { HiOutlineChat, HiOutlineMail, HiOutlinePhone } from "react-icons/hi";
 import { AspectRatio, Image } from "@chakra-ui/react";
 import { Checkbox } from "@chakra-ui/react";
+
+import FlagPhoneInput from "@tuteria/shared-lib/src/components/form-elements/FlagPhoneInput";
+import { transformPhoneInput } from "@tuteria/shared-lib/src/components/form-elements/PhoneInput";
 
 export const PayPalLogo = (props: HTMLChakraProps<"svg">) => (
   <chakra.svg
@@ -513,68 +519,200 @@ export const OrderSummary = () => (
     </Stack>
   </Stack>
 );
-export const ShippingInformation = () => (
-  <Stack spacing={{ base: "6", md: "10" }}>
-    <Heading size="md">Shipping Information</Heading>
-    <Stack spacing={{ base: "6", md: "8" }}>
-      <FormControl id="name">
-        <FormLabel color={useColorModeValue("gray.700", "gray.200")}>
-          Full name
-        </FormLabel>
-        <Input
-          name="name"
-          placeholder="Your first and last name"
-          focusBorderColor={useColorModeValue("blue.500", "blue.200")}
-        />
-      </FormControl>
-      <FormControl id="street">
-        <FormLabel color={useColorModeValue("gray.700", "gray.200")}>
-          Street address
-        </FormLabel>
-        <Input
-          name="name"
-          placeholder="123 Example Street"
-          focusBorderColor={useColorModeValue("blue.500", "blue.200")}
-        />
-      </FormControl>
-      <HStack spacing="6">
-        <FormControl id="zip" maxW="32">
-          <FormLabel color={useColorModeValue("gray.700", "gray.200")}>
-            Zip Code
-          </FormLabel>
-          <Input
-            name="zip"
-            placeholder="Zip Code"
-            focusBorderColor={useColorModeValue("blue.500", "blue.200")}
-          />
-        </FormControl>
-        <FormControl id="city">
-          <FormLabel color={useColorModeValue("gray.700", "gray.200")}>
-            City
-          </FormLabel>
-          <Input
-            name="city"
-            placeholder="City"
-            focusBorderColor={useColorModeValue("blue.500", "blue.200")}
-          />
-        </FormControl>
-      </HStack>
-      <FormControl id="email">
-        <FormLabel color={useColorModeValue("gray.700", "gray.200")}>
-          Email address
-        </FormLabel>
-        <Input
-          name="email"
-          placeholder="you@exmaple.com"
-          focusBorderColor={useColorModeValue("blue.500", "blue.200")}
-        />
-      </FormControl>
-      <Checkbox defaultIsChecked spacing="4" colorScheme="blue">
-        Billing address is same as shipping
-      </Checkbox>
-    </Stack>
-  </Stack>
-);
+const wrongEmailFormats = [
+  "www.",
+  "@gmal",
+  "@yaho",
+  "@gmial",
+  "@googlemail",
+  "@yahoomail",
+];
+
+const validationSchema = yup.object().shape({
+  full_name: yup.string().trim().required("Fullname is required"),
+  email: yup
+    .string()
+    .required("Email is required")
+    .email("Email is InValid")
+    .test("email", "Wrong email formate", (value) => {
+      if (value) {
+        return !wrongEmailFormats.some((v) => value.includes(v));
+      }
+      return false;
+    }),
+  phone: yup.string().required("Phone number is required"),
+  country: yup.string().required("Country is required"),
+  state: yup.string().required("State is required"),
+});
+let commonProps = (
+  { name }: { name: any },
+  { touched, errors }: { touched: any; errors: any }
+) => ({
+  isInvalid: Boolean(touched[name] && errors[name]),
+  errorMessage: errors[name],
+});
+export const ShippingInformation = ({
+  country_code = "ng",
+  countries = [],
+}) => {
+  const labelColor = useColorModeValue("gray.700", "gray.200");
+  const inputColor = useColorModeValue("blue.500", "blue.200");
+  return (
+    <Formik
+      initialValues={{}}
+      validationSchema={validationSchema}
+      render={({ handleSubmit, errors }) => {
+        return (
+          <form
+            onSubmit={(value) => {
+              handleSubmit(value);
+              console.log(errors);
+            }}
+          >
+            <Stack spacing={{ base: "6", md: "10" }}>
+              <Heading size="md">Shipping Information</Heading>
+              <Stack spacing={{ base: "6", md: "8" }}>
+                <Field
+                  name="full_name"
+                  render={({ field, form }) => {
+                    return (
+                      <FormControl
+                        isInvalid={commonProps(field, form).isInvalid}
+                        id="name"
+                      >
+                        <FormLabel color={labelColor}>Full name</FormLabel>
+                        <Input
+                          name="name"
+                          placeholder="Your first and last name"
+                          focusBorderColor={inputColor}
+                          {...field}
+                        />
+                        <FormErrorMessage>
+                          {commonProps(field, form).errorMessage}
+                        </FormErrorMessage>
+                      </FormControl>
+                    );
+                  }}
+                />
+                <Field
+                  name="email"
+                  render={({ field, form }) => {
+                    return (
+                      <FormControl
+                        isInvalid={commonProps(field, form).isInvalid}
+                        id="email"
+                      >
+                        <FormLabel color={labelColor}>Email address</FormLabel>
+                        <Input
+                          name="email"
+                          type="email"
+                          placeholder="you@exmaple.com"
+                          {...field}
+                          focusBorderColor={inputColor}
+                        />
+                        <FormErrorMessage>
+                          {commonProps(field, form).errorMessage}
+                        </FormErrorMessage>
+                      </FormControl>
+                    );
+                  }}
+                />
+                <Field name="phone">
+                  {({ field, form }: { field: any; form: any }) => {
+                    let fieldValue = field.value || "";
+                    if (fieldValue) {
+                      fieldValue = transformPhoneInput(
+                        country_code,
+                        fieldValue
+                      );
+                    }
+                    return (
+                      <FormControl
+                        isInvalid={commonProps(field, form).isInvalid}
+                      >
+                        <FormLabel color={labelColor}>Phone Number</FormLabel>
+                        <FlagPhoneInput
+                          country={country_code.toLowerCase()}
+                          {...field}
+                          value={field.value}
+                          focusBorderColor={inputColor}
+                          onChange={(value) => {
+                            form.setFieldValue(field.name, value);
+                          }}
+                        />
+                        <FormErrorMessage>
+                          {commonProps(field, form).errorMessage}
+                        </FormErrorMessage>
+                      </FormControl>
+                    );
+                  }}
+                </Field>
+                <Field
+                  name="country"
+                  render={({ field, form }: { field: any; form: any }) => (
+                    <FormControl
+                      isInvalid={commonProps(field, form).isInvalid}
+                      flex={1}
+                    >
+                      <FormLabel color={labelColor} htmlFor="country">
+                        Country
+                      </FormLabel>
+                      <Select
+                        id="country"
+                        size="lg"
+                        focusBorderColor={inputColor}
+                        borderColor="neutral.500"
+                        fontSize="md"
+                        placeholder="Select Country"
+                        value={field.value}
+                        {...field}
+                        {...commonProps(field, form)}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                          form.setFieldValue(field.name, e.target.value);
+                        }}
+                      >
+                        {countries.map((country) => (
+                          <option key={country.value} value={country.value}>
+                            {country.label}
+                          </option>
+                        ))}
+                      </Select>
+                      <FormErrorMessage>
+                        {commonProps(field, form).errorMessage}
+                      </FormErrorMessage>
+                    </FormControl>
+                  )}
+                />
+                <Field
+                  name="state"
+                  render={({ field, form }) => {
+                    return (
+                      <FormControl
+                        isInvalid={commonProps(field, form).isInvalid}
+                        id="state"
+                      >
+                        <FormLabel color={labelColor}>State</FormLabel>
+                        <Input
+                          name="state"
+                          placeholder="Your state"
+                          focusBorderColor={inputColor}
+                          {...field}
+                        />
+                        <FormErrorMessage>
+                          {commonProps(field, form).errorMessage}
+                        </FormErrorMessage>
+                      </FormControl>
+                    );
+                  }}
+                />
+              </Stack>
+            </Stack>
+          </form>
+        );
+      }}
+    />
+  );
+};
 
 export const ShippingMethod = () => (
   <Stack spacing={{ base: "6", md: "10" }}>

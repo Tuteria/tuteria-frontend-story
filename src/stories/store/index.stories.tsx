@@ -5,6 +5,8 @@ import StoreHomePage from "@tuteria/shared-lib/src/store/pages/Home";
 import ICheckoutPage from "@tuteria/shared-lib/src/store/pages/CheckoutPage";
 import ProductDetailPage from "@tuteria/shared-lib/src/store/pages/ProductDetail";
 import { linkTo } from "@storybook/addon-links";
+import { TuteriaStore } from "@tuteria/shared-lib/src/store/_store";
+import "katex/dist/katex.min.css";
 export default {
   title: "Store/Pages",
   decorators: [
@@ -17,6 +19,85 @@ export default {
     ),
   ],
 };
+function generateInvoice({ amount }) {
+  return Promise.resolve({
+    amount,
+    order: "MCYN9OWEOBWA",
+    currency: "ngn",
+    base_country: "NG",
+    description: "Gold Flower",
+    discount: 0,
+    user_details: {
+      first_name: "Abiola",
+      last_name: "Oyeniyi",
+      country: "Nigeria",
+      email: "gbozee@gmail.com",
+      phone_number: "2347035209976",
+      key: "pk_test_3146e297e6d0463fea560139bc122a4aae04fedb",
+      redirect_url:
+        "https://payment.tuteria.com/paystack/verify-payment/MCYN9OWEOBWA/?amount=400000",
+      kind: "paystack",
+      js_script: "https://js.paystack.co/v1/inline.js",
+    },
+    paid: false,
+  });
+}
+const markDownDescription = `Get a band 8.0 in your first sitting. This course bundle prepares you for the speaking, listening, reading, and writing modules of the test. So far, it is the only comprehensive IELTS course tailor-made for Nigerians and Africans generally. 
+
+
+This is the best online IELTS Band 8.0 Preparatory Video Course for Nigerians which is “FAIL-PROOF”, It is proven by our past students now in their dream countries to help you get a band 8.0 in one sitting even if your English is terrible (or not) and you only have less than 10 days to prepare.
+
+ 
+Popularly known as the 5-star IELTS digital bible, this fail-proof IELTS video course will teach you how to think like your IELTS examiner so that you give them exactly what they’re expecting. 
+
+It is taught by our multiple award-winning IELTS tutors from Nigeria to help you get a band 8.0.
+
+This course bundle contains real classroom sessions focusing on equipping you with proven strategies, tips, advice, skills to pass the IELTS test.
+
+
+
+**What is contained in this course bundle?**
+
+
+
+  A. The IELTS writing module master course. (Get this ONLY for 3,000 Naira - Click here to access it)
+
+  B. The IELTS speaking module master course. (Get this ONLY for 3,000 Naira - Click here to access it)
+
+  C. The IELTS reading module master course. (Get this ONLY for 3,000 Naira - Click here to access it)
+
+  D. The IELTS listening module master course. (Get this ONLY for 3,000 Naira - Click here to access it)
+
+
+
+**What you’ll get from this course**
+
+
+
+* Over 35 classroom-tailored video lessons 
+* 25+ hours of instruction 
+* Pre-assessments
+* Live worked examples
+* Exclusive essay analyses for writing tasks 1 and 2 (General and Academic)
+* In-class mock tests and exercises 
+* Attention-tracking quizzes
+* Tip flashcards
+* Writing and speaking samples and audio recordings
+* Simple exam strategies for both General and Academic Training
+* Confidence to perform well on the test date 
+* Time management strategies 
+* Real IELTS past questions 
+
+
+**Requirements** 
+
+* Intermediate English level
+* Drive to pass the IELTS test excellently  
+
+
+**Who is the course NOT for?**
+
+This course bundle is not for those who are NOT ready to pass IELTS with flying colors. `;
 const images = [
   {
     id: "01",
@@ -49,7 +130,7 @@ const products = [
   {
     id: "1",
     name: "Bamboo Tan",
-    currency: "USD",
+    currency: "NGN",
     price: 199,
     flag: "new",
     imageUrl:
@@ -62,14 +143,13 @@ const products = [
         color: "purple",
       },
     ],
-    description:
-      "With a sleek design and a captivating essence, this is a modern Classic made for every occasion.",
+    description: markDownDescription,
     images,
   },
   {
     id: "2",
     name: "Iconic Turquoise",
-    currency: "USD",
+    currency: "NGN",
     price: 199,
     salePrice: 179.99,
     flag: "on-sale",
@@ -77,79 +157,112 @@ const products = [
       "https://images.unsplash.com/photo-1509941943102-10c232535736?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
     rating: 4,
     ratingCount: 12,
-    description:
-      "With a sleek design and a captivating essence, this is a modern Classic made for every occasion.",
+    description: markDownDescription,
     images,
   },
   {
     id: "3",
     name: "Marble Leather",
-    currency: "USD",
+    currency: "NGN",
     price: 199,
     imageUrl:
       "https://images.unsplash.com/photo-1564594985645-4427056e22e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
     rating: 4,
     ratingCount: 12,
-    description:
-      "With a sleek design and a captivating essence, this is a modern Classic made for every occasion.",
+    description: markDownDescription,
     images,
   },
   {
     id: "4",
     name: "Silve wolf",
-    currency: "GBP",
+    currency: "NGN",
     price: 199,
     imageUrl:
       "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=680&q=80",
     rating: 5,
     ratingCount: 1,
-    description:
-      "With a sleek design and a captivating essence, this is a modern Classic made for every occasion.",
+    description: markDownDescription,
     images,
   },
 ];
 
+const mainProduct = {
+  id: "5",
+  name: "All dressed",
+  currency: "NGN",
+  price: 20000,
+  description:
+    "Dress that feels a little fany for when pajamas aren’t cutting it",
+  imageUrl:
+    "https://images.unsplash.com/photo-1630759072462-d5348e577ee8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=872&q=80",
+};
 const cartData = [
   {
     id: "1",
-    price: 39.99,
-    currency: "GBP",
-    name: "Ferragamo bag",
-    description: "Tan, 40mm",
-    quantity: 3,
-    imageUrl:
-      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80",
+    quantity: 1,
   },
   {
     id: "2",
-    price: 39.99,
-    currency: "GBP",
-    name: "Bamboo Tan",
-    description: "Tan, 40mm",
-    quantity: 3,
-    imageUrl:
-      "https://images.unsplash.com/photo-1591561954557-26941169b49e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80",
+    quantity: 2,
   },
   {
     id: "3",
-    price: 39.99,
-    currency: "GBP",
-    name: "Yeezy Sneakers",
-    description: "Tan, 40mm",
     quantity: 3,
-    imageUrl:
-      "https://images.unsplash.com/photo-1604671801908-6f0c6a092c05?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1770&q=80",
   },
 ];
 
 function navigate(path?: string) {
   linkTo("Store/Pages", "DetailPage")();
 }
+const store = TuteriaStore.create(
+  {},
+  {
+    adapter: {
+      saveUserInfo: async (userInfo, cartData) => {
+        console.log({ userInfo, cartData });
+      },
+      async generateInvoice(
+        amountToBePaid,
+        userInfoWithCart: { userInfo: any; cartItems: any[] }
+      ) {
+        return await Promise.resolve({
+          amount: amountToBePaid,
+          order: "MCYN9OWEOBWA",
+          currency: "ngn",
+          base_country: "NG",
+          description: "Gold Flower",
+          discount: 0,
+          user_details: {
+            first_name: "Abiola",
+            last_name: "Oyeniyi",
+            country: "Nigeria",
+            email: "gbozee@gmail.com",
+            phone_number: "2347035209976",
+            key: "pk_test_3146e297e6d0463fea560139bc122a4aae04fedb",
+            redirect_url:
+              "https://payment.tuteria.com/paystack/verify-payment/MCYN9OWEOBWA/?amount=400000",
+            kind: "paystack",
+            js_script: "https://js.paystack.co/v1/inline.js",
+          },
+          paid: false,
+        });
+      },
+    },
+  }
+);
 export const HomePage = () => {
+  React.useEffect(() => {
+    store.initialize({
+      cartItems: cartData,
+      products: [...products, mainProduct],
+    });
+  }, []);
   return (
     <StoreHomePage
+      store={store}
+      heading="Everything you need to score a Band 8.0 in IELTS for Nigerians and Africans"
+      mainProduct={mainProduct}
       products={products}
-      cartData={cartData}
       toFullDetails={(item) => {
         if (item) {
           navigate();
@@ -162,9 +275,36 @@ export const HomePage = () => {
 };
 
 export const DetailPage = () => {
-  return <ProductDetailPage />;
+  React.useEffect(() => {
+    store.initialize({
+      cartItems: cartData,
+      products: [...products, mainProduct],
+    });
+  }, []);
+  return (
+    <ProductDetailPage
+      store={store}
+      product={{ ...products[1], related: [products[0], ...products.slice(2)] }}
+      toCheckoutPage={() => {
+        linkTo("Store/Pages", "Checkout Page")();
+      }}
+    />
+  );
 };
 
 export const CheckoutPage = () => {
-  return <ICheckoutPage />;
+  React.useEffect(() => {
+    store.initialize({
+      cartItems: cartData,
+      products: [...products, mainProduct],
+    });
+  }, []);
+  return (
+    <ICheckoutPage
+      store={store}
+      onSuccessfulPayment={(url) => {
+        console.log(url);
+      }}
+    />
+  );
 };
