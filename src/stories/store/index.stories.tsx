@@ -371,6 +371,7 @@ const store = TuteriaStore.create(
       },
       saveUserInfo: async (userInfo, cartData) => {
         console.log({ userInfo, cartData });
+        return 23;
       },
       async generateInvoice(
         amountToBePaid,
