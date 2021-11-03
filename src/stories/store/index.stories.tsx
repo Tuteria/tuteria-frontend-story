@@ -42,8 +42,10 @@ function generateInvoice({ amount }) {
     paid: false,
   });
 }
-const shortMarkDownDescription = `Get a band 8.0 in your first sitting. This course bundle prepares you for the speaking, listening, reading, and writing modules of the test. So far, it is the only comprehensive IELTS course tailor-made for Nigerians and Africans generally. 
-`;
+const shortMarkDownDescription = `Get a band 8.0 in your first sitting. This course bundle prepares you for the speaking, listening, reading, and writing modules of the test. 
+
+This is the best online IELTS Band 8.0 Preparatory Video Course for Nigerians which is “FAIL-PROOF”, It is proven by our past students now in their dream countries to help you get a band 8.0 in one sitting.`;
+
 const markDownDescription = `Get a band 8.0 in your first sitting. This course bundle prepares you for the speaking, listening, reading, and writing modules of the test. So far, it is the only comprehensive IELTS course tailor-made for Nigerians and Africans generally. 
 
 
@@ -167,22 +169,22 @@ const products = [
   },
   {
     id: "2",
-    name: "Iconic Turquoise",
-    shortName: "Iconic Turquoise",
+    name: "Complete IELTS Video Course for Nigerians",
+    shortName: "Complete IELTS Course",
     currency: "NGN",
-    price: 199,
-    salePrice: 179.99,
-    flag: "on-sale",
+    price: 27000,
+    salePrice: 10000,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
+    purchases: 412,
     imageUrl:
       "https://images.unsplash.com/photo-1509941943102-10c232535736?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
     rating: 4,
     ratingCount: 12,
+    summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
-    purchases: 58000,
-    relatedProducts: ["1", "4"],
-    modules: ["Writing", "Listening", "Speaking"],
-    course: "IELTS",
     reviews: [
       {
         id: "review1",
@@ -200,25 +202,25 @@ const products = [
         color: "purple",
       },
     ],
-    summary: shortMarkDownDescription,
   },
   {
     id: "3",
-    name: "Marble Leather",
-    shortName: "Marble Leather",
+    name: "Sample Band 9.0 Essay Write-ups",
+    shortName: "Sample Band 9.0 Essays",
     currency: "NGN",
-    price: 199,
-    imageUrl:
-      "https://images.unsplash.com/photo-1564594985645-4427056e22e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-    rating: 4,
-    ratingCount: 12,
-    description: markDownDescription,
-    images,
-    salePrice: 18000,
-    purchases: 58000,
+    price: 3000,
     relatedProducts: ["2", "3"],
     modules: ["Writing", "Listening", "Speaking"],
     course: "IELTS",
+    purchases: 42,
+    imageUrl:
+      "https://images.unsplash.com/photo-1564594985645-4427056e22e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    rating: 5,
+    ratingCount: 12,
+    summary: shortMarkDownDescription,
+    description: markDownDescription,
+    images,
+    salePrice: 18000,
     reviews: [
       {
         id: "review1",
@@ -236,25 +238,61 @@ const products = [
         color: "purple",
       },
     ],
-    summary: shortMarkDownDescription,
   },
   {
     id: "4",
-    name: "Silve wolf",
-    shortName: "Silve wolf",
+    name: "IELTS Speaking Task Review",
+    shortName: "Speaking Review",
     currency: "NGN",
-    price: 199,
+    price: 5000,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
+    purchases: 112,
     imageUrl:
       "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=680&q=80",
     rating: 5,
     ratingCount: 1,
+    summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
-    salePrice: 18000,
-    purchases: 58000,
+  },
+  {
+    id: "5",
+    name: "IELTS Writing Task Review",
+    shortName: "Writing Review",
+    currency: "NGN",
+    price: 7000,
+    purchases: 129,
     relatedProducts: ["2", "3"],
     modules: ["Writing", "Listening", "Speaking"],
     course: "IELTS",
+    imageUrl:
+      "https://images.unsplash.com/photo-1564594985645-4427056e22e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    rating: 4,
+    ratingCount: 12,
+    summary: shortMarkDownDescription,
+    description: markDownDescription,
+    images,
+  },
+  {
+    id: "6",
+    name: "IELTS Listening Video Course for Nigerians",
+    shortName: "IELTS Listening Course",
+    currency: "NGN",
+    price: 3000,
+    purchases: 132,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
+    imageUrl:
+      "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=680&q=80",
+    rating: 5,
+    ratingCount: 1,
+    summary: shortMarkDownDescription,
+    description: markDownDescription,
+    images,
+    salePrice: 18000,
     reviews: [
       {
         id: "review1",
@@ -272,21 +310,16 @@ const products = [
         color: "purple",
       },
     ],
-    summary: shortMarkDownDescription,
   },
 ];
 
 const mainProduct = {
   id: "5",
-  name: "Ultimate IELTS Preparatory Video Course for Nigerians22",
-  shortName: "Ultimate IELTS Course",
+  name: "Ultimate IELTS Video Course",
   currency: "NGN",
   price: 22520,
-  salePrice: 18000,
-  purchases: 58000,
-  relatedProducts: ["2", "3"],
-  modules: ["Writing", "Listening", "Speaking"],
-  course: "IELTS",
+  description:
+    "Nigerians 🇳🇬 now in Canada, UK, US & Australia Used this Perfect IELTS Preparatory Course to get a Band 8.0 in less than 2 weeks",
   imageUrl:
     "https://images.unsplash.com/photo-1602024242516-fbc9d4fda4b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
   rating: 5,
@@ -309,7 +342,6 @@ const mainProduct = {
     },
   ],
   summary: shortMarkDownDescription,
-  description: markDownDescription,
   images,
 };
 const cartData = [
@@ -379,7 +411,7 @@ export const HomePage = () => {
   return (
     <StoreHomePage
       store={store}
-      heading="Everything you need to score a Band 8.0 in IELTS for Nigerians and Africans"
+      heading="Everything you need to score a Band 8.0 in IELTS"
       mainProduct={mainProduct}
       products={products}
       toFullDetails={(item) => {
