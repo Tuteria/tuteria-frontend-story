@@ -137,12 +137,26 @@ const products = [
     shortName: "Ultimate IELTS Course",
     currency: "NGN",
     price: 22520,
+    salePrice: 18000,
     purchases: 58000,
-    flag: "new",
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
     imageUrl:
       "https://images.unsplash.com/photo-1602024242516-fbc9d4fda4b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
     rating: 5,
     ratingCount: 1,
+    reviews: [
+      {
+        id: "review1",
+        name: "Olatunde",
+        rating: 5,
+        date: "",
+        email: "tunde@email.com",
+        title: "Love the product!",
+        comment: "Love this product!",
+      },
+    ],
     tags: [
       {
         name: "Exclusive 💫",
@@ -160,7 +174,9 @@ const products = [
     currency: "NGN",
     price: 27000,
     salePrice: 10000,
-    flag: "on-sale",
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
     purchases: 412,
     imageUrl:
       "https://images.unsplash.com/photo-1509941943102-10c232535736?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
@@ -176,6 +192,9 @@ const products = [
     shortName: "Sample Band 9.0 Essays",
     currency: "NGN",
     price: 3000,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
     purchases: 42,
     imageUrl:
       "https://images.unsplash.com/photo-1564594985645-4427056e22e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
@@ -191,6 +210,9 @@ const products = [
     shortName: "Speaking Review",
     currency: "NGN",
     price: 5000,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
     purchases: 112,
     imageUrl:
       "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=680&q=80",
@@ -207,6 +229,9 @@ const products = [
     currency: "NGN",
     price: 7000,
     purchases: 129,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
     imageUrl:
       "https://images.unsplash.com/photo-1564594985645-4427056e22e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
     rating: 4,
@@ -222,6 +247,9 @@ const products = [
     currency: "NGN",
     price: 3000,
     purchases: 132,
+    relatedProducts: ["2", "3"],
+    modules: ["Writing", "Listening", "Speaking"],
+    course: "IELTS",
     imageUrl:
       "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=680&q=80",
     rating: 5,
