@@ -246,7 +246,7 @@ const products = [
     shortName: "Speaking Review",
     currency: "NGN",
     price: 5000,
-    relatedProducts: ["2", "3"],
+    relatedProducts: ["5", "3"],
     modules: ["Writing", "Listening", "Speaking"],
     course: "IELTS",
     purchases: 112,
@@ -364,7 +364,7 @@ const cartData = [
 ];
 
 function navigate(path?: string) {
-  linkTo("Store/Pages", "DetailPage")();
+  linkTo("Store/Pages", "Detail Page")();
 }
 const store = TuteriaStore.create(
   {},
@@ -373,8 +373,8 @@ const store = TuteriaStore.create(
       updateCartItems: (cartItems) => {
         console.log(cartItems);
       },
-      saveUserInfo: async (userInfo, cartData) => {
-        console.log({ userInfo, cartData });
+      saveUserInfo: async (userInfo, cartData, amount) => {
+        console.log({ userInfo, cartData, amount });
         return 23;
       },
       async verifyCoupon(code) {
@@ -390,9 +390,29 @@ const store = TuteriaStore.create(
           totalUsed: 0,
         };
       },
+      async updateUserInfo(
+        userId,
+        { cartItems, discountCode },
+        amountToBePaid
+      ) {
+        let result = {
+          full_amount: amountToBePaid,
+          discount_code: discountCode,
+        };
+        cartItems.forEach((c) => {
+          result[c.id] = c.quantity;
+        });
+        console.log(result);
+        return result;
+      },
       async generateInvoice(
         amountToBePaid,
-        userInfoWithCart: { userInfo: any; cartItems: any[] }
+        userInfoWithCart: {
+          userInfo: any;
+          cartItems: any[];
+          currency?: string;
+          id: any;
+        }
       ) {
         return await Promise.resolve({
           amount: amountToBePaid,
@@ -433,6 +453,9 @@ export const HomePage = () => {
       heading="Everything you need to score a Band 8.0 in IELTS"
       mainProduct={mainProduct}
       products={products}
+      toCheckoutPage={() => {
+        navigate();
+      }}
       toFullDetails={(item) => {
         if (item) {
           navigate();
@@ -448,7 +471,7 @@ export const DetailPage = () => {
   React.useEffect(() => {
     store.initialize({
       userId: null,
-      cartItems: cartData,
+      cartItems: [],
       products: [...products, mainProduct],
     });
   }, []);
@@ -460,6 +483,9 @@ export const DetailPage = () => {
         relatedProducts: products[1].relatedProducts.map((o) =>
           products.find((x) => x.id === o)
         ),
+      }}
+      toHomePage={() => {
+        linkTo("Store/Pages", "Home Page")();
       }}
       toCheckoutPage={() => {
         linkTo("Store/Pages", "Checkout Page")();
@@ -474,6 +500,17 @@ export const CheckoutPage = () => {
       userId: null,
       cartItems: cartData,
       products: [...products, mainProduct],
+      // discountObj: {
+      //   discountCode: "APPLYFIVE",
+      //   discountType: "percent",
+      //   discount: 5,
+      //   issuer: "Tuteria",
+      //   currency: "₦",
+      //   dateIssued: "2021-06-10",
+      //   dateExpired: "2021-12-31",
+      //   maximumCount: 10000,
+      //   totalUsed: 0,
+      // },
     });
   }, []);
   return (
