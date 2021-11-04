@@ -1,11 +1,11 @@
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import React from "react";
-import WithButtonsComponent from "@tuteria/shared-lib/src/components/chakra-pro/NavBar/WithButtons";
-import WithFullButtonsComponent from "@tuteria/shared-lib/src/components/chakra-pro/NavBar/WithFullButtons";
-import WithRightCTAComponent from "@tuteria/shared-lib/src/components/chakra-pro/NavBar/WithRightCTA";
-import WithSubMenuComponent from "@tuteria/shared-lib/src/components/chakra-pro/NavBar/WithSubMenu";
-import WithTabsComponent from "@tuteria/shared-lib/src/components/chakra-pro/NavBar/WithTabs";
+import WithButtonsComponent from "../../pages/components/Marketing/NavBar/WithButtons";
+import WithFullButtonsComponent from "../../pages/components/Marketing/NavBar/WithFullButtons";
+import WithRightCTAComponent from "../../pages/components/Marketing/NavBar/WithRightCTA";
+import WithSubMenuComponent from "../../pages/components/Marketing/NavBar/WithSubMenu";
+import WithTabsComponent from "../../pages/components/Marketing/NavBar/WithTabs";
 
 export default {
   title: "Raw Designs/Marketing/NavBar",

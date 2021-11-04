@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import React from "react";
-import WithDarkBackgroundComponent from "@tuteria/shared-lib/src/components/chakra-pro/Newsletter/WithDarkBackground";
-import WithImageComponent from "@tuteria/shared-lib/src/components/chakra-pro/Newsletter/WithImage";
+import WithDarkBackgroundComponent from "../../pages/components/Marketing/Newsletter/WithDarkBackground";
+import WithImageComponent from "../../pages/components/Marketing/Newsletter/WithImage";
 
 export default {
   title: "Raw Designs/Marketing/Newsletters",

@@ -136,9 +136,9 @@ const products = [
     name: "Ultimate IELTS Preparatory Video Course for Nigerians",
     shortName: "Ultimate IELTS Course",
     currency: "NGN",
-    price: 22520,
-    salePrice: 18000,
-    purchases: 58000,
+    price: 68980,
+    salePrice: 22520,
+    purchases: 3277,
     relatedProducts: ["2", "3"],
     modules: ["Writing", "Listening", "Speaking"],
     course: "IELTS",
@@ -208,7 +208,8 @@ const products = [
     name: "Sample Band 9.0 Essay Write-ups",
     shortName: "Sample Band 9.0 Essays",
     currency: "NGN",
-    price: 3000,
+    salePrice: 3000,
+    price: 18000,
     relatedProducts: ["2", "3"],
     modules: ["Writing", "Listening", "Speaking"],
     course: "IELTS",
@@ -220,7 +221,7 @@ const products = [
     summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
-    salePrice: 18000,
+
     reviews: [
       {
         id: "review1",
@@ -245,7 +246,7 @@ const products = [
     shortName: "Speaking Review",
     currency: "NGN",
     price: 5000,
-    relatedProducts: ["2", "3"],
+    relatedProducts: ["5", "3"],
     modules: ["Writing", "Listening", "Speaking"],
     course: "IELTS",
     purchases: 112,
@@ -280,7 +281,8 @@ const products = [
     name: "IELTS Listening Video Course for Nigerians",
     shortName: "IELTS Listening Course",
     currency: "NGN",
-    price: 3000,
+    price: 18000,
+    salePrice: 3000,
     purchases: 132,
     relatedProducts: ["2", "3"],
     modules: ["Writing", "Listening", "Speaking"],
@@ -292,7 +294,6 @@ const products = [
     summary: shortMarkDownDescription,
     description: markDownDescription,
     images,
-    salePrice: 18000,
     reviews: [
       {
         id: "review1",
@@ -315,15 +316,18 @@ const products = [
 
 const mainProduct = {
   id: "5",
-  name: "Ultimate IELTS Video Course",
+  name: "The Ultimate IELTS Video Course",
+  shortName: "Ultimate IELTS Course",
   currency: "NGN",
-  price: 22520,
-  description:
-    "Nigerians 🇳🇬 now in Canada, UK, US & Australia Used this Perfect IELTS Preparatory Course to get a Band 8.0 in less than 2 weeks",
+  price: 68980,
+  salePrice: 22520,
+  purchases: 3277,
+  subtitle:
+    "Nigerians 🇳🇬 now in Canada, UK, US & Australia Used this Perfect IELTS Preparatory Course to get a Band 8.0 in less than 2 weeks.",
   imageUrl:
     "https://images.unsplash.com/photo-1602024242516-fbc9d4fda4b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-  rating: 5,
-  ratingCount: 1,
+  rating: 4.5,
+  ratingCount: 40,
   reviews: [
     {
       id: "review1",
@@ -360,7 +364,7 @@ const cartData = [
 ];
 
 function navigate(path?: string) {
-  linkTo("Store/Pages", "DetailPage")();
+  linkTo("Store/Pages", "Detail Page")();
 }
 const store = TuteriaStore.create(
   {},
@@ -369,12 +373,46 @@ const store = TuteriaStore.create(
       updateCartItems: (cartItems) => {
         console.log(cartItems);
       },
-      saveUserInfo: async (userInfo, cartData) => {
-        console.log({ userInfo, cartData });
+      saveUserInfo: async (userInfo, cartData, amount) => {
+        console.log({ userInfo, cartData, amount });
+        return 23;
+      },
+      async verifyCoupon(code) {
+        return {
+          discountCode: "APPLYFIVE",
+          discountType: "percent",
+          discount: 5,
+          issuer: "Tuteria",
+          currency: "₦",
+          dateIssued: "2021-06-10",
+          dateExpired: "2021-12-31",
+          maximumCount: 10000,
+          totalUsed: 0,
+        };
+      },
+      async updateUserInfo(
+        userId,
+        { cartItems, discountCode },
+        amountToBePaid
+      ) {
+        let result = {
+          full_amount: amountToBePaid,
+          discount_code: discountCode,
+        };
+        cartItems.forEach((c) => {
+          result[c.id] = c.quantity;
+        });
+        console.log(result);
+        return result;
       },
       async generateInvoice(
         amountToBePaid,
-        userInfoWithCart: { userInfo: any; cartItems: any[] }
+        userInfoWithCart: {
+          userInfo: any;
+          cartItems: any[];
+          currency?: string;
+          id: any;
+        }
       ) {
         return await Promise.resolve({
           amount: amountToBePaid,
@@ -404,6 +442,7 @@ const store = TuteriaStore.create(
 export const HomePage = () => {
   React.useEffect(() => {
     store.initialize({
+      userId: null,
       cartItems: cartData,
       products: [...products, mainProduct],
     });
@@ -414,6 +453,9 @@ export const HomePage = () => {
       heading="Everything you need to score a Band 8.0 in IELTS"
       mainProduct={mainProduct}
       products={products}
+      toCheckoutPage={() => {
+        navigate();
+      }}
       toFullDetails={(item) => {
         if (item) {
           navigate();
@@ -428,7 +470,8 @@ export const HomePage = () => {
 export const DetailPage = () => {
   React.useEffect(() => {
     store.initialize({
-      cartItems: cartData,
+      userId: null,
+      cartItems: [],
       products: [...products, mainProduct],
     });
   }, []);
@@ -437,9 +480,12 @@ export const DetailPage = () => {
       store={store}
       product={{
         ...products[1],
-        related: products[1].relatedProducts.map((o) =>
+        relatedProducts: products[1].relatedProducts.map((o) =>
           products.find((x) => x.id === o)
         ),
+      }}
+      toHomePage={() => {
+        linkTo("Store/Pages", "Home Page")();
       }}
       toCheckoutPage={() => {
         linkTo("Store/Pages", "Checkout Page")();
@@ -451,8 +497,20 @@ export const DetailPage = () => {
 export const CheckoutPage = () => {
   React.useEffect(() => {
     store.initialize({
+      userId: null,
       cartItems: cartData,
       products: [...products, mainProduct],
+      // discountObj: {
+      //   discountCode: "APPLYFIVE",
+      //   discountType: "percent",
+      //   discount: 5,
+      //   issuer: "Tuteria",
+      //   currency: "₦",
+      //   dateIssued: "2021-06-10",
+      //   dateExpired: "2021-12-31",
+      //   maximumCount: 10000,
+      //   totalUsed: 0,
+      // },
     });
   }, []);
   return (

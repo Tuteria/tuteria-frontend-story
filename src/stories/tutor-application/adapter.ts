@@ -12,6 +12,7 @@ import {
   SAMPLE_TUTERIA_SUBJECTS,
   SAMPLE_TUTOR_DATA,
   SAMPLE_TUTOR_SUBJECTS,
+  TUTORS,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import storage from "@tuteria/shared-lib/src/local-storage";
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
@@ -140,6 +141,9 @@ export const testAdapter: ServerAdapterType = {
   },
   fetchQuizQuestions: async (quizSubjects) => {
     return await samplePromise({ quiz: DATA.quiz, quizSubjects });
+  },
+  fetchLandingPageTutors: async () => {
+    return await samplePromise(TUTORS);
   },
   saveSubject(subject_id, subject) {},
   loadExistingSubject(subject_id) {

@@ -121,7 +121,7 @@ export const LandingPage = () => {
   }> => {
     return await new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve({ loggedIn: true, email: "john@example.com" });
+        resolve({ loggedIn: false, email: "" });
       }, 200);
     });
   };
@@ -140,6 +140,7 @@ export const LandingPage = () => {
       }, 200);
     });
   };
+
   return (
     <LandingView
       onSubmit={onSubmit}
@@ -161,10 +162,10 @@ export const Verification = () => {
       ...result,
       tutorInfo: {
         ...result.tutorInfo,
-        email_verified: true,
+        // email_verified: true,
         appData: {
           currentStep: APPLICATION_STEPS.VERIFY,
-          currentEditableForm: STEPS.VERIFY_EMAIL,
+          currentEditableForm: STEPS.VERIFICATION,
         },
       },
     });

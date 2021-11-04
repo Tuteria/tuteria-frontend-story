@@ -1,10 +1,10 @@
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import React from "react";
-import WithTwoColumnsComponent from "@tuteria/shared-lib/src/components/chakra-pro/Footers/WithTwoColumns";
-import SimpleComponent from "@tuteria/shared-lib/src/components/chakra-pro/Footers/Simple";
-import WithFourColumnsComponent from "@tuteria/shared-lib/src/components/chakra-pro/Footers/WithFourColumns";
-import WithLogoBelowComponent from "@tuteria/shared-lib/src/components/chakra-pro/Footers/WithLogoBelow";
+import WithTwoColumnsComponent from "../../pages/components/Marketing/Footers/WithTwoColumns";
+import SimpleComponent from "../../pages/components/Marketing/Footers/Simple";
+import WithFourColumnsComponent from "../../pages/components/Marketing/Footers/WithFourColumns";
+import WithLogoBelowComponent from "../../pages/components/Marketing/Footers/WithLogoBelow";
 
 export default {
   title: "Raw Designs/Marketing/Footers",
