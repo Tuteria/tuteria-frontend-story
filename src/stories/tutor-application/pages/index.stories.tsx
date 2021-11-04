@@ -255,7 +255,7 @@ export const SubjectReviewPage = () => {
       initialize={initialize}
       text="Loading subject details..."
     >
-      <TutorPageWrapper store={store}>
+      <TutorPageWrapper store={{}}>
         <TutorSubjectsPage
           store={subjectStore}
           showWelcomeModal={false}
