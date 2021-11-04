@@ -4,6 +4,7 @@ import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import StoreHomePage from "@tuteria/shared-lib/src/store/pages/Home";
 import ICheckoutPage from "@tuteria/shared-lib/src/store/pages/CheckoutPage";
 import ProductDetailPage from "@tuteria/shared-lib/src/store/pages/ProductDetail";
+import Complete from "@tuteria/shared-lib/src/store/pages/Complete";
 import { linkTo } from "@storybook/addon-links";
 import { TuteriaStore } from "@tuteria/shared-lib/src/store/_store";
 import "katex/dist/katex.min.css";
@@ -520,5 +521,11 @@ export const CheckoutPage = () => {
         console.log(url);
       }}
     />
+  );
+};
+
+export const CompletePage = () => {
+  return (
+    <Complete photo="https://images.unsplash.com/photo-1602024242516-fbc9d4fda4b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" />
   );
 };
