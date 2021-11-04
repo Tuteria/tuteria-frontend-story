@@ -27,6 +27,7 @@ import { SubjectsCardMobile } from "@tuteria/shared-lib/src/tutor-revamp/Subject
 import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditView";
 import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
 import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity";
+import TutorPricing from "@tuteria/shared-lib/src/tutor-revamp/Pricing";
 import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUploader";
 import LoginModal from "@tuteria/shared-lib/src/tutor-application/Login/LoginModal";
 import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
@@ -34,6 +35,7 @@ import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data"
 import QuizStore, {
   IQuizStore,
 } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
+import { TutorPricingStore } from "@tuteria/shared-lib/src/stores/pricing";
 import React from "react";
 import { testAdapter } from "./adapter";
 
@@ -426,4 +428,45 @@ export const LoginWithModal = () => {
       />
     </>
   );
+};
+
+const tutorData = {
+  firstName: "Tolulope",
+  photo:
+    "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200",
+  level: "premium",
+  isNewTutor: true,
+  lessonsTaught: 0,
+  subjects: [
+    "English Language",
+    "Mathematics",
+    "Physics",
+    "IELTS",
+    "Spoken English",
+    "Literature",
+  ],
+  availability: {
+    Monday: ["Morning", "Late afternoon"],
+    Wednesday: ["Evening", "Early evening"],
+  },
+};
+
+const pricingStore = TutorPricingStore.create(
+  {
+    _subjects: tutorData.subjects.map((o) => ({ name: o })),
+  },
+  {
+    adapter: {
+      savePricingInfo: async (data, availability) => {
+        console.log({ pricingInfo: data, availability });
+        return await new Promise((resolve, reject) => {
+          setTimeout(() => resolve(), 500);
+        });
+      },
+    },
+  }
+);
+
+export const Pricing = () => {
+  return <TutorPricing {...tutorData} store={pricingStore} />;
 };
