@@ -35,6 +35,12 @@ def deploy_staging():
         run('docker-compose pull tutor-next')
         run('docker-compose up -d tutor-next')
     run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')    
+@hosts('sama@staging-prod.tuteria.com')
+def deploy_store():
+    with cd('/home/sama/tuteria-codebase/tuteria-deploy'):
+        run('docker-compose pull store-next')
+        run('docker-compose up -d store-next')
+    run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')    
 
 
 @hosts('sama@tutor-search.tuteria.com')
