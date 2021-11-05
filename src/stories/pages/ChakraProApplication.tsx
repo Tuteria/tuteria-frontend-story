@@ -2,7 +2,14 @@ import { Text } from "@chakra-ui/react";
 import * as React from "react";
 // this is the valid codebase
 
+import { AuthenticationWithCenterForm } from "./components/Application/AuthenticationWithCenterForm";
+import { AuthenticationWithProviders } from "./components/Application/AuthenticationWithProviders";
+import { AuthenticationWithFlushedInputs } from "./components/Application/AuthenticationWithFlushedInputs";
+import { AuthenticationWithGradient } from "./components/Application/AuthenticationWithGradient";
+import { AuthenticationWithLeftBackground } from "./components/Application/AuthenticationWithLeftBackground";
 import { BannerWithButton } from "./components/Application/BannerWithButton";
+import { BannerForCookies } from "./components/Application/BannerForCookies";
+import { BannerWithGradient } from "./components/Application/BannerWithGradient";
 import { ButtonCheckBox } from "./components/Application/ButtonCheckBox";
 import { ButtonRadioBox } from "./components/Application/ButtonRadioBox";
 import { CardWithAddButton } from "./components/Application/CardWithAddButton";
@@ -11,6 +18,9 @@ import { CardWithForm } from "./components/Application/CardWithForm";
 import { CardWithRightButton } from "./components/Application/CardWithRightButton";
 import { CardWithSwitch } from "./components/Application/CardWithSwitch";
 import { CardWithUserDetails } from "./components/Application/CardWithUserDetails";
+import { FormAccountSettings } from "./components/Application/FormAccountSettings";
+import { FormWithShadow } from "./components/Application/FormWithShadow";
+import { GridWithAspectRatio } from "./components/Application/GridWithAspectRatio";
 import { CustomRadioGroup } from "./components/Application/CustomRadioGroup";
 import { HeaderWithActions } from "./components/Application/HeaderWithActions";
 import { HeaderWithActionsAndTabs } from "./components/Application/HeaderWithActionsAndTabs";
@@ -18,6 +28,9 @@ import { HeaderWithBreadcrumbs } from "./components/Application/HeaderWithBreadc
 import { HeaderWithProfile } from "./components/Application/HeaderWithProfile";
 import { HeaderWithSearch } from "./components/Application/HeaderWithSearch";
 import { ListWithVerticalLine } from "./components/Application/ListWithVerticalLine";
+import { NotificationWithColoredBg } from "./components/Application/NotificationWithColoredBg";
+import { NotificationWithSeparator } from "./components/Application/NotificationWithSeparator";
+import { PopoverToShareFeedback } from "./components/Application/PopoverToShareFeedback";
 import { ShellWithFullBg } from "./components/Application/ShellWithFullBg";
 import { ShellWithGroupedMenu } from "./components/Application/ShellWithGroupedMenu";
 import { ShellWithThreeColumn } from "./components/Application/ShellWithThreeColumn";
@@ -31,37 +44,64 @@ import { StatWithIndicator } from "./components/Application/StatWithIndicator";
 import { StatWithProgessBar } from "./components/Application/StatWithProgessBar";
 import { StatWithThreeColumns } from "./components/Application/StatWithThreeColumns";
 import { TableWithSearch } from "./components/Application/TableWithSearch";
+import { StepsWithArrow } from "./components/Application/StepsWithArrow";
+import { StepsWithNumbers } from "./components/Application/StepsWithNumbers";
 import { VerticalSteps } from "./components/Application/VerticalSteps";
+import { UserCardGrid } from "./components/Application/UserCardGrid";
+import { UserCardWithBackground } from "./components/Application/UserCardWithBackground";
+import { UserCardWithRating } from "./components/Application/UserCardWithRating";
+import { UserCardWithTags } from "./components/Application/UserCardWithTags";
 
 export {
-  VerticalSteps,
-  StatWithProgessBar,
-  TableWithSearch,
-  StatWithIndicator,
-  SidebarWithBackground,
-  ShellWithTopNavbar,
-  SidebarWithSearch,
-  StatWithDivider,
-  ShellWithFullBg,
-  ShellWithGroupedMenu,
-  ShellWithThreeColumn,
-  StatWithThreeColumns,
-  StatWithCenteredIndicator,
-  StatWithIcon,
-  ListWithVerticalLine,
-  HeaderWithActions,
-  HeaderWithActionsAndTabs,
-  HeaderWithBreadcrumbs,
-  HeaderWithProfile,
-  ButtonCheckBox,
+  AuthenticationWithCenterForm,
+  AuthenticationWithProviders,
+  AuthenticationWithFlushedInputs,
+  AuthenticationWithGradient,
+  AuthenticationWithLeftBackground,
+  BannerWithButton,
+  BannerForCookies,
+  BannerWithGradient,
   CardWithRightButton,
   CardWithColorAccent,
   CardWithAddButton,
   CardWithUserDetails,
   CardWithSwitch,
-  BannerWithButton,
+  CardWithForm,
+  FormAccountSettings,
+  FormWithShadow,
+  GridWithAspectRatio,
+  HeaderWithActions,
+  HeaderWithActionsAndTabs,
+  HeaderWithBreadcrumbs,
+  HeaderWithProfile,
+  HeaderWithSearch,
+  ListWithVerticalLine,
+  NotificationWithColoredBg,
+  NotificationWithSeparator,
+  PopoverToShareFeedback,
+  ShellWithFullBg,
+  ShellWithGroupedMenu,
+  ShellWithThreeColumn,
+  ShellWithTopNavbar,
+  SidebarWithBackground,
+  SidebarWithSearch,
+  VerticalSteps,
+  StatWithProgessBar,
+  StatWithThreeColumns,
+  StatWithIndicator,
+  StatWithDivider,
+  StatWithCenteredIndicator,
+  StatWithIcon,
+  TableWithSearch,
+  StepsWithArrow,
+  StepsWithNumbers,
+  ButtonCheckBox,
   CustomRadioGroup,
   ButtonRadioBox,
+  UserCardGrid,
+  UserCardWithBackground,
+  UserCardWithRating,
+  UserCardWithTags,
 };
 
 export const ChakraProView: React.FC = () => {
