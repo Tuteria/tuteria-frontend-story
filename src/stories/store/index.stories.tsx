@@ -379,17 +379,21 @@ const store = TuteriaStore.create(
         return 23;
       },
       async verifyCoupon(code) {
-        return {
-          discountCode: "APPLYFIVE",
-          discountType: "percent",
-          discount: 5,
-          issuer: "Tuteria",
-          currency: "₦",
-          dateIssued: "2021-06-10",
-          dateExpired: "2021-12-31",
-          maximumCount: 10000,
-          totalUsed: 0,
-        };
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve({
+              discountCode: "APPLYFIVE",
+              discountType: "percent",
+              discount: 5,
+              issuer: "Tuteria",
+              currency: "₦",
+              dateIssued: "2021-06-10",
+              dateExpired: "2021-12-31",
+              maximumCount: 10000,
+              totalUsed: 0,
+            });
+          }, 2000);
+        });
       },
       async updateUserInfo(
         userId,
