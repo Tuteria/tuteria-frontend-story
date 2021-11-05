@@ -97,7 +97,7 @@ const data = [
       image:
         "https://images.unsplash.com/photo-1470506028280-a011fb34b6f7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NjN8fGxhZHklMjBmYWNlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60",
       name: "Susan Schwartz",
-      email: "jenyzx@exmaple.com",
+      email: "jenyzx@example.com",
     },
   },
   {
