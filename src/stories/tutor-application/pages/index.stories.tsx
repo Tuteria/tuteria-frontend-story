@@ -37,6 +37,7 @@ const store = initializeStore(testAdapter);
 
 function navigate(path: string) {
   let options = {
+    "/apply": "Tutor Page",
     "/verify": "Verification",
     "/complete": "Completed Page",
     "/skills": "EditSubjectPage",
@@ -127,7 +128,7 @@ export const LandingPage = () => {
   const onSubmit: any = async (data) => {
     return await new Promise((resolve) => {
       setTimeout(() => {
-        resolve({ loggedIn: false });
+        resolve({ loggedIn: true });
       }, 200);
     });
   };
@@ -143,6 +144,10 @@ export const LandingPage = () => {
     <LandingView
       onSubmit={onSubmit}
       continueUrl="/apply"
+      beginApplication={() => {
+        console.log("to next page");
+        navigate("/apply");
+      }}
       onLogin={onLogIn}
       isUserLoggedIn={isUserLoggedIn}
     />
