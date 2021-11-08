@@ -22,7 +22,9 @@ import QuizPage, {
 import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
 import ScheduleCard from "@tuteria/shared-lib/src/tutor-revamp/Schedule";
 import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
-import SubjectAdditionPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
+import SubjectAdditionPage, {
+  SubjectClassSelectionModal,
+} from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
 import { SubjectsCardMobile } from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditForm";
 import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditView";
 import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
@@ -75,6 +77,16 @@ export const Results = () => {
         questionsAnswered: 21,
       }}
     />
+  );
+};
+
+export const SubjectSelectionModal = () => {
+  return (
+    <OverlayRouter>
+      <OverlayWrapper>
+        <SubjectClassSelectionModal />
+      </OverlayWrapper>
+    </OverlayRouter>
   );
 };
 
