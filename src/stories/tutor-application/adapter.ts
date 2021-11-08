@@ -77,6 +77,7 @@ export const testAdapter: ServerAdapterType = {
     return await samplePromise(id);
   },
   saveTutorInfo: async (data: any) => {
+    debugger;
     return await samplePromise("tutorToken");
   },
   getTuteriaSubjects: () => {
@@ -185,6 +186,7 @@ export const testAdapter: ServerAdapterType = {
           name: original_filename,
           size: `${Math.round(bytes / 1000)}KB`,
           url: secure_url,
+          id: original_filename,
         };
         return newFile;
       })
@@ -222,7 +224,10 @@ export const testAdapter: ServerAdapterType = {
     return await samplePromise(undefined);
   },
   submitVideoRecording: async (url) => {
-    return await samplePromise({ id: "sample-video", url });
+    return await samplePromise({
+      id: "sample-video",
+      url: "https://www.youtube.com/watch?v=sVPYIRF9RCQ",
+    });
   },
   initializeSubject: async (adapter, subjectInfo, key) => {
     let response = await initializeApplication(adapter, {
