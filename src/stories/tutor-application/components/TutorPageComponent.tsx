@@ -31,9 +31,7 @@ const Agreements = React.lazy(
 const NewDevelopment = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/NewDevelopment")
 );
-const GuarantorsInfoForm = React.lazy(
-  () => import("@tuteria/shared-lib/src/tutor-revamp/Guarantors")
-);
+
 const PaymentInfo = React.lazy(
   () => import("@tuteria/shared-lib/src/tutor-revamp/PaymentInfo")
 );
@@ -80,7 +78,6 @@ const TutorPageComponent: React.FC<{
         <ScheduleCard {...getFormWrapperProps(STEPS.SCHEDULE_INFO)} />
         <TeachingProfile {...getFormWrapperProps(STEPS.TEACHING_PROFILE)} />
 
-        <GuarantorsInfoForm {...getFormWrapperProps(STEPS.GUARANTOR_INFO)} />
         <PaymentInfo {...getFormWrapperProps(STEPS.PAYMENT_INFO)} />
         <NewDevelopment {...getFormWrapperProps(STEPS.NEW_DEVELOPMENT)} />
         <Agreements {...getFormWrapperProps(STEPS.AGREEMENT_INFO)} />
