@@ -606,7 +606,7 @@ export const ShippingInformation = ({
                         <Input
                           name="email"
                           type="email"
-                          placeholder="you@exmaple.com"
+                          placeholder="you@youremail.com"
                           {...field}
                           focusBorderColor={inputColor}
                         />

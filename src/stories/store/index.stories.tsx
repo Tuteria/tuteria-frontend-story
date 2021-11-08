@@ -191,7 +191,7 @@ const products = [
         id: "review1",
         name: "Olatunde",
         rating: 5,
-        date: "",
+        date: "July 15h 2020",
         email: "tunde@email.com",
         title: "Love the product!",
         comment: "Love this product!",
@@ -334,7 +334,7 @@ const mainProduct = {
       id: "review1",
       name: "Olatunde",
       rating: 5,
-      date: "",
+      date: "2020-10-06",
       email: "tunde@email.com",
       title: "Love the product!",
       comment: "Love this product!",
@@ -379,17 +379,21 @@ const store = TuteriaStore.create(
         return 23;
       },
       async verifyCoupon(code) {
-        return {
-          discountCode: "APPLYFIVE",
-          discountType: "percent",
-          discount: 5,
-          issuer: "Tuteria",
-          currency: "₦",
-          dateIssued: "2021-06-10",
-          dateExpired: "2021-12-31",
-          maximumCount: 10000,
-          totalUsed: 0,
-        };
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve({
+              discountCode: "APPLYFIVE",
+              discountType: "percent",
+              discount: 5,
+              issuer: "Tuteria",
+              currency: "₦",
+              dateIssued: "2021-06-10",
+              dateExpired: "2021-12-31",
+              maximumCount: 10000,
+              totalUsed: 0,
+            });
+          }, 2000);
+        });
       },
       async updateUserInfo(
         userId,
