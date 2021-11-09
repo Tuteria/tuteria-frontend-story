@@ -12,6 +12,7 @@ import {
   SAMPLE_TUTERIA_SUBJECTS,
   SAMPLE_TUTOR_DATA,
   SAMPLE_TUTOR_SUBJECTS,
+  SUBJECT_GROUPS,
   TUTORS,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import storage from "@tuteria/shared-lib/src/local-storage";
@@ -40,7 +41,7 @@ const formIds = {
 function loadExistingTutorInfo() {
   return {
     ...SAMPLE_TUTOR_DATA,
-    appData: { currentEditableForm: formIds[8] },
+    appData: { currentEditableForm: formIds[2] },
   };
 }
 const initializeApplication = async (
@@ -72,11 +73,20 @@ const initializeApplication = async (
     },
   });
 };
+
 export const testAdapter: ServerAdapterType = {
+  getSubjectData() {
+    return {
+      tutorSubjects: SAMPLE_TUTOR_SUBJECTS,
+      tuteriaSubjects: SAMPLE_TUTERIA_SUBJECTS,
+      groups: SUBJECT_GROUPS,
+    };
+  },
   deleteSubject: async (id) => {
     return await samplePromise(id);
   },
   saveTutorInfo: async (data: any) => {
+    debugger;
     return await samplePromise("tutorToken");
   },
   getTuteriaSubjects: () => {
@@ -185,6 +195,7 @@ export const testAdapter: ServerAdapterType = {
           name: original_filename,
           size: `${Math.round(bytes / 1000)}KB`,
           url: secure_url,
+          id: original_filename,
         };
         return newFile;
       })
@@ -222,7 +233,10 @@ export const testAdapter: ServerAdapterType = {
     return await samplePromise(undefined);
   },
   submitVideoRecording: async (url) => {
-    return await samplePromise({ id: "sample-video", url });
+    return await samplePromise({
+      id: "sample-video",
+      url: "https://www.youtube.com/watch?v=sVPYIRF9RCQ",
+    });
   },
   initializeSubject: async (adapter, subjectInfo, key) => {
     let response = await initializeApplication(adapter, {

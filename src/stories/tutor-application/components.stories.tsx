@@ -9,11 +9,15 @@ import {
 } from "@tuteria/shared-lib/src/components/OverlayRouter";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
-import { SAMPLE_TUTERIA_SUBJECTS } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
+import {
+  SAMPLE_TUTERIA_SUBJECTS,
+  SAMPLE_TUTOR_SUBJECTS2,
+} from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import {
   buildProfileInfo,
   initializeStore,
   TutorSubject,
+  SubjectStore,
 } from "@tuteria/shared-lib/src/stores";
 import { SUBJECT_EDIT_STEPS } from "@tuteria/shared-lib/src/stores/subject";
 import QuizPage, {
@@ -22,11 +26,14 @@ import QuizPage, {
 import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
 import ScheduleCard from "@tuteria/shared-lib/src/tutor-revamp/Schedule";
 import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
-import SubjectAdditionPage from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
+import SubjectAdditionPage, {
+  SubjectClassSelection,
+} from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
 import { SubjectsCardMobile } from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditForm";
 import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditView";
 import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
 import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity";
+import TutorPricing from "@tuteria/shared-lib/src/tutor-revamp/Pricing";
 import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUploader";
 import LoginModal from "@tuteria/shared-lib/src/tutor-application/Login/LoginModal";
 import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
@@ -34,6 +41,7 @@ import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data"
 import QuizStore, {
   IQuizStore,
 } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
+import { TutorPricingStore } from "@tuteria/shared-lib/src/stores/pricing";
 import React from "react";
 import { testAdapter } from "./adapter";
 
@@ -42,7 +50,9 @@ export default {
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <Story />
+        <OverlayRouter>
+          <Story />
+        </OverlayRouter>
       </ThemeProvider>
     ),
   ],
@@ -75,58 +85,80 @@ export const Results = () => {
     />
   );
 };
+const groupStore = SubjectStore.create(
+  {},
+  { adapter: loadAdapter(testAdapter) }
+);
+export const SubjectSelectionModal = () => {
+  let subjectClasses = [
+    {
+      name: "Primary",
+      subjects: ["Common Entrance", "Basic mathematics"],
+    },
+    {
+      name: "Pre-Primary",
+      subjects: ["Handwriting", "Pronounciation", "Writing"],
+    },
+    {
+      name: "Math Focused",
+      subjects: ["Mathematics core", "Further Mathematics"],
+    },
+  ];
+  React.useEffect(() => {
+    groupStore.initializeTutorSubjects(testAdapter.getSubjectData());
+  }, []);
+  return (
+    <OverlayWrapper>
+      <SubjectClassSelection
+        store={groupStore}
+        classes={subjectClasses}
+        onAddSubjects={(values) => console.log(values)}
+      />
+    </OverlayWrapper>
+  );
+};
 
 export const SubjectAddition = () => {
   return (
-    <OverlayRouter>
-      <OverlayWrapper>
-        <SubjectAdditionPage onSubmit={() => {}} store={store.subject} />;
-      </OverlayWrapper>
-    </OverlayRouter>
+    <OverlayWrapper>
+      <SubjectAdditionPage onSubmit={() => {}} store={store.subject} />;
+    </OverlayWrapper>
   );
 };
 
 export const SubjectTable = () => {
   return (
-    <OverlayRouter>
-      <OverlayWrapper>
-        <TutorSubjectsPage onTakeTest={() => {}} store={store.subject} />;
-      </OverlayWrapper>
-    </OverlayRouter>
+    <OverlayWrapper>
+      <TutorSubjectsPage onTakeTest={() => {}} store={store.subject} />;
+    </OverlayWrapper>
   );
 };
 
 export const EmptySubjectTable = () => {
   return (
-    <OverlayRouter>
-      <OverlayWrapper>
-        <Box w="1000px" mx="auto">
-          <TutorSubjectsPage onTakeTest={() => {}} store={store.subject} />
-        </Box>
-      </OverlayWrapper>
-    </OverlayRouter>
+    <OverlayWrapper>
+      <Box w="1000px" mx="auto">
+        <TutorSubjectsPage onTakeTest={() => {}} store={store.subject} />
+      </Box>
+    </OverlayWrapper>
   );
 };
 
 export const SubjectCardView = () => {
   return (
-    <OverlayRouter>
-      <OverlayWrapper>
-        <SubjectsCardMobile
-          currentSubjects={store.subject.tutorSubjects}
-          store={store.subject}
-        />
-      </OverlayWrapper>
-    </OverlayRouter>
+    <OverlayWrapper>
+      <SubjectsCardMobile
+        currentSubjects={store.subject.tutorSubjects}
+        store={store.subject}
+      />
+    </OverlayWrapper>
   );
 };
 export const Verification = () => {
   return (
-    <OverlayRouter>
-      <OverlayWrapper>
-        <VerificationIdentity store={store.identity} />
-      </OverlayWrapper>
-    </OverlayRouter>
+    <OverlayWrapper>
+      <VerificationIdentity store={store.identity} />
+    </OverlayWrapper>
   );
 };
 
@@ -142,21 +174,19 @@ export const VideoUploader = () => {
 
 export const Schedule = () => {
   return (
-    <OverlayRouter>
-      <OverlayWrapper>
-        <Box px="200px">
-          <ScheduleCard
-            handleChange={() => {}}
-            formHeader={"Tutor Schedule"}
-            label="schedule-info"
-            lockedDescription="select your teaching schedule"
-            isCollapsed={false}
-            store={store.schedule}
-            onSubmit={(formData: any) => {}}
-          />
-        </Box>
-      </OverlayWrapper>
-    </OverlayRouter>
+    <OverlayWrapper>
+      <Box px="200px">
+        <ScheduleCard
+          handleChange={() => {}}
+          formHeader={"Tutor Schedule"}
+          label="schedule-info"
+          lockedDescription="select your teaching schedule"
+          isCollapsed={false}
+          store={store.schedule}
+          onSubmit={(formData: any) => {}}
+        />
+      </Box>
+    </OverlayWrapper>
   );
 };
 
@@ -264,7 +294,13 @@ export const TestSelectionPage = () => {
         countries: allCountries,
         tuteriaSubjects: testAdapter.getTuteriaSubjects(),
       });
-      store.initializeTutorData(result);
+      store.initializeTutorData({
+        ...result,
+        subjectData: {
+          ...result.subjectData,
+          tutorSubjects: SAMPLE_TUTOR_SUBJECTS2,
+        },
+      });
       store.subject.setCurrentSubjectId(209699);
       setInst(store.subject.tuteriaSubjectForCurrentSubject);
       setLoading(false);
@@ -426,4 +462,45 @@ export const LoginWithModal = () => {
       />
     </>
   );
+};
+
+const tutorData = {
+  firstName: "Tolulope",
+  photo:
+    "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200",
+  level: "premium",
+  isNewTutor: true,
+  lessonsTaught: 0,
+  subjects: [
+    "English Language",
+    "Mathematics",
+    "Physics",
+    "IELTS",
+    "Spoken English",
+    "Literature",
+  ],
+  availability: {
+    Monday: ["Morning", "Late afternoon"],
+    Wednesday: ["Evening", "Early evening"],
+  },
+};
+
+const pricingStore = TutorPricingStore.create(
+  {
+    _subjects: tutorData.subjects.map((o) => ({ name: o })),
+  },
+  {
+    adapter: {
+      savePricingInfo: async (data, availability) => {
+        console.log({ pricingInfo: data, availability });
+        return await new Promise((resolve, reject) => {
+          setTimeout(() => resolve(), 500);
+        });
+      },
+    },
+  }
+);
+
+export const Pricing = () => {
+  return <TutorPricing {...tutorData} store={pricingStore} />;
 };
