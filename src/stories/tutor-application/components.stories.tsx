@@ -9,7 +9,10 @@ import {
 } from "@tuteria/shared-lib/src/components/OverlayRouter";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
-import { SAMPLE_TUTERIA_SUBJECTS } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
+import {
+  SAMPLE_TUTERIA_SUBJECTS,
+  SAMPLE_TUTOR_SUBJECTS2,
+} from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import {
   buildProfileInfo,
   initializeStore,
@@ -290,7 +293,13 @@ export const TestSelectionPage = () => {
         countries: allCountries,
         tuteriaSubjects: testAdapter.getTuteriaSubjects(),
       });
-      store.initializeTutorData(result);
+      store.initializeTutorData({
+        ...result,
+        subjectData: {
+          ...result.subjectData,
+          tutorSubjects: SAMPLE_TUTOR_SUBJECTS2,
+        },
+      });
       store.subject.setCurrentSubjectId(209699);
       setInst(store.subject.tuteriaSubjectForCurrentSubject);
       setLoading(false);
