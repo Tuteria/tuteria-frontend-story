@@ -14,6 +14,7 @@ import {
   buildProfileInfo,
   initializeStore,
   TutorSubject,
+  SubjectStore,
 } from "@tuteria/shared-lib/src/stores";
 import { SUBJECT_EDIT_STEPS } from "@tuteria/shared-lib/src/stores/subject";
 import QuizPage, {
@@ -46,7 +47,9 @@ export default {
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <Story />
+        <OverlayRouter>
+          <Story />
+        </OverlayRouter>
       </ThemeProvider>
     ),
   ],
@@ -79,7 +82,10 @@ export const Results = () => {
     />
   );
 };
-
+const groupStore = SubjectStore.create(
+  {},
+  { adapter: loadAdapter(testAdapter) }
+);
 export const SubjectSelectionModal = () => {
   let subjectClasses = [
     {
@@ -95,69 +101,61 @@ export const SubjectSelectionModal = () => {
       subjects: ["Mathematics core", "Further Mathematics"],
     },
   ];
+  React.useEffect(() => {
+    groupStore.initializeTutorSubjects(testAdapter.getSubjectData());
+  }, []);
   return (
-    <OverlayRouter>
-      <OverlayWrapper>
-        <SubjectClassSelection
-          classes={subjectClasses}
-          onAddSubjects={(values) => console.log(values)}
-        />
-      </OverlayWrapper>
-    </OverlayRouter>
+    <OverlayWrapper>
+      <SubjectClassSelection
+        store={groupStore}
+        classes={subjectClasses}
+        onAddSubjects={(values) => console.log(values)}
+      />
+    </OverlayWrapper>
   );
 };
 
 export const SubjectAddition = () => {
   return (
-    <OverlayRouter>
-      <OverlayWrapper>
-        <SubjectAdditionPage onSubmit={() => {}} store={store.subject} />;
-      </OverlayWrapper>
-    </OverlayRouter>
+    <OverlayWrapper>
+      <SubjectAdditionPage onSubmit={() => {}} store={store.subject} />;
+    </OverlayWrapper>
   );
 };
 
 export const SubjectTable = () => {
   return (
-    <OverlayRouter>
-      <OverlayWrapper>
-        <TutorSubjectsPage onTakeTest={() => {}} store={store.subject} />;
-      </OverlayWrapper>
-    </OverlayRouter>
+    <OverlayWrapper>
+      <TutorSubjectsPage onTakeTest={() => {}} store={store.subject} />;
+    </OverlayWrapper>
   );
 };
 
 export const EmptySubjectTable = () => {
   return (
-    <OverlayRouter>
-      <OverlayWrapper>
-        <Box w="1000px" mx="auto">
-          <TutorSubjectsPage onTakeTest={() => {}} store={store.subject} />
-        </Box>
-      </OverlayWrapper>
-    </OverlayRouter>
+    <OverlayWrapper>
+      <Box w="1000px" mx="auto">
+        <TutorSubjectsPage onTakeTest={() => {}} store={store.subject} />
+      </Box>
+    </OverlayWrapper>
   );
 };
 
 export const SubjectCardView = () => {
   return (
-    <OverlayRouter>
-      <OverlayWrapper>
-        <SubjectsCardMobile
-          currentSubjects={store.subject.tutorSubjects}
-          store={store.subject}
-        />
-      </OverlayWrapper>
-    </OverlayRouter>
+    <OverlayWrapper>
+      <SubjectsCardMobile
+        currentSubjects={store.subject.tutorSubjects}
+        store={store.subject}
+      />
+    </OverlayWrapper>
   );
 };
 export const Verification = () => {
   return (
-    <OverlayRouter>
-      <OverlayWrapper>
-        <VerificationIdentity store={store.identity} />
-      </OverlayWrapper>
-    </OverlayRouter>
+    <OverlayWrapper>
+      <VerificationIdentity store={store.identity} />
+    </OverlayWrapper>
   );
 };
 
@@ -173,21 +171,19 @@ export const VideoUploader = () => {
 
 export const Schedule = () => {
   return (
-    <OverlayRouter>
-      <OverlayWrapper>
-        <Box px="200px">
-          <ScheduleCard
-            handleChange={() => {}}
-            formHeader={"Tutor Schedule"}
-            label="schedule-info"
-            lockedDescription="select your teaching schedule"
-            isCollapsed={false}
-            store={store.schedule}
-            onSubmit={(formData: any) => {}}
-          />
-        </Box>
-      </OverlayWrapper>
-    </OverlayRouter>
+    <OverlayWrapper>
+      <Box px="200px">
+        <ScheduleCard
+          handleChange={() => {}}
+          formHeader={"Tutor Schedule"}
+          label="schedule-info"
+          lockedDescription="select your teaching schedule"
+          isCollapsed={false}
+          store={store.schedule}
+          onSubmit={(formData: any) => {}}
+        />
+      </Box>
+    </OverlayWrapper>
   );
 };
 
