@@ -41,11 +41,12 @@ function navigate(path: string) {
   let options = {
     "/apply": "Tutor Page",
     "/verify": "Verification",
+    "/subject": "Subject Create Page",
     "/complete": "Completed Page",
     "/skills": "EditSubjectPage",
     "/quiz/select-skill": "TestSelectionPage",
   };
-  linkTo("Tutor Application/Pages", options["path"])();
+  linkTo("Tutor Application/Pages", options[path])();
 }
 export const TutorPage = () => {
   async function initialize(setLoading) {
@@ -58,11 +59,7 @@ export const TutorPage = () => {
     setLoading(false);
     if (store.currentStep === APPLICATION_STEPS.APPLY) {
     } else {
-      let options = {
-        [APPLICATION_STEPS.COMPLETE]: "/complete",
-        [APPLICATION_STEPS.VERIFY]: "/verify",
-      };
-      navigate(options[store.currentStep]);
+      navigate("/apply");
     }
   }
 
@@ -177,7 +174,12 @@ export const Verification = () => {
     if (store.currentStep === APPLICATION_STEPS.VERIFY) {
       setLoading(false);
     } else {
-      navigate("/complete");
+      let options = {
+        [APPLICATION_STEPS.COMPLETE]: "/complete",
+        [APPLICATION_STEPS.VERIFY]: "/verify",
+        [APPLICATION_STEPS.SUBJECT]: "/subject",
+      };
+      navigate(options[store.currentStep]);
     }
   }
 
@@ -190,7 +192,7 @@ export const Verification = () => {
         store={store}
         onNextStep={async () => {
           await store.submitApplication(true);
-          linkTo("Tutor Application/Pages", "Completed Page")();
+          navigate("/subject");
         }}
       />
     </LoadingStateWrapper>
@@ -209,16 +211,17 @@ export const SubjectCreatePage = () => {
       tutorInfo: {
         ...result.tutorInfo,
         appData: {
-          currentStep: APPLICATION_STEPS.COMPLETE,
+          currentStep: APPLICATION_STEPS.SUBJECT,
         },
       },
     });
-    if (store.currentStep === APPLICATION_STEPS.COMPLETE) {
+    if (store.currentStep === APPLICATION_STEPS.SUBJECT) {
       setLoading(false);
     } else {
       let options = {
         [APPLICATION_STEPS.APPLY]: "/apply",
         [APPLICATION_STEPS.VERIFY]: "/verify",
+        [APPLICATION_STEPS.COMPLETE]: "/complete",
       };
       navigate(options[store.currentStep]);
     }
@@ -235,6 +238,10 @@ export const SubjectCreatePage = () => {
 };
 
 export const CompletedPage = () => {
+  React.useEffect(() => {
+    store.setCurrentStep(APPLICATION_STEPS.COMPLETE);
+  }, []);
+
   return (
     <CompletedApplicationPage
       firstName="Chidi"
