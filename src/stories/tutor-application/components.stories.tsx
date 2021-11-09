@@ -23,7 +23,7 @@ import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
 import ScheduleCard from "@tuteria/shared-lib/src/tutor-revamp/Schedule";
 import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
 import SubjectAdditionPage, {
-  SubjectClassSelectionModal,
+  SubjectClassSelection,
 } from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
 import { SubjectsCardMobile } from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditForm";
 import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditView";
@@ -81,10 +81,27 @@ export const Results = () => {
 };
 
 export const SubjectSelectionModal = () => {
+  let subjectClasses = [
+    {
+      name: "Primary",
+      subjects: ["Common Entrance", "Basic mathematics"],
+    },
+    {
+      name: "Pre-Primary",
+      subjects: ["Handwriting", "Pronounciation", "Writing"],
+    },
+    {
+      name: "Math Focused",
+      subjects: ["Mathematics core", "Further Mathematics"],
+    },
+  ];
   return (
     <OverlayRouter>
       <OverlayWrapper>
-        <SubjectClassSelectionModal />
+        <SubjectClassSelection
+          classes={subjectClasses}
+          onAddSubjects={(values) => console.log(values)}
+        />
       </OverlayWrapper>
     </OverlayRouter>
   );
