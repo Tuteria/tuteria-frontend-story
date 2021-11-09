@@ -24,8 +24,10 @@ def update_images(scale=1, celery=False, callback=None):
 def deploy_next(user="sama", password=password):
     with settings(user="sama", password=password):
         with cd("/home/sama/web_deploy"):
-            run('docker-compose pull tutor-next')
-            run('docker-compose up -d tutor-next') 
+            # run('docker-compose pull tutor-next')
+            # run('docker-compose up -d tutor-next') 
+            run('docker-compose pull store-next')
+            run('docker-compose up -d store-next') 
             run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
     
 

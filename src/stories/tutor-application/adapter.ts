@@ -12,6 +12,7 @@ import {
   SAMPLE_TUTERIA_SUBJECTS,
   SAMPLE_TUTOR_DATA,
   SAMPLE_TUTOR_SUBJECTS,
+  SUBJECT_GROUPS,
   TUTORS,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import storage from "@tuteria/shared-lib/src/local-storage";
@@ -72,7 +73,15 @@ const initializeApplication = async (
     },
   });
 };
+
 export const testAdapter: ServerAdapterType = {
+  getSubjectData() {
+    return {
+      tutorSubjects: SAMPLE_TUTOR_SUBJECTS,
+      tuteriaSubjects: SAMPLE_TUTERIA_SUBJECTS,
+      groups: SUBJECT_GROUPS,
+    };
+  },
   deleteSubject: async (id) => {
     return await samplePromise(id);
   },
