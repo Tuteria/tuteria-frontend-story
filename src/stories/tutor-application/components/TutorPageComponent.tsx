@@ -88,7 +88,7 @@ const TutorPageComponent: React.FC<{
       <Stack>
         <Button
           onClick={() => {
-            store.submitApplication().then(() => {
+            store.submitApplication(store.currentStep).then(() => {
               onNextStep();
             });
           }}

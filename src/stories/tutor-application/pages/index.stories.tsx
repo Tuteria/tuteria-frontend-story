@@ -68,6 +68,7 @@ export const TutorPage = () => {
       <TutorPageComponent
         // currentStep={store.currentEditableForm}
         store={store}
+        // currentStep={store.currentStep}
         onEditSubject={(subject) => {
           return "/skills";
         }}
@@ -177,7 +178,7 @@ export const Verification = () => {
       let options = {
         [APPLICATION_STEPS.COMPLETE]: "/complete",
         [APPLICATION_STEPS.VERIFY]: "/verify",
-        [APPLICATION_STEPS.SUBJECT]: "/subject",
+        [APPLICATION_STEPS.SUBJECT]: "/subjects",
       };
       navigate(options[store.currentStep]);
     }
@@ -191,7 +192,7 @@ export const Verification = () => {
       <VerificationPage
         store={store}
         onNextStep={async () => {
-          await store.submitApplication(true);
+          await store.submitApplication(store.currentStep);
           navigate("/subject");
         }}
       />
@@ -246,7 +247,6 @@ export const CompletedPage = () => {
     <CompletedApplicationPage
       firstName="Chidi"
       store={store}
-      isPremium={true}
       photo="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200"
     />
   );
