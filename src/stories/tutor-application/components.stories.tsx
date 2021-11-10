@@ -27,7 +27,7 @@ import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
 import ScheduleCard from "@tuteria/shared-lib/src/tutor-revamp/Schedule";
 import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
 import SubjectAdditionPage, {
-  SubjectClassSelection,
+  SubjectGroupSelection,
 } from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
 import { SubjectsCardMobile } from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditForm";
 import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditView";
@@ -90,30 +90,13 @@ const groupStore = SubjectStore.create(
   { adapter: loadAdapter(testAdapter) }
 );
 export const SubjectSelectionModal = () => {
-  let subjectClasses = [
-    {
-      name: "Primary",
-      subjects: ["Common Entrance", "Basic mathematics"],
-    },
-    {
-      name: "Pre-Primary",
-      subjects: ["Handwriting", "Pronounciation", "Writing"],
-    },
-    {
-      name: "Math Focused",
-      subjects: ["Mathematics core", "Further Mathematics"],
-    },
-  ];
   React.useEffect(() => {
     groupStore.initializeTutorSubjects(testAdapter.getSubjectData());
   }, []);
+
   return (
     <OverlayWrapper>
-      <SubjectClassSelection
-        store={groupStore}
-        classes={subjectClasses}
-        onAddSubjects={(values) => console.log(values)}
-      />
+      <SubjectGroupSelection store={groupStore} />
     </OverlayWrapper>
   );
 };

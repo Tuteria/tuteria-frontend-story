@@ -41,11 +41,12 @@ function navigate(path: string) {
   let options = {
     "/apply": "Tutor Page",
     "/verify": "Verification",
+    "/subject": "Subject Create Page",
     "/complete": "Completed Page",
     "/skills": "EditSubjectPage",
     "/quiz/select-skill": "TestSelectionPage",
   };
-  linkTo("Tutor Application/Pages", options["path"])();
+  linkTo("Tutor Application/Pages", options[path])();
 }
 export const TutorPage = () => {
   async function initialize(setLoading) {
@@ -58,11 +59,7 @@ export const TutorPage = () => {
     setLoading(false);
     if (store.currentStep === APPLICATION_STEPS.APPLY) {
     } else {
-      let options = {
-        [APPLICATION_STEPS.COMPLETE]: "/complete",
-        [APPLICATION_STEPS.VERIFY]: "/verify",
-      };
-      navigate(options[store.currentStep]);
+      navigate("/apply");
     }
   }
 
@@ -71,6 +68,7 @@ export const TutorPage = () => {
       <TutorPageComponent
         // currentStep={store.currentEditableForm}
         store={store}
+        // currentStep={store.currentStep}
         onEditSubject={(subject) => {
           return "/skills";
         }}
@@ -170,14 +168,19 @@ export const Verification = () => {
         // email_verified: true,
         appData: {
           currentStep: APPLICATION_STEPS.VERIFY,
-          currentEditableForm: STEPS.VERIFICATION,
+          currentEditableForm: STEPS.GUARANTOR_INFO,
         },
       },
     });
     if (store.currentStep === APPLICATION_STEPS.VERIFY) {
       setLoading(false);
     } else {
-      navigate("/complete");
+      let options = {
+        [APPLICATION_STEPS.COMPLETE]: "/complete",
+        [APPLICATION_STEPS.VERIFY]: "/verify",
+        [APPLICATION_STEPS.SUBJECT]: "/subjects",
+      };
+      navigate(options[store.currentStep]);
     }
   }
 
@@ -189,8 +192,8 @@ export const Verification = () => {
       <VerificationPage
         store={store}
         onNextStep={async () => {
-          await store.submitApplication(true);
-          linkTo("Tutor Application/Pages", "Completed Page")();
+          await store.submitApplication(store.currentStep);
+          navigate("/subject");
         }}
       />
     </LoadingStateWrapper>
@@ -209,16 +212,17 @@ export const SubjectCreatePage = () => {
       tutorInfo: {
         ...result.tutorInfo,
         appData: {
-          currentStep: APPLICATION_STEPS.COMPLETE,
+          currentStep: APPLICATION_STEPS.SUBJECT,
         },
       },
     });
-    if (store.currentStep === APPLICATION_STEPS.COMPLETE) {
+    if (store.currentStep === APPLICATION_STEPS.SUBJECT) {
       setLoading(false);
     } else {
       let options = {
         [APPLICATION_STEPS.APPLY]: "/apply",
         [APPLICATION_STEPS.VERIFY]: "/verify",
+        [APPLICATION_STEPS.COMPLETE]: "/complete",
       };
       navigate(options[store.currentStep]);
     }
@@ -235,11 +239,14 @@ export const SubjectCreatePage = () => {
 };
 
 export const CompletedPage = () => {
+  React.useEffect(() => {
+    store.setCurrentStep(APPLICATION_STEPS.COMPLETE);
+  }, []);
+
   return (
     <CompletedApplicationPage
       firstName="Chidi"
       store={store}
-      isPremium={true}
       photo="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200"
     />
   );
