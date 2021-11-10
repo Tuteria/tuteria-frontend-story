@@ -90,29 +90,13 @@ const groupStore = SubjectStore.create(
   { adapter: loadAdapter(testAdapter) }
 );
 export const SubjectSelectionModal = () => {
-  // let subjectClasses = [
-  //   {
-  //     name: "Primary",
-  //     subjects: ["Common Entrance", "Basic mathematics"],
-  //   },
-  //   {
-  //     name: "Pre-Primary",
-  //     subjects: ["Handwriting", "Pronounciation", "Writing"],
-  //   },
-  //   {
-  //     name: "Math Focused",
-  //     subjects: ["Mathematics core", "Further Mathematics"],
-  //   },
-  // ];
   React.useEffect(() => {
     groupStore.initializeTutorSubjects(testAdapter.getSubjectData());
   }, []);
+
   return (
     <OverlayWrapper>
-      <SubjectGroupSelection
-        store={groupStore}
-        onAddSubjects={(values) => console.log(values)}
-      />
+      <SubjectGroupSelection store={groupStore} />
     </OverlayWrapper>
   );
 };
