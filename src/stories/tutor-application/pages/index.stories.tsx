@@ -168,7 +168,7 @@ export const Verification = () => {
         // email_verified: true,
         appData: {
           currentStep: APPLICATION_STEPS.VERIFY,
-          currentEditableForm: STEPS.VERIFICATION,
+          currentEditableForm: STEPS.GUARANTOR_INFO,
         },
       },
     });
