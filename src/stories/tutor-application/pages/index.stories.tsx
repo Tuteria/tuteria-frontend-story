@@ -245,6 +245,10 @@ export const SubjectCreatePage = () => {
 };
 
 export const CompletedPage = () => {
+  React.useEffect(() => {
+    store.setCurrentStep("complete");
+  }, []);
+
   return (
     <CompletedApplicationPage
       firstName="Chidi"
