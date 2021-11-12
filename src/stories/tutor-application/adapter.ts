@@ -70,6 +70,7 @@ const initializeApplication = async (
       tutorSubjects: SAMPLE_TUTOR_SUBJECTS,
       tuteriaSubjects: tuteriaSubjects,
       supportedCountries,
+      groups: SUBJECT_GROUPS,
     },
   });
 };

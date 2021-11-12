@@ -233,14 +233,20 @@ export const SubjectCreatePage = () => {
       initialize={initialize}
       text="Loading subject details..."
     >
-      <SubjectCreationPage store={store} />
+      <SubjectCreationPage
+        onNextStep={async () => {
+          await store.submitApplication(store.currentStep);
+          navigate("/complete");
+        }}
+        store={store}
+      />
     </LoadingStateWrapper>
   );
 };
 
 export const CompletedPage = () => {
   React.useEffect(() => {
-    store.setCurrentStep(APPLICATION_STEPS.COMPLETE);
+    store.setCurrentStep("complete");
   }, []);
 
   return (
