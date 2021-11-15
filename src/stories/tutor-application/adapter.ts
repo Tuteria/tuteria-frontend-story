@@ -242,7 +242,7 @@ export const testAdapter: ServerAdapterType = {
     let response = await initializeApplication(adapter, {
       regions: [],
       countries: [],
-      tuteriaSubjects: subjectInfo.subjects,
+      tuteriaSubjects: SAMPLE_TUTERIA_SUBJECTS,
     });
     let foundSubject = {
       ...SAMPLE_TUTOR_SUBJECTS[0],

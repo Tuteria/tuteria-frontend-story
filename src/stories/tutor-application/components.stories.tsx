@@ -337,7 +337,11 @@ export const EditSubjectPage = () => {
       text="Fetching subject details..."
       initialize={initialize}
     >
-      <SubjectEditView type="hide" store={subjectStore}>
+      <SubjectEditView
+        type="hide"
+        subjectStore={store.subject}
+        store={subjectStore}
+      >
         {(currentForm) => {
           if (currentForm === SUBJECT_EDIT_STEPS.PREVIEW) {
             return (
