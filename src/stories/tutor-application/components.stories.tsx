@@ -316,6 +316,32 @@ const subjectStore = TutorSubject.create(
   {},
   { adapter: loadAdapter(testAdapter) }
 );
+const TUTORDATA = {
+  education: [
+    {
+      school: "University of Lagos",
+      country: "Nigeria",
+      specialty: "Human resources",
+      course: "Systems Engineering",
+      grade: "First-Class",
+      degree: "B.Sc",
+      startYear: "2007",
+      endYear: "2013",
+    },
+  ],
+  workHistory: [
+    {
+      company: "Tuteria Limited",
+      role: "Manager",
+      isTeachingRole: true,
+      startYear: "2012",
+      endYear: "2015",
+      isCurrent: false,
+      showOnProfile: true,
+    },
+  ],
+};
+
 export const EditSubjectPage = () => {
   async function initialize(setLoading) {
     try {
@@ -343,6 +369,7 @@ export const EditSubjectPage = () => {
     >
       <SubjectEditView
         type="hide"
+        educationAndWorkHistoryData={TUTORDATA}
         subjectStore={store.subject}
         store={subjectStore}
       >
