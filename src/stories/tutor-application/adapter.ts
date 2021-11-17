@@ -254,4 +254,7 @@ export const testAdapter: ServerAdapterType = {
   authenticateUser: async ({ email, otp }) => {
     return await samplePromise({ email, otp });
   },
+  createQuizFromSheet: async () => {
+    return await samplePromise({});
+  },
 };

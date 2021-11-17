@@ -306,6 +306,7 @@ export const TestSelectionPage = () => {
         navigateToSubject={navigateToSubject}
         toSubjectEditPage={() => navigate("/skills")}
         subjectInfo={inst}
+        showRefresh={true}
       />
     </LoadingStateWrapper>
   );
