@@ -12,6 +12,9 @@ import allRegions from "@tuteria/shared-lib/src/data/regions.json";
 import {
   SAMPLE_TUTERIA_SUBJECTS,
   SAMPLE_TUTOR_SUBJECTS2,
+  ACADEMIC_PREFERENCES,
+  EXAM_PREP_PREFERENCES,
+  TEACHING_PREFERENCES,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import {
   buildProfileInfo,
@@ -34,6 +37,7 @@ import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditVie
 import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
 import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity";
 import TutorPricing from "@tuteria/shared-lib/src/tutor-revamp/Pricing";
+import TeachingPreference from "@tuteria/shared-lib/src/tutor-revamp/TeachingPreference";
 import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUploader";
 import LoginModal from "@tuteria/shared-lib/src/tutor-application/Login/LoginModal";
 import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
@@ -313,6 +317,32 @@ const subjectStore = TutorSubject.create(
   {},
   { adapter: loadAdapter(testAdapter) }
 );
+const TUTORDATA = {
+  education: [
+    {
+      school: "University of Lagos",
+      country: "Nigeria",
+      specialty: "Human resources",
+      course: "Systems Engineering",
+      grade: "First-Class",
+      degree: "B.Sc",
+      startYear: "2007",
+      endYear: "2013",
+    },
+  ],
+  workHistory: [
+    {
+      company: "Tuteria Limited",
+      role: "Manager",
+      isTeachingRole: true,
+      startYear: "2012",
+      endYear: "2015",
+      isCurrent: false,
+      showOnProfile: true,
+    },
+  ],
+};
+
 export const EditSubjectPage = () => {
   async function initialize(setLoading) {
     try {
@@ -340,6 +370,7 @@ export const EditSubjectPage = () => {
     >
       <SubjectEditView
         type="hide"
+        educationAndWorkHistoryData={TUTORDATA}
         subjectStore={store.subject}
         store={subjectStore}
       >
@@ -491,4 +522,15 @@ const pricingStore = TutorPricingStore.create(
 
 export const Pricing = () => {
   return <TutorPricing {...tutorData} store={pricingStore} />;
+};
+
+export const TeachingPreferenceComponent = () => {
+  return (
+    <TeachingPreference
+      uploadStore={store.identity.uploadStore}
+      academicPreference={ACADEMIC_PREFERENCES}
+      exampPrepPreference={EXAM_PREP_PREFERENCES}
+      otherPreferences={TEACHING_PREFERENCES}
+    />
+  );
 };
