@@ -572,33 +572,35 @@ export const AcademicPreference = () => {
   );
 };
 export const TestPrepPreference = () => {
+  let subject = "IELTS";
   let preferences = [
     {
       heading: "Purposes",
       subHeading: "For which purpose do you plan on taking the exam?",
       id: "purposes",
-      options: EXAM_PREP_PREFERENCES.purposes,
+      options: EXAM_PREP_PREFERENCES.purposes[subject],
       type: "multiselect",
     },
     {
       heading: "Modules",
       subHeading: "Select your modules",
       id: "modules",
-      options: EXAM_PREP_PREFERENCES.modules,
+      options: EXAM_PREP_PREFERENCES.modules[subject],
       type: "multiselect",
     },
-    {
-      heading: "Test Results",
-      subHeading: "Have you taken the test?",
-      id: "test_results",
-      type: "radio",
-      depends: "modules",
-      dependType: "input",
-    },
+    // {
+    //   heading: "Test Results",
+    //   subHeading: "Have you taken the test?",
+    //   id: "test_results",
+    //   type: "radio",
+    //   depends: "modules",
+    //   dependType: "input",
+    // },
     {
       heading: "Test results verification",
       subHeading: "Verify your test results",
       depends: "test_results",
+      options: EXAM_PREP_PREFERENCES.modules,
       id: "test_results_verification",
       type: "proof",
     },
@@ -648,16 +650,17 @@ export const LanguagePreference = () => {
       id: "exam",
       type: "multiselect",
     },
-    {
-      heading: "Are you a native speaker",
-      id: "native_speaker",
-      type: "radio",
-    },
+    // {
+    //   heading: "Are you a native speaker",
+    //   id: "native_speaker",
+    //   type: "radio",
+    // },
   ];
   return (
     <TeachingPreference
       uploadStore={store.identity.uploadStore}
       fields={preferences}
+      onSubmit={(values) => console.log(values)}
     />
   );
 };
