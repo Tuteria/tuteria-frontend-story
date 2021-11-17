@@ -39,6 +39,7 @@ import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/Verificat
 import TutorPricing from "@tuteria/shared-lib/src/tutor-revamp/Pricing";
 import TeachingPreference, {
   MultiSelectCustomAccordion,
+  SwitchInput,
 } from "@tuteria/shared-lib/src/tutor-revamp/TeachingPreference";
 import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUploader";
 import LoginModal from "@tuteria/shared-lib/src/tutor-application/Login/LoginModal";
@@ -578,6 +579,7 @@ export const TestPrepPreference = () => {
       heading: "Purposes",
       subHeading: "For which purpose do you plan on taking the exam?",
       id: "purposes",
+      name: "purposes",
       options: EXAM_PREP_PREFERENCES.purposes[subject],
       type: "multiselect",
     },
@@ -585,24 +587,28 @@ export const TestPrepPreference = () => {
       heading: "Modules",
       subHeading: "Select your modules",
       id: "modules",
+      name: "modules",
       options: EXAM_PREP_PREFERENCES.modules[subject],
       type: "multiselect",
     },
-    // {
-    //   heading: "Test Results",
-    //   subHeading: "Have you taken the test?",
-    //   id: "test_results",
-    //   type: "radio",
-    //   depends: "modules",
-    //   dependType: "input",
-    // },
+    {
+      heading: "Test Results",
+      subHeading: "Have you taken the test?",
+      id: "test_results",
+      name: "test_results",
+      type: "conditional",
+      depends: "modules",
+      dependType: "input",
+    },
     {
       heading: "Test results verification",
       subHeading: "Verify your test results",
-      depends: "test_results",
+      depends: "modules",
       options: EXAM_PREP_PREFERENCES.modules,
       id: "test_results_verification",
+      name: "test_results_verification",
       type: "proof",
+      secondary: "test_results",
     },
   ];
   return (
@@ -650,11 +656,13 @@ export const LanguagePreference = () => {
       id: "exam",
       type: "multiselect",
     },
-    // {
-    //   heading: "Are you a native speaker",
-    //   id: "native_speaker",
-    //   type: "radio",
-    // },
+    {
+      heading: "Language Proficiency",
+      subHeading: "Are you a native speaker",
+      id: "native_speaker",
+      type: "radio",
+      options: ["Yes", "No"],
+    },
   ];
   return (
     <TeachingPreference
@@ -686,17 +694,21 @@ export const MusicPreference = () => {
       subHeading: "Which exams will you offer?",
       options: TEACHING_PREFERENCES.exams,
       id: "exam",
-      type: "radio",
+      type: "multiselect",
     },
     {
-      heading: "Do you have a personal instrument",
+      heading: "Instrument Ownership",
+      subHeading: "Do you have a personal instrument",
       id: "instrument",
       type: "radio",
+      options: ["Yes", "No"],
     },
     {
-      heading: "Do you have access to a studio",
+      heading: "Studio Access",
+      subHeading: "Do you have access to a studio",
       id: "studio",
       type: "radio",
+      options: ["Yes", "No"],
     },
     {
       heading: "Instrument Type",
@@ -715,6 +727,28 @@ export const MusicPreference = () => {
   );
 };
 
+export const SwitchInputStory = () => {
+  let subject = "IELTS";
+  let preferences = {
+    heading: "Test Results",
+    subHeading: "Have you taken the test?",
+    id: "test_results",
+    options: EXAM_PREP_PREFERENCES.modules[subject],
+    type: "radio",
+    depends: "modules",
+    dependType: "input",
+  };
+
+  return (
+    <Box w="720px" mx="auto">
+      <SwitchInput
+        onChange={(vals) => console.log(vals)}
+        formField={preferences}
+        onSubmit={(values) => console.log(values)}
+      />
+    </Box>
+  );
+};
 export const MultiSelectAccordion = () => {
   let examsByClass = {
     "Junior Secondary": [
