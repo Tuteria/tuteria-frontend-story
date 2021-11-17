@@ -15,6 +15,7 @@ import {
   ACADEMIC_PREFERENCES,
   EXAM_PREP_PREFERENCES,
   TEACHING_PREFERENCES,
+  SAMPLE_QUESTION,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import {
   buildProfileInfo,
@@ -48,6 +49,7 @@ import QuizStore, {
 import { TutorPricingStore } from "@tuteria/shared-lib/src/stores/pricing";
 import React from "react";
 import { testAdapter } from "./adapter";
+import QuestionStyle from "@tuteria/shared-lib/src/tutor-revamp/quizzes/Question";
 
 export default {
   title: "Tutor Application/Components",
@@ -531,6 +533,23 @@ export const TeachingPreferenceComponent = () => {
       academicPreference={ACADEMIC_PREFERENCES}
       exampPrepPreference={EXAM_PREP_PREFERENCES}
       otherPreferences={TEACHING_PREFERENCES}
+    />
+  );
+};
+
+export const ImageOptions = () => {
+  return (
+    <QuestionStyle
+      direction="column"
+      is_horizontal={SAMPLE_QUESTION.options_display === "horizontal"}
+      question_type={SAMPLE_QUESTION?.question_type}
+      questionNo={1}
+      onAnswerClick={() => {}}
+      isSelected={{}}
+      lastQuestion={0}
+      answers={SAMPLE_QUESTION.answers}
+      question={SAMPLE_QUESTION.content}
+      image={SAMPLE_QUESTION.figure}
     />
   );
 };
