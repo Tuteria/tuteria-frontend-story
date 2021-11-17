@@ -37,7 +37,9 @@ import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditVie
 import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
 import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity";
 import TutorPricing from "@tuteria/shared-lib/src/tutor-revamp/Pricing";
-import TeachingPreference from "@tuteria/shared-lib/src/tutor-revamp/TeachingPreference";
+import TeachingPreference, {
+  MultiSelectCustomAccordion,
+} from "@tuteria/shared-lib/src/tutor-revamp/TeachingPreference";
 import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUploader";
 import LoginModal from "@tuteria/shared-lib/src/tutor-application/Login/LoginModal";
 import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
@@ -496,13 +498,258 @@ export const Pricing = () => {
   return <TutorPricing {...tutorData} store={pricingStore} />;
 };
 
-export const TeachingPreferenceComponent = () => {
+export const AcademicPreference = () => {
+  let preferences = [
+    {
+      heading: "What class groups do you teach?",
+      subHeading: "Select the main age and class of learners you teach.",
+      id: "classes",
+      name: "classes",
+      options: ACADEMIC_PREFERENCES.classes,
+      type: "multiselect",
+      required: true,
+    },
+    {
+      heading: "Curriculums",
+      subHeading:
+        "Select the curriculum you're experienced in or skip this step if you don't teach academics.",
+      options: ACADEMIC_PREFERENCES.curriculums,
+      id: "curriculums",
+      name: "curriculums",
+      type: "multiselect",
+      required: true,
+    },
+    {
+      heading: "Exam preparation experience",
+      id: "exams_speciality",
+      name: "exams_speciality",
+      subHeading: `Indicate the exams you have successfully prepared students for or skip this step if it doesn't apply to you.`,
+      options: [
+        {
+          heading: "Upper Primary Exams",
+          options: [
+            "Common Entrance Exams",
+            "11+ Entrance Exams",
+            "Cambridge Primary Exams",
+          ],
+        },
+        {
+          heading: "Junior Secondary Exams",
+          options: ["JSSCE/BECE", "Cambridge Checkpoint", "13+ Entrance Exams"],
+        },
+        {
+          heading: "Senior Secondary Exams",
+          options: [
+            "WAEC/JAMB/NECO/JUPEB",
+            "IGCSE-Cambridge A/Levels",
+            "SAT/PSAT- Reasoning Test",
+            "ACT- College Test",
+            "SAT II - Subject Tests",
+            "Edexcel - International A/Levels",
+            "IB - International BAccalaureate",
+            "AP - Advanced Placement Exams",
+          ],
+        },
+      ],
+      type: "multiselect",
+      complex: true,
+    },
+    {
+      heading: "Schools taught",
+      id: "schools_taught",
+      name: "schools_taught",
+      subHeading: "Which schools have you taught?",
+      type: "input",
+    },
+  ];
+
   return (
     <TeachingPreference
       uploadStore={store.identity.uploadStore}
-      academicPreference={ACADEMIC_PREFERENCES}
-      exampPrepPreference={EXAM_PREP_PREFERENCES}
-      otherPreferences={TEACHING_PREFERENCES}
+      fields={preferences}
+      onSubmit={(values) => console.log(values)}
+    />
+  );
+};
+export const TestPrepPreference = () => {
+  let preferences = [
+    {
+      heading: "Purposes",
+      subHeading: "For which purpose do you plan on taking the exam?",
+      id: "purposes",
+      options: EXAM_PREP_PREFERENCES.purposes,
+      type: "multiselect",
+    },
+    {
+      heading: "Modules",
+      subHeading: "Select your modules",
+      id: "modules",
+      options: EXAM_PREP_PREFERENCES.modules,
+      type: "multiselect",
+    },
+    {
+      heading: "Test Results",
+      subHeading: "Have you taken the test?",
+      id: "test_results",
+      type: "radio",
+      depends: "modules",
+      dependType: "input",
+    },
+    {
+      heading: "Test results verification",
+      subHeading: "Verify your test results",
+      depends: "test_results",
+      id: "test_results_verification",
+      type: "proof",
+    },
+  ];
+  return (
+    <TeachingPreference
+      uploadStore={store.identity.uploadStore}
+      fields={preferences}
+      onSubmit={(values) => console.log(values)}
+    />
+  );
+};
+export const LanguagePreference = () => {
+  let preferences = [
+    {
+      heading: "What class groups do you teach?",
+      subHeading: "Select the main age and class of learners you teach.",
+      options: TEACHING_PREFERENCES.classes,
+      id: "classes",
+      type: "multiselect",
+    },
+    {
+      heading: "Levels",
+      subHeading: "Select the levels you teach.",
+      options: TEACHING_PREFERENCES.levels,
+      id: "levels",
+      type: "multiselect",
+    },
+    {
+      heading: "Dialect",
+      subHeading: "Select the dialects you teach.",
+      options: TEACHING_PREFERENCES.dialect,
+      id: "dialect",
+      type: "multiselect",
+    },
+    {
+      heading: "Purpose",
+      subHeading: "What is the purpose for teaching?",
+      options: TEACHING_PREFERENCES.purposes,
+      id: "purpose",
+      type: "multiselect",
+    },
+    {
+      heading: "Exam",
+      subHeading: "Which exams will you offer?",
+      options: TEACHING_PREFERENCES.exams,
+      id: "exam",
+      type: "multiselect",
+    },
+    {
+      heading: "Are you a native speaker",
+      id: "native_speaker",
+      type: "radio",
+    },
+  ];
+  return (
+    <TeachingPreference
+      uploadStore={store.identity.uploadStore}
+      fields={preferences}
+    />
+  );
+};
+
+export const MusicPreference = () => {
+  let preferences = [
+    {
+      heading: "What class groups do you teach?",
+      subHeading: "Select the main age and class of learners you teach.",
+      options: TEACHING_PREFERENCES.classes,
+      id: "classes",
+      type: "multiselect",
+    },
+    {
+      heading: "Levels",
+      subHeading: "Select the levels you teach.",
+      options: TEACHING_PREFERENCES.levels,
+      id: "levels",
+      type: "multiselect",
+    },
+    {
+      heading: "Exam",
+      subHeading: "Which exams will you offer?",
+      options: TEACHING_PREFERENCES.exams,
+      id: "exam",
+      type: "radio",
+    },
+    {
+      heading: "Do you have a personal instrument",
+      id: "instrument",
+      type: "radio",
+    },
+    {
+      heading: "Do you have access to a studio",
+      id: "studio",
+      type: "radio",
+    },
+    {
+      heading: "Instrument Type",
+      subHeading: "What is the type of instrument you use?",
+      options: TEACHING_PREFERENCES.instrument_types,
+      id: "instrument-type",
+      type: "multiselect",
+    },
+  ];
+  return (
+    <TeachingPreference
+      uploadStore={store.identity.uploadStore}
+      fields={preferences}
+      onSubmit={(values) => console.log(values)}
+    />
+  );
+};
+
+export const MultiSelectAccordion = () => {
+  let examsByClass = {
+    "Junior Secondary": [
+      "JSSCE / BECE",
+      "Cambridge Checkpoint",
+      "13+ Entrance Exam",
+    ],
+    "Senior Secondary": [
+      "WAEC / JAMB / NECO / JUPEB",
+      "IGCSE - Cambridge A/Levels",
+      "SAT / PSAT - Reasoning Test",
+      "ACT - College Test",
+      "SAT II - Subject Tests",
+      "Edexcel - International A/Levels",
+      "IB - International Baccalaureate",
+      "AP - Advanced Placement Exam",
+    ],
+    "Upper Primary": [
+      "Entrance Into Top Schools",
+      "Common Entrance Exam",
+      "11+ Entrance Exam",
+      "Cambridge Primary Exam",
+    ],
+  };
+  let defaultValues = {
+    "Junior Secondary": ["JSSCE / BECE"],
+    "Senior Secondary": [
+      "IB - International Baccalaureate",
+      "AP - Advanced Placement Exam",
+    ],
+    "Upper Primary": ["Entrance Into Top Schools"],
+  };
+
+  return (
+    <MultiSelectCustomAccordion
+      onChange={(vals) => console.log(vals)}
+      examsObject={examsByClass}
+      defaultValues={defaultValues}
     />
   );
 };
