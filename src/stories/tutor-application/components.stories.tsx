@@ -38,7 +38,10 @@ import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditVie
 import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
 import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity";
 import TutorPricing from "@tuteria/shared-lib/src/tutor-revamp/Pricing";
-import TeachingPreference from "@tuteria/shared-lib/src/tutor-revamp/TeachingPreference";
+import TeachingPreference, {
+  MultiSelectCustomAccordion,
+  SwitchInput,
+} from "@tuteria/shared-lib/src/tutor-revamp/TeachingPreference";
 import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUploader";
 import LoginModal from "@tuteria/shared-lib/src/tutor-application/Login/LoginModal";
 import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
@@ -317,7 +320,10 @@ export const TestSelectionPage = () => {
 let pk = 209601;
 const subjectStore = TutorSubject.create(
   {},
-  { adapter: loadAdapter(testAdapter) }
+  {
+    adapter: loadAdapter(testAdapter),
+    buildPreferences: testAdapter.buildPreferences,
+  }
 );
 const TUTORDATA = {
   education: [
@@ -526,13 +532,118 @@ export const Pricing = () => {
   return <TutorPricing {...tutorData} store={pricingStore} />;
 };
 
-export const TeachingPreferenceComponent = () => {
+export const AcademicPreference = () => {
+  let preferences = testAdapter.buildPreferences({ category: "Academics" });
+
   return (
     <TeachingPreference
       uploadStore={store.identity.uploadStore}
-      academicPreference={ACADEMIC_PREFERENCES}
-      exampPrepPreference={EXAM_PREP_PREFERENCES}
-      otherPreferences={TEACHING_PREFERENCES}
+      fields={preferences}
+      onSubmit={(values) => console.log(values)}
+    />
+  );
+};
+export const TestPrepPreference = () => {
+  let preferences = testAdapter.buildPreferences({
+    name: "IELTS",
+    category: "Test Prep",
+  });
+  return (
+    <TeachingPreference
+      uploadStore={store.identity.uploadStore}
+      fields={preferences}
+      onSubmit={(values) => console.log(values)}
+    />
+  );
+};
+export const LanguagePreference = () => {
+  let preferences = testAdapter.buildPreferences({
+    name: "IELTS",
+    category: "Languages",
+  });
+  return (
+    <TeachingPreference
+      uploadStore={store.identity.uploadStore}
+      fields={preferences}
+      onSubmit={(values) => console.log(values)}
+    />
+  );
+};
+
+export const MusicPreference = () => {
+  let preferences = testAdapter.buildPreferences({
+    name: "IELTS",
+    category: "Music",
+  });
+  return (
+    <TeachingPreference
+      uploadStore={store.identity.uploadStore}
+      fields={preferences}
+      onSubmit={(values) => console.log(values)}
+    />
+  );
+};
+
+export const SwitchInputStory = () => {
+  let subject = "IELTS";
+  let preferences = {
+    heading: "Test Results",
+    subHeading: "Have you taken the test?",
+    id: "test_results",
+    options: EXAM_PREP_PREFERENCES.modules[subject],
+    type: "radio",
+    depends: "modules",
+    dependType: "input",
+  };
+
+  return (
+    <Box w="720px" mx="auto">
+      <SwitchInput
+        onChange={(vals) => console.log(vals)}
+        formField={preferences}
+        onSubmit={(values) => console.log(values)}
+      />
+    </Box>
+  );
+};
+export const MultiSelectAccordion = () => {
+  let examsByClass = {
+    "Junior Secondary": [
+      "JSSCE / BECE",
+      "Cambridge Checkpoint",
+      "13+ Entrance Exam",
+    ],
+    "Senior Secondary": [
+      "WAEC / JAMB / NECO / JUPEB",
+      "IGCSE - Cambridge A/Levels",
+      "SAT / PSAT - Reasoning Test",
+      "ACT - College Test",
+      "SAT II - Subject Tests",
+      "Edexcel - International A/Levels",
+      "IB - International Baccalaureate",
+      "AP - Advanced Placement Exam",
+    ],
+    "Upper Primary": [
+      "Entrance Into Top Schools",
+      "Common Entrance Exam",
+      "11+ Entrance Exam",
+      "Cambridge Primary Exam",
+    ],
+  };
+  let defaultValues = {
+    "Junior Secondary": ["JSSCE / BECE"],
+    "Senior Secondary": [
+      "IB - International Baccalaureate",
+      "AP - Advanced Placement Exam",
+    ],
+    "Upper Primary": ["Entrance Into Top Schools"],
+  };
+
+  return (
+    <MultiSelectCustomAccordion
+      onChange={(vals) => console.log(vals)}
+      examsObject={examsByClass}
+      defaultValues={defaultValues}
     />
   );
 };
