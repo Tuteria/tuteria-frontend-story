@@ -47,6 +47,13 @@ function loadExistingTutorInfo() {
     appData: { currentEditableForm: formIds[10] },
   };
 }
+
+const clearSubjectDescription = () => {
+  storage.clear("SUBJECT_DESCRIPTION");
+  storage.clear("TEACHING_STYLE");
+  storage.clear("TRACK_RECORD");
+};
+
 const initializeApplication = async (
   adapter: AdapterType,
   { regions, countries, tuteriaSubjects }
@@ -127,6 +134,7 @@ export const testAdapter: ServerAdapterType = {
   updateTutorSubjectInfo: async (values, subject_id) => {
     console.log(values);
     // return Promise.reject({})
+    clearSubjectDescription();
     return await samplePromise({ values, subject_id });
   },
   async saveSubjectImages(images) {
@@ -453,5 +461,11 @@ export const testAdapter: ServerAdapterType = {
       ];
     }
     return [];
+  },
+  saveOnBlur(name, value) {
+    storage.set(name, value);
+  },
+  loadSubjectDescription(name) {
+    return storage.get(name, "");
   },
 };
