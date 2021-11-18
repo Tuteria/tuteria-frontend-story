@@ -318,7 +318,10 @@ export const TestSelectionPage = () => {
 let pk = 209601;
 const subjectStore = TutorSubject.create(
   {},
-  { adapter: loadAdapter(testAdapter) }
+  {
+    adapter: loadAdapter(testAdapter),
+    buildPreferences: testAdapter.buildPreferences,
+  }
 );
 const TUTORDATA = {
   education: [
@@ -528,65 +531,7 @@ export const Pricing = () => {
 };
 
 export const AcademicPreference = () => {
-  let preferences = [
-    {
-      heading: "What class groups do you teach?",
-      subHeading: "Select the main age and class of learners you teach.",
-      name: "classes",
-      options: ACADEMIC_PREFERENCES.classes,
-      type: "multiselect",
-      required: true,
-    },
-    {
-      heading: "Curriculums",
-      subHeading:
-        "Select the curriculum you're experienced in or skip this step if you don't teach academics.",
-      options: ACADEMIC_PREFERENCES.curriculums,
-      name: "curriculums",
-      type: "multiselect",
-      required: true,
-    },
-    {
-      heading: "Exam preparation experience",
-      name: "exams_speciality",
-      subHeading: `Indicate the exams you have successfully prepared students for or skip this step if it doesn't apply to you.`,
-      options: [
-        {
-          heading: "Upper Primary Exams",
-          options: [
-            "Common Entrance Exams",
-            "11+ Entrance Exams",
-            "Cambridge Primary Exams",
-          ],
-        },
-        {
-          heading: "Junior Secondary Exams",
-          options: ["JSSCE/BECE", "Cambridge Checkpoint", "13+ Entrance Exams"],
-        },
-        {
-          heading: "Senior Secondary Exams",
-          options: [
-            "WAEC/JAMB/NECO/JUPEB",
-            "IGCSE-Cambridge A/Levels",
-            "SAT/PSAT- Reasoning Test",
-            "ACT- College Test",
-            "SAT II - Subject Tests",
-            "Edexcel - International A/Levels",
-            "IB - International BAccalaureate",
-            "AP - Advanced Placement Exams",
-          ],
-        },
-      ],
-      type: "multiselect",
-      complex: true,
-    },
-    {
-      heading: "Schools taught",
-      name: "schools_taught",
-      subHeading: "Which schools have you taught?",
-      type: "input",
-    },
-  ];
+  let preferences = testAdapter.buildPreferences({ category: "Academics" });
 
   return (
     <TeachingPreference
@@ -597,40 +542,10 @@ export const AcademicPreference = () => {
   );
 };
 export const TestPrepPreference = () => {
-  let subject = "IELTS";
-  let preferences = [
-    {
-      heading: "Purposes",
-      subHeading: "For which purpose do you plan on taking the exam?",
-      name: "purposes",
-      options: EXAM_PREP_PREFERENCES.purposes[subject],
-      type: "multiselect",
-    },
-    {
-      heading: "Modules",
-      subHeading: "Select your modules",
-      name: "modules",
-      options: EXAM_PREP_PREFERENCES.modules[subject],
-      type: "multiselect",
-    },
-    {
-      heading: "Test Results",
-      subHeading: "Have you taken the test?",
-      name: "test_results",
-      type: "conditional",
-      depends: "modules",
-      dependType: "input",
-    },
-    {
-      heading: "Test results verification",
-      subHeading: "Verify your test results",
-      depends: "modules",
-      options: EXAM_PREP_PREFERENCES.modules,
-      name: "test_results_verification",
-      type: "proof",
-      secondary: "test_results",
-    },
-  ];
+  let preferences = testAdapter.buildPreferences({
+    name: "IELTS",
+    category: "Test Prep",
+  });
   return (
     <TeachingPreference
       uploadStore={store.identity.uploadStore}
@@ -640,50 +555,10 @@ export const TestPrepPreference = () => {
   );
 };
 export const LanguagePreference = () => {
-  let preferences = [
-    {
-      heading: "What class groups do you teach?",
-      subHeading: "Select the main age and class of learners you teach.",
-      options: TEACHING_PREFERENCES.classes,
-      name: "classes",
-      type: "multiselect",
-    },
-    {
-      heading: "Levels",
-      subHeading: "Select the levels you teach.",
-      options: TEACHING_PREFERENCES.levels,
-      name: "levels",
-      type: "multiselect",
-    },
-    {
-      heading: "Dialect",
-      subHeading: "Select the dialects you teach.",
-      options: TEACHING_PREFERENCES.dialect,
-      name: "dialect",
-      type: "multiselect",
-    },
-    {
-      heading: "Purpose",
-      subHeading: "What is the purpose for teaching?",
-      options: TEACHING_PREFERENCES.purposes,
-      name: "purpose",
-      type: "multiselect",
-    },
-    {
-      heading: "Exam",
-      subHeading: "Which exams will you offer?",
-      options: TEACHING_PREFERENCES.exams,
-      name: "exam",
-      type: "multiselect",
-    },
-    {
-      heading: "Language Proficiency",
-      subHeading: "Are you a native speaker",
-      name: "native_speaker",
-      type: "radio",
-      options: ["Yes", "No"],
-    },
-  ];
+  let preferences = testAdapter.buildPreferences({
+    name: "IELTS",
+    category: "Languages",
+  });
   return (
     <TeachingPreference
       uploadStore={store.identity.uploadStore}
@@ -694,50 +569,10 @@ export const LanguagePreference = () => {
 };
 
 export const MusicPreference = () => {
-  let preferences = [
-    {
-      heading: "What class groups do you teach?",
-      subHeading: "Select the main age and class of learners you teach.",
-      options: TEACHING_PREFERENCES.classes,
-      name: "classes",
-      type: "multiselect",
-    },
-    {
-      heading: "Levels",
-      subHeading: "Select the levels you teach.",
-      options: TEACHING_PREFERENCES.levels,
-      name: "levels",
-      type: "multiselect",
-    },
-    {
-      heading: "Exam",
-      subHeading: "Which exams will you offer?",
-      options: TEACHING_PREFERENCES.exams,
-      name: "exam",
-      type: "multiselect",
-    },
-    {
-      heading: "Instrument Ownership",
-      subHeading: "Do you have a personal instrument",
-      name: "instrument",
-      type: "radio",
-      options: ["Yes", "No"],
-    },
-    {
-      heading: "Studio Access",
-      subHeading: "Do you have access to a studio",
-      name: "studio",
-      type: "radio",
-      options: ["Yes", "No"],
-    },
-    {
-      heading: "Instrument Type",
-      subHeading: "What is the type of instrument you use?",
-      options: TEACHING_PREFERENCES.instrument_types,
-      name: "instrument-type",
-      type: "multiselect",
-    },
-  ];
+  let preferences = testAdapter.buildPreferences({
+    name: "IELTS",
+    category: "Music",
+  });
   return (
     <TeachingPreference
       uploadStore={store.identity.uploadStore}
