@@ -9,10 +9,13 @@ import DATA, {
 } from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 import {
+  ACADEMIC_PREFERENCES,
+  EXAM_PREP_PREFERENCES,
   SAMPLE_TUTERIA_SUBJECTS,
   SAMPLE_TUTOR_DATA,
   SAMPLE_TUTOR_SUBJECTS,
   SUBJECT_GROUPS,
+  TEACHING_PREFERENCES,
   TUTORS,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import storage from "@tuteria/shared-lib/src/local-storage";
@@ -256,5 +259,200 @@ export const testAdapter: ServerAdapterType = {
   },
   createQuizFromSheet: async () => {
     return await samplePromise({});
+  },
+  buildPreferences(subject: { category?: string; name?: string }) {
+    if (subject.category === "Academics") {
+      return [
+        {
+          heading: "What class groups do you teach?",
+          subHeading: "Select the main age and class of learners you teach.",
+          name: "classes",
+          options: ACADEMIC_PREFERENCES.classes,
+          type: "multiselect",
+          required: true,
+        },
+        {
+          heading: "Curriculums",
+          subHeading:
+            "Select the curriculum you're experienced in or skip this step if you don't teach academics.",
+          options: ACADEMIC_PREFERENCES.curriculums,
+          name: "curriculums",
+          type: "multiselect",
+          required: true,
+        },
+        {
+          heading: "Exam preparation experience",
+          name: "exams_speciality",
+          subHeading: `Indicate the exams you have successfully prepared students for or skip this step if it doesn't apply to you.`,
+          options: [
+            {
+              heading: "Upper Primary Exams",
+              options: [
+                "Common Entrance Exams",
+                "11+ Entrance Exams",
+                "Cambridge Primary Exams",
+              ],
+            },
+            {
+              heading: "Junior Secondary Exams",
+              options: [
+                "JSSCE/BECE",
+                "Cambridge Checkpoint",
+                "13+ Entrance Exams",
+              ],
+            },
+            {
+              heading: "Senior Secondary Exams",
+              options: [
+                "WAEC/JAMB/NECO/JUPEB",
+                "IGCSE-Cambridge A/Levels",
+                "SAT/PSAT- Reasoning Test",
+                "ACT- College Test",
+                "SAT II - Subject Tests",
+                "Edexcel - International A/Levels",
+                "IB - International BAccalaureate",
+                "AP - Advanced Placement Exams",
+              ],
+            },
+          ],
+          type: "multiselect",
+          complex: true,
+        },
+        {
+          heading: "Schools taught",
+          name: "schools_taught",
+          subHeading: "Which schools have you taught?",
+          type: "input",
+        },
+      ];
+    }
+    if (subject.category === "Test Prep") {
+      return [
+        {
+          heading: "Purposes",
+          subHeading: "For which purpose do you plan on taking the exam?",
+          name: "purposes",
+          options: EXAM_PREP_PREFERENCES.purposes[subject.name],
+          type: "multiselect",
+        },
+        {
+          heading: "Modules",
+          subHeading: "Select your modules",
+          name: "modules",
+          options: EXAM_PREP_PREFERENCES.modules[subject.name],
+          type: "multiselect",
+        },
+        {
+          heading: "Test Results",
+          subHeading: "Have you taken the test?",
+          name: "test_results",
+          type: "conditional",
+          depends: "modules",
+          dependType: "input",
+        },
+        {
+          heading: "Test results verification",
+          subHeading: "Verify your test results",
+          depends: "modules",
+          options: EXAM_PREP_PREFERENCES.modules,
+          name: "test_results_verification",
+          type: "proof",
+          secondary: "test_results",
+        },
+      ];
+    }
+    if (subject.category === "Languages") {
+      return [
+        {
+          heading: "What class groups do you teach?",
+          subHeading: "Select the main age and class of learners you teach.",
+          options: TEACHING_PREFERENCES.classes,
+          name: "classes",
+          type: "multiselect",
+        },
+        {
+          heading: "Levels",
+          subHeading: "Select the levels you teach.",
+          options: TEACHING_PREFERENCES.levels,
+          name: "levels",
+          type: "multiselect",
+        },
+        {
+          heading: "Dialect",
+          subHeading: "Select the dialects you teach.",
+          options: TEACHING_PREFERENCES.dialect,
+          name: "dialect",
+          type: "multiselect",
+        },
+        {
+          heading: "Purpose",
+          subHeading: "What is the purpose for teaching?",
+          options: TEACHING_PREFERENCES.purposes,
+          name: "purpose",
+          type: "multiselect",
+        },
+        {
+          heading: "Exam",
+          subHeading: "Which exams will you offer?",
+          options: TEACHING_PREFERENCES.exams,
+          name: "exam",
+          type: "multiselect",
+        },
+        {
+          heading: "Language Proficiency",
+          subHeading: "Are you a native speaker",
+          name: "native_speaker",
+          type: "radio",
+          options: ["Yes", "No"],
+        },
+      ];
+    }
+    if (subject.category === "Music") {
+      return [
+        {
+          heading: "What class groups do you teach?",
+          subHeading: "Select the main age and class of learners you teach.",
+          options: TEACHING_PREFERENCES.classes,
+          name: "classes",
+          type: "multiselect",
+        },
+        {
+          heading: "Levels",
+          subHeading: "Select the levels you teach.",
+          options: TEACHING_PREFERENCES.levels,
+          name: "levels",
+          type: "multiselect",
+        },
+        {
+          heading: "Exam",
+          subHeading: "Which exams will you offer?",
+          options: TEACHING_PREFERENCES.exams,
+          name: "exam",
+          type: "multiselect",
+        },
+        {
+          heading: "Instrument Ownership",
+          subHeading: "Do you have a personal instrument",
+          name: "instrument",
+          type: "radio",
+          options: ["Yes", "No"],
+        },
+        {
+          heading: "Studio Access",
+          subHeading: "Do you have access to a studio",
+          name: "studio",
+          type: "radio",
+          options: ["Yes", "No"],
+        },
+        {
+          heading: "Instrument Type",
+          subHeading: "What is the type of instrument you use?",
+          options: TEACHING_PREFERENCES.instrument_types,
+          name: "instrument-type",
+          type: "multiselect",
+        },
+      ];
+    }
+    return [];
   },
 };
