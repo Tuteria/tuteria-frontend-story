@@ -70,6 +70,7 @@ const initializeApplication = async (
       tutorSubjects: SAMPLE_TUTOR_SUBJECTS,
       tuteriaSubjects: tuteriaSubjects,
       supportedCountries,
+      groups: SUBJECT_GROUPS,
     },
   });
 };
@@ -241,7 +242,7 @@ export const testAdapter: ServerAdapterType = {
     let response = await initializeApplication(adapter, {
       regions: [],
       countries: [],
-      tuteriaSubjects: subjectInfo.subjects,
+      tuteriaSubjects: SAMPLE_TUTERIA_SUBJECTS,
     });
     let foundSubject = {
       ...SAMPLE_TUTOR_SUBJECTS[0],
@@ -252,5 +253,8 @@ export const testAdapter: ServerAdapterType = {
   initializeApplication,
   authenticateUser: async ({ email, otp }) => {
     return await samplePromise({ email, otp });
+  },
+  createQuizFromSheet: async () => {
+    return await samplePromise({});
   },
 };
