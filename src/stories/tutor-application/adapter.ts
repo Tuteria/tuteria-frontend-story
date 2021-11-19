@@ -357,7 +357,6 @@ export const testAdapter: ServerAdapterType = {
           heading: "Test results verification",
           subHeading: "Verify your test results by uploading proof",
           depends: "modules",
-          options: EXAM_PREP_PREFERENCES.modules,
           name: "test_results_verification",
           type: "proof",
           secondary: "test_results",
