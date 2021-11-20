@@ -133,9 +133,18 @@ export const testAdapter: ServerAdapterType = {
   },
   updateTutorSubjectInfo: async (values, subject_id) => {
     console.log(values);
-    // return Promise.reject({})
-    clearSubjectDescription();
+    // return Promise.reject({ spellCheck: errors });
+    // clearSubjectDescription();
     return await samplePromise({ values, subject_id });
+  },
+  async checkSpellingAndGrammar(checks) {
+    console.log({ checks });
+    let errors = {};
+    checks.forEach((c) => {
+      errors[c.key] = "Spelling errors";
+    });
+    return await samplePromise({});
+    // return Promise.reject({ spellCheck: errors });
   },
   async saveSubjectImages(images) {
     let folder = "exhibitions";

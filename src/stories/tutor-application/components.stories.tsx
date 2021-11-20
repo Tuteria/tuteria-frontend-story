@@ -364,6 +364,7 @@ export const EditSubjectPage = () => {
       if (foundSubject) {
         store.initializeTutorData(result);
         subjectStore.initialize(foundSubject);
+        store.subject.setCurrentSubjectId(subjectStore.id);
         setLoading(false);
       }
     } catch (error) {
