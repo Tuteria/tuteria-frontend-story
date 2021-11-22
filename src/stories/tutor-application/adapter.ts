@@ -47,6 +47,13 @@ function loadExistingTutorInfo() {
     appData: { currentEditableForm: formIds[10] },
   };
 }
+
+const clearSubjectDescription = () => {
+  storage.clear("SUBJECT_DESCRIPTION");
+  storage.clear("TEACHING_STYLE");
+  storage.clear("TRACK_RECORD");
+};
+
 const initializeApplication = async (
   adapter: AdapterType,
   { regions, countries, tuteriaSubjects }
@@ -126,8 +133,45 @@ export const testAdapter: ServerAdapterType = {
   },
   updateTutorSubjectInfo: async (values, subject_id) => {
     console.log(values);
-    // return Promise.reject({})
+    // return Promise.reject({ spellCheck: errors });
+    // clearSubjectDescription();
     return await samplePromise({ values, subject_id });
+  },
+  async checkSpellingAndGrammar(checks) {
+    // {
+    //   "age": {
+    //     "spelling": [
+    //       "hass",
+    //       "equationss"
+    //     ],
+    //     "grammar": {
+    //       "ionization": "This sentence does not start with an uppercase letter."
+    //     },
+    //     "similarity": [
+    //       {
+    //         "time": 49,
+    //         "similarity": 0.9416,
+    //         "lang": "en",
+    //         "langConfidence": 1,
+    //         "timestamp": "2021-11-20T19:07:29.634"
+    //       },
+    //       {
+    //         "time": 45,
+    //         "similarity": 0.9416,
+    //         "lang": "en",
+    //         "langConfidence": 1,
+    //         "timestamp": "2021-11-20T19:07:29.634"
+    //       }
+    //     ]
+    //   }
+    // }
+    console.log({ checks });
+    let errors = {};
+    checks.forEach((c) => {
+      errors[c.key] = "Spelling errors";
+    });
+    // return await samplePromise({});
+    return Promise.reject({ spellCheck: errors });
   },
   async saveSubjectImages(images) {
     let folder = "exhibitions";
@@ -332,29 +376,31 @@ export const testAdapter: ServerAdapterType = {
           heading: "Purposes",
           subHeading: "For which purpose do you plan on taking the exam?",
           name: "purposes",
-          options: EXAM_PREP_PREFERENCES.purposes[subject.name],
+          options: EXAM_PREP_PREFERENCES.purposes.IELTS,
           type: "multiselect",
+          required: true,
         },
         {
           heading: "Modules",
           subHeading: "Select your modules",
           name: "modules",
-          options: EXAM_PREP_PREFERENCES.modules[subject.name],
+          options: EXAM_PREP_PREFERENCES.modules.IELTS,
           type: "multiselect",
+          required: true,
         },
         {
           heading: "Test Results",
           subHeading: "Have you taken the test?",
           name: "test_results",
           type: "conditional",
-          depends: "modules",
-          dependType: "input",
+          options: EXAM_PREP_PREFERENCES.modules.IELTS,
+          // depends: "modules",
+          // dependType: "input",
         },
         {
           heading: "Test results verification",
-          subHeading: "Verify your test results",
+          subHeading: "Verify your test results by uploading proof",
           depends: "modules",
-          options: EXAM_PREP_PREFERENCES.modules,
           name: "test_results_verification",
           type: "proof",
           secondary: "test_results",
@@ -454,5 +500,11 @@ export const testAdapter: ServerAdapterType = {
       ];
     }
     return [];
+  },
+  saveOnBlur(name, value) {
+    storage.set(name, value);
+  },
+  loadSubjectDescription(name) {
+    return storage.get(name, "");
   },
 };
