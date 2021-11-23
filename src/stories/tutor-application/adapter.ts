@@ -507,4 +507,7 @@ export const testAdapter: ServerAdapterType = {
   loadSubjectDescription(name) {
     return storage.get(name, "");
   },
+  getEarningPercentage() {
+    return 70;
+  },
 };
