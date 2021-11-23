@@ -510,4 +510,11 @@ export const testAdapter: ServerAdapterType = {
   getEarningPercentage() {
     return 70;
   },
+  getPriceSuggestion(subject: string) {
+    return {
+      minimum: "1750",
+      maximum: "3600",
+      recommended: "2750",
+    };
+  },
 };
