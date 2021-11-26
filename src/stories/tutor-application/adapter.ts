@@ -326,7 +326,7 @@ export const testAdapter: ServerAdapterType = {
         },
         {
           heading: "Exam preparation experience",
-          name: "exams_speciality",
+          name: "exam_speciality",
           subHeading: `Indicate the exams you have successfully prepared students for or skip this step if it doesn't apply to you.`,
           options: [
             {
