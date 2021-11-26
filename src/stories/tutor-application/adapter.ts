@@ -507,4 +507,14 @@ export const testAdapter: ServerAdapterType = {
   loadSubjectDescription(name) {
     return storage.get(name, "");
   },
+  getEarningPercentage() {
+    return 70;
+  },
+  getPriceSuggestion(subject: string) {
+    return {
+      minimum: "1750",
+      maximum: "3600",
+      recommended: "2750",
+    };
+  },
 };
