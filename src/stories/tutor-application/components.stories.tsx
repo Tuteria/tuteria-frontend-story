@@ -9,24 +9,35 @@ import {
 } from "@tuteria/shared-lib/src/components/OverlayRouter";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import allRegions from "@tuteria/shared-lib/src/data/regions.json";
+import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import {
+  EXAM_PREP_PREFERENCES,
+  sampleTutorInfo,
+  SAMPLE_JOB_LIST_DATA,
+  SAMPLE_QUESTION,
   SAMPLE_TUTERIA_SUBJECTS,
   SAMPLE_TUTOR_SUBJECTS2,
-  ACADEMIC_PREFERENCES,
-  EXAM_PREP_PREFERENCES,
-  TEACHING_PREFERENCES,
-  SAMPLE_QUESTION,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import {
   buildProfileInfo,
   initializeStore,
-  TutorSubject,
   SubjectStore,
+  TutorJobListStore,
+  TutorSubject,
 } from "@tuteria/shared-lib/src/stores";
+import { TutorPricingStore } from "@tuteria/shared-lib/src/stores/pricing";
 import { SUBJECT_EDIT_STEPS } from "@tuteria/shared-lib/src/stores/subject";
+import LoginModal from "@tuteria/shared-lib/src/tutor-application/Login/LoginModal";
+import JobList from "@tuteria/shared-lib/src/tutor-revamp/JobList";
+import TutorPricing from "@tuteria/shared-lib/src/tutor-revamp/Pricing";
+import QuestionStyle from "@tuteria/shared-lib/src/tutor-revamp/quizzes/Question";
 import QuizPage, {
   TuteriaQuizPage,
 } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/Quiz";
+import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
+import QuizStore, {
+  IQuizStore,
+} from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
 import ResultsPage from "@tuteria/shared-lib/src/tutor-revamp/Results";
 import ScheduleCard from "@tuteria/shared-lib/src/tutor-revamp/Schedule";
 import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
@@ -35,24 +46,16 @@ import SubjectAdditionPage, {
 } from "@tuteria/shared-lib/src/tutor-revamp/SubjectComponents";
 import { SubjectsCardMobile } from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditForm";
 import SubjectEditView from "@tuteria/shared-lib/src/tutor-revamp/SubjectEditView";
-import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
-import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity";
-import TutorPricing from "@tuteria/shared-lib/src/tutor-revamp/Pricing";
 import TeachingPreference, {
   MultiSelectCustomAccordion,
   SwitchInput,
 } from "@tuteria/shared-lib/src/tutor-revamp/TeachingPreference";
+import TutorProfile from "@tuteria/shared-lib/src/tutor-revamp/TutorPreview";
+import VerificationIdentity from "@tuteria/shared-lib/src/tutor-revamp/VerificationIdentity";
 import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUploader";
-import LoginModal from "@tuteria/shared-lib/src/tutor-application/Login/LoginModal";
-import { gradeQuiz } from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quiz-grader";
-import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
-import QuizStore, {
-  IQuizStore,
-} from "@tuteria/shared-lib/src/tutor-revamp/quizzes/quizStore";
-import { TutorPricingStore } from "@tuteria/shared-lib/src/stores/pricing";
 import React from "react";
+import { observer } from "mobx-react-lite";
 import { testAdapter } from "./adapter";
-import QuestionStyle from "@tuteria/shared-lib/src/tutor-revamp/quizzes/Question";
 
 export default {
   title: "Tutor Application/Components",
@@ -664,4 +667,50 @@ export const ImageOptions = () => {
       image={SAMPLE_QUESTION.figure}
     />
   );
+};
+
+const jobListStore = TutorJobListStore.create(
+  {
+    availability: {
+      availability: {
+        Monday: ["Morning", "Late afternoon"],
+        Wednesday: ["Evening", "Early evening"],
+      },
+      maxDays: 3,
+      maxHours: 1,
+      maxStudents: 3,
+    },
+    locationInfo: {
+      country: "Nigeria",
+      countries: allCountries,
+      state: "Lagos",
+      region: "Agege",
+      regions: allRegions,
+    },
+  },
+  {}
+);
+
+const JobListStory = observer(({ jobListStore }: any) => {
+  React.useEffect(() => {
+    jobListStore.bulkMapToStore(SAMPLE_JOB_LIST_DATA);
+  }, []);
+
+  return (
+    <OverlayRouter>
+      <Box>
+        <JobList
+          agent={{}}
+          host=""
+          store={jobListStore}
+          bookings={jobListStore.bookings}
+          tutorInfo={sampleTutorInfo}
+        />
+      </Box>
+    </OverlayRouter>
+  );
+});
+
+export const JobListPage = () => {
+  return <JobListStory jobListStore={jobListStore} />;
 };
