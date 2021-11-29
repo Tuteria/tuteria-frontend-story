@@ -3,6 +3,7 @@ import ClientPages from "@tuteria/shared-lib/src/client-pages/root";
 import { OverlayRouter } from "@tuteria/shared-lib/src/components/OverlayRouter";
 import { initializeStore } from "@tuteria/shared-lib/src/stores";
 import { CLIENT_PAGES } from "@tuteria/shared-lib/src/stores/client-types";
+import VerificationPageComponent from "@tuteria/shared-lib/src/client-pages/verification";
 import "katex/dist/katex.min.css";
 import React from "react";
 import "react-phone-input-2/lib/style.css";
@@ -48,6 +49,15 @@ export const LocationInfoPage = () => {
       page={CLIENT_PAGES.LOCATION_INFO}
       store={store}
       initialData={initialData[CLIENT_PAGES.LOCATION_INFO]}
+    />
+  );
+};
+export const VerficationPage = () => {
+  return (
+    <ClientPages
+      page={CLIENT_PAGES.VERIFICATION}
+      store={store}
+      initialData={initialData[CLIENT_PAGES.VERIFICATION] || {}}
     />
   );
 };
