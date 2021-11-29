@@ -141,21 +141,23 @@ export const testAdapter: ServerAdapterType = {
     /**
      * checks = [{key:"description","value":"Thi is aia amaple"}]
      */
-    // {
-    //   "description": {
-    //     "grammar": {
-    //       "ionization": "This sentence does not start with an uppercase letter."
-    //     },
-    //     "similarSubjects": ["Physics"]
-    //   }
-    // }
     console.log({ checks });
     let errors = {};
     checks.forEach((c) => {
-      errors[c.key] = "Spelling errors";
+      errors[c.key] = "There are some errors that need to be fixed.";
     });
-    // return await samplePromise({});
-    return Promise.reject({ spellCheck: errors, errors });
+    return Promise.reject({
+      spellCheck: errors,
+      errors: {
+        description: {
+          grammar: {
+            ionization:
+              "This sentence does not start with an uppercase letter.",
+          },
+          similarSubjects: ["Physics"],
+        },
+      },
+    });
   },
   async saveSubjectImages(images) {
     let folder = "exhibitions";

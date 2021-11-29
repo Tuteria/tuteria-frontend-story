@@ -6,7 +6,7 @@ import { CLIENT_PAGES } from "@tuteria/shared-lib/src/stores/client-types";
 import "katex/dist/katex.min.css";
 import React from "react";
 import "react-phone-input-2/lib/style.css";
-import { subjectPageData, testAdapter } from "../adapter";
+import { subjectPageData, testAdapter, initialData } from "../adapter";
 
 export default {
   title: "Existing Tutors/Pages",
@@ -29,6 +29,16 @@ export const SubjectsPage = () => {
       page={CLIENT_PAGES.SUBJECTS}
       store={store}
       initialData={subjectPageData}
+    />
+  );
+};
+
+export const PersonalInfoPage = () => {
+  return (
+    <ClientPages
+      page={CLIENT_PAGES.PROFILE_EDIT}
+      store={store}
+      initialData={initialData[CLIENT_PAGES.PROFILE_EDIT]}
     />
   );
 };

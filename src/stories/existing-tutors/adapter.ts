@@ -13,6 +13,10 @@ import {
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import storage from "@tuteria/shared-lib/src/local-storage";
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
+import { CLIENT_PAGES } from "@tuteria/shared-lib/src/stores/client-types";
+import educationWorkData from "@tuteria/shared-lib/src/data/educationData.json";
+import allRegions from "@tuteria/shared-lib/src/data/regions.json";
+import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 
 function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -29,6 +33,25 @@ export const subjectPageData = {
     tuteriaSubjects: SAMPLE_TUTERIA_SUBJECTS,
     supportedCountries,
     groups: SUBJECT_GROUPS,
+  },
+};
+
+export const initialData = {
+  [CLIENT_PAGES.SUBJECTS]: subjectPageData,
+  [CLIENT_PAGES.PROFILE_EDIT]: {
+    staticData: {
+      regions: allRegions,
+      countries: allCountries,
+      supportedCountries,
+      educationData: {
+        degree_data: educationWorkData.degree_data,
+        grade_data: educationWorkData.grade_data,
+        specialities: educationWorkData.specialities,
+        sources: educationWorkData.sources,
+        languages: educationWorkData.languages,
+      },
+    },
+    tutorInfo: SAMPLE_TUTOR_DATA,
   },
 };
 
