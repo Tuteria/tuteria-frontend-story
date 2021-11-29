@@ -38,7 +38,18 @@ export const subjectPageData = {
 
 export const initialData = {
   [CLIENT_PAGES.SUBJECTS]: subjectPageData,
-  [CLIENT_PAGES.PROFILE_EDIT]: {
+  [CLIENT_PAGES.PERSONAL_INFO]: {
+    staticData: {
+      regions: allRegions,
+      countries: allCountries,
+      educationData: {
+        sources: educationWorkData.sources,
+        languages: educationWorkData.languages,
+      },
+    },
+    tutorInfo: SAMPLE_TUTOR_DATA,
+  },
+  [CLIENT_PAGES.LOCATION_INFO]: {
     staticData: {
       regions: allRegions,
       countries: allCountries,
@@ -47,8 +58,6 @@ export const initialData = {
         degree_data: educationWorkData.degree_data,
         grade_data: educationWorkData.grade_data,
         specialities: educationWorkData.specialities,
-        sources: educationWorkData.sources,
-        languages: educationWorkData.languages,
       },
     },
     tutorInfo: SAMPLE_TUTOR_DATA,

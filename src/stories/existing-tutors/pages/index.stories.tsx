@@ -36,9 +36,18 @@ export const SubjectsPage = () => {
 export const PersonalInfoPage = () => {
   return (
     <ClientPages
-      page={CLIENT_PAGES.PROFILE_EDIT}
+      page={CLIENT_PAGES.PERSONAL_INFO}
       store={store}
-      initialData={initialData[CLIENT_PAGES.PROFILE_EDIT]}
+      initialData={initialData[CLIENT_PAGES.PERSONAL_INFO]}
+    />
+  );
+};
+export const LocationInfoPage = () => {
+  return (
+    <ClientPages
+      page={CLIENT_PAGES.LOCATION_INFO}
+      store={store}
+      initialData={initialData[CLIENT_PAGES.LOCATION_INFO]}
     />
   );
 };
