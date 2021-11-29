@@ -49,6 +49,12 @@ export const testAdapter: any = {
   getTuteriaSubjects: () => {
     return SAMPLE_TUTERIA_SUBJECTS;
   },
+  loadExistingTutorInfo() {
+    return {
+      ...SAMPLE_TUTOR_DATA,
+    };
+  },
+
   saveTutorSubjects: async (subjects) => {
     let existingSubjects: any = SAMPLE_TUTOR_SUBJECTS.map((tx) => {
       return {
