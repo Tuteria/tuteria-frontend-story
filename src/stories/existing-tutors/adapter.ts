@@ -75,6 +75,9 @@ export const initialData = {
     },
     tutorInfo: SAMPLE_TUTOR_DATA,
   },
+  [CLIENT_PAGES.WORK_HISTORY]: {
+    tutorInfo: SAMPLE_TUTOR_DATA,
+  },
   [CLIENT_PAGES.SPECIAL_NEEDS]: {
     tutorInfo: SAMPLE_TUTOR_DATA,
   },
