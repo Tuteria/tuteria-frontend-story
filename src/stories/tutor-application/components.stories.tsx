@@ -12,12 +12,14 @@ import allRegions from "@tuteria/shared-lib/src/data/regions.json";
 import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import {
   EXAM_PREP_PREFERENCES,
-  sampleTutorInfo,
-  SAMPLE_JOB_LIST_DATA,
   SAMPLE_QUESTION,
   SAMPLE_TUTERIA_SUBJECTS,
   SAMPLE_TUTOR_SUBJECTS2,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
+import {
+  sampleTutorInfo,
+  SAMPLE_JOB_LIST_DATA,
+} from "@tuteria/shared-lib/src/data/tutor-application/sample_job_data";
 import {
   buildProfileInfo,
   initializeStore,
@@ -700,7 +702,7 @@ const JobListStory = observer(({ jobListStore }: any) => {
     <OverlayRouter>
       <Box>
         <JobList
-          agent={{}}
+          // agent={{}}
           host=""
           store={jobListStore}
           bookings={jobListStore.bookings}
