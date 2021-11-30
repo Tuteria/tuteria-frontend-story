@@ -62,6 +62,9 @@ export const initialData = {
     },
     tutorInfo: SAMPLE_TUTOR_DATA,
   },
+  [CLIENT_PAGES.VERIFICATION]: {
+    tutorInfo: SAMPLE_TUTOR_DATA,
+  },
 };
 
 export const testAdapter: any = {

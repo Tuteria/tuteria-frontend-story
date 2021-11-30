@@ -3,11 +3,10 @@ import ClientPages from "@tuteria/shared-lib/src/client-pages/root";
 import { OverlayRouter } from "@tuteria/shared-lib/src/components/OverlayRouter";
 import { initializeStore } from "@tuteria/shared-lib/src/stores";
 import { CLIENT_PAGES } from "@tuteria/shared-lib/src/stores/client-types";
-import VerificationPageComponent from "@tuteria/shared-lib/src/client-pages/verification";
 import "katex/dist/katex.min.css";
 import React from "react";
 import "react-phone-input-2/lib/style.css";
-import { subjectPageData, testAdapter, initialData } from "../adapter";
+import { initialData, subjectPageData, testAdapter } from "../adapter";
 
 export default {
   title: "Existing Tutors/Pages",
