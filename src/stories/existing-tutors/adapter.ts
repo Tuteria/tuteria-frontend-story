@@ -62,6 +62,25 @@ export const initialData = {
     },
     tutorInfo: SAMPLE_TUTOR_DATA,
   },
+  [CLIENT_PAGES.EDUCATION_HISTORY]: {
+    staticData: {
+      regions: allRegions,
+      countries: allCountries,
+      supportedCountries,
+      educationData: {
+        degree_data: educationWorkData.degree_data,
+        grade_data: educationWorkData.grade_data,
+        specialities: educationWorkData.specialities,
+      },
+    },
+    tutorInfo: SAMPLE_TUTOR_DATA,
+  },
+  [CLIENT_PAGES.SPECIAL_NEEDS]: {
+    tutorInfo: SAMPLE_TUTOR_DATA,
+  },
+  [CLIENT_PAGES.PROFILE_PHOTO]: {
+    tutorInfo: SAMPLE_TUTOR_DATA,
+  },
 };
 
 export const testAdapter: any = {
