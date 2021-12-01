@@ -60,3 +60,43 @@ export const VerficationPage = () => {
     />
   );
 };
+
+export const EducationHistoryPage = () => {
+  return (
+    <ClientPages
+      page={CLIENT_PAGES.EDUCATION_HISTORY}
+      store={store}
+      initialData={initialData[CLIENT_PAGES.EDUCATION_HISTORY] || {}}
+    />
+  );
+};
+
+export const WorkHistoryPage = () => {
+  return (
+    <ClientPages
+      page={CLIENT_PAGES.WORK_HISTORY}
+      store={store}
+      initialData={initialData[CLIENT_PAGES.WORK_HISTORY] || {}}
+    />
+  );
+};
+
+export const SpecialNeedsPage = () => {
+  return (
+    <ClientPages
+      page={CLIENT_PAGES.SPECIAL_NEEDS}
+      store={store}
+      initialData={initialData[CLIENT_PAGES.SPECIAL_NEEDS] || {}}
+    />
+  );
+};
+
+export const ProfilePhotoPage = () => {
+  return (
+    <ClientPages
+      page={CLIENT_PAGES.PROFILE_PHOTO}
+      store={store}
+      initialData={initialData[CLIENT_PAGES.PROFILE_PHOTO] || {}}
+    />
+  );
+};
