@@ -16,3 +16,9 @@
 [submodule "packages/tutor-client-lib"]
 	path = packages/tutor-client-lib
 	url = git@gitlab.com:tuteria/v2/tuteria-client-library.git
+[submodule "packages/tutor-app"]
+	path = packages/tutor-app
+	url = git@gitlab.com:tuteria/v2/tutor-frontend-app.git
+[submodule "packages/mobile-lib"]
+	path = packages/mobile-lib
+	url = git@gitlab.com:tuteria/mobile-lib.git

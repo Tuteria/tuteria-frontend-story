@@ -44,7 +44,7 @@ const formIds = {
 function loadExistingTutorInfo() {
   return {
     ...SAMPLE_TUTOR_DATA,
-    appData: { currentEditableForm: formIds[10] },
+    appData: { currentEditableForm: formIds[4] },
   };
 }
 
@@ -137,41 +137,27 @@ export const testAdapter: ServerAdapterType = {
     // clearSubjectDescription();
     return await samplePromise({ values, subject_id });
   },
-  async checkSpellingAndGrammar(checks) {
-    // {
-    //   "age": {
-    //     "spelling": [
-    //       "hass",
-    //       "equationss"
-    //     ],
-    //     "grammar": {
-    //       "ionization": "This sentence does not start with an uppercase letter."
-    //     },
-    //     "similarity": [
-    //       {
-    //         "time": 49,
-    //         "similarity": 0.9416,
-    //         "lang": "en",
-    //         "langConfidence": 1,
-    //         "timestamp": "2021-11-20T19:07:29.634"
-    //       },
-    //       {
-    //         "time": 45,
-    //         "similarity": 0.9416,
-    //         "lang": "en",
-    //         "langConfidence": 1,
-    //         "timestamp": "2021-11-20T19:07:29.634"
-    //       }
-    //     ]
-    //   }
-    // }
+  async checkSpellingAndGrammar(checks: any[]) {
+    /**
+     * checks = [{key:"description","value":"Thi is aia amaple"}]
+     */
     console.log({ checks });
     let errors = {};
     checks.forEach((c) => {
-      errors[c.key] = "Spelling errors";
+      errors[c.key] = "There are some errors that need to be fixed.";
     });
-    // return await samplePromise({});
-    return Promise.reject({ spellCheck: errors });
+    return Promise.reject({
+      spellCheck: errors,
+      errors: {
+        description: {
+          grammar: {
+            ionization:
+              "This sentence does not start with an uppercase letter.",
+          },
+          similarSubjects: ["Physics"],
+        },
+      },
+    });
   },
   async saveSubjectImages(images) {
     let folder = "exhibitions";
@@ -517,4 +503,5 @@ export const testAdapter: ServerAdapterType = {
       recommended: "2750",
     };
   },
+  getNLPProcessing() {},
 };
