@@ -62,6 +62,9 @@ export const initialData = {
     },
     tutorInfo: SAMPLE_TUTOR_DATA,
   },
+  [CLIENT_PAGES.VERIFICATION]: {
+    tutorInfo: SAMPLE_TUTOR_DATA,
+  },
   [CLIENT_PAGES.EDUCATION_HISTORY]: {
     staticData: {
       regions: allRegions,
@@ -81,12 +84,7 @@ export const initialData = {
   [CLIENT_PAGES.SPECIAL_NEEDS]: {
     tutorInfo: SAMPLE_TUTOR_DATA,
   },
-  [CLIENT_PAGES.PROFILE_PHOTO]: {
-    tutorInfo: SAMPLE_TUTOR_DATA,
-  },
-  [CLIENT_PAGES.VERIFICATION]: {
-    tutorInfo: SAMPLE_TUTOR_DATA,
-  },
+  [CLIENT_PAGES.PROFILE_PHOTO]: {},
 };
 
 export const testAdapter: any = {
