@@ -69,22 +69,26 @@ export const initialData = {
     staticData: {
       regions: allRegions,
       countries: allCountries,
-      supportedCountries,
       educationData: {
         degree_data: educationWorkData.degree_data,
         grade_data: educationWorkData.grade_data,
         specialities: educationWorkData.specialities,
       },
     },
-    tutorInfo: SAMPLE_TUTOR_DATA,
+    tutorInfo: { educationWorkHistory: SAMPLE_TUTOR_DATA.educationWorkHistory },
   },
   [CLIENT_PAGES.WORK_HISTORY]: {
-    tutorInfo: SAMPLE_TUTOR_DATA,
+    tutorInfo: { educationWorkHistory: SAMPLE_TUTOR_DATA.educationWorkHistory },
   },
-  [CLIENT_PAGES.SPECIAL_NEEDS]: {
-    tutorInfo: SAMPLE_TUTOR_DATA,
+  [CLIENT_PAGES.TEACHING_PROFILE]: {
+    tutorInfo: { teachingProfile: SAMPLE_TUTOR_DATA.teachingProfile },
   },
-  [CLIENT_PAGES.PROFILE_PHOTO]: {},
+  [CLIENT_PAGES.PROFILE_PHOTO]: {
+    tutorInfo: { identity: SAMPLE_TUTOR_DATA.identity },
+  },
+  [CLIENT_PAGES.SCHEDULE_INFO]: {
+    tutorInfo: { availability: SAMPLE_TUTOR_DATA.availability },
+  },
 };
 
 export const testAdapter: any = {

@@ -81,12 +81,12 @@ export const WorkHistoryPage = () => {
   );
 };
 
-export const SpecialNeedsPage = () => {
+export const TeachingProfilePage = () => {
   return (
     <ClientPages
-      page={CLIENT_PAGES.SPECIAL_NEEDS}
+      page={CLIENT_PAGES.TEACHING_PROFILE}
       store={store}
-      initialData={initialData[CLIENT_PAGES.SPECIAL_NEEDS] || {}}
+      initialData={initialData[CLIENT_PAGES.TEACHING_PROFILE] || {}}
     />
   );
 };
@@ -97,6 +97,16 @@ export const ProfilePhotoPage = () => {
       page={CLIENT_PAGES.PROFILE_PHOTO}
       store={store}
       initialData={initialData[CLIENT_PAGES.PROFILE_PHOTO] || {}}
+    />
+  );
+};
+
+export const SchedulePage = () => {
+  return (
+    <ClientPages
+      page={CLIENT_PAGES.SCHEDULE_INFO}
+      store={store}
+      initialData={initialData[CLIENT_PAGES.SCHEDULE_INFO] || {}}
     />
   );
 };
