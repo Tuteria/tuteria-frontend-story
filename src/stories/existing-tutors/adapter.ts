@@ -84,6 +84,9 @@ export const initialData = {
   [CLIENT_PAGES.PROFILE_PHOTO]: {
     tutorInfo: SAMPLE_TUTOR_DATA,
   },
+  [CLIENT_PAGES.VERIFICATION]: {
+    tutorInfo: SAMPLE_TUTOR_DATA,
+  },
 };
 
 export const testAdapter: any = {
