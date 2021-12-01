@@ -11,6 +11,7 @@ import {
   SUBJECT_GROUPS,
   TEACHING_PREFERENCES,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
+import { SAMPLE_JOB_LIST_DATA } from "@tuteria/shared-lib/src/data/tutor-application/sample_job_data";
 import storage from "@tuteria/shared-lib/src/local-storage";
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
 import { CLIENT_PAGES } from "@tuteria/shared-lib/src/stores/client-types";
@@ -37,6 +38,7 @@ export const subjectPageData = {
 };
 
 export const initialData = {
+  [CLIENT_PAGES.JOBS]: SAMPLE_JOB_LIST_DATA,
   [CLIENT_PAGES.SUBJECTS]: subjectPageData,
   [CLIENT_PAGES.PERSONAL_INFO]: {
     staticData: {

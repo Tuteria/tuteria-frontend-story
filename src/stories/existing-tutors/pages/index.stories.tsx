@@ -110,3 +110,15 @@ export const SchedulePage = () => {
     />
   );
 };
+
+export const JobsPage = () => {
+  return (
+    <ClientPages
+      page={CLIENT_PAGES.JOBS}
+      store={store}
+      initialData={initialData[CLIENT_PAGES.JOBS]}
+      host=""
+      agent={{}}
+    />
+  );
+};

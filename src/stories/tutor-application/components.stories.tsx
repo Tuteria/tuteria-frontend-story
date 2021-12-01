@@ -671,27 +671,7 @@ export const ImageOptions = () => {
   );
 };
 
-const jobListStore = TutorJobListStore.create(
-  {
-    availability: {
-      availability: {
-        Monday: ["Morning", "Late afternoon"],
-        Wednesday: ["Evening", "Early evening"],
-      },
-      maxDays: 3,
-      maxHours: 1,
-      maxStudents: 3,
-    },
-    locationInfo: {
-      country: "Nigeria",
-      countries: allCountries,
-      state: "Lagos",
-      region: "Agege",
-      regions: allRegions,
-    },
-  },
-  {}
-);
+const jobListStore = TutorJobListStore.create({}, {});
 
 const JobListStory = observer(({ jobListStore }: any) => {
   React.useEffect(() => {
