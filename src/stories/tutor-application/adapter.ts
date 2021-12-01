@@ -504,4 +504,13 @@ export const testAdapter: ServerAdapterType = {
     };
   },
   getNLPProcessing() {},
+  //jobs endpoints
+  async updateTutorResponse(payload, requestSlug, tutorSlug, agent) {
+    console.log({ payload, requestSlug, tutorSlug, agent });
+    return await samplePromise({});
+  },
+  async bookLessons(requestSlug, sessions) {
+    console.log({ requestSlug, sessions });
+    return await samplePromise({});
+  },
 };
