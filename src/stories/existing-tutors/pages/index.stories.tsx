@@ -118,7 +118,7 @@ export const JobsPage = () => {
       store={store}
       initialData={initialData[CLIENT_PAGES.JOBS]}
       host=""
-      agent={{}}
+      agent={undefined}
     />
   );
 };
