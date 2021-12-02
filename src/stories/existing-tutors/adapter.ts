@@ -30,7 +30,10 @@ export const subjectPageData = {
 };
 
 export const initialData = {
-  [CLIENT_PAGES.JOBS]: SAMPLE_JOB_LIST_DATA,
+  [CLIENT_PAGES.JOBS]: {
+    tutorInfo: { personalInfo: SAMPLE_TUTOR_DATA.personalInfo },
+    jobs: SAMPLE_JOB_LIST_DATA,
+  },
   [CLIENT_PAGES.SUBJECTS]: subjectPageData,
   [CLIENT_PAGES.PERSONAL_INFO]: {
     staticData: {
@@ -57,7 +60,13 @@ export const initialData = {
     tutorInfo: SAMPLE_TUTOR_DATA,
   },
   [CLIENT_PAGES.VERIFICATION]: {
-    tutorInfo: SAMPLE_TUTOR_DATA,
+    tutorInfo: { identity: SAMPLE_TUTOR_DATA.identity },
+  },
+  [CLIENT_PAGES.GUARANTOR_INFO]: {
+    tutorInfo: { educationWorkHistory: SAMPLE_TUTOR_DATA.educationWorkHistory },
+  },
+  [CLIENT_PAGES.UPLOAD_PROOF]: {
+    tutorInfo: { educationWorkHistory: SAMPLE_TUTOR_DATA.educationWorkHistory },
   },
   [CLIENT_PAGES.EDUCATION_HISTORY]: {
     staticData: {
