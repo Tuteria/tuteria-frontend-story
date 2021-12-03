@@ -290,7 +290,12 @@ export const testAdapter: ServerAdapterType = {
   createQuizFromSheet: async () => {
     return await samplePromise({});
   },
-  buildPreferences(subject: { category?: string; name?: string }) {
+  buildPreferences(subject: {
+    category?: string;
+    subcategory?: string[];
+    name?: string;
+  }) {
+    const higherSubcategories = ["Upper Primary", ""];
     if (subject.category === "Academics") {
       return [
         {
@@ -302,9 +307,9 @@ export const testAdapter: ServerAdapterType = {
           required: true,
         },
         {
-          heading: "Curriculums",
+          heading: "School curriculums",
           subHeading:
-            "Select the curriculum you're experienced in or skip this step if you don't teach academics.",
+            "Please select the curriculum(s) you're experienced in for teaching this subject",
           options: ACADEMIC_PREFERENCES.curriculums,
           name: "curriculums",
           type: "multiselect",
@@ -313,7 +318,8 @@ export const testAdapter: ServerAdapterType = {
         {
           heading: "Exam preparation experience",
           name: "exam_speciality",
-          subHeading: `Indicate the exams you have successfully prepared students for or skip this step if it doesn't apply to you.`,
+          subHeading:
+            "Indicate the exams you have successfully prepared students for or skip this step if it doesn't apply to you.",
           options: [
             {
               heading: "Upper Primary Exams",
@@ -349,9 +355,9 @@ export const testAdapter: ServerAdapterType = {
           complex: true,
         },
         {
-          heading: "Schools taught",
+          heading: "School entrance exams",
           name: "schools_taught",
-          subHeading: "Which schools have you taught?",
+          subHeading: `If you've prepared students in ${subject.name} for entrance into secondary or tertiary schools, please list the schools here separated by commas.`,
           type: "input",
         },
       ];
@@ -442,46 +448,52 @@ export const testAdapter: ServerAdapterType = {
     if (subject.category === "Music") {
       return [
         {
-          heading: "What class groups do you teach?",
-          subHeading: "Select the main age and class of learners you teach.",
+          heading: "Age or class group",
+          subHeading:
+            "What ages or class groups do you teach for this subject? Select all that apply",
           options: TEACHING_PREFERENCES.classes,
           name: "classes",
           type: "multiselect",
         },
         {
-          heading: "Levels",
-          subHeading: "Select the levels you teach.",
+          heading: "Proficiency level",
+          subHeading:
+            "What level of students are your lessons best suited for?",
           options: TEACHING_PREFERENCES.levels,
           name: "levels",
           type: "multiselect",
         },
         {
-          heading: "Exam",
-          subHeading: "Which exams will you offer?",
+          heading: "Music exam preparation",
+          subHeading:
+            "If you have passed or prepared students for any of these exams, please select them",
           options: TEACHING_PREFERENCES.exams,
           name: "exam",
           type: "multiselect",
         },
         {
-          heading: "Instrument Ownership",
-          subHeading: "Do you have a personal instrument",
+          heading: "Areas of interest",
+          subHeading:
+            "Which of these areas of interests do your lessons cover? Select all that apply.",
+          options: TEACHING_PREFERENCES.instrument_types,
+          name: "instrument-type",
+          type: "multiselect",
+        },
+        {
+          heading: "Musical instruments",
+          subHeading:
+            "Do you personally own the relevant instrument(s) needed to teach this subject?",
           name: "instrument",
           type: "radio",
           options: ["Yes", "No"],
         },
         {
-          heading: "Studio Access",
-          subHeading: "Do you have access to a studio",
+          heading: "Musical studio",
+          subHeading:
+            "Do you have access to a studio that can be used for lessons? If yes, ensure to upload images under the Subject Photos section",
           name: "studio",
           type: "radio",
           options: ["Yes", "No"],
-        },
-        {
-          heading: "Instrument Type",
-          subHeading: "What is the type of instrument you use?",
-          options: TEACHING_PREFERENCES.instrument_types,
-          name: "instrument-type",
-          type: "multiselect",
         },
       ];
     }
