@@ -682,7 +682,7 @@ const JobListStory = observer(({ jobListStore }: any) => {
     <OverlayRouter>
       <Box>
         <JobList
-          // agent={{}}
+          agent={undefined}
           host=""
           store={jobListStore}
           bookings={jobListStore.bookings}
