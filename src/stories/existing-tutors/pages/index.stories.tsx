@@ -51,15 +51,6 @@ export const LocationInfoPage = () => {
     />
   );
 };
-export const VerficationPage = () => {
-  return (
-    <ClientPages
-      page={CLIENT_PAGES.VERIFICATION}
-      store={store}
-      initialData={initialData[CLIENT_PAGES.VERIFICATION] || {}}
-    />
-  );
-};
 
 export const EducationHistoryPage = () => {
   return (
