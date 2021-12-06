@@ -22,3 +22,6 @@
 [submodule "packages/mobile-lib"]
 	path = packages/mobile-lib
 	url = git@gitlab.com:tuteria/mobile-lib.git
+[submodule "packages/tuteria-cdn"]
+	path = packages/tuteria-cdn
+	url = git@gitlab.com:tuteria/v2/cdn.git
