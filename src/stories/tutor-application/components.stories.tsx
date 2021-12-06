@@ -539,7 +539,10 @@ export const Pricing = () => {
 };
 
 export const AcademicPreference = () => {
-  let preferences = testAdapter.buildPreferences({ category: "Academics" });
+  let preferences = testAdapter.buildPreferences({
+    name: "Phonics",
+    category: "Academics",
+  });
 
   return (
     <TeachingPreference

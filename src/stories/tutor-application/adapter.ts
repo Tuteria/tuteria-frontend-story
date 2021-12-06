@@ -1,3 +1,4 @@
+import { Description } from "./../pages/components/Application/CardWithUserDetails";
 import {
   AdapterType,
   ServerAdapterType,
@@ -145,7 +146,7 @@ export const testAdapter: ServerAdapterType = {
     console.log({ checks });
     let errors = {};
     checks.forEach((c) => {
-      errors[c.key] = "There are some errors that need to be fixed.";
+      errors[c.key] = "Please click below to fix the errors";
     });
     return Promise.reject({
       spellCheck: errors,
@@ -154,8 +155,25 @@ export const testAdapter: ServerAdapterType = {
           grammar: {
             ionization:
               "This sentence does not start with an uppercase letter.",
+            you: "This should have a comma.",
           },
-          similarSubjects: ["Physics"],
+          similarSubjects: ["Physics", "General Mathematics"],
+        },
+        teachingStyle: {
+          grammar: {
+            ionization:
+              "This sentence does not start with an uppercase letter.",
+            you: "This should have a comma.",
+          },
+          similarSubjects: ["Physics", "General Mathematics"],
+        },
+        trackRecords: {
+          grammar: {
+            ionization:
+              "This sentence does not start with an uppercase letter.",
+            you: "This should have a comma.",
+          },
+          similarSubjects: ["Physics", "General Mathematics"],
         },
       },
     });
@@ -292,7 +310,7 @@ export const testAdapter: ServerAdapterType = {
     return await samplePromise({});
   },
   buildPreferences(subject: { category?: string; name?: string }) {
-    let uu = BUILD_PREFERENCES[subject.category];
+    let uu = BUILD_PREFERENCES(subject)[subject.category];
     return uu ? uu : [];
   },
   saveOnBlur(name, value) {
