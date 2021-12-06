@@ -539,7 +539,10 @@ export const Pricing = () => {
 };
 
 export const AcademicPreference = () => {
-  let preferences = testAdapter.buildPreferences({ category: "Academics" });
+  let preferences = testAdapter.buildPreferences({
+    name: "Phonics",
+    category: "Academics",
+  });
 
   return (
     <TeachingPreference
@@ -673,26 +676,36 @@ export const ImageOptions = () => {
 
 const jobListStore = TutorJobListStore.create({}, {});
 
-const JobListStory = observer(({ jobListStore }: any) => {
-  React.useEffect(() => {
-    jobListStore.bulkMapToStore(SAMPLE_JOB_LIST_DATA);
-  }, []);
+const JobListStory = observer(
+  ({ jobListStore, booking_key = "bookings" }: any) => {
+    React.useEffect(() => {
+      let dataset = SAMPLE_JOB_LIST_DATA;
+      if (booking_key === "requests") {
+        dataset = [SAMPLE_JOB_LIST_DATA[0]];
+      }
+      jobListStore.bulkMapToStore(dataset);
+    }, []);
 
-  return (
-    <OverlayRouter>
-      <Box>
-        <JobList
-          agent={undefined}
-          host=""
-          store={jobListStore}
-          bookings={jobListStore.bookings}
-          tutorInfo={sampleTutorInfo}
-        />
-      </Box>
-    </OverlayRouter>
-  );
-});
+    return (
+      <OverlayRouter>
+        <Box>
+          <JobList
+            agent={undefined}
+            host=""
+            store={jobListStore}
+            bookings={jobListStore[booking_key]}
+            tutorInfo={sampleTutorInfo}
+          />
+        </Box>
+      </OverlayRouter>
+    );
+  }
+);
 
 export const JobListPage = () => {
   return <JobListStory jobListStore={jobListStore} />;
+};
+
+export const JobNoFilterPage = () => {
+  return <JobListStory jobListStore={jobListStore} booking_key="requests" />;
 };
