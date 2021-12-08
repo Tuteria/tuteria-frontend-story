@@ -46,7 +46,7 @@ const formIds = {
 function loadExistingTutorInfo() {
   return {
     ...SAMPLE_TUTOR_DATA,
-    appData: { currentEditableForm: formIds[4] },
+    appData: { currentEditableForm: formIds[1] },
   };
 }
 
@@ -97,6 +97,10 @@ export const testAdapter: ServerAdapterType = {
   },
   deleteSubject: async (id) => {
     return await samplePromise(id);
+  },
+  deleteBulkSubjects: async (ids, status) => {
+    console.log(ids, status);
+    return await samplePromise({ ids, status });
   },
   saveTutorInfo: async (data: any) => {
     return await samplePromise("tutorToken");
