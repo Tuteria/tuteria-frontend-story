@@ -695,6 +695,7 @@ const JobListStory = observer(
             host=""
             store={jobListStore}
             bookings={jobListStore[booking_key]}
+            displayFilter={booking_key === "bookings"}
             tutorInfo={sampleTutorInfo}
           />
         </Box>
