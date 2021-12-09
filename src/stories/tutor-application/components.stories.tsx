@@ -31,6 +31,7 @@ import { TutorPricingStore } from "@tuteria/shared-lib/src/stores/pricing";
 import { SUBJECT_EDIT_STEPS } from "@tuteria/shared-lib/src/stores/subject";
 import LoginModal from "@tuteria/shared-lib/src/tutor-application/Login/LoginModal";
 import JobList from "@tuteria/shared-lib/src/tutor-revamp/JobList";
+import JobSummary from "@tuteria/shared-lib/src/tutor-revamp/JobSummary";
 import TutorPricing from "@tuteria/shared-lib/src/tutor-revamp/Pricing";
 import QuestionStyle from "@tuteria/shared-lib/src/tutor-revamp/quizzes/Question";
 import QuizPage, {
@@ -708,4 +709,12 @@ export const JobListPage = () => {
 
 export const JobNoFilterPage = () => {
   return <JobListStory jobListStore={jobListStore} booking_key="requests" />;
+};
+
+export const JobSummaryStory = () => {
+  return (
+    <Box>
+      <JobSummary />
+    </Box>
+  );
 };
