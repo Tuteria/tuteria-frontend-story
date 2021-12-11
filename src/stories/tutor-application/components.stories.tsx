@@ -678,11 +678,13 @@ export const ImageOptions = () => {
 const jobListStore = TutorJobListStore.create({}, {});
 
 const JobListStory = observer(
-  ({ jobListStore, booking_key = "bookings" }: any) => {
+  ({ jobListStore, booking_key = "bookings", displayFilter = true }: any) => {
     React.useEffect(() => {
       let dataset = SAMPLE_JOB_LIST_DATA;
       if (booking_key === "requests") {
-        dataset = [SAMPLE_JOB_LIST_DATA[0]];
+        if (!displayFilter) {
+          dataset = [SAMPLE_JOB_LIST_DATA[0]];
+        }
       }
       jobListStore.bulkMapToStore(dataset);
     }, []);
@@ -695,7 +697,7 @@ const JobListStory = observer(
             host=""
             store={jobListStore}
             bookings={jobListStore[booking_key]}
-            displayFilter={booking_key === "bookings"}
+            displayFilter={displayFilter}
             tutorInfo={sampleTutorInfo}
             onNavigate={() =>
               linkTo("Tutor Application/Components", "Job No Filter Page")()
@@ -711,8 +713,18 @@ export const JobListPage = () => {
   return <JobListStory jobListStore={jobListStore} />;
 };
 
+export const JobListPage2 = () => {
+  return <JobListStory booking_type="requests" jobListStore={jobListStore} />;
+};
+
 export const JobNoFilterPage = () => {
-  return <JobListStory jobListStore={jobListStore} booking_key="requests" />;
+  return (
+    <JobListStory
+      jobListStore={jobListStore}
+      displayFilter={false}
+      booking_key="requests"
+    />
+  );
 };
 
 export const JobSummaryStory = () => {

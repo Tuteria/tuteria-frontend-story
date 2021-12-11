@@ -326,12 +326,13 @@ export const testAdapter: ServerAdapterType = {
   getEarningPercentage() {
     return 70;
   },
-  getPriceSuggestion(subject: string) {
-    return {
+  async getPriceSuggestion(subject: string) {
+    console.log(subject);
+    return samplePromise({
       minimum: "1750",
       maximum: "3600",
       recommended: "2750",
-    };
+    });
   },
   getNLPProcessing() {},
   //jobs endpoints
@@ -342,5 +343,15 @@ export const testAdapter: ServerAdapterType = {
   async bookLessons(requestSlug, sessions) {
     console.log({ requestSlug, sessions });
     return await samplePromise({});
+  },
+  async validatePersonalInfo(formValues) {
+    console.log(formValues);
+    return samplePromise({});
+    return Promise.reject({
+      formErrors: {
+        email: "This email already exists",
+        phone: "This phone already exists on Tuteria",
+      },
+    });
   },
 };
