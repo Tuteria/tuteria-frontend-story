@@ -695,7 +695,11 @@ const JobListStory = observer(
             host=""
             store={jobListStore}
             bookings={jobListStore[booking_key]}
+            displayFilter={booking_key === "bookings"}
             tutorInfo={sampleTutorInfo}
+            onNavigate={() =>
+              linkTo("Tutor Application/Components", "Job No Filter Page")()
+            }
           />
         </Box>
       </OverlayRouter>
