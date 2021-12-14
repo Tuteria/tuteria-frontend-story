@@ -92,6 +92,19 @@ export const initialData = {
   [CLIENT_PAGES.SCHEDULE_INFO]: {
     tutorInfo: { availability: SAMPLE_TUTOR_DATA.availability },
   },
+  [CLIENT_PAGES.PAYMENT_INFO]: {
+    staticData: {
+      regions: allRegions,
+      countries: allCountries,
+      supportedCountries,
+      educationData: {
+        degree_data: educationWorkData.degree_data,
+        grade_data: educationWorkData.grade_data,
+        specialities: educationWorkData.specialities,
+      },
+    },
+    tutorInfo: SAMPLE_TUTOR_DATA,
+  },
 };
 
 export { testAdapter } from "../tutor-application/adapter";
