@@ -113,11 +113,7 @@ export const JobsPage = () => {
   );
 };
 export const PaymentInformation = () => {
-  const [isReadOnly, setIsReadOnly] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsReadOnly(store.paymentInfo.completed);
-  }, [isReadOnly]);
+  const isReadOnly = true;
 
   return (
     <ClientPages
@@ -126,7 +122,7 @@ export const PaymentInformation = () => {
       initialData={initialData[CLIENT_PAGES.PAYMENT_INFO]}
       host=""
       agent={undefined}
-      isReadOnly={store.paymentInfo.completed}
+      isReadOnly={isReadOnly}
     />
   );
 };
