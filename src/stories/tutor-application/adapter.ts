@@ -46,7 +46,7 @@ const formIds = {
 function loadExistingTutorInfo() {
   return {
     ...SAMPLE_TUTOR_DATA,
-    appData: { currentEditableForm: formIds[10] },
+    appData: { currentEditableForm: formIds[1] },
   };
 }
 
