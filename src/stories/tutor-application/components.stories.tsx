@@ -12,7 +12,8 @@ import allRegions from "@tuteria/shared-lib/src/data/regions.json";
 import { SAMPLE_QUIZ_DATA } from "@tuteria/shared-lib/src/data/sample-quiz-data";
 import {
   EXAM_PREP_PREFERENCES,
-  SAMPLE_QUESTION,
+  SAMPLE_AUDIO_QUESTION,
+  SAMPLE_IMAGE_QUESTION,
   SAMPLE_TUTERIA_SUBJECTS,
   SAMPLE_TUTOR_SUBJECTS2,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
@@ -662,15 +663,32 @@ export const ImageOptions = () => {
   return (
     <QuestionStyle
       direction="column"
-      is_horizontal={SAMPLE_QUESTION.options_display === "horizontal"}
-      question_type={SAMPLE_QUESTION?.question_type}
+      is_horizontal={SAMPLE_IMAGE_QUESTION.options_display === "horizontal"}
+      question_type={SAMPLE_IMAGE_QUESTION?.question_type}
       questionNo={1}
       onAnswerClick={() => {}}
       isSelected={{}}
       lastQuestion={0}
-      answers={SAMPLE_QUESTION.answers}
-      question={SAMPLE_QUESTION.content}
-      image={SAMPLE_QUESTION.figure}
+      answers={SAMPLE_IMAGE_QUESTION.answers}
+      question={SAMPLE_IMAGE_QUESTION.content}
+      image={SAMPLE_IMAGE_QUESTION.figure}
+    />
+  );
+};
+
+export const AudioQuestion = () => {
+  return (
+    <QuestionStyle
+      direction="column"
+      is_horizontal={SAMPLE_AUDIO_QUESTION.options_display === "horizontal"}
+      question_type={SAMPLE_AUDIO_QUESTION?.question_type}
+      questionNo={1}
+      onAnswerClick={() => {}}
+      isSelected={{}}
+      lastQuestion={0}
+      answers={SAMPLE_AUDIO_QUESTION.answers}
+      question={SAMPLE_AUDIO_QUESTION.content}
+      image={SAMPLE_AUDIO_QUESTION.figure}
     />
   );
 };
