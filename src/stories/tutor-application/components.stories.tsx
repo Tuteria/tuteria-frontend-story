@@ -378,6 +378,12 @@ export const EditSubjectPage = () => {
     }
   }
 
+  let pricingSuggestion = {
+    minimum: 2000,
+    maximum: 6000,
+    recommended: 4000,
+  };
+
   return (
     <LoadingStateWrapper
       text="Fetching subject details..."
@@ -388,6 +394,7 @@ export const EditSubjectPage = () => {
         educationAndWorkHistoryData={TUTORDATA}
         subjectStore={store.subject}
         store={subjectStore}
+        getPriceSuggestion={() => pricingSuggestion}
       >
         {(currentForm) => {
           if (currentForm === SUBJECT_EDIT_STEPS.PREVIEW) {

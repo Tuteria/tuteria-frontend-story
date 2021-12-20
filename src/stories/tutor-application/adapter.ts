@@ -76,6 +76,102 @@ const initializeApplication = async (
         sources: educationWorkData.sources,
         languages: educationWorkData.languages,
       },
+      pricing: {
+        tutorLevelFactor: [
+          {
+            tutor_level: "Probation",
+            factor: 0.9,
+          },
+          {
+            tutor_level: "Standard",
+            factor: 1,
+          },
+          {
+            tutor_level: "Premium",
+            factor: 1.25,
+          },
+          {
+            tutor_level: "Deluxe",
+            factor: 1.5,
+          },
+        ],
+        experienceFactor: [
+          {
+            experience: "None",
+            factor: 0.9,
+          },
+          {
+            experience: "Below 5",
+            factor: 1,
+          },
+          {
+            experience: "Btw 5 & 10",
+            factor: 1.1,
+          },
+          {
+            experience: "Above 10",
+            factor: 1.15,
+          },
+        ],
+        ratingsFactor: [
+          {
+            ratings: "No rating",
+            factor: 1,
+          },
+          {
+            ratings: "Below 4.0",
+            factor: 0.9,
+          },
+          {
+            ratings: "4.0 - 4.2",
+            factor: 1,
+          },
+          {
+            ratings: "4.3 - 4.7",
+            factor: 1.05,
+          },
+          {
+            ratings: "4.8 - 5.0",
+            factor: 1.2,
+          },
+        ],
+        noOfClientsFactor: [
+          {
+            no_of_clients: "None",
+            factor: 0.9,
+          },
+          {
+            no_of_clients: "Less than 5",
+            factor: 1,
+          },
+          {
+            no_of_clients: "Btw 5 & 10",
+            factor: 1.1,
+          },
+          {
+            no_of_clients: "Btw 10 & 20",
+            factor: 1.2,
+          },
+          {
+            no_of_clients: "More than 20",
+            factor: 1.25,
+          },
+        ],
+        recommendedFactor: [
+          {
+            name: "Recommended",
+            factor: 1,
+          },
+          {
+            name: "Minimum",
+            factor: 0.6,
+          },
+          {
+            name: "Maximum",
+            factor: 1.5,
+          },
+        ],
+      },
     },
     tutorInfo: loadExistingTutorInfo(),
     subjectData: {
