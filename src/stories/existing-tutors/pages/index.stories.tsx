@@ -7,7 +7,6 @@ import "katex/dist/katex.min.css";
 import React from "react";
 import "react-phone-input-2/lib/style.css";
 import { initialData, subjectPageData, testAdapter } from "../adapter";
-
 export default {
   title: "Existing Tutors/Pages",
   decorators: [
@@ -110,6 +109,20 @@ export const JobsPage = () => {
       initialData={initialData[CLIENT_PAGES.JOBS]}
       host=""
       agent={undefined}
+    />
+  );
+};
+export const PaymentInformation = () => {
+  const isReadOnly = true;
+
+  return (
+    <ClientPages
+      page={CLIENT_PAGES.PAYMENT_INFO}
+      store={store}
+      initialData={initialData[CLIENT_PAGES.PAYMENT_INFO]}
+      host=""
+      agent={undefined}
+      isReadOnly={isReadOnly}
     />
   );
 };
