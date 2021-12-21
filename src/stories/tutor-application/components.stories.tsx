@@ -283,7 +283,7 @@ const navigateToSubject = () => {
   linkTo("Tutor Application/Pages", "Tutor Page")();
 };
 
-export const TestSelectionPage = () => {
+export const ReviewTestPage = () => {
   const [canTakeQuiz, setTakeQuiz] = React.useState(true);
   const [inst, setInst] = React.useState(null);
 
@@ -319,7 +319,7 @@ export const TestSelectionPage = () => {
         navigateToSubject={navigateToSubject}
         toSubjectEditPage={() => navigate("/skills")}
         subjectInfo={inst}
-        // isReview={true}
+        isReview={true}
       />
     </LoadingStateWrapper>
   );
