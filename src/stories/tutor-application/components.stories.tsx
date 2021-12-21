@@ -15,7 +15,7 @@ import {
   SAMPLE_AUDIO_QUESTION,
   SAMPLE_IMAGE_QUESTION,
   SAMPLE_TUTERIA_SUBJECTS,
-  SAMPLE_TUTOR_SUBJECTS2,
+  SAMPLE_TUTOR_SUBJECTS,
 } from "@tuteria/shared-lib/src/data/tutor-application/sample_data";
 import {
   sampleTutorInfo,
@@ -275,7 +275,8 @@ let instance = {
   },
 };
 
-const subjectInfo = SAMPLE_TUTERIA_SUBJECTS[2];
+const subjectInfo = SAMPLE_TUTERIA_SUBJECTS[0];
+const subjectId = 712345;
 
 const adapter = loadAdapter(testAdapter);
 const navigateToSubject = () => {
@@ -297,10 +298,10 @@ export const TestSelectionPage = () => {
         ...result,
         subjectData: {
           ...result.subjectData,
-          tutorSubjects: SAMPLE_TUTOR_SUBJECTS2,
+          tutorSubjects: SAMPLE_TUTOR_SUBJECTS,
         },
       });
-      store.subject.setCurrentSubjectId(209699);
+      store.subject.setCurrentSubjectId(subjectId);
       setInst(store.subject.tuteriaSubjectForCurrentSubject);
       setLoading(false);
     } catch (error) {
