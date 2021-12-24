@@ -1,3 +1,4 @@
+import { ChevronRightIcon } from "@chakra-ui/icons";
 import { Button, Stack } from "@chakra-ui/react";
 import FormWrapper, {
   useTutorApplicationFlow,
@@ -91,10 +92,12 @@ const TutorPageComponent: React.FC<{
           }}
           colorScheme="blue"
           size="lg"
+          height={["48px", "64px"]}
+          rightIcon={<ChevronRightIcon fontSize="2xl" />}
           isLoading={store.applicationLoading}
           isDisabled={!completedForm}
         >
-          Submit Application
+          Next step: Verifications
         </Button>
       </Stack>
     </TutorPageWrapper>
