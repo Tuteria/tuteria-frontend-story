@@ -45,6 +45,7 @@ function navigate(path: string) {
     "/complete": "Completed Page",
     "/skills": "EditSubjectPage",
     "/quiz/select-skill": "TestSelectionPage",
+    "/landing": "Landing Page",
   };
   linkTo("Tutor Application/Pages", options[path])();
 }
@@ -78,6 +79,9 @@ export const TutorPage = () => {
         }}
         onNextStep={() => {
           navigate("/verify");
+        }}
+        onLogout={() => {
+          navigate("/landing");
         }}
       />
     </LoadingStateWrapper>
@@ -191,6 +195,9 @@ export const Verification = () => {
     >
       <VerificationPage
         store={store}
+        onLogout={() => {
+          navigate("/landing");
+        }}
         onNextStep={async () => {
           await store.submitApplication(store.currentStep);
           navigate("/subject");
@@ -234,6 +241,9 @@ export const SubjectCreatePage = () => {
       text="Loading subject details..."
     >
       <SubjectCreationPage
+        onLogout={() => {
+          navigate("/landing");
+        }}
         onNextStep={async () => {
           await store.submitApplication(store.currentStep);
           navigate("/complete");

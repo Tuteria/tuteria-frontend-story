@@ -47,12 +47,14 @@ const TutorPageComponent: React.FC<{
   onEditSubject?: (subject: any) => any;
   onNextStep?: () => any;
   currentStep?: string;
+  onLogout?: () => any;
 }> = ({
   store,
   onTakeTest,
   onEditSubject,
   onNextStep,
   currentStep,
+  onLogout,
   ...rest
 }) => {
   const { getFormWrapperProps, formIndex, steps, activeStep, completedForm } =
@@ -63,6 +65,7 @@ const TutorPageComponent: React.FC<{
       // formIndex={formIndex}
       // steps={steps}
       // activeStep={activeStep}
+      onLogout={onLogout}
       store={store}
     >
       <FormWrapper
