@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import CentredWithSliderComponent from "../../pages/components/Marketing/Testimonials/CenteredWithSlider";
+import WithCurveComponent from "../../pages/components/Marketing/Testimonials/WithCurve";
 import WithChatBubbleComponent from "../../pages/components/Marketing/Testimonials/WithChatBubble";
 import WithLargeImageComponent from "../../pages/components/Marketing/Testimonials/WithLargeImage";
 import WithRatingComponent from "../../pages/components/Marketing/Testimonials/WithRating";
@@ -32,6 +33,9 @@ export default {
 
 export const CentredWithSlider = () => {
   return <CentredWithSliderComponent />;
+};
+export const WithCurve = () => {
+  return <WithCurveComponent />;
 };
 export const WithChatBubble = () => {
   return <WithChatBubbleComponent />;

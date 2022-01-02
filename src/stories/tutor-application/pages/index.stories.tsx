@@ -93,6 +93,7 @@ export const TutorPage = () => {
 export const Login = () => {
   return (
     <LoginPage
+      onCreateAccount={() => {}}
       onLogin={async (data, key) => {
         console.log(key);
         return new Promise((resolve, reject) => {
