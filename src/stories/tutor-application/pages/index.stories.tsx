@@ -190,10 +190,7 @@ export const Verification = () => {
   }
 
   return (
-    <LoadingStateWrapper
-      text="Fetching Tutor details..."
-      initialize={initialize}
-    >
+    <LoadingStateWrapper text="Fetching details..." initialize={initialize}>
       <VerificationPage
         store={store}
         onLogout={() => {
