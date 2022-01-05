@@ -46,7 +46,7 @@ const formIds = {
 function loadExistingTutorInfo() {
   return {
     ...SAMPLE_TUTOR_DATA,
-    appData: { currentEditableForm: formIds[10] },
+    appData: { currentEditableForm: formIds[1] },
   };
 }
 
@@ -358,6 +358,7 @@ export const testAdapter: ServerAdapterType = {
     return await samplePromise([]);
   },
   submitQuizResults: async (payload) => {
+    console.log(payload);
     return await samplePromise({ payload });
   },
   buildQuizData: async (subjectInfo) => {

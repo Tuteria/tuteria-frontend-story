@@ -740,7 +740,7 @@ export const JobListPage = () => {
 };
 
 export const JobListPage2 = () => {
-  return <JobListStory booking_type="requests" jobListStore={jobListStore} />;
+  return <JobListStory booking_key="requests" jobListStore={jobListStore} />;
 };
 
 export const JobNoFilterPage = () => {
@@ -753,10 +753,10 @@ export const JobNoFilterPage = () => {
   );
 };
 
-export const JobSummaryStory = () => {
-  return (
-    <Box>
-      <JobSummary />
-    </Box>
-  );
-};
+// export const JobSummaryStory = () => {
+//   return (
+//     <Box>
+//       <JobSummary />
+//     </Box>
+//   );
+// };
