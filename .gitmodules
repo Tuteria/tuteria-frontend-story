@@ -25,3 +25,6 @@
 [submodule "packages/tuteria-cdn"]
 	path = packages/tuteria-cdn
 	url = git@gitlab.com:tuteria/v2/cdn.git
+[submodule "packages/old-shared-lib"]
+	path = packages/old-shared-lib
+	url = git@gitlab.com:tuteria/v2/component-lib.git
