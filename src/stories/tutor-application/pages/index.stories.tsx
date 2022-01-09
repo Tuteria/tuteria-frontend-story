@@ -146,6 +146,7 @@ export const LandingPage = () => {
 
   return (
     <LandingView
+      displayBanner
       onSubmit={onSubmit}
       continueUrl="/apply"
       beginApplication={() => {
