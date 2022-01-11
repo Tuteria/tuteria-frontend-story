@@ -51,7 +51,7 @@ export const ReviewImageUpload = () => {
   );
 };
 
-export const ReviewVideoUpload = () => {
+export const ReviewNativeVideoUpload = () => {
   return (
     <ReviewMediaUpload
       isOpen
@@ -59,6 +59,25 @@ export const ReviewVideoUpload = () => {
       loading={{ accept: false, reject: false }}
       mediaType="video"
       mediaUrl="https://res.cloudinary.com/iolab/video/upload/v1641421294/video-submission/godwin-video.webm"
+      onAccept={async () => {}}
+      onReject={async () => {}}
+      userInfo={{
+        name: "Elon Mosque",
+        dob: "02/12/1974",
+        gender: "Male",
+      }}
+    />
+  );
+};
+
+export const ReviewYoutubeVideoUpload = () => {
+  return (
+    <ReviewMediaUpload
+      isOpen
+      onClose={() => {}}
+      loading={{ accept: false, reject: false }}
+      mediaType="video"
+      mediaUrl="https://www.youtube.com/watch?v=Z036fil8ang"
       onAccept={async () => {}}
       onReject={async () => {}}
       userInfo={{
