@@ -23,7 +23,7 @@ import {
 import storage from "@tuteria/shared-lib/src/local-storage";
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
 
-function samplePromise(data = {}, timer = 300): Promise<any> {
+export function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(data);
