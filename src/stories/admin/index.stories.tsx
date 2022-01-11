@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import RemarkApp from "@tuteria/shared-lib/src/admin/Remark";
 import ReviewMediaUpload from "@tuteria/shared-lib/src/admin/ReviewMediaUpload";
+import ReviewGuarantorComponent from "@tuteria/shared-lib/src/admin/ReviewGuarantors";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import React from "react";
 
@@ -62,8 +63,8 @@ export const ReviewNativeVideoUpload = () => {
       onAccept={async () => {}}
       onReject={async () => {}}
       userInfo={{
-        name: "Elon Mosque",
-        dob: "02/12/1974",
+        name: "Nezuko Kamado",
+        dob: "02/12/2009",
         gender: "Male",
       }}
     />
@@ -81,10 +82,46 @@ export const ReviewYoutubeVideoUpload = () => {
       onAccept={async () => {}}
       onReject={async () => {}}
       userInfo={{
-        name: "Elon Mosque",
+        name: "Eren Yaeger",
         dob: "02/12/1974",
         gender: "Male",
       }}
     />
   );
 };
+
+export function ReviewGuarantors() {
+  return (
+    <ReviewGuarantorComponent
+      actions={{
+        onAccept: async () => {},
+        onReject: async () => {},
+      }}
+      guanrantors={[
+        {
+          title: "Mr.",
+          fullName: "Inosuke Hashibira",
+          email: "inosukeh@gmail.com",
+          occupation: "Demon Slayer",
+          phone: "12345678",
+          company: "Demon Slayer Corps",
+          relationship: "Friend",
+          isVerified: true,
+        },
+        {
+          title: "Mr.",
+          fullName: "Edward Elric",
+          email: "fullmetal@gmail.com",
+          occupation: "Alchemist",
+          phone: "08034562134",
+          company: "Amestris State Military",
+          relationship: "Brother",
+          isVerified: false,
+        },
+      ]}
+      isOpen
+      loading={{ accept: false, reject: false }}
+      onClose={() => {}}
+    />
+  );
+}
