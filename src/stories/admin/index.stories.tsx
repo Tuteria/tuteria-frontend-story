@@ -37,8 +37,9 @@ export const ReviewImageUpload = () => {
     <ReviewMediaUpload
       isOpen
       onClose={() => {}}
+      loading={{ accept: false, reject: false }}
       mediaType="image"
-      mediaUrl="https://res.cloudinary.com/mlkmahmud/image/upload/v1641815093/butterfly_avhqwo.jpg"
+      mediaUrl="https://res.cloudinary.com/iolab/image/upload/v1641370467/identity/orumaph-identity.jpg"
       onAccept={async () => {}}
       onReject={async () => {}}
       userInfo={{
@@ -55,8 +56,9 @@ export const ReviewVideoUpload = () => {
     <ReviewMediaUpload
       isOpen
       onClose={() => {}}
+      loading={{ accept: false, reject: false }}
       mediaType="video"
-      mediaUrl="https://res.cloudinary.com/mlkmahmud/video/upload/v1607940021/How_Open_Source_Changed_My_Life_with_Max_Stoiber_rrgned.mp4"
+      mediaUrl="https://res.cloudinary.com/iolab/video/upload/v1641421294/video-submission/godwin-video.webm"
       onAccept={async () => {}}
       onReject={async () => {}}
       userInfo={{
