@@ -12,7 +12,10 @@ module.exports = {
     // Assign aliases from snowpack.config.js
     config.resolve.alias = {
       ...config.resolve.alias,
+      // "@emotion/styled": toPath("packages/old-shared-lib/node_modules/@emotion/styled"),
       "@emotion/core": toPath("node_modules/@emotion/react"),
+      // "emotion-theming": toPath("packages/old-shared-lib/node_modules/emotion-theming")
+      // "@emotion/core": toPath("packages/old-shared-lib/node_modules/@emotion/core"),
       // 'emotion-theming': toPath('node_modules/@emotion/react'),
     };
 
