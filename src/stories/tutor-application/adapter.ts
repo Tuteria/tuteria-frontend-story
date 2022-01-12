@@ -23,7 +23,7 @@ import {
 import storage from "@tuteria/shared-lib/src/local-storage";
 import { uploadToCloudinary } from "@tuteria/shared-lib/src/utils";
 
-function samplePromise(data = {}, timer = 300): Promise<any> {
+export function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(data);
@@ -199,6 +199,7 @@ export const testAdapter: ServerAdapterType = {
     return await samplePromise({ ids, status });
   },
   saveTutorInfo: async (data: any) => {
+    console.log(data);
     return await samplePromise("tutorToken");
   },
   getTuteriaSubjects: () => {
@@ -226,7 +227,7 @@ export const testAdapter: ServerAdapterType = {
       };
     });
     subjects.forEach((s) => {
-      existingSubjects.push({ id: 23, ...s, category: "Academics" });
+      existingSubjects.push({ id: 23, name: s, category: "Languages" });
     });
     return await samplePromise(existingSubjects);
   },
@@ -386,6 +387,7 @@ export const testAdapter: ServerAdapterType = {
     return await samplePromise(undefined);
   },
   submitVideoRecording: async (url) => {
+    console.log(url);
     return await samplePromise({
       id: "sample-video",
       url: "https://www.youtube.com/watch?v=sVPYIRF9RCQ",

@@ -147,6 +147,7 @@ export const LandingPage = () => {
 
   return (
     <LandingView
+      displayBanner
       onSubmit={onSubmit}
       continueUrl="/apply"
       beginApplication={() => {
@@ -175,6 +176,7 @@ export const Verification = () => {
           currentStep: APPLICATION_STEPS.VERIFY,
           currentEditableForm: STEPS.GUARANTOR_INFO,
         },
+        others: { ...(result.tutorInfo?.others || {}), canApply: true },
       },
     });
     if (store.currentStep === APPLICATION_STEPS.VERIFY) {
