@@ -23,6 +23,7 @@ export const UpdateRemark = () => {
     <RemarkApp
       content="Default content"
       request_id={1}
+      onUpdateRemark={() => {}}
       actions={[
         { label: "Send profile to client", value: "profile_to_client" },
         { label: "Log calls/sms/email", value: "activity_log" },
@@ -37,12 +38,13 @@ export const ReviewImageUpload = () => {
   return (
     <ReviewMediaUpload
       isOpen
-      onClose={() => {}}
       loading={{ accept: false, reject: false }}
       mediaType="image"
       mediaUrl="https://res.cloudinary.com/iolab/image/upload/v1641370467/identity/orumaph-identity.jpg"
       onAccept={async () => {}}
+      onClose={() => {}}
       onReject={async () => {}}
+      profileUrl="https://res.cloudinary.com/iolab/image/upload/v1641370428/profile_pics/orumaph-profile.png"
       userInfo={{
         name: "Bernie Sandals",
         dob: "23/02/1965",
@@ -95,6 +97,7 @@ export function ReviewGuarantors() {
     <ReviewGuarantorComponent
       actions={{
         onAccept: async () => {},
+        onDelete: async () => {},
         onReject: async () => {},
       }}
       guanrantors={[
@@ -107,6 +110,7 @@ export function ReviewGuarantors() {
           company: "Demon Slayer Corps",
           relationship: "Friend",
           isVerified: true,
+          no_of_years: 4,
         },
         {
           title: "Mr.",
@@ -117,6 +121,7 @@ export function ReviewGuarantors() {
           company: "Amestris State Military",
           relationship: "Brother",
           isVerified: false,
+          no_of_years: 2,
         },
       ]}
       isOpen
