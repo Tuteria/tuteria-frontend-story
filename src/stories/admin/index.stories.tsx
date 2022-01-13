@@ -1,9 +1,10 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useDisclosure } from "@chakra-ui/react";
 import RemarkApp from "@tuteria/shared-lib/src/admin/Remark";
 import ReviewMediaUpload from "@tuteria/shared-lib/src/admin/ReviewMediaUpload";
 import ReviewGuarantorComponent from "@tuteria/shared-lib/src/admin/ReviewGuarantors";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import React from "react";
+import { samplePromise } from "../tutor-application/adapter";
 
 export default {
   title: "Admin/Tutor Management",
@@ -35,6 +36,26 @@ export const UpdateRemark = () => {
 };
 
 export const ReviewImageUpload = () => {
+  const [loading, setLoading] = React.useState({
+    accept: false,
+    reject: false,
+  });
+  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
+
+  function onAccept() {
+    setLoading({ ...loading, accept: true });
+    return samplePromise({}).then(() => {
+      onClose();
+    });
+  }
+
+  function onReject() {
+    setLoading({ ...loading, reject: true });
+    return samplePromise({}).then(() => {
+      onClose();
+    });
+  }
+
   return (
     <ReviewMediaUpload
       isOpen
