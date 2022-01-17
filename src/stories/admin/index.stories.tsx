@@ -1,6 +1,7 @@
 import { Box, useDisclosure } from "@chakra-ui/react";
 import RemarkApp from "@tuteria/shared-lib/src/admin/Remark";
 import ReviewMediaUpload from "@tuteria/shared-lib/src/admin/ReviewMediaUpload";
+import ReviewGuarantorComponent from "@tuteria/shared-lib/src/admin/ReviewGuarantors";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import React from "react";
 import { samplePromise } from "../tutor-application/adapter";
@@ -23,6 +24,7 @@ export const UpdateRemark = () => {
     <RemarkApp
       content="Default content"
       request_id={1}
+      onUpdateRemark={() => {}}
       actions={[
         { label: "Send profile to client", value: "profile_to_client" },
         { label: "Log calls/sms/email", value: "activity_log" },
@@ -56,13 +58,14 @@ export const ReviewImageUpload = () => {
 
   return (
     <ReviewMediaUpload
-      isOpen={isOpen}
-      onClose={onClose}
-      loading={loading}
+      isOpen
+      loading={{ accept: false, reject: false }}
       mediaType="image"
       mediaUrl="https://res.cloudinary.com/iolab/image/upload/v1641370467/identity/orumaph-identity.jpg"
-      onAccept={onAccept}
-      onReject={onReject}
+      onAccept={async () => {}}
+      onClose={() => {}}
+      onReject={async () => {}}
+      profileUrl="https://res.cloudinary.com/iolab/image/upload/v1641370428/profile_pics/orumaph-profile.png"
       userInfo={{
         name: "Bernie Sandals",
         dob: "23/02/1965",
@@ -83,8 +86,8 @@ export const ReviewNativeVideoUpload = () => {
       onAccept={async () => {}}
       onReject={async () => {}}
       userInfo={{
-        name: "Elon Mosque",
-        dob: "02/12/1974",
+        name: "Nezuko Kamado",
+        dob: "02/12/2009",
         gender: "Male",
       }}
     />
@@ -102,10 +105,49 @@ export const ReviewYoutubeVideoUpload = () => {
       onAccept={async () => {}}
       onReject={async () => {}}
       userInfo={{
-        name: "Elon Mosque",
+        name: "Eren Yaeger",
         dob: "02/12/1974",
         gender: "Male",
       }}
     />
   );
 };
+
+export function ReviewGuarantors() {
+  return (
+    <ReviewGuarantorComponent
+      actions={{
+        onAccept: async () => {},
+        onDelete: async () => {},
+        onReject: async () => {},
+      }}
+      guanrantors={[
+        {
+          title: "Mr.",
+          fullName: "Inosuke Hashibira",
+          email: "inosukeh@gmail.com",
+          occupation: "Demon Slayer",
+          phone: "12345678",
+          company: "Demon Slayer Corps",
+          relationship: "Friend",
+          isVerified: true,
+          no_of_years: 4,
+        },
+        {
+          title: "Mr.",
+          fullName: "Edward Elric",
+          email: "fullmetal@gmail.com",
+          occupation: "Alchemist",
+          phone: "08034562134",
+          company: "Amestris State Military",
+          relationship: "Brother",
+          isVerified: false,
+          no_of_years: 2,
+        },
+      ]}
+      isOpen
+      loading={{ accept: false, reject: false }}
+      onClose={() => {}}
+    />
+  );
+}
