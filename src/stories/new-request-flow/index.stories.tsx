@@ -5,12 +5,12 @@ import LandingPageComponent from "@tuteria/shared-lib/src/new-request-flow/pages
 import storage from "@tuteria/shared-lib/src/utils/storage";
 import { OverlayRouter } from "@tuteria/shared-lib/src/components/OverlayRouter";
 import { adapter } from "./adapter";
-import { LocationFieldStore } from "@tuteria/shared-lib/src/stores/location";
+import { LocationFieldStore } from "@tuteria/shared-lib/src/stores";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import regions from "@tuteria/shared-lib/src/data/regions.json";
 
 export default {
-  title: "New Request Flow/Pages",
+  title: "Request Flow/Pages",
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
