@@ -1,21 +1,19 @@
 import { Box } from "@chakra-ui/react";
-import LandingPageComponent from "@tuteria/shared-lib/src/new-request-flow/pages/LandingPage";
-import { OverlayRouter } from "@tuteria/shared-lib/src/components/OverlayRouter";
-import { adapter } from "./adapter";
-import { LocationFieldStore } from "@tuteria/shared-lib/src/stores";
 import { linkTo } from "@storybook/addon-links";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
+import { OverlayRouter } from "@tuteria/shared-lib/src/components/OverlayRouter";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import regions from "@tuteria/shared-lib/src/data/regions.json";
 import { ClientRequestForm } from "@tuteria/shared-lib/src/home-tutoring/request-flow/ClientRequestForm";
 import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-flow/constants";
-import { RequestDataProvider } from "@tuteria/shared-lib/src/home-tutoring/request-flow/RequestDataProvider";
+import { PricingPage as NewPricingPage } from "@tuteria/shared-lib/src/home-tutoring/request-flow/PricingPage";
+import { RequestFlowStore } from "@tuteria/shared-lib/src/home-tutoring/request-flow/store";
+import LandingPageComponent from "@tuteria/shared-lib/src/new-request-flow/pages/LandingPage";
 import storage from "@tuteria/shared-lib/src/storage";
+import { LocationFieldStore } from "@tuteria/shared-lib/src/stores";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
-import { SAMPLEREQUEST } from "./sampleData";
-import { RequestFlowStore } from "@tuteria/shared-lib/src/home-tutoring/request-flow/store";
-import { PricingPage as NewPricingPage } from "@tuteria/shared-lib/src/home-tutoring/request-flow/PricingPage";
+import { adapter } from "./adapter";
 
 export default {
   title: "Request Flow/Pages",
@@ -88,60 +86,50 @@ export const LandingPage = () => {
   );
 };
 
-const NewParentFlow = observer(({ viewModel, academicData, ...rest }: any) => {
-  const [loaded, setLoaded] = useState(false);
+const NewParentFlow = observer(
+  ({ viewModel, academicData, onSubmit, ...rest }: any) => {
+    const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    storage.set(adapter.regionKey, rest.regions);
-    storage.set(adapter.countryKey, rest.countries);
-    let existing = storage.get(adapter.requestKey, {});
-    storage.set(adapter.requestKey, {
-      ...existing,
-      ...SAMPLEREQUEST,
-    });
-    viewModel.initializeRequestData(academicData, true).then(() => {
-      setLoaded(true);
-    });
-  }, []);
+    useEffect(() => {
+      adapter.updateStaticData(rest);
+      viewModel.initializeRequestData(academicData, true).then(() => {
+        setLoaded(true);
+      });
+    }, []);
 
-  return (
-    <>
+    return (
       <OverlayRouter>
         <ClientRequestForm
           loaded={loaded}
           discountFlag={true}
-          onSubmit={() => {
-            if (
-              viewModel.splitRequests.length === viewModel.splitToExclude.length
-            ) {
-              linkTo("External Pages / New Parent Flow", "Client request")();
-            } else {
-              linkTo("External Pages / Request Flow", "Search Results")();
-            }
-          }}
+          onSubmit={onSubmit}
           viewModel={viewModel}
         />
       </OverlayRouter>
-    </>
-  );
-});
+    );
+  }
+);
 
 export const LessonDetail = () => {
   const viewModel = RequestFlowStore.create(undefined, {
     adapter,
   });
-  // onSnapshot(viewModel, (...a) => {
-  //   console.log("On snapshot change", a);
-  // });
   return (
-    <RequestDataProvider initialValue={SAMPLEREQUEST}>
-      <NewParentFlow
-        academicData={ACADEMICS_DATA}
-        regions={regions}
-        countries={allCountries}
-        viewModel={viewModel}
-      />
-    </RequestDataProvider>
+    <NewParentFlow
+      academicData={ACADEMICS_DATA}
+      regions={regions}
+      countries={allCountries}
+      viewModel={viewModel}
+      onSubmit={() => {
+        if (
+          viewModel.splitRequests.length === viewModel.splitToExclude.length
+        ) {
+          linkTo("External Pages / New Parent Flow", "Client request")();
+        } else {
+          linkTo("External Pages / Request Flow", "Search Results")();
+        }
+      }}
+    />
   );
 };
 
