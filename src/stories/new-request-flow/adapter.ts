@@ -1,13 +1,12 @@
-import allCountries from "@tuteria/shared-lib/src/data/countries.json";
-import ACADEMICS_DATA from "@tuteria/shared-lib/src/data/parent-flow/data";
-import { SAMPLENEIGHBORINGAREA } from "@tuteria/shared-lib/src/data/private-lessons/_sampleData";
-import regions from "@tuteria/shared-lib/src/data/regions.json";
+import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-flow/constants";
 import storage from "@tuteria/shared-lib/src/storage";
+import allCountries from "@tuteria/shared-lib/src/data/countries.json";
+import regions from "@tuteria/shared-lib/src/data/regions.json";
+import { SAMPLENEIGHBORINGAREA } from "./sampleData";
 
 const REGION_KEY = "TEST-REGIONS-VICINITIES";
 const COUNTRY_KEY = "TEST-COUNTRIES";
 const REQUEST_KEY = "TEST-HOME-TUTORING-REQUEST";
-
 export const adapter = {
   regionKey: REGION_KEY,
   countryKey: COUNTRY_KEY,
@@ -24,6 +23,11 @@ export const adapter = {
     return await new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve([0, 1, 2]);
+        // if (splitRequests.length > 2) {
+        //   resolve([0]);
+        // } else {
+        //   resolve([]);
+        // }
       }, 3000);
     });
   },
@@ -52,6 +56,11 @@ export const adapter = {
     return await new Promise((resolve, reject) => {
       setTimeout(() => {
         console.log({ slug, tutorResponse });
+        // actions that should happen when the tutor status is updated.
+        // remember to convert the bookingStage from the object to an array
+        // of stage and duration since that is a better format. exclude any
+        // stage that has a value of null
+        // reject()
         resolve(tutorResponse);
       }, 3000);
     });
@@ -119,13 +128,14 @@ export const adapter = {
     } else {
       result.countries = allCountries;
     }
-    let r: any = await new Promise((resolve, reject) => {
+    let r = await new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(result);
       }, 500);
     });
     return {
       ...r,
+      // country: "Nigeria"
     };
   },
 
@@ -153,7 +163,7 @@ export const adapter = {
   },
   savePricingInfo: async (data, availability) => {
     return await new Promise((resolve, reject) => {
-      setTimeout(() => resolve(null), 500);
+      setTimeout(() => resolve(), 500);
     });
   },
   getNeighboringArea: async (region) => {
