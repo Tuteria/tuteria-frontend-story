@@ -181,4 +181,8 @@ export const adapter = {
       ...SAMPLEREQUEST,
     });
   },
+  initializeLandingPage({ regions, countries }) {
+    storage.set(adapter.regionKey, regions);
+    storage.set(adapter.countryKey, countries);
+  },
 };
