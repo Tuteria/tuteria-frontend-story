@@ -3,6 +3,7 @@ import storage from "@tuteria/shared-lib/src/storage";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import regions from "@tuteria/shared-lib/src/data/regions.json";
 import { SAMPLENEIGHBORINGAREA } from "./sampleData";
+import { SAMPLEREQUEST } from "./sampleData";
 
 const REGION_KEY = "TEST-REGIONS-VICINITIES";
 const COUNTRY_KEY = "TEST-COUNTRIES";
@@ -170,5 +171,18 @@ export const adapter = {
     return await new Promise((resolve, reject) => {
       setTimeout(() => resolve(SAMPLENEIGHBORINGAREA), 100);
     });
+  },
+  updateStaticData({ regions, countries }) {
+    storage.set(adapter.regionKey, regions);
+    storage.set(adapter.countryKey, countries);
+    let existing = storage.get(adapter.requestKey, {});
+    storage.set(adapter.requestKey, {
+      ...existing,
+      ...SAMPLEREQUEST,
+    });
+  },
+  initializeLandingPage({ regions, countries }) {
+    storage.set(adapter.regionKey, regions);
+    storage.set(adapter.countryKey, countries);
   },
 };

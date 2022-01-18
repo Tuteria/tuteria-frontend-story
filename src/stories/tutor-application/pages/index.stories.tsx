@@ -93,6 +93,7 @@ export const TutorPage = () => {
 export const Login = () => {
   return (
     <LoginPage
+      onCreateAccount={() => {}}
       onLogin={async (data, key) => {
         console.log(key);
         return new Promise((resolve, reject) => {
@@ -191,10 +192,7 @@ export const Verification = () => {
   }
 
   return (
-    <LoadingStateWrapper
-      text="Fetching Tutor details..."
-      initialize={initialize}
-    >
+    <LoadingStateWrapper text="Fetching details..." initialize={initialize}>
       <VerificationPage
         store={store}
         onLogout={() => {

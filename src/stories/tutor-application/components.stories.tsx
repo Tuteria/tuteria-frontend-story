@@ -312,7 +312,7 @@ export const ReviewTestPage = () => {
   let _subjectInfo = store.subject.tuteriaSubjectForCurrentSubject;
   console.log({ _subjectInfo });
   return (
-    <LoadingStateWrapper initialize={initialize} text="Fetching Subjects...">
+    <LoadingStateWrapper initialize={initialize} text="Fetching subjects...">
       <TuteriaQuizPage
         store={store.subject.currentSubject}
         canTakeQuiz={canTakeQuiz}

@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import StatsWithCardComponent from "../../pages/components/Marketing/Stats/StatsWithCard";
+import StatsWithLineComponent from "../../pages/components/Marketing/Stats/StatsWithLine";
 import React from "react";
 
 export default {
@@ -27,4 +28,8 @@ export default {
 
 export const StatsWithCard = () => {
   return <StatsWithCardComponent />;
+};
+
+export const StatsWithLine = () => {
+  return <StatsWithLineComponent />;
 };
