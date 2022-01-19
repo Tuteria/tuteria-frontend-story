@@ -191,12 +191,16 @@ export const PricingPage = () => {
     updateClientStore(store);
     setLoaded(true);
   }, []);
+  console.log(store.pricingInfo);
   return loaded ? (
     <NewPricingPage
       pricingData={store.pricingInfo}
       // pricingData={samplePricingData}
       onEditRequest={() => {
         navigate("/request");
+      }}
+      onSelectPlan={(plan, price) => {
+        console.log({ plan, price });
       }}
     />
   ) : null;
@@ -296,6 +300,8 @@ const SAMPLECLIENTREQUEST = {
       number: "",
       channel: "",
     },
+    state: "Lagos",
+    vicinity: "Abule-ijesha",
   },
   paymentInfo: {
     amountPaid: 250000,
