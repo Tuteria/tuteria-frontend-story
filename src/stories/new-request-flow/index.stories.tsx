@@ -24,6 +24,7 @@ import {
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { adapter, PRICING_INFO } from "./adapter";
+import { SAMPLEREQUEST } from "./sampleData";
 // import { SAMPLEREQUEST as SAMPLECLIENTREQUEST } from "./sampleData";
 
 export default {
@@ -327,10 +328,14 @@ function updateClientStore(store) {
         lessonSchedule: SAMPLECLIENTREQUEST.lessonDetails,
       },
       childDetails: SAMPLECLIENTREQUEST.childDetails,
-      splitRequests: SAMPLECLIENTREQUEST.tutorDetails.map((o) => ({
+      splitRequests: SAMPLECLIENTREQUEST.tutorDetails.map((o, i) => ({
         names: o.names,
+        curriculum: SAMPLECLIENTREQUEST.childDetails[i].curriculum,
+        purposes: SAMPLEREQUEST.splitRequests[i].purposes || [],
         tutorId: o.tutorId,
         lessonDays: o.lessonDays,
+        lessonDuration: 3,
+        lessonHours: 3,
         subjectGroup: o.subjectGroup,
         searchSubject: o.searchSubject,
       })),
