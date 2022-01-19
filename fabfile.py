@@ -113,9 +113,9 @@ def build_tuteria_cdn():
     run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
 
 
-@hosts("sama@staging-prod.tuteria.com")
+@hosts("sama@tutor-search.tuteria.com")
 def deploy_cdn():
-    with cd("/home/sama/tuteria-codebase/tuteria-deploy"):
+    with cd("/home/sama/web_deploy"):
         run("docker-compose pull cdn-next")
         run("docker-compose up -d cdn-next")
     run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')

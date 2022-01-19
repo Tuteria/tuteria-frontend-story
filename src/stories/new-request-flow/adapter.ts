@@ -7237,6 +7237,28 @@ export const PRICING_INFO = {
       factor: 0.7,
     },
   ],
+  hourFactor: [
+    {
+      hours: "1 hour",
+      factor: 1.5,
+    },
+    {
+      hours: "1.5 hour",
+      factor: 1.85,
+    },
+    {
+      hours: "2-3 hours",
+      factor: 1,
+    },
+    {
+      hours: "4 hours",
+      factor: 0.85,
+    },
+    {
+      hours: "5 hours",
+      factor: 0.75,
+    },
+  ],
 };
 export const adapter = {
   regionKey: REGION_KEY,
