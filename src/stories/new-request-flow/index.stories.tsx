@@ -17,10 +17,13 @@ import {
   ClientRequestPage as NewClientRequestPage,
 } from "@tuteria/shared-lib/src/new-request-flow/pages/ClientRequestPage";
 
-import { LocationFieldStore } from "@tuteria/shared-lib/src/stores";
+import {
+  IRequestFlowStore,
+  LocationFieldStore,
+} from "@tuteria/shared-lib/src/stores";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
-import { adapter } from "./adapter";
+import { adapter, PRICING_INFO } from "./adapter";
 // import { SAMPLEREQUEST as SAMPLECLIENTREQUEST } from "./sampleData";
 
 export default {
@@ -93,29 +96,31 @@ export const LandingPage = () => {
   );
 };
 
-const NewParentFlow = observer(
-  ({ viewModel, academicData, onSubmit, ...rest }: any) => {
-    const [loaded, setLoaded] = useState(false);
+const NewParentFlow: React.FC<{
+  viewModel: IRequestFlowStore;
+  academicData: any;
+  onSubmit: any;
+}> = observer(({ viewModel, academicData, onSubmit, ...rest }: any) => {
+  const [loaded, setLoaded] = useState(false);
 
-    useEffect(() => {
-      adapter.updateStaticData(rest);
-      viewModel.initializeRequestData(academicData, true).then(() => {
-        setLoaded(true);
-      });
-    }, []);
+  useEffect(() => {
+    adapter.updateStaticData(rest);
+    viewModel.initializeRequestData(academicData, true).then(() => {
+      setLoaded(true);
+    });
+  }, []);
 
-    return (
-      <OverlayRouter>
-        <ClientRequestForm
-          loaded={loaded}
-          discountFlag={true}
-          onSubmit={onSubmit}
-          viewModel={viewModel}
-        />
-      </OverlayRouter>
-    );
-  }
-);
+  return (
+    <OverlayRouter>
+      <ClientRequestForm
+        loaded={loaded}
+        discountFlag={true}
+        onSubmit={onSubmit}
+        viewModel={viewModel}
+      />
+    </OverlayRouter>
+  );
+});
 
 export const LessonDetail = () => {
   const viewModel = RequestFlowStore.create(undefined, {
@@ -139,8 +144,9 @@ export const LessonDetail = () => {
     />
   );
 };
-
+const store = ClientRequestStore.create({}, { adapter });
 export const PricingPage = () => {
+  const [loaded, setLoaded] = React.useState(false);
   const samplePricingData = {
     standardFx: 1.0,
     premiumFx: 1.4,
@@ -181,15 +187,19 @@ export const PricingPage = () => {
       },
     ],
   };
-
-  return (
+  React.useEffect(() => {
+    updateClientStore(store);
+    setLoaded(true);
+  }, []);
+  return loaded ? (
     <NewPricingPage
-      pricingData={samplePricingData}
+      pricingData={store.pricingInfo}
+      // pricingData={samplePricingData}
       onEditRequest={() => {
         navigate("/request");
       }}
     />
-  );
+  ) : null;
 };
 
 const SAMPLECLIENTREQUEST = {
@@ -302,32 +312,30 @@ const SAMPLECLIENTREQUEST = {
   },
 };
 
-const store = ClientRequestStore.create({}, { adapter });
-export const ClientRequestPage = () => {
-  let [loaded, setLoaded] = useState(false);
-  useEffect(() => {
-    store.mapToStore(
-      {
-        contactDetails: SAMPLECLIENTREQUEST.contactDetails,
-        lessonDetails: {
-          lessonType: SAMPLECLIENTREQUEST.lessonDetails.lessonType,
-          lessonSchedule: SAMPLECLIENTREQUEST.lessonDetails,
-        },
-        childDetails: SAMPLECLIENTREQUEST.childDetails,
-        splitRequests: SAMPLECLIENTREQUEST.tutorDetails.map((o) => ({
-          names: o.names,
-          tutorId: o.tutorId,
-          lessonDays: o.lessonDays,
-          subjectGroup: o.subjectGroup,
-          searchSubject: o.searchSubject,
-        })),
-        slug: SAMPLECLIENTREQUEST.slug,
-        created: SAMPLECLIENTREQUEST.created,
-        modified: SAMPLECLIENTREQUEST.modified,
-        status: SAMPLECLIENTREQUEST.status,
-        agent: SAMPLECLIENTREQUEST.agent,
+function updateClientStore(store) {
+  store.mapToStore(
+    {
+      contactDetails: SAMPLECLIENTREQUEST.contactDetails,
+      lessonDetails: {
+        lessonType: SAMPLECLIENTREQUEST.lessonDetails.lessonType,
+        lessonSchedule: SAMPLECLIENTREQUEST.lessonDetails,
       },
-      {
+      childDetails: SAMPLECLIENTREQUEST.childDetails,
+      splitRequests: SAMPLECLIENTREQUEST.tutorDetails.map((o) => ({
+        names: o.names,
+        tutorId: o.tutorId,
+        lessonDays: o.lessonDays,
+        subjectGroup: o.subjectGroup,
+        searchSubject: o.searchSubject,
+      })),
+      slug: SAMPLECLIENTREQUEST.slug,
+      created: SAMPLECLIENTREQUEST.created,
+      modified: SAMPLECLIENTREQUEST.modified,
+      status: SAMPLECLIENTREQUEST.status,
+      agent: SAMPLECLIENTREQUEST.agent,
+    },
+    {
+      paymentInfo: {
         walletBalance: 0,
         lessonPayments: [{ lessons: 8 }, { lessons: 8 }],
         monthsPaid: 1,
@@ -336,15 +344,23 @@ export const ClientRequestPage = () => {
         transportFare: 0,
         totalDiscount: 0,
       },
-      SAMPLECLIENTREQUEST.tutorDetails.map((o) => ({
+      tutorsData: SAMPLECLIENTREQUEST.tutorDetails.map((o) => ({
         userId: o.tutorId,
         ...o.tutorInfo,
       })),
-      SAMPLECLIENTREQUEST.tutorDetails.map((o) => ({
+      tutorResponses: SAMPLECLIENTREQUEST.tutorDetails.map((o) => ({
         ...o.tutorResponse,
         tutor_slug: o.tutorId,
-      }))
-    );
+      })),
+      pricingInfo: PRICING_INFO,
+    }
+  );
+}
+
+export const ClientRequestPage = () => {
+  let [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    updateClientStore(store);
     setLoaded(true);
   }, []);
   return loaded ? (
