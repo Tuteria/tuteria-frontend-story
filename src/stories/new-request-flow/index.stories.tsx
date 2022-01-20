@@ -101,6 +101,7 @@ const NewParentFlow: React.FC<{
   viewModel: IRequestFlowStore;
   academicData: any;
   onSubmit: any;
+  [key: string]: any;
 }> = observer(({ viewModel, academicData, onSubmit, ...rest }: any) => {
   const [loaded, setLoaded] = useState(false);
 
@@ -203,9 +204,7 @@ export const PricingPage = () => {
       onEditRequest={() => {
         navigate("/request");
       }}
-      onSelectPlan={(plan, price) => {
-        console.log({ plan, price });
-      }}
+      store={store}
     />
   ) : null;
 };
@@ -329,6 +328,7 @@ function updateClientStore(store) {
       lessonDetails: {
         lessonType: SAMPLECLIENTREQUEST.lessonDetails.lessonType,
         lessonSchedule: SAMPLECLIENTREQUEST.lessonDetails,
+        lessonDays: SAMPLEREQUEST.lessonDetails.lessonSchedule.lessonDays,
       },
       childDetails: SAMPLECLIENTREQUEST.childDetails,
       splitRequests: SAMPLECLIENTREQUEST.tutorDetails.map((o, i) => ({
