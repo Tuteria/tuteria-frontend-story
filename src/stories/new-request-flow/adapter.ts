@@ -7362,6 +7362,7 @@ export const adapter = {
       requestData.splitRequests = splitRequests;
     }
     storage.set(REQUEST_KEY, requestData);
+    console.log(requestData);
     return data;
   },
   fetchAcademicData: async () => {
