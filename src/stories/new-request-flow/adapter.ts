@@ -185,4 +185,8 @@ export const adapter = {
     storage.set(adapter.regionKey, regions);
     storage.set(adapter.countryKey, countries);
   },
+  saveRequestToServer() {
+    let requestData = storage.get(REQUEST_KEY, {});
+    console.log(requestData);
+  },
 };

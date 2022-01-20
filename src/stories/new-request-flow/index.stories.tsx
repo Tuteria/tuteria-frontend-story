@@ -130,13 +130,21 @@ export const LessonDetail = () => {
       countries={allCountries}
       viewModel={viewModel}
       onSubmit={() => {
-        if (
-          viewModel.splitRequests.length === viewModel.splitToExclude.length
-        ) {
-          linkTo("External Pages / New Parent Flow", "Client request")();
-        } else {
-          linkTo("External Pages / Request Flow", "Search Results")();
-        }
+        // if (
+        //   viewModel.splitRequests.length === viewModel.splitToExclude.length
+        // ) {
+        //   linkTo("External Pages / New Parent Flow", "Client request")();
+        // } else {
+        //   linkTo("External Pages / Request Flow", "Search Results")();
+        // }
+        viewModel
+          .saveRequestToServer()
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }}
     />
   );
