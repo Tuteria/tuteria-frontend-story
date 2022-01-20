@@ -8,6 +8,13 @@ import { SAMPLEREQUEST } from "./sampleData";
 const REGION_KEY = "TEST-REGIONS-VICINITIES";
 const COUNTRY_KEY = "TEST-COUNTRIES";
 const REQUEST_KEY = "TEST-HOME-TUTORING-REQUEST";
+export function samplePromise(data = {}, timer = 300): Promise<any> {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(data);
+    }, 300);
+  });
+}
 export const PRICING_INFO = {
   subjectFactor: [
     {
@@ -7362,6 +7369,7 @@ export const adapter = {
       requestData.splitRequests = splitRequests;
     }
     storage.set(REQUEST_KEY, requestData);
+    console.log(requestData);
     return data;
   },
   fetchAcademicData: async () => {
@@ -7414,11 +7422,6 @@ export const adapter = {
       }, 1000);
     });
   },
-  savePricingInfo: async (data, availability) => {
-    return await new Promise((resolve, reject) => {
-      setTimeout(() => resolve(), 500);
-    });
-  },
   getNeighboringArea: async (region) => {
     return await new Promise((resolve, reject) => {
       setTimeout(() => resolve(SAMPLENEIGHBORINGAREA), 100);
@@ -7436,5 +7439,9 @@ export const adapter = {
   initializeLandingPage({ regions, countries }) {
     storage.set(adapter.regionKey, regions);
     storage.set(adapter.countryKey, countries);
+  },
+  savePricingInfo: async (requestData, paymentInfo) => {
+    console.log({ requestData, paymentInfo });
+    return await samplePromise({ requestData, paymentInfo }, 10000);
   },
 };
