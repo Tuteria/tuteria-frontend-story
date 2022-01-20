@@ -1,10 +1,13 @@
 import { Box } from "@chakra-ui/react";
-import React from "react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
-import LessonsPageComponent from "@tuteria/shared-lib/src/group-lessons/pages/LessonsPage";
-import { GroupLessonsProvider } from "@tuteria/shared-lib/src/group-lessons/GroupLessonsProvider";
-import { GROUPLESSON_DATA, IELTSClasses, SAMPLE_USER_INFO } from "./sampleData";
 import { OverlayRouter } from "@tuteria/shared-lib/src/components/OverlayRouter";
+import allCountries from "@tuteria/shared-lib/src/data/countries.json";
+import { GroupLessonsProvider } from "@tuteria/shared-lib/src/group-lessons/GroupLessonsProvider";
+import LessonsPage from "@tuteria/shared-lib/src/group-lessons/pages/LessonsPage";
+import RegistrationPageComponent from "@tuteria/shared-lib/src/group-lessons/pages/RegistrationPage";
+import React from "react";
+import { GROUPLESSON_DATA, IELTSClasses, SAMPLE_USER_INFO } from "./sampleData";
+import "react-phone-input-2/lib/style.css";
 
 export default {
   title: "Group Lessons/Pages",
@@ -19,7 +22,7 @@ export default {
   ],
 };
 
-export const LessonsPage = () => {
+function Wrapper({ children }) {
   return (
     <OverlayRouter>
       <GroupLessonsProvider
@@ -43,8 +46,30 @@ export const LessonsPage = () => {
           medium: "From a friend",
         }}
       >
-        <LessonsPageComponent />
+        {children}
       </GroupLessonsProvider>
     </OverlayRouter>
+  );
+}
+
+export const LessonDetails = () => {
+  return (
+    <Wrapper>
+      <LessonsPage />
+    </Wrapper>
+  );
+};
+
+export const RegistrationPage = () => {
+  return (
+    <Wrapper>
+      <RegistrationPageComponent
+        countries={allCountries}
+        submitted
+        onSubmit={(data) => {
+          console.log(data);
+        }}
+      />
+    </Wrapper>
   );
 };
