@@ -88,6 +88,8 @@ export const LandingPage = () => {
           value: x.name,
           code: x.code,
         }))}
+        displayBanner
+        bannerText="Wait, You've missed a step"
       />
     </OverlayRouter>
   );
