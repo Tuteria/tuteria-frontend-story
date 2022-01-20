@@ -5,6 +5,7 @@ import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import { GroupLessonsProvider } from "@tuteria/shared-lib/src/group-lessons/GroupLessonsProvider";
 import LessonsPage from "@tuteria/shared-lib/src/group-lessons/pages/LessonsPage";
 import RegistrationPageComponent from "@tuteria/shared-lib/src/group-lessons/pages/RegistrationPage";
+import PaymentPageComponent from "@tuteria/shared-lib/src/group-lessons/pages/PaymentPage";
 import React from "react";
 import { GROUPLESSON_DATA, IELTSClasses, SAMPLE_USER_INFO } from "./sampleData";
 import "react-phone-input-2/lib/style.css";
@@ -70,6 +71,14 @@ export const RegistrationPage = () => {
           console.log(data);
         }}
       />
+    </Wrapper>
+  );
+};
+
+export const PaymentPage = () => {
+  return (
+    <Wrapper>
+      <PaymentPageComponent />
     </Wrapper>
   );
 };
