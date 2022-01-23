@@ -12,6 +12,7 @@ import {
   RequestFlowStore,
 } from "@tuteria/shared-lib/src/home-tutoring/request-flow/store";
 import LandingPageComponent from "@tuteria/shared-lib/src/new-request-flow/pages/LandingPage";
+import CompletePage from "@tuteria/shared-lib/src/new-request-flow/pages/CompletePage";
 import {
   ClientRequestDetail,
   ClientRequestPage as NewClientRequestPage,
@@ -370,6 +371,10 @@ function updateClientStore(store) {
     }
   );
 }
+
+export const RequestCompletePage = () => {
+  return <CompletePage />;
+};
 
 export const ClientRequestPage = () => {
   let [loaded, setLoaded] = useState(false);
