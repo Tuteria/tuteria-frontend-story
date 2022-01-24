@@ -210,8 +210,7 @@ export const PricingPage = () => {
   console.log(store.pricingInfo);
   return loaded ? (
     <NewPricingPage
-      pricingData={store.pricingInfo}
-      // pricingData={samplePricingData}
+      onSubmit={() => {}}
       onEditRequest={() => {
         navigate("/request");
       }}
