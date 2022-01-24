@@ -7444,4 +7444,8 @@ export const adapter = {
     console.log({ requestData, paymentInfo });
     return await samplePromise({ requestData, paymentInfo }, 10000);
   },
+  saveRequestToServer() {
+    let requestData = storage.get(REQUEST_KEY, {});
+    console.log(requestData);
+  },
 };
