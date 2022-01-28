@@ -60,6 +60,7 @@ import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUp
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { testAdapter } from "./adapter";
+import CloudinaryUploadComponent from "@tuteria/shared-lib/src/components/third-party/Cloudinary";
 
 export default {
   title: "Tutor Application/Components",
@@ -753,6 +754,17 @@ export const JobNoFilterPage = () => {
   );
 };
 
+export const CloudinaryUpload = () => {
+  return (
+    <CloudinaryUploadComponent
+      cloudName="iolab"
+      uploadPreset=""
+      onSubmit={(response) => {
+        console.log(response);
+      }}
+    />
+  );
+};
 // export const JobSummaryStory = () => {
 //   return (
 //     <Box>

@@ -133,3 +133,17 @@ def build_request_flow():
         )
         run("docker push registry.gitlab.com/tuteria/v2/home-tutoring-application:latest")
     run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
+
+@hosts("sama@tutor-search.tuteria.com")
+def build_notification_flow():
+    with cd("/home/sama/notification-service"):
+        run("git pull --no-edit")
+        run("git checkout -f master")
+        # run('yarn install')
+        # run('/home/sama/.nvm/versions/node/v8.9.4/bin/node build')
+        run("docker login -u gbozee -p abiola2321 registry.gitlab.com")
+        run(
+            "docker build --no-cache -t registry.gitlab.com/tuteria/notification-service:aws ."
+        )
+        run("docker push registry.gitlab.com/tuteria/notification-service:aws")
+    run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
