@@ -2,6 +2,7 @@ import { Box, useDisclosure } from "@chakra-ui/react";
 import RemarkApp from "@tuteria/shared-lib/src/admin/Remark";
 import ReviewMediaUpload from "@tuteria/shared-lib/src/admin/ReviewMediaUpload";
 import ReviewGuarantorComponent from "@tuteria/shared-lib/src/admin/ReviewGuarantors";
+import WhatsAppChatModalComponent from "@tuteria/shared-lib/src/admin/WhatsAppChatModal";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import React from "react";
 import { samplePromise } from "../tutor-application/adapter";
@@ -151,3 +152,30 @@ export function ReviewGuarantors() {
     />
   );
 }
+
+export const WhatsAppChatModal = () => {
+  return (
+    <WhatsAppChatModalComponent
+      handleSend={(message) => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve({
+              content: { text: message },
+              direction: "sent",
+              createdDatetime: new Date(),
+            });
+          }, 600);
+        });
+      }}
+      isOpen
+      messages={[
+        {
+          content: { text: "Good morning" },
+          direction: "received",
+          createdDatetime: "2022-01-26T14:27:10.94247226Z",
+        },
+      ]}
+      onClose={() => {}}
+    />
+  );
+};
