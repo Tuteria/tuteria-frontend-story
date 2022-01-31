@@ -8,7 +8,11 @@ import RegistrationPageComponent from "@tuteria/shared-lib/src/group-lessons/pag
 import PaymentPageComponent from "@tuteria/shared-lib/src/group-lessons/pages/PaymentPage";
 import ClientBookingDetails from "@tuteria/shared-lib/src/group-lessons/pages/ClientBookingDetails";
 import React from "react";
-import { GROUPLESSON_DATA, IELTSClasses, SAMPLE_USER_INFO } from "./sampleData";
+import {
+  GROUPLESSON_DATA,
+  CheckpointEnglish,
+  SAMPLE_USER_INFO,
+} from "./sampleData";
 import "react-phone-input-2/lib/style.css";
 
 export default {
@@ -30,8 +34,8 @@ function Wrapper({ children }) {
       <GroupLessonsProvider
         lessonData={GROUPLESSON_DATA}
         userInfo={SAMPLE_USER_INFO}
-        classSelected="IELTSWeekend01"
-        classes={IELTSClasses}
+        classSelected="CheckpointEnglishBatch1"
+        classes={CheckpointEnglish}
         authenticatonLogic={{
           onLogin: () => Promise.reject({}),
           onResetPassword: () => Promise.resolve({}),

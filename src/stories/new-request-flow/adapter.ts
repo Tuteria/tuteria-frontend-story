@@ -2,8 +2,17 @@ import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-fl
 import storage from "@tuteria/shared-lib/src/storage";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import regions from "@tuteria/shared-lib/src/data/regions.json";
-import { SAMPLENEIGHBORINGAREA } from "./sampleData";
+import {
+  SAMPLENEIGHBORINGAREA,
+  TUTORSEARCHRESULT_DATA,
+  TUTORSEARCHRESULT_DATA_TRIMED,
+} from "./sampleData";
 import { SAMPLEREQUEST } from "./sampleData";
+import {
+  resolveCurrencyFromCountry,
+  getCurrencyForCountry,
+} from "@tuteria/shared-lib/src/components/payments/hooks";
+import { trimSearchResult } from "@tuteria/shared-lib/src/home-tutoring/request-flow/search-fns";
 
 const REGION_KEY = "TEST-REGIONS-VICINITIES";
 const COUNTRY_KEY = "TEST-COUNTRIES";
@@ -7325,10 +7334,6 @@ export const adapter = {
       }, 3000);
     });
   },
-  initializeRequestData: async () => {
-    let requestData = storage.get(REQUEST_KEY, {});
-    return [requestData, []];
-  },
   onSubmit: async (key, data, splitRequests) => {
     let requestData = storage.get(REQUEST_KEY, {});
     if (key === "student-details") {
@@ -7389,7 +7394,7 @@ export const adapter = {
     } else {
       result.countries = allCountries;
     }
-    let r = await new Promise((resolve, reject) => {
+    let r: any = await new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(result);
       }, 500);
@@ -7444,8 +7449,176 @@ export const adapter = {
     console.log({ requestData, paymentInfo });
     return await samplePromise({ requestData, paymentInfo }, 10000);
   },
-  saveRequestToServer() {
+  saveRequestToServer: async (admin) => {
     let requestData = storage.get(REQUEST_KEY, {});
-    console.log(requestData);
+    console.log(requestData, admin);
+  },
+  getTestimonials: async (tutorId) => {
+    return await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          certifications: [
+            {
+              award: "Health,Safety and Enviroment",
+              institution: "ISPON",
+            },
+            {
+              award: "Muson Grade 4 (awaiting)",
+              institution: "Muson",
+            },
+          ],
+          testimonials: [
+            {
+              firstName: "Mrs Akintola",
+              lastName: "Akintola",
+              review:
+                "We saw an immediate change in her scores in school especially in Mathematics",
+              dateReviewed: "2021-02-24T20:37:34.922851",
+              rating: 5,
+              subjectsBooked: ["Basic Mathematics"],
+              lessonsBooked: 12,
+            },
+            {
+              firstName: "Mrs Akintola",
+              lastName: "Akintola",
+              review:
+                "We saw an immediate change in her scores in school especially in Mathematics",
+              dateReviewed: "2021-02-24T20:37:34.569069",
+              rating: 5,
+              subjectsBooked: ["Basic Mathematics"],
+              lessonsBooked: 12,
+            },
+            {
+              firstName: "Moyosore",
+              lastName: "Onalaja",
+              review: "Excellent Tutor!",
+              dateReviewed: "2020-09-14T08:11:31.507203",
+              rating: 5,
+              subjectsBooked: ["Basic Sciences"],
+              lessonsBooked: 4,
+            },
+            {
+              firstName: "Mojisola",
+              lastName: "Aregbesola",
+              review:
+                "Good at the job. He really helped to improve my son in mathematics",
+              dateReviewed: "2020-07-18T23:52:29.121076",
+              rating: 5,
+              subjectsBooked: ["Basic Mathematics"],
+              lessonsBooked: 12,
+            },
+            {
+              firstName: "Moyosore",
+              lastName: "Onalaja",
+              review: "Excellent Tutor",
+              dateReviewed: "2020-07-13T11:12:27.181242",
+              rating: 5,
+              subjectsBooked: ["Basic Sciences"],
+              lessonsBooked: 4,
+            },
+          ],
+        });
+      }, 5000);
+    });
+  },
+  getCurrencyForCountry: getCurrencyForCountry,
+  fetchSearchResultFunc(currentIndex, requestData, specialities) {
+    // let currentSearchData = TUTORSEARCHRESULT_DATA;
+    let currentSearchData = TUTORSEARCHRESULT_DATA_TRIMED;
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let searchObj = requestData.splitRequests[currentIndex];
+        // resolve(currentSearchData)
+        let result = trimSearchResult(
+          currentSearchData,
+          [],
+          requestData,
+          searchObj,
+          specialities,
+          []
+        );
+        resolve(result);
+      }, 500);
+    });
+  },
+  transformSearchResult(
+    tutorOptions,
+    requestData,
+    selectedIDS = [],
+    specialities = [],
+    deniedTutors = [],
+    searchObj = {}
+  ) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        // resolve(currentSearchData[currentIndex]);
+        // resolve(currentSearchData);
+        let result = trimSearchResult(
+          tutorOptions,
+          selectedIDS,
+          requestData,
+          searchObj,
+          specialities,
+          deniedTutors
+        );
+        resolve(result);
+      }, 500);
+    });
+  },
+  resolveCurrencyFromCountry: resolveCurrencyFromCountry,
+  onTutorsSelected: async (data, paymentInfo) => {
+    console.log(paymentInfo);
+    return data;
+  },
+  initializeRequestData: async () => {
+    // return [requestData, []];
+
+    let arr = [
+      TUTORSEARCHRESULT_DATA[0],
+      // undefined,
+      // TUTORSEARCHRESULT_DATA[1],
+      undefined,
+      // undefined,
+      // undefined,
+      TUTORSEARCHRESULT_DATA[2],
+      // SAMPLESEARCH_RESULTS[0][4],
+      // SAMPLESEARCH_RESULTS[1][2],
+      // SAMPLESEARCH_RESULTS[2][1],
+    ];
+    return [
+      SAMPLEREQUEST,
+      // {
+      //   ...SAMPLEREQUEST,
+      //   splitRequests: SAMPLEREQUEST.splitRequests.map((o, i) => {
+      //     return {
+      //       ...o,
+      //       tutorId: arr[i]?.userId,
+      //     };
+      //   }),
+      // },
+      // REAL_SAMPLE_DATA,
+      arr,
+    ];
+  },
+  verifyCoupon: (couponText) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (couponText === "TUTERIALOVESU") {
+          resolve({
+            discountCode: "TUTERIALOVESU",
+            discountType: "percent",
+            discount: 5,
+            issuer: "The Place",
+            currency: "₦",
+            dateIssued: "",
+            dateExpired: "2021-10-05",
+            useCount: 5,
+            maximumCount: 50,
+          });
+        } else {
+          reject("Discount code is invalid");
+        }
+      }, 200);
+    });
   },
 };

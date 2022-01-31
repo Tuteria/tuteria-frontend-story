@@ -17,10 +17,16 @@ import {
   ClientRequestDetail,
   ClientRequestPage as NewClientRequestPage,
 } from "@tuteria/shared-lib/src/new-request-flow/pages/ClientRequestPage";
+import {
+  ErrorState,
+  SearchResultPage,
+  SearchResultPage2,
+} from "@tuteria/shared-lib/src/new-request-flow/pages/SearchResultPage";
 
 import {
   IRequestFlowStore,
   LocationFieldStore,
+  SearchStore,
 } from "@tuteria/shared-lib/src/stores";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
@@ -406,4 +412,107 @@ export const ClientRequestPage = () => {
       />
     </NewClientRequestPage>
   ) : null;
+};
+
+const SearchResultStory2 = observer(
+  ({
+    searchStore,
+    requestInfo,
+    firstSearch,
+    coupon,
+    currencyForCountry,
+    agent,
+    hasFetchedSearchData,
+  }) => {
+    const [loaded, setLoaded] = React.useState(false);
+    useEffect(() => {
+      if (currencyForCountry) {
+        searchStore.oldSearchContextProps.updateCurrency(currencyForCountry);
+      }
+      let arr = [
+        TUTORSEARCHRESULT_DATA[0],
+        // undefined,
+        TUTORSEARCHRESULT_DATA[1],
+        // undefined,
+        // // undefined,
+        // // undefined,
+        TUTORSEARCHRESULT_DATA[2],
+        // SAMPLESEARCH_RESULTS[0][4],
+        // SAMPLESEARCH_RESULTS[1][2],
+        // SAMPLESEARCH_RESULTS[2][1],
+      ];
+      if (!agent) {
+        arr = [];
+      }
+      searchStore
+        .initializeApplication(SAMPLEREQUEST, coupon, firstSearch, arr, [
+          { key: "Primary Math", values: ["Engineering", "Sciences"] },
+
+          //this is where we put specialities
+        ])
+        .then(() => {
+          searchStore.setDeniedTutors([]);
+          setLoaded(true);
+          if (agent) {
+            searchStore.useRequestDataProps.updateAdminLogin(true);
+          }
+          throw new Error("ooooops");
+          // searchStore.oldSearchContextProps.initializeSearchIndex();
+        })
+        .catch(() => {
+          setTimeout(() => {
+            setLoaded(true);
+          }, 4000);
+        });
+    }, []);
+
+    console.log(
+      "!!Selected Tutors ID",
+      searchStore.useRequestDataProps.selectedTutorsIds
+    );
+    const sampleAgent = {
+      name: "Benita",
+      phone_number: "+2349095121865",
+      email: "benita@tuteria.com",
+      image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
+    };
+    return loaded ? (
+      hasFetchedSearchData ? (
+        <OverlayRouter>
+          <SearchResultPage2
+            toNextPage={() => {}}
+            requestInfo={SAMPLEREQUEST}
+            searchStore={searchStore}
+            deniedTutors={[]}
+            agent={sampleAgent}
+            selectedTutorsId={searchStore.useRequestDataProps.selectedTutorsIds} // selectedTutorIds
+          />
+        </OverlayRouter>
+      ) : (
+        <ErrorState />
+      )
+    ) : null;
+  }
+);
+
+export const SearchResultsAsAgent = () => {
+  const searchStore = SearchStore.create(
+    {},
+    {
+      adapter,
+    }
+  );
+  const sampleAgent = {
+    name: "Benita",
+    phone_number: "+2349095121865",
+    email: "benita@tuteria.com",
+    image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
+  };
+  return (
+    <SearchResultStory2
+      searchStore={searchStore}
+      agent={sampleAgent}
+      hasFetchedSearchData
+    />
+  );
 };
