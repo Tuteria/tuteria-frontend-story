@@ -165,6 +165,13 @@ export const Verification = () => {
 export const VideoUploader = () => {
   return (
     <VideoUploaderComponent
+      cloudinaryProps={{
+        cloudName: "tuteria",
+        uploadPreset: "video-submission",
+        publicId: "storybook-demo",
+      }}
+      loading={false}
+      uploaded={false}
       onSubmit={async (url) => {
         alert(url);
       }}
@@ -757,18 +764,14 @@ export const JobNoFilterPage = () => {
 export const CloudinaryUpload = () => {
   return (
     <CloudinaryUploadComponent
-      cloudName="iolab"
-      uploadPreset=""
+      cloudName="tuteria"
+      uploadPreset="video-submission"
+      publicId="storybook-demo"
       onSubmit={(response) => {
         console.log(response);
       }}
-    />
+    >
+      <Button colorScheme={"blue"}>Upload</Button>
+    </CloudinaryUploadComponent>
   );
 };
-// export const JobSummaryStory = () => {
-//   return (
-//     <Box>
-//       <JobSummary />
-//     </Box>
-//   );
-// };
