@@ -11,18 +11,16 @@ import {
   ClientRequestStore,
   RequestFlowStore,
 } from "@tuteria/shared-lib/src/home-tutoring/request-flow/store";
-import LandingPageComponent from "@tuteria/shared-lib/src/new-request-flow/pages/LandingPage";
-import CompletePage from "@tuteria/shared-lib/src/new-request-flow/pages/CompletePage";
 import {
   ClientRequestDetail,
   ClientRequestPage as NewClientRequestPage,
 } from "@tuteria/shared-lib/src/new-request-flow/pages/ClientRequestPage";
+import CompletePage from "@tuteria/shared-lib/src/new-request-flow/pages/CompletePage";
+import LandingPageComponent from "@tuteria/shared-lib/src/new-request-flow/pages/LandingPage";
 import {
   ErrorState,
-  SearchResultPage,
   SearchResultPage2,
 } from "@tuteria/shared-lib/src/new-request-flow/pages/SearchResultPage";
-
 import {
   IRequestFlowStore,
   LocationFieldStore,
@@ -31,7 +29,8 @@ import {
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { adapter, PRICING_INFO } from "./adapter";
-import { SAMPLEREQUEST } from "./sampleData";
+import { SAMPLEREQUEST, TUTORSEARCHRESULT_DATA } from "./sampleData";
+
 // import { SAMPLEREQUEST as SAMPLECLIENTREQUEST } from "./sampleData";
 
 export default {
@@ -423,7 +422,7 @@ const SearchResultStory2 = observer(
     currencyForCountry,
     agent,
     hasFetchedSearchData,
-  }) => {
+  }: any) => {
     const [loaded, setLoaded] = React.useState(false);
     useEffect(() => {
       if (currencyForCountry) {
@@ -480,7 +479,6 @@ const SearchResultStory2 = observer(
       hasFetchedSearchData ? (
         <OverlayRouter>
           <SearchResultPage2
-            toNextPage={() => {}}
             requestInfo={SAMPLEREQUEST}
             searchStore={searchStore}
             deniedTutors={[]}
