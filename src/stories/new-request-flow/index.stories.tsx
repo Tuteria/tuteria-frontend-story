@@ -27,6 +27,7 @@ import {
   SearchStore,
 } from "@tuteria/shared-lib/src/stores";
 import { observer } from "mobx-react-lite";
+import { ISearchStore } from "packages/shared-lib/src/stores/types";
 import React, { useEffect, useState } from "react";
 import { adapter, PRICING_INFO } from "./adapter";
 import { SAMPLEREQUEST, TUTORSEARCHRESULT_DATA } from "./sampleData";
@@ -422,7 +423,9 @@ const SearchResultStory2 = observer(
     currencyForCountry,
     agent,
     hasFetchedSearchData,
-  }: any) => {
+  }: {
+    searchStore: ISearchStore;
+  }) => {
     const [loaded, setLoaded] = React.useState(false);
     useEffect(() => {
       if (currencyForCountry) {
@@ -458,10 +461,11 @@ const SearchResultStory2 = observer(
           throw new Error("ooooops");
           // searchStore.oldSearchContextProps.initializeSearchIndex();
         })
-        .catch(() => {
-          setTimeout(() => {
-            setLoaded(true);
-          }, 4000);
+        .catch((error) => {
+          console.log(error);
+          // setTimeout(() => {
+          //   setLoaded(true);
+          // }, 4000);
         });
     }, []);
 
