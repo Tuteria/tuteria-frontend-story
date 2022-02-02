@@ -21,10 +21,12 @@ import {
   ErrorState,
   SearchResultPage2,
 } from "@tuteria/shared-lib/src/new-request-flow/pages/SearchResultPage";
+import AdminSearchPage from "@tuteria/shared-lib/src/new-request-flow/pages/AdminSearchPage";
 import {
   IRequestFlowStore,
   LocationFieldStore,
   SearchStore,
+  AdminSearchStore,
 } from "@tuteria/shared-lib/src/stores";
 import { observer } from "mobx-react-lite";
 import { ISearchStore } from "packages/shared-lib/src/stores/types";
@@ -497,8 +499,8 @@ const SearchResultStory2 = observer(
   }
 );
 
-export const SearchResultsAsAgent = () => {
-  const searchStore = SearchStore.create(
+export const AdminSearchView = () => {
+  const searchStore = AdminSearchStore.create(
     {},
     {
       adapter,
@@ -510,11 +512,17 @@ export const SearchResultsAsAgent = () => {
     email: "benita@tuteria.com",
     image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
   };
+  return <AdminSearchPage store={searchStore} agent={sampleAgent} />;
+};
+
+export const SearchResults = () => {
+  const searchStore = SearchStore.create(
+    {},
+    {
+      adapter,
+    }
+  );
   return (
-    <SearchResultStory2
-      searchStore={searchStore}
-      agent={sampleAgent}
-      hasFetchedSearchData
-    />
+    <SearchResultStory2 searchStore={searchStore} hasFetchedSearchData={true} />
   );
 };

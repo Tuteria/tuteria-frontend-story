@@ -7621,4 +7621,27 @@ export const adapter = {
       }, 200);
     });
   },
+  initializeAdminSearch: async () => {
+    return samplePromise({
+      requestInfo: SAMPLEREQUEST,
+      firstSearch: undefined,
+      tutors: [
+        TUTORSEARCHRESULT_DATA[0],
+        // undefined,
+        TUTORSEARCHRESULT_DATA[1],
+        // undefined,
+        // // undefined,
+        // // undefined,
+        TUTORSEARCHRESULT_DATA[2],
+        // SAMPLESEARCH_RESULTS[0][4],
+        // SAMPLESEARCH_RESULTS[1][2],
+        // SAMPLESEARCH_RESULTS[2][1],
+      ],
+      specialities: [
+        { key: "Primary Math", values: ["Engineering", "Sciences"] },
+
+        //this is where we put specialities
+      ],
+    });
+  },
 };
