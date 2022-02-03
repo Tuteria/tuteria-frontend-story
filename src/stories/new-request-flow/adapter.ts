@@ -7623,7 +7623,8 @@ export const adapter = {
   },
   initializeAdminSearch: async () => {
     return samplePromise({
-      requestInfo: SAMPLEREQUEST,
+      requestInfo: {},
+      // requestInfo: SAMPLEREQUEST,
       firstSearch: undefined,
       tutors: [
         TUTORSEARCHRESULT_DATA[0],
