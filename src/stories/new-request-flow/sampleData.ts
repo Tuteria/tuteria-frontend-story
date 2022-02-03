@@ -1,4 +1,5 @@
 export const SAMPLEREQUEST = {
+  slug: "SAMPLEREQUEST",
   teacherKind: "Specialized teachers",
   dateSubmitted: "Sat, 16 Jan 2022 13:11:03 GMT",
   contactDetails: {
