@@ -499,22 +499,6 @@ const SearchResultStory2 = observer(
   }
 );
 
-export const AdminSearchView = () => {
-  const searchStore = AdminSearchStore.create(
-    {},
-    {
-      adapter,
-    }
-  );
-  const sampleAgent = {
-    name: "Benita",
-    phone_number: "+2349095121865",
-    email: "benita@tuteria.com",
-    image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
-  };
-  return <AdminSearchPage store={searchStore} agent={sampleAgent} />;
-};
-
 export const SearchResults = () => {
   const searchStore = SearchStore.create(
     {},
