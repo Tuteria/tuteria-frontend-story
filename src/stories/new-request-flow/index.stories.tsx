@@ -11,6 +11,7 @@ import {
   ClientRequestStore,
   RequestFlowStore,
 } from "@tuteria/shared-lib/src/home-tutoring/request-flow/store";
+import AdminSearchPage from "@tuteria/shared-lib/src/new-request-flow/pages/AdminSearchPage";
 import {
   ClientRequestDetail,
   ClientRequestPage as NewClientRequestPage,
@@ -21,18 +22,23 @@ import {
   ErrorState,
   SearchResultPage2,
 } from "@tuteria/shared-lib/src/new-request-flow/pages/SearchResultPage";
-import AdminSearchPage from "@tuteria/shared-lib/src/new-request-flow/pages/AdminSearchPage";
+import TutorProfilePageComponent from "@tuteria/shared-lib/src/new-request-flow/pages/TutorProfilePage";
 import {
+  AdminSearchStore,
   IRequestFlowStore,
   LocationFieldStore,
   SearchStore,
-  AdminSearchStore,
 } from "@tuteria/shared-lib/src/stores";
+import searchResultStore from "@tuteria/shared-lib/src/stores/jobs/searchResult";
 import { observer } from "mobx-react-lite";
 import { ISearchStore } from "packages/shared-lib/src/stores/types";
 import React, { useEffect, useState } from "react";
 import { adapter, PRICING_INFO } from "./adapter";
-import { SAMPLEREQUEST, TUTORSEARCHRESULT_DATA } from "./sampleData";
+import {
+  SAMPLEREQUEST,
+  TUTORSEARCHRESULT_DATA,
+  TUTORSEARCHRESULT_DATA_TRIMED,
+} from "./sampleData";
 
 // import { SAMPLEREQUEST as SAMPLECLIENTREQUEST } from "./sampleData";
 
@@ -525,4 +531,9 @@ export const SearchResults = () => {
   return (
     <SearchResultStory2 searchStore={searchStore} hasFetchedSearchData={true} />
   );
+};
+
+export const TutorProfilePage = () => {
+  const store = searchResultStore.create(TUTORSEARCHRESULT_DATA_TRIMED[0]);
+  return <TutorProfilePageComponent searchObj={{}} store={store} />;
 };
