@@ -30,6 +30,13 @@ function navigate(path: string) {
   linkTo("Request Flow/Pages", options[path])();
 }
 
+const sampleAgent = {
+  name: "Benita",
+  phone_number: "+2349095121865",
+  email: "benita@tuteria.com",
+  image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
+};
+
 export const SingleRequest = () => {
   const searchStore = AdminSearchStore.create(
     {},
@@ -64,12 +71,7 @@ export const SingleRequest = () => {
       },
     }
   );
-  const sampleAgent = {
-    name: "Benita",
-    phone_number: "+2349095121865",
-    email: "benita@tuteria.com",
-    image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
-  };
+
   return <AdminSearchPage store={searchStore} agent={sampleAgent} />;
 };
 
@@ -103,11 +105,6 @@ export const MultipleSplitRequest = () => {
       },
     }
   );
-  const sampleAgent = {
-    name: "Benita",
-    phone_number: "+2349095121865",
-    email: "benita@tuteria.com",
-    image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
-  };
+
   return <AdminSearchPage store={searchStore} agent={sampleAgent} />;
 };
