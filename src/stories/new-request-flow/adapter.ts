@@ -24,6 +24,36 @@ export function samplePromise(data = {}, timer = 300): Promise<any> {
     }, 300);
   });
 }
+let gatewayJson = {
+  amount: "45000",
+  order: "MCYN9OWEOBWA",
+  currency: "ngn",
+  base_country: "NG",
+  description: "Gold Flower",
+  discount: 0,
+  user_details: {
+    first_name: "Abiola",
+    last_name: "Oyeniyi",
+    country: "Nigeria",
+    email: "gbozee@gmail.com",
+    phone_number: "2347035209976",
+    key: "pk_test_3146e297e6d0463fea560139bc122a4aae04fedb",
+    redirect_url:
+      "https://payment.tuteria.com/paystack/verify-payment/MCYN9OWEOBWA/?amount=400000",
+    kind: "paystack",
+    js_script: "https://js.paystack.co/v1/inline.js",
+  },
+  paid: false,
+};
+export function generateInvoice(amountToBePaid, paymentInfo) {
+  //params = {amount,gatewayFee,monthsPaid}
+  // let gatewayFee = 0;
+  // if (gatewayFunc) {
+  //   gatewayFee += gatewayFunc(amount);
+  // }
+  return Promise.resolve({ ...gatewayJson, amount: amountToBePaid });
+}
+
 export const PRICING_INFO = {
   subjectFactor: [
     {
