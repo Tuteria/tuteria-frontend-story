@@ -60,6 +60,7 @@ import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUp
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { testAdapter } from "./adapter";
+import CloudinaryUploadComponent from "@tuteria/shared-lib/src/components/third-party/Cloudinary";
 
 export default {
   title: "Tutor Application/Components",
@@ -164,6 +165,13 @@ export const Verification = () => {
 export const VideoUploader = () => {
   return (
     <VideoUploaderComponent
+      cloudinaryProps={{
+        cloudName: "tuteria",
+        uploadPreset: "video-submission",
+        publicId: "storybook-demo",
+      }}
+      loading={false}
+      uploaded={false}
       onSubmit={async (url) => {
         alert(url);
       }}
@@ -753,10 +761,17 @@ export const JobNoFilterPage = () => {
   );
 };
 
-// export const JobSummaryStory = () => {
-//   return (
-//     <Box>
-//       <JobSummary />
-//     </Box>
-//   );
-// };
+export const CloudinaryUpload = () => {
+  return (
+    <CloudinaryUploadComponent
+      cloudName="tuteria"
+      uploadPreset="video-submission"
+      publicId="storybook-demo"
+      onSubmit={(response) => {
+        console.log(response);
+      }}
+    >
+      <Button colorScheme={"blue"}>Upload</Button>
+    </CloudinaryUploadComponent>
+  );
+};

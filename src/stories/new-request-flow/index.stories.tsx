@@ -11,21 +11,35 @@ import {
   ClientRequestStore,
   RequestFlowStore,
 } from "@tuteria/shared-lib/src/home-tutoring/request-flow/store";
-import LandingPageComponent from "@tuteria/shared-lib/src/new-request-flow/pages/LandingPage";
-import CompletePage from "@tuteria/shared-lib/src/new-request-flow/pages/CompletePage";
+import AdminSearchPage from "@tuteria/shared-lib/src/new-request-flow/pages/AdminSearchPage";
 import {
   ClientRequestDetail,
   ClientRequestPage as NewClientRequestPage,
 } from "@tuteria/shared-lib/src/new-request-flow/pages/ClientRequestPage";
-
+import CompletePage from "@tuteria/shared-lib/src/new-request-flow/pages/CompletePage";
+import LandingPageComponent from "@tuteria/shared-lib/src/new-request-flow/pages/LandingPage";
 import {
+  ErrorState,
+  SearchResultPage2,
+} from "@tuteria/shared-lib/src/new-request-flow/pages/SearchResultPage";
+import TutorProfilePageComponent from "@tuteria/shared-lib/src/new-request-flow/pages/TutorProfilePage";
+import {
+  AdminSearchStore,
   IRequestFlowStore,
   LocationFieldStore,
+  SearchStore,
 } from "@tuteria/shared-lib/src/stores";
+import searchResultStore from "@tuteria/shared-lib/src/stores/jobs/searchResult";
 import { observer } from "mobx-react-lite";
+import { ISearchStore } from "packages/shared-lib/src/stores/types";
 import React, { useEffect, useState } from "react";
 import { adapter, PRICING_INFO } from "./adapter";
-import { SAMPLEREQUEST } from "./sampleData";
+import {
+  SAMPLEREQUEST,
+  TUTORSEARCHRESULT_DATA,
+  TUTORSEARCHRESULT_DATA_TRIMED,
+} from "./sampleData";
+
 // import { SAMPLEREQUEST as SAMPLECLIENTREQUEST } from "./sampleData";
 
 export default {
@@ -406,4 +420,104 @@ export const ClientRequestPage = () => {
       />
     </NewClientRequestPage>
   ) : null;
+};
+
+const SearchResultStory2 = observer(
+  ({
+    searchStore,
+    requestInfo,
+    firstSearch,
+    coupon,
+    currencyForCountry,
+    agent,
+    hasFetchedSearchData,
+  }: {
+    searchStore: ISearchStore;
+  }) => {
+    const [loaded, setLoaded] = React.useState(false);
+    useEffect(() => {
+      if (currencyForCountry) {
+        searchStore.oldSearchContextProps.updateCurrency(currencyForCountry);
+      }
+      let arr = [
+        TUTORSEARCHRESULT_DATA[0],
+        // undefined,
+        TUTORSEARCHRESULT_DATA[1],
+        // undefined,
+        // // undefined,
+        // // undefined,
+        TUTORSEARCHRESULT_DATA[2],
+        // SAMPLESEARCH_RESULTS[0][4],
+        // SAMPLESEARCH_RESULTS[1][2],
+        // SAMPLESEARCH_RESULTS[2][1],
+      ];
+      if (!agent) {
+        arr = [];
+      }
+      searchStore
+        .initializeApplication(SAMPLEREQUEST, coupon, firstSearch, arr, [
+          { key: "Primary Math", values: ["Engineering", "Sciences"] },
+
+          //this is where we put specialities
+        ])
+        .then(() => {
+          searchStore.setDeniedTutors([]);
+          setLoaded(true);
+          if (agent) {
+            searchStore.useRequestDataProps.updateAdminLogin(true);
+          }
+          throw new Error("ooooops");
+          // searchStore.oldSearchContextProps.initializeSearchIndex();
+        })
+        .catch((error) => {
+          console.log(error);
+          // setTimeout(() => {
+          //   setLoaded(true);
+          // }, 4000);
+        });
+    }, []);
+
+    console.log(
+      "!!Selected Tutors ID",
+      searchStore.useRequestDataProps.selectedTutorsIds
+    );
+    const sampleAgent = {
+      name: "Benita",
+      phone_number: "+2349095121865",
+      email: "benita@tuteria.com",
+      image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
+    };
+    return loaded ? (
+      hasFetchedSearchData ? (
+        <OverlayRouter>
+          <SearchResultPage2
+            requestInfo={SAMPLEREQUEST}
+            searchStore={searchStore}
+            deniedTutors={[]}
+            agent={sampleAgent}
+            selectedTutorsId={searchStore.useRequestDataProps.selectedTutorsIds} // selectedTutorIds
+          />
+        </OverlayRouter>
+      ) : (
+        <ErrorState />
+      )
+    ) : null;
+  }
+);
+
+export const SearchResults = () => {
+  const searchStore = SearchStore.create(
+    {},
+    {
+      adapter,
+    }
+  );
+  return (
+    <SearchResultStory2 searchStore={searchStore} hasFetchedSearchData={true} />
+  );
+};
+
+export const TutorProfilePage = () => {
+  const store = searchResultStore.create(TUTORSEARCHRESULT_DATA_TRIMED[0]);
+  return <TutorProfilePageComponent searchObj={{}} store={store} />;
 };

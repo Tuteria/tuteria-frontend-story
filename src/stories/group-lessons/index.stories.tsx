@@ -1,10 +1,19 @@
 import { Box } from "@chakra-ui/react";
-import React from "react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
-import LessonsPageComponent from "@tuteria/shared-lib/src/group-lessons/pages/LessonsPage";
-import { GroupLessonsProvider } from "@tuteria/shared-lib/src/group-lessons/GroupLessonsProvider";
-import { GROUPLESSON_DATA, IELTSClasses, SAMPLE_USER_INFO } from "./sampleData";
 import { OverlayRouter } from "@tuteria/shared-lib/src/components/OverlayRouter";
+import allCountries from "@tuteria/shared-lib/src/data/countries.json";
+import { GroupLessonsProvider } from "@tuteria/shared-lib/src/group-lessons/GroupLessonsProvider";
+import LessonsPage from "@tuteria/shared-lib/src/group-lessons/pages/LessonsPage";
+import RegistrationPageComponent from "@tuteria/shared-lib/src/group-lessons/pages/RegistrationPage";
+import PaymentPageComponent from "@tuteria/shared-lib/src/group-lessons/pages/PaymentPage";
+import ClientBookingDetails from "@tuteria/shared-lib/src/group-lessons/pages/ClientBookingDetails";
+import React from "react";
+import {
+  GROUPLESSON_DATA,
+  CheckpointEnglish,
+  SAMPLE_USER_INFO,
+} from "./sampleData";
+import "react-phone-input-2/lib/style.css";
 
 export default {
   title: "Group Lessons/Pages",
@@ -19,14 +28,14 @@ export default {
   ],
 };
 
-export const LessonsPage = () => {
+function Wrapper({ children }) {
   return (
     <OverlayRouter>
       <GroupLessonsProvider
         lessonData={GROUPLESSON_DATA}
         userInfo={SAMPLE_USER_INFO}
-        classSelected="IELTSWeekend01"
-        classes={IELTSClasses}
+        classSelected="CheckpointEnglishBatch1"
+        classes={CheckpointEnglish}
         authenticatonLogic={{
           onLogin: () => Promise.reject({}),
           onResetPassword: () => Promise.resolve({}),
@@ -43,8 +52,46 @@ export const LessonsPage = () => {
           medium: "From a friend",
         }}
       >
-        <LessonsPageComponent />
+        {children}
       </GroupLessonsProvider>
     </OverlayRouter>
+  );
+}
+
+export const LessonDetails = () => {
+  return (
+    <Wrapper>
+      <LessonsPage />
+    </Wrapper>
+  );
+};
+
+export const RegistrationPage = () => {
+  return (
+    <Wrapper>
+      <RegistrationPageComponent
+        countries={allCountries}
+        submitted
+        onSubmit={(data) => {
+          console.log(data);
+        }}
+      />
+    </Wrapper>
+  );
+};
+
+export const PaymentPage = () => {
+  return (
+    <Wrapper>
+      <PaymentPageComponent />
+    </Wrapper>
+  );
+};
+
+export const ClientBookingDetailsPage = () => {
+  return (
+    <Wrapper>
+      <ClientBookingDetails />
+    </Wrapper>
   );
 };
