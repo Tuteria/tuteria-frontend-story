@@ -36,8 +36,8 @@ def deploy_next(user="sama", password=password):
 @hosts("sama@staging-prod.tuteria.com")
 def deploy_staging():
     with cd("/home/sama/tuteria-codebase/tuteria-deploy"):
-        run("docker-compose pull tutor-next")
-        run("docker-compose up -d tutor-next")
+        run("docker-compose pull tutor-next request-next")
+        run("docker-compose up -d tutor-next request-next")
     run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
 
 
@@ -113,9 +113,23 @@ def build_tuteria_cdn():
     run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
 
 
-@hosts("sama@staging-prod.tuteria.com")
+@hosts("sama@tutor-search.tuteria.com")
 def deploy_cdn():
-    with cd("/home/sama/tuteria-codebase/tuteria-deploy"):
+    with cd("/home/sama/web_deploy"):
         run("docker-compose pull cdn-next")
         run("docker-compose up -d cdn-next")
+    run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
+
+@hosts("sama@tutor-search.tuteria.com")
+def build_request_flow():
+    with cd("/home/sama/home-tutoring-application"):
+        run("git pull --no-edit")
+        run("git checkout -f develop")
+        # run('yarn install')
+        # run('/home/sama/.nvm/versions/node/v8.9.4/bin/node build')
+        run("docker login -u gbozee -p abiola2321 registry.gitlab.com")
+        run(
+            "docker build --no-cache -t registry.gitlab.com/tuteria/v2/home-tutoring-application:latest ."
+        )
+        run("docker push registry.gitlab.com/tuteria/v2/home-tutoring-application:latest")
     run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')

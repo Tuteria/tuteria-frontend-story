@@ -10,7 +10,7 @@ export const SAMPLEREQUEST = {
     phone: "2347083266188",
     vicinity: "Agungi",
     address: "Motunrayo Street",
-    region: "Lekki",
+    region: "Lekki Phase 1",
     state: "Lagos",
     country: "Nigeria",
     country_code: "NG",

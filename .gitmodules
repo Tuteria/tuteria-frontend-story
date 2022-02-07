@@ -28,3 +28,6 @@
 [submodule "packages/home-tutoring-app"]
 	path = packages/home-tutoring-app
 	url = git@gitlab.com:tuteria/v2/home-tutoring-application.git
+[submodule "packages/group-lessons"]
+	path = packages/group-lessons
+	url = git@gitlab.com:tuteria/v2/group-lessons.git

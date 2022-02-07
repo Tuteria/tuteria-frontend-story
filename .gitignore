@@ -127,4 +127,5 @@ packages/tutor-app
 packages/tuteria-data
 packages/store-app
 packages/home-tutoring-app
+packages/group-lessons
 *.pyc
