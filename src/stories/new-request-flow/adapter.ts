@@ -7642,4 +7642,74 @@ export const adapter = {
       ],
     });
   },
+  ...{
+    generateInvoice,
+    generateSpeakingInvoice: generateInvoice,
+    onPayWithWallet: async ({ slug, amount }) => {
+      return new Promise((resolve, reject) => {
+        console.log({ slug, amount });
+        setTimeout(() => {
+          resolve({});
+        }, 3000);
+      });
+    },
+    getBookingInfo: async (slug) => {
+      return {
+        slug,
+        tutors: [
+          {
+            userId: "tutorId9",
+            subject: {
+              hourlyRate: 5000,
+              hourlyDiscount: 0,
+              discountForExtraStudents: 10,
+            },
+            newTutorDiscount: 0,
+            distance: 32,
+            firstName: "Adeleke",
+            lastName: "Benson",
+            photo: "https://randomuser.me/api/portraits/women/95.jpg",
+          },
+          {
+            userId: "tutorId12",
+            subject: {
+              hourlyRate: 2800,
+              hourlyDiscount: 0,
+              discountForExtraStudents: 10,
+            },
+            newTutorDiscount: 0,
+            distance: 22,
+            firstName: "Adamson",
+            lastName: "Benson",
+            photo: "https://randomuser.me/api/portraits/men/35.jpg",
+          },
+
+          {
+            userId: "tutorId19",
+            subject: {
+              hourlyRate: 2500,
+              hourlyDiscount: 0,
+              discountForExtraStudents: 10,
+            },
+            newTutorDiscount: 0,
+            distance: 32,
+            firstName: "Atinuke",
+            lastName: "Benson",
+            photo: "https://randomuser.me/api/portraits/men/36.jpg",
+          },
+        ],
+        tuitionFee: 329600,
+        totalLessons: 48,
+        totalDiscount: 16800,
+        transportFare: 0,
+        couponDiscount: 0,
+        paidSpeakingFee: false,
+        distanceThreshold: 20,
+        walletBalance: 500000,
+        fareParKM: 25,
+        currency: "₦",
+        timeSubmitted: new Date().toISOString(),
+      };
+    },
+  },
 };
