@@ -433,6 +433,7 @@ const SearchResultStory2 = observer(
     hasFetchedSearchData,
   }: {
     searchStore: ISearchStore;
+    [key: string]: any;
   }) => {
     const [loaded, setLoaded] = React.useState(false);
     useEffect(() => {

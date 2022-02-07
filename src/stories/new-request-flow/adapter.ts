@@ -7642,4 +7642,65 @@ export const adapter = {
       ],
     });
   },
+
+  createSearchFilter(requestData, searchIndex = 0) {
+    let {
+      filters = {},
+      lessonDetails: { lessonSchedule },
+      teacherKind,
+    } = requestData;
+    const request = requestData.splitRequests[searchIndex];
+    let lessonDays = request.lessonDays || [];
+    if (lessonDays.length === 0) {
+      lessonDays = lessonSchedule.lessonDays;
+    }
+
+    const contactInfo = requestData.contactDetails;
+    // also send down the booking days and time for active bookings.
+    // get the regions that are related to the request region and then
+    // include tutors that fall in said region.
+    // active booking lessonDays filter would happen on the client.
+    // send down exam preparation expreience which tallies with the purpose from the request.
+    // send down lesson preference i.e max no of hours etc.
+    const searchFilters = {
+      searchSubject: request.searchSubject, // priority 1. tutor must have this subject if not then it is not part of the result.
+      subjectGroup: request.subjectGroup.join(","), // most of the subjects in subjectGroup
+      // teacherOption: request.teacherOption,
+      specialNeeds: request.specialNeeds.filter((x) => x !== "None").join(","),
+      curriculum: request.curriculum.join(","), // must have all the curriculum
+      class: request.class.join(","), // must have selected all the classes.
+      lessonDays: lessonDays.join(","), // tutors that are free on all of the lessonDays
+      lessonTime: lessonSchedule.lessonTime, // must be available at this time.
+      region: contactInfo.region,
+      state: contactInfo.state,
+      vicinity: contactInfo.vicinity,
+      country: contactInfo.country,
+      teacherKind,
+      searchIndex,
+    };
+    let lessonType =
+      requestData.lessonDetails.lessonType || filters?.lessonType;
+    if (lessonType == "online") {
+      delete searchFilters.region;
+    }
+    return searchFilters;
+  },
+
+  getSearchResults(requestParameters) {
+    let currentSearchData = TUTORSEARCHRESULT_DATA_TRIMED;
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        let searchObj = SAMPLEREQUEST.splitRequests[0];
+        let result = trimSearchResult(
+          currentSearchData,
+          [],
+          SAMPLEREQUEST,
+          searchObj,
+          undefined,
+          []
+        );
+        resolve(result);
+      }, 500);
+    });
+  },
 };
