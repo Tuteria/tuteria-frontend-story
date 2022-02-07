@@ -1,18 +1,18 @@
-import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-flow/constants";
-import storage from "@tuteria/shared-lib/src/storage";
+import {
+  getCurrencyForCountry,
+  resolveCurrencyFromCountry,
+} from "@tuteria/shared-lib/src/components/payments/hooks";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import regions from "@tuteria/shared-lib/src/data/regions.json";
+import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-flow/constants";
+import { trimSearchResult } from "@tuteria/shared-lib/src/home-tutoring/request-flow/search-fns";
+import storage from "@tuteria/shared-lib/src/storage";
 import {
   SAMPLENEIGHBORINGAREA,
+  SAMPLEREQUEST,
   TUTORSEARCHRESULT_DATA,
   TUTORSEARCHRESULT_DATA_TRIMED,
 } from "./sampleData";
-import { SAMPLEREQUEST } from "./sampleData";
-import {
-  resolveCurrencyFromCountry,
-  getCurrencyForCountry,
-} from "@tuteria/shared-lib/src/components/payments/hooks";
-import { trimSearchResult } from "@tuteria/shared-lib/src/home-tutoring/request-flow/search-fns";
 
 const REGION_KEY = "TEST-REGIONS-VICINITIES";
 const COUNTRY_KEY = "TEST-COUNTRIES";
@@ -7665,6 +7665,22 @@ export const adapter = {
         // // undefined,
         // TUTORSEARCHRESULT_DATA[2],
       ],
+      specialities: [
+        { key: "Primary Math", values: ["Engineering", "Sciences"] },
+
+        //this is where we put specialities
+      ],
+    });
+  },
+  initializeProfileToClient: async () => {
+    return samplePromise({
+      requestInfo: SAMPLEREQUEST,
+      tutors: [
+        TUTORSEARCHRESULT_DATA[0],
+        TUTORSEARCHRESULT_DATA[1],
+        TUTORSEARCHRESULT_DATA[2],
+      ],
+      firstSearch: undefined,
       specialities: [
         { key: "Primary Math", values: ["Engineering", "Sciences"] },
 
