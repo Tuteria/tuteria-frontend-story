@@ -550,6 +550,9 @@ export const CheckoutPageView = () => {
       },
     }
   );
+  const tutors = TUTORSEARCHRESULT_DATA_TRIMED.filter((u) =>
+    ["adebowalea", "opeyemia2", "bukolaa7"].includes(u.userId)
+  );
   return (
     <CheckoutPage
       store={bookingStore}
@@ -566,23 +569,19 @@ export const CheckoutPageView = () => {
         requestInfo: {
           ...SAMPLEREQUEST,
           splitRequest: SAMPLEREQUEST.splitRequests.map((o, i) => {
-            let tutors = ["tutorId9", "tutorId12", "tutorId19"];
+            let tutors = ["adebowalea", "opeyemia2", "bukolaa7"];
             return {
               ...o,
               tutorId: tutors[o],
             };
           }),
         },
-        tutors: [
-          TUTORSEARCHRESULT_DATA[0][8],
-          TUTORSEARCHRESULT_DATA[1][5],
-          TUTORSEARCHRESULT_DATA[2][8],
-        ],
+        tutors,
         bookingInfo: {
           slug: SAMPLEREQUEST.slug,
           tutors: [
             {
-              userId: "tutorId9",
+              userId: "adebowalea",
               subject: {
                 hourlyRate: 5000,
                 hourlyDiscount: 0,
@@ -595,7 +594,7 @@ export const CheckoutPageView = () => {
               photo: "https://randomuser.me/api/portraits/women/95.jpg",
             },
             {
-              userId: "tutorId12",
+              userId: "opeyemia2",
               subject: {
                 hourlyRate: 2800,
                 hourlyDiscount: 0,
@@ -609,7 +608,7 @@ export const CheckoutPageView = () => {
             },
 
             {
-              userId: "tutorId19",
+              userId: "bukolaa7",
               subject: {
                 hourlyRate: 2500,
                 hourlyDiscount: 0,
@@ -622,14 +621,14 @@ export const CheckoutPageView = () => {
               photo: "https://randomuser.me/api/portraits/men/36.jpg",
             },
           ],
-          tuitionFee: 329600,
-          totalLessons: 48,
-          totalDiscount: 16800,
+          tuitionFee: 48000,
+          totalLessons: 12,
+          totalDiscount: 0,
           transportFare: 0,
           couponDiscount: 0,
           paidSpeakingFee: false,
           distanceThreshold: 20,
-          walletBalance: 500000,
+          walletBalance: 0,
           fareParKM: 25,
           currency: "₦",
           timeSubmitted: new Date().toISOString(),
