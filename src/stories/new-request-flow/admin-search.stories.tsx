@@ -7,6 +7,7 @@ import React from "react";
 import { adapter, samplePromise } from "./adapter";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import regions from "@tuteria/shared-lib/src/data/regions.json";
+import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-flow/constants";
 
 import { SAMPLEREQUEST } from "./sampleData";
 
@@ -79,9 +80,6 @@ export const SingleRequest = () => {
     email: "benita@tuteria.com",
     image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
   };
-  React.useEffect(() => {
-    adapter.updateStaticData({ regions, countries: allCountries });
-  }, []);
 
   return <AdminSearchPage store={searchStore} agent={sampleAgent} />;
 };
