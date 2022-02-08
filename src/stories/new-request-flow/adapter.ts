@@ -1,18 +1,18 @@
-import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-flow/constants";
-import storage from "@tuteria/shared-lib/src/storage";
+import {
+  getCurrencyForCountry,
+  resolveCurrencyFromCountry,
+} from "@tuteria/shared-lib/src/components/payments/hooks";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import regions from "@tuteria/shared-lib/src/data/regions.json";
+import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-flow/constants";
+import { trimSearchResult } from "@tuteria/shared-lib/src/home-tutoring/request-flow/search-fns";
+import storage from "@tuteria/shared-lib/src/storage";
 import {
   SAMPLENEIGHBORINGAREA,
+  SAMPLEREQUEST,
   TUTORSEARCHRESULT_DATA,
   TUTORSEARCHRESULT_DATA_TRIMED,
 } from "./sampleData";
-import { SAMPLEREQUEST } from "./sampleData";
-import {
-  resolveCurrencyFromCountry,
-  getCurrencyForCountry,
-} from "@tuteria/shared-lib/src/components/payments/hooks";
-import { trimSearchResult } from "@tuteria/shared-lib/src/home-tutoring/request-flow/search-fns";
 
 const REGION_KEY = "TEST-REGIONS-VICINITIES";
 const COUNTRY_KEY = "TEST-COUNTRIES";
@@ -24,6 +24,36 @@ export function samplePromise(data = {}, timer = 300): Promise<any> {
     }, 300);
   });
 }
+let gatewayJson = {
+  amount: "45000",
+  order: "MCYN9OWEOBWA",
+  currency: "ngn",
+  base_country: "NG",
+  description: "Gold Flower",
+  discount: 0,
+  user_details: {
+    first_name: "Abiola",
+    last_name: "Oyeniyi",
+    country: "Nigeria",
+    email: "gbozee@gmail.com",
+    phone_number: "2347035209976",
+    key: "pk_test_3146e297e6d0463fea560139bc122a4aae04fedb",
+    redirect_url:
+      "https://payment.tuteria.com/paystack/verify-payment/MCYN9OWEOBWA/?amount=400000",
+    kind: "paystack",
+    js_script: "https://js.paystack.co/v1/inline.js",
+  },
+  paid: false,
+};
+export function generateInvoice(amountToBePaid, paymentInfo) {
+  //params = {amount,gatewayFee,monthsPaid}
+  // let gatewayFee = 0;
+  // if (gatewayFunc) {
+  //   gatewayFee += gatewayFunc(amount);
+  // }
+  return Promise.resolve({ ...gatewayJson, amount: amountToBePaid });
+}
+
 export const PRICING_INFO = {
   subjectFactor: [
     {
@@ -7641,5 +7671,91 @@ export const adapter = {
         //this is where we put specialities
       ],
     });
+  },
+  initializeProfileToClient: async () => {
+    return samplePromise({
+      requestInfo: SAMPLEREQUEST,
+      tutors: [
+        TUTORSEARCHRESULT_DATA[0],
+        TUTORSEARCHRESULT_DATA[1],
+        TUTORSEARCHRESULT_DATA[2],
+      ],
+      firstSearch: undefined,
+      specialities: [
+        { key: "Primary Math", values: ["Engineering", "Sciences"] },
+
+        //this is where we put specialities
+      ],
+    });
+  },
+  ...{
+    generateInvoice,
+    generateSpeakingInvoice: generateInvoice,
+    onPayWithWallet: async ({ slug, amount }) => {
+      return new Promise((resolve, reject) => {
+        console.log({ slug, amount });
+        setTimeout(() => {
+          resolve({});
+        }, 3000);
+      });
+    },
+    getBookingInfo: async (slug) => {
+      return {
+        slug,
+        tutors: [
+          {
+            userId: "tutorId9",
+            subject: {
+              hourlyRate: 5000,
+              hourlyDiscount: 0,
+              discountForExtraStudents: 10,
+            },
+            newTutorDiscount: 0,
+            distance: 32,
+            firstName: "Adeleke",
+            lastName: "Benson",
+            photo: "https://randomuser.me/api/portraits/women/95.jpg",
+          },
+          {
+            userId: "tutorId12",
+            subject: {
+              hourlyRate: 2800,
+              hourlyDiscount: 0,
+              discountForExtraStudents: 10,
+            },
+            newTutorDiscount: 0,
+            distance: 22,
+            firstName: "Adamson",
+            lastName: "Benson",
+            photo: "https://randomuser.me/api/portraits/men/35.jpg",
+          },
+
+          {
+            userId: "tutorId19",
+            subject: {
+              hourlyRate: 2500,
+              hourlyDiscount: 0,
+              discountForExtraStudents: 10,
+            },
+            newTutorDiscount: 0,
+            distance: 32,
+            firstName: "Atinuke",
+            lastName: "Benson",
+            photo: "https://randomuser.me/api/portraits/men/36.jpg",
+          },
+        ],
+        tuitionFee: 329600,
+        totalLessons: 48,
+        totalDiscount: 16800,
+        transportFare: 0,
+        couponDiscount: 0,
+        paidSpeakingFee: false,
+        distanceThreshold: 20,
+        walletBalance: 500000,
+        fareParKM: 25,
+        currency: "₦",
+        timeSubmitted: new Date().toISOString(),
+      };
+    },
   },
 };

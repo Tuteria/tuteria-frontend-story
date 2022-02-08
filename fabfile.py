@@ -99,10 +99,10 @@ def tag_shared_lib(is_test=False, branch="origin"):
 
 
 @hosts("sama@tutor-search.tuteria.com")
-def build_tuteria_cdn():
+def build_tuteria_cdn(branch="master"):
     with cd("/home/sama/tuteria_cdn"):
         run("git pull --no-edit")
-        run("git checkout -f master")
+        run("git checkout -f {}".format(branch))
         # run('yarn install')
         # run('/home/sama/.nvm/versions/node/v8.9.4/bin/node build')
         run("docker login -u gbozee -p abiola2321 registry.gitlab.com")
