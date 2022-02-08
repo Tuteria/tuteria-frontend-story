@@ -432,6 +432,7 @@ const SearchResultStory2 = observer(
     hasFetchedSearchData,
   }: {
     searchStore: ISearchStore;
+    [key: string]: any;
   }) => {
     const [loaded, setLoaded] = React.useState(false);
     useEffect(() => {
@@ -607,7 +608,7 @@ const CPage = observer(
             bookingStore.sendRequestToClient("checkout")
           }
           bookingDetails={bookingInfo.bookingDetails}
-          currency={bookingInfo.currency}
+          currency="NGN"
           gatewayFeeFunc={gateWayFee}
           agentInfo={agent}
           paymentInfo={bookingStore.paymentInfo}
