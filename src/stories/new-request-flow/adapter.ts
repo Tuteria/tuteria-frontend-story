@@ -7597,7 +7597,7 @@ export const adapter = {
   },
   resolveCurrencyFromCountry: resolveCurrencyFromCountry,
   onTutorsSelected: async (data, paymentInfo) => {
-    console.log(paymentInfo);
+    console.log({ data, paymentInfo });
     return data;
   },
   initializeRequestData: async () => {

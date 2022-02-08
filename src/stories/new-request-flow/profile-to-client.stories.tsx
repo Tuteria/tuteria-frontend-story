@@ -59,7 +59,11 @@ export const SingleRequest = () => {
           //   firstSearch[0]
         ]
       }
-      firstSearch={firstSearch}
+      firstSearch={firstSearch.map((j) => ({
+        ...j,
+        totalAmount: 42000,
+        lessons: 12,
+      }))}
       requestInfo={{
         ...SAMPLEREQUEST,
         splitRequests: [SAMPLEREQUEST.splitRequests[0]],
@@ -93,8 +97,12 @@ export const MultipleRequests = () => {
     <TutorSelectPage
       store={searchStore}
       agent={sampleAgent}
-      firstSearch={firstSearch}
-      tutors={tutors}
+      firstSearch={firstSearch.map((j) => ({
+        ...j,
+        totalAmount: 24000,
+        lessons: 4,
+      }))}
+      tutors={tutors.map((j) => ({ ...j, totalAmount: 24000, lessons: 4 }))}
       requestInfo={SAMPLEREQUEST}
     />
   );
