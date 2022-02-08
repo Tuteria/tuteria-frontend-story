@@ -11,7 +11,7 @@ import {
   ClientRequestStore,
   RequestFlowStore,
 } from "@tuteria/shared-lib/src/home-tutoring/request-flow/store";
-import AdminSearchPage from "@tuteria/shared-lib/src/new-request-flow/pages/AdminSearchPage";
+import { CheckoutPage } from "@tuteria/shared-lib/src/new-request-flow/pages/CheckoutPage";
 import {
   ClientRequestDetail,
   ClientRequestPage as NewClientRequestPage,
@@ -22,11 +22,8 @@ import {
   ErrorState,
   SearchResultPage2,
 } from "@tuteria/shared-lib/src/new-request-flow/pages/SearchResultPage";
-import TutorSelectPage from "@tuteria/shared-lib/src/new-request-flow/pages/SearchResultPage/TutorSelectPage";
-import { CheckoutPage } from "@tuteria/shared-lib/src/new-request-flow/pages/CheckoutPage";
 import TutorProfilePageComponent from "@tuteria/shared-lib/src/new-request-flow/pages/TutorProfilePage";
 import {
-  AdminSearchStore,
   IRequestFlowStore,
   LocationFieldStore,
   SearchStore,
@@ -516,18 +513,6 @@ export const SearchResults = () => {
   );
   return (
     <SearchResultStory2 searchStore={searchStore} hasFetchedSearchData={true} />
-  );
-};
-
-export const ProfileSentToClient = () => {
-  const searchStore = SearchStore.create(
-    {},
-    {
-      adapter,
-    }
-  );
-  return (
-    <TutorSelectStory searchStore={searchStore} hasFetchedSearchData={true} />
   );
 };
 
