@@ -5,6 +5,9 @@ import AdminSearchPage from "@tuteria/shared-lib/src/new-request-flow/pages/Admi
 import { AdminSearchStore } from "@tuteria/shared-lib/src/stores";
 import React from "react";
 import { adapter, samplePromise } from "./adapter";
+import allCountries from "@tuteria/shared-lib/src/data/countries.json";
+import regions from "@tuteria/shared-lib/src/data/regions.json";
+import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-flow/constants";
 
 import { SAMPLEREQUEST } from "./sampleData";
 
@@ -71,6 +74,12 @@ export const SingleRequest = () => {
       },
     }
   );
+  const sampleAgent = {
+    name: "Benita",
+    phone_number: "+2349095121865",
+    email: "benita@tuteria.com",
+    image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
+  };
 
   return <AdminSearchPage store={searchStore} agent={sampleAgent} />;
 };
