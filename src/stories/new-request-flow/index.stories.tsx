@@ -608,7 +608,7 @@ const CPage = observer(
             bookingStore.sendRequestToClient("checkout")
           }
           bookingDetails={bookingInfo.bookingDetails}
-          currency={bookingInfo.currency}
+          currency="NGN"
           gatewayFeeFunc={gateWayFee}
           agentInfo={agent}
           paymentInfo={bookingStore.paymentInfo}
