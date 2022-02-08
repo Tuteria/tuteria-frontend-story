@@ -5,6 +5,8 @@ import AdminSearchPage from "@tuteria/shared-lib/src/new-request-flow/pages/Admi
 import { AdminSearchStore } from "@tuteria/shared-lib/src/stores";
 import React from "react";
 import { adapter, samplePromise } from "./adapter";
+import allCountries from "@tuteria/shared-lib/src/data/countries.json";
+import regions from "@tuteria/shared-lib/src/data/regions.json";
 
 import { SAMPLEREQUEST } from "./sampleData";
 
@@ -70,6 +72,9 @@ export const SingleRequest = () => {
     email: "benita@tuteria.com",
     image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
   };
+  React.useEffect(() => {
+    adapter.updateStaticData({ regions, countries: allCountries });
+  }, []);
   return <AdminSearchPage store={searchStore} agent={sampleAgent} />;
 };
 
