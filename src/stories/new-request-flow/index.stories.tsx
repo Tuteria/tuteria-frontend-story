@@ -11,7 +11,7 @@ import {
   ClientRequestStore,
   RequestFlowStore,
 } from "@tuteria/shared-lib/src/home-tutoring/request-flow/store";
-import AdminSearchPage from "@tuteria/shared-lib/src/new-request-flow/pages/AdminSearchPage";
+import { CheckoutPage } from "@tuteria/shared-lib/src/new-request-flow/pages/CheckoutPage";
 import {
   ClientRequestDetail,
   ClientRequestPage as NewClientRequestPage,
@@ -24,7 +24,6 @@ import {
 } from "@tuteria/shared-lib/src/new-request-flow/pages/SearchResultPage";
 import TutorProfilePageComponent from "@tuteria/shared-lib/src/new-request-flow/pages/TutorProfilePage";
 import {
-  AdminSearchStore,
   IRequestFlowStore,
   LocationFieldStore,
   SearchStore,
@@ -520,4 +519,175 @@ export const SearchResults = () => {
 export const TutorProfilePage = () => {
   const store = searchResultStore.create(TUTORSEARCHRESULT_DATA_TRIMED[0]);
   return <TutorProfilePageComponent searchObj={{}} store={store} />;
+};
+
+const CPage = observer(
+  ({ bookingStore, agent, created, modified, status, loggedIn = false }) => {
+    let [paymentLoading, setLoading] = React.useState(false);
+    let [madePayment, setMadePayment] = React.useState(false);
+    useEffect(() => {
+      bookingStore.initializeRequestData(ACADEMICS_DATA).then(() => {
+        bookingStore.getBookingInfo("XAB101"); // or use bookingStore.updateBookingInfo with raw data
+      });
+      if (loggedIn) {
+        bookingStore.updateLoggedIn(true);
+      } else {
+        bookingStore.updateAdminLogin(true);
+      }
+      // bookingStore.mapToStore(SAMPLEREQUEST);
+    }, []);
+    // const onSubmit = (selectedClass) => {
+    //   console.log(selectedClass);
+    //   navigate("/registration");
+    // };
+    const gateWayFee = bookingStore.bookingInfo?.calculateGateWay;
+    function loadSpeakingPaymentDetails(amount) {
+      setLoading(true);
+      return bookingStore.bookingInfo
+        .generateSpeakingInvoice(amount)
+        .then((rr) => {
+          if (rr.paid) {
+            setLoading(false);
+            setMadePayment(true);
+          } else {
+            return rr;
+          }
+        });
+    }
+    function loadPaymentDetails(amount) {
+      setLoading(true);
+      return bookingStore.bookingInfo
+        .generateInvoice(amount)
+        .then((rr) => {
+          if (rr.paid) {
+            setLoading(false);
+            setMadePayment(true);
+          } else {
+            return rr;
+          }
+        })
+        .catch((error) => {
+          setLoading(false);
+        });
+    }
+    function onPaymentSuccessful(url) {
+      // axios.get(url).then(response => {
+      //     this.afterPayment();
+      //   });
+      // }}
+    }
+    function onSpeakingPaymentSuccessful(url) {
+      bookingStore.bookingInfo.setPaidFee();
+      setLoading(false);
+    }
+    function onPaymentFailed() {
+      setLoading(false);
+    }
+    function onCancelPayment() {
+      setLoading(false);
+    }
+    function onPayWithWallet() {
+      setLoading(true);
+      bookingInfo
+        .onPayWithWallet()
+        .then(() => {})
+        .catch((error) => {
+          setLoading(false);
+        });
+    }
+    let bookingInfo = bookingStore.bookingInfo;
+    return bookingInfo ? (
+      <OverlayRouter>
+        <CheckoutPage
+          isLoggedIn={bookingStore.isLoggedIn}
+          requestData={bookingStore.requestData}
+          isAdminLogin={bookingStore.isAdminLogin}
+          sendingToClient={bookingStore.sendingToClient}
+          sendRequestToClient={() =>
+            bookingStore.sendRequestToClient("checkout")
+          }
+          bookingDetails={bookingInfo.bookingDetails}
+          currency={bookingInfo.currency}
+          gatewayFeeFunc={gateWayFee}
+          agentInfo={agent}
+          paymentInfo={bookingStore.paymentInfo}
+          paymentProps={{
+            callback: onPaymentSuccessful,
+            onClose: onCancelPayment,
+            failureCallback: onPaymentFailed,
+            paymentLoading,
+          }}
+          speakingPaymentProps={{
+            callback: onSpeakingPaymentSuccessful,
+            onClose: onCancelPayment,
+            failureCallback: onPaymentFailed,
+            paymentLoading,
+          }}
+          multipleMonthDiscount={bookingInfo.multipleMonthDiscount}
+          bankInfo={{
+            bankdetails: { name: "Tuteria Limited", number: "0266765638" },
+            howToPay: [
+              "Copy the bank account details below",
+              "Pay with your bank app, USSD or ATM",
+            ],
+            logoUrl: "https://ik.imagekit.io/gbudoh/GTBank_Logo_dJlcYP6KF.png",
+            logoSize: [16, 24],
+          }}
+          loadSpeakingPaymentDetails={loadSpeakingPaymentDetails}
+          loadPaymentDetails={loadPaymentDetails}
+          paymentLoading={paymentLoading}
+          speakingFee={bookingInfo.speakingFee}
+          paidSpeakingFee={bookingInfo.paidSpeakingFee}
+          onPayWithWallet={onPayWithWallet}
+          triggerAdminAction={bookingStore.triggerAdminAction}
+          adminActionOptions={bookingStore.adminActions}
+        />
+      </OverlayRouter>
+    ) : null;
+  }
+);
+
+export const CheckoutPageView = () => {
+  const bookingStore = RequestFlowStore.create(
+    {},
+    {
+      adapter: {
+        ...adapter,
+        initializeRequestData: async () => {
+          return [
+            {
+              ...SAMPLEREQUEST,
+              splitRequest: SAMPLEREQUEST.splitRequests.map((o, i) => {
+                let tutors = ["tutorId9", "tutorId12", "tutorId19"];
+                return {
+                  ...o,
+                  tutorId: tutors[o],
+                };
+              }),
+            },
+            [
+              TUTORSEARCHRESULT_DATA[0][8],
+              TUTORSEARCHRESULT_DATA[1][5],
+              TUTORSEARCHRESULT_DATA[2][8],
+            ],
+          ];
+        },
+      },
+    }
+  );
+  return (
+    <CPage
+      bookingStore={bookingStore}
+      agent={{
+        name: "Benita",
+        phone_number: "+2349095121865",
+        email: "benita@tuteria.com",
+        image: "https://ik.imagekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
+      }}
+      created=""
+      modified=""
+      status="pending"
+      loggedIn
+    />
+  );
 };
