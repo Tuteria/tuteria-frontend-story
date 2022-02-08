@@ -11,7 +11,7 @@ import {
   ClientRequestStore,
   RequestFlowStore,
 } from "@tuteria/shared-lib/src/home-tutoring/request-flow/store";
-import { CheckoutPage } from "@tuteria/shared-lib/src/new-request-flow/pages/CheckoutPage";
+import CheckoutPage from "@tuteria/shared-lib/src/new-request-flow/pages/CheckoutPage";
 import {
   ClientRequestDetail,
   ClientRequestPage as NewClientRequestPage,
@@ -432,6 +432,7 @@ const SearchResultStory2 = observer(
     hasFetchedSearchData,
   }: {
     searchStore: ISearchStore;
+    [key: string]: any;
   }) => {
     const [loaded, setLoaded] = React.useState(false);
     useEffect(() => {
@@ -521,134 +522,8 @@ export const TutorProfilePage = () => {
   return <TutorProfilePageComponent searchObj={{}} store={store} />;
 };
 
-const CPage = observer(
-  ({ bookingStore, agent, created, modified, status, loggedIn = false }) => {
-    let [paymentLoading, setLoading] = React.useState(false);
-    let [madePayment, setMadePayment] = React.useState(false);
-    useEffect(() => {
-      bookingStore.initializeRequestData(ACADEMICS_DATA).then(() => {
-        bookingStore.getBookingInfo("XAB101"); // or use bookingStore.updateBookingInfo with raw data
-      });
-      if (loggedIn) {
-        bookingStore.updateLoggedIn(true);
-      } else {
-        bookingStore.updateAdminLogin(true);
-      }
-      // bookingStore.mapToStore(SAMPLEREQUEST);
-    }, []);
-    // const onSubmit = (selectedClass) => {
-    //   console.log(selectedClass);
-    //   navigate("/registration");
-    // };
-    const gateWayFee = bookingStore.bookingInfo?.calculateGateWay;
-    function loadSpeakingPaymentDetails(amount) {
-      setLoading(true);
-      return bookingStore.bookingInfo
-        .generateSpeakingInvoice(amount)
-        .then((rr) => {
-          if (rr.paid) {
-            setLoading(false);
-            setMadePayment(true);
-          } else {
-            return rr;
-          }
-        });
-    }
-    function loadPaymentDetails(amount) {
-      setLoading(true);
-      return bookingStore.bookingInfo
-        .generateInvoice(amount)
-        .then((rr) => {
-          if (rr.paid) {
-            setLoading(false);
-            setMadePayment(true);
-          } else {
-            return rr;
-          }
-        })
-        .catch((error) => {
-          setLoading(false);
-        });
-    }
-    function onPaymentSuccessful(url) {
-      // axios.get(url).then(response => {
-      //     this.afterPayment();
-      //   });
-      // }}
-    }
-    function onSpeakingPaymentSuccessful(url) {
-      bookingStore.bookingInfo.setPaidFee();
-      setLoading(false);
-    }
-    function onPaymentFailed() {
-      setLoading(false);
-    }
-    function onCancelPayment() {
-      setLoading(false);
-    }
-    function onPayWithWallet() {
-      setLoading(true);
-      bookingInfo
-        .onPayWithWallet()
-        .then(() => {})
-        .catch((error) => {
-          setLoading(false);
-        });
-    }
-    let bookingInfo = bookingStore.bookingInfo;
-    return bookingInfo ? (
-      <OverlayRouter>
-        <CheckoutPage
-          isLoggedIn={bookingStore.isLoggedIn}
-          requestData={bookingStore.requestData}
-          isAdminLogin={bookingStore.isAdminLogin}
-          sendingToClient={bookingStore.sendingToClient}
-          sendRequestToClient={() =>
-            bookingStore.sendRequestToClient("checkout")
-          }
-          bookingDetails={bookingInfo.bookingDetails}
-          currency={bookingInfo.currency}
-          gatewayFeeFunc={gateWayFee}
-          agentInfo={agent}
-          paymentInfo={bookingStore.paymentInfo}
-          paymentProps={{
-            callback: onPaymentSuccessful,
-            onClose: onCancelPayment,
-            failureCallback: onPaymentFailed,
-            paymentLoading,
-          }}
-          speakingPaymentProps={{
-            callback: onSpeakingPaymentSuccessful,
-            onClose: onCancelPayment,
-            failureCallback: onPaymentFailed,
-            paymentLoading,
-          }}
-          multipleMonthDiscount={bookingInfo.multipleMonthDiscount}
-          bankInfo={{
-            bankdetails: { name: "Tuteria Limited", number: "0266765638" },
-            howToPay: [
-              "Copy the bank account details below",
-              "Pay with your bank app, USSD or ATM",
-            ],
-            logoUrl: "https://ik.imagekit.io/gbudoh/GTBank_Logo_dJlcYP6KF.png",
-            logoSize: [16, 24],
-          }}
-          loadSpeakingPaymentDetails={loadSpeakingPaymentDetails}
-          loadPaymentDetails={loadPaymentDetails}
-          paymentLoading={paymentLoading}
-          speakingFee={bookingInfo.speakingFee}
-          paidSpeakingFee={bookingInfo.paidSpeakingFee}
-          onPayWithWallet={onPayWithWallet}
-          triggerAdminAction={bookingStore.triggerAdminAction}
-          adminActionOptions={bookingStore.adminActions}
-        />
-      </OverlayRouter>
-    ) : null;
-  }
-);
-
 export const CheckoutPageView = () => {
-  const bookingStore = RequestFlowStore.create(
+  const bookingStore = SearchStore.create(
     {},
     {
       adapter: {
@@ -675,19 +550,90 @@ export const CheckoutPageView = () => {
       },
     }
   );
+  const tutors = TUTORSEARCHRESULT_DATA_TRIMED.filter((u) =>
+    ["adebowalea", "opeyemia2", "bukolaa7"].includes(u.userId)
+  );
   return (
-    <CPage
-      bookingStore={bookingStore}
+    <CheckoutPage
+      store={bookingStore}
       agent={{
         name: "Benita",
         phone_number: "+2349095121865",
         email: "benita@tuteria.com",
         image: "https://ik.imagekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
       }}
-      created=""
-      modified=""
-      status="pending"
-      loggedIn
+      onPaymentSuccessful={(url) => {
+        console.log(url);
+      }}
+      initialData={{
+        requestInfo: {
+          ...SAMPLEREQUEST,
+          splitRequest: SAMPLEREQUEST.splitRequests.map((o, i) => {
+            let tutors = ["adebowalea", "opeyemia2", "bukolaa7"];
+            return {
+              ...o,
+              tutorId: tutors[o],
+            };
+          }),
+        },
+        tutors,
+        bookingInfo: {
+          slug: SAMPLEREQUEST.slug,
+          tutors: [
+            {
+              userId: "adebowalea",
+              subject: {
+                hourlyRate: 5000,
+                hourlyDiscount: 0,
+                discountForExtraStudents: 10,
+              },
+              newTutorDiscount: 0,
+              distance: 32,
+              firstName: "Adeleke",
+              lastName: "Benson",
+              photo: "https://randomuser.me/api/portraits/women/95.jpg",
+            },
+            {
+              userId: "opeyemia2",
+              subject: {
+                hourlyRate: 2800,
+                hourlyDiscount: 0,
+                discountForExtraStudents: 10,
+              },
+              newTutorDiscount: 0,
+              distance: 22,
+              firstName: "Adamson",
+              lastName: "Benson",
+              photo: "https://randomuser.me/api/portraits/men/35.jpg",
+            },
+
+            {
+              userId: "bukolaa7",
+              subject: {
+                hourlyRate: 2500,
+                hourlyDiscount: 0,
+                discountForExtraStudents: 10,
+              },
+              newTutorDiscount: 0,
+              distance: 32,
+              firstName: "Atinuke",
+              lastName: "Benson",
+              photo: "https://randomuser.me/api/portraits/men/36.jpg",
+            },
+          ],
+          tuitionFee: 48000,
+          totalLessons: 12,
+          totalDiscount: 0,
+          transportFare: 0,
+          couponDiscount: 0,
+          paidSpeakingFee: false,
+          distanceThreshold: 20,
+          walletBalance: 0,
+          fareParKM: 25,
+          currency: "₦",
+          timeSubmitted: new Date().toISOString(),
+        },
+      }}
     />
   );
 };
