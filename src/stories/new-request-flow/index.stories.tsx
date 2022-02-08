@@ -575,7 +575,7 @@ const TutorSelectStory = observer(
         <OverlayRouter>
           <TutorSelectPage
             requestInfo={SAMPLEREQUEST}
-            isMultipleRequest={true}
+            isMultipleRequest={false}
             searchStore={searchStore}
             deniedTutors={[]}
             agent={sampleAgent}
