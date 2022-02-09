@@ -69,6 +69,9 @@ export const SingleRequest = () => {
 
               //this is where we put specialities
             ],
+            academicData: ACADEMICS_DATA,
+            // regions: regions,
+            // countries: allCountries
           });
         },
       },
@@ -80,6 +83,13 @@ export const SingleRequest = () => {
     email: "benita@tuteria.com",
     image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
   };
+
+  React.useEffect(() => {
+    searchStore.useRequestDataProps.lessonLocationStore.updateFields({
+      regions,
+      countries: allCountries,
+    });
+  });
 
   return <AdminSearchPage store={searchStore} agent={sampleAgent} />;
 };
