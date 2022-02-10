@@ -12,6 +12,62 @@ import {
 } from "../new-request-flow/sampleData";
 import clientAdapter from "@tuteria/shared-lib/src/external-pages/request-flow/client-utils";
 
+const serverResult = {
+  tutors: [
+    {
+      full_name: "Cyril U",
+      email: "cyonos2003@yahoo.com",
+      phone_no: "+2348034187494",
+      address: "Block 207 Amuwo-odofin estate,mile 2 Lagos",
+      pool_id: 108772,
+      approved: false,
+      teaches_all: true,
+      matched_subjects: [
+        {
+          name: "Quantitative Reasoning",
+          active: true,
+          url: "/ng/cyrilu/i-love-teaching-quantitative-and-helping-my-pupils-get-better-grades/",
+        },
+        {
+          name: "Verbal Reasoning",
+          active: true,
+          url: "/ng/cyrilu/i-love-teaching-verbal-and-helping-my-pupils-get-better-grades/",
+        },
+        {
+          name: "General Mathematics",
+          active: true,
+          url: "/ng/cyrilu/graduate-of-engineering-and-an-expert-mathematics-teacher/",
+        },
+        {
+          name: "English Language",
+          active: true,
+          url: "/ng/cyrilu/i-love-teaching-basic-english-and-helping-my-pupils-get-better-grades/",
+        },
+      ],
+      default_subject: null,
+      cost: "3333.33",
+    },
+    {
+      full_name: "Gloria A",
+      email: "arinzeifeomagloria@yahoo.com",
+      phone_no: "+2348176863652",
+      address: "51 road block 41 flat 12 festac town lagos Festac Town Lagos",
+      pool_id: 108796,
+      approved: true,
+      teaches_all: true,
+      matched_subjects: [
+        {
+          name: "English Language",
+          active: true,
+          url: "/ng/ifeomaa4/experienced-english-instructor-with-a-personalized-teaching-approach/",
+        },
+      ],
+      default_subject: "English Language",
+      cost: "3334.00",
+    },
+  ],
+};
+
 export const testAdapter = {
   getTutorsFromPool(slug, component) {
     let result = {
