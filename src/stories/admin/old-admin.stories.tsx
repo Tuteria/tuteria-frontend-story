@@ -1,3 +1,4 @@
+import "./bootstrap.css";
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { OverlayRouter } from "@tuteria/shared-lib/src/components/OverlayRouter";
@@ -11,7 +12,6 @@ import {
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { testAdapter } from "./adapter";
-
 export default {
   title: "Admin/Old Admin",
   decorators: [

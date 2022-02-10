@@ -5,12 +5,14 @@ import {
   profileToClientState,
   tutorApprovalState,
   updateBudgetState,
+  additionalInfoState,
 } from "@tuteria/shared-lib/src/old-admin/utils";
 import {
   SAMPLEREQUEST,
   TUTORSEARCHRESULT_DATA,
 } from "../new-request-flow/sampleData";
 import clientAdapter from "@tuteria/shared-lib/src/external-pages/request-flow/client-utils";
+import { samplePromise } from "../tutor-application/adapter";
 
 const serverResult = {
   tutors: [
@@ -123,6 +125,15 @@ export const testAdapter = {
       }, 300);
     });
   },
+  async updateAdditionalInfo(poolId, component, action, postData, updateMsg) {
+    console.log({ action, postData });
+    additionalInfoState(
+      component,
+      { msg: "Updated budget and lesson count" },
+      updateMsg
+    );
+    return samplePromise({});
+  },
   handleToggleApprovalFunc(poolId, approval, component, updateMsg) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -206,6 +217,10 @@ export const testAdapter = {
       console.log("Saved to server", passedData);
       debugger;
       return {};
+    },
+    async updateAdditionalInfo(...rest) {
+      console.log(rest);
+      return samplePromise({});
     },
   }),
 };
