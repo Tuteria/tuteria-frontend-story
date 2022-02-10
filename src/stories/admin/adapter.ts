@@ -106,6 +106,10 @@ export const testAdapter = {
             },
           ],
           default_subject: "Chemistry",
+          additionalInfo: {
+            budget: 50000,
+            no_of_lessons: 4,
+          },
           cost: "3000.00",
         },
       ],
