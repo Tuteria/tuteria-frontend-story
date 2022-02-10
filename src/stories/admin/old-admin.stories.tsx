@@ -13,7 +13,7 @@ import React from "react";
 import { testAdapter } from "./adapter";
 
 export default {
-  title: "Old Admin/Components",
+  title: "Admin/Old Admin",
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
