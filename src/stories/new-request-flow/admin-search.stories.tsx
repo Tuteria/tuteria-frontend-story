@@ -2,15 +2,19 @@ import { Box } from "@chakra-ui/react";
 import { linkTo } from "@storybook/addon-links";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import AdminSearchPage from "@tuteria/shared-lib/src/new-request-flow/pages/AdminSearchPage";
-import { AdminSearchStore } from "@tuteria/shared-lib/src/stores";
+import {
+  AdminSearchStore,
+  SearchResultType,
+} from "@tuteria/shared-lib/src/stores";
 import React from "react";
 import { adapter, samplePromise } from "./adapter";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import regions from "@tuteria/shared-lib/src/data/regions.json";
 import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-flow/constants";
+import EditTutorInfo from "@tuteria/shared-lib/src/new-request-flow/pages/AdminSearchPage/EditTutorInfo";
 
-import { SAMPLEREQUEST } from "./sampleData";
-
+import { SAMPLEREQUEST, TUTORSEARCHRESULT_DATA_TRIMED } from "./sampleData";
+import { observer } from "mobx-react-lite";
 export default {
   title: "Request Flow/Pages/AdminSearch",
   decorators: [
@@ -88,7 +92,7 @@ export const SingleRequest = () => {
       regions,
       countries: allCountries,
     });
-  });
+  }, []);
 
   return <AdminSearchPage store={searchStore} agent={sampleAgent} />;
 };
@@ -168,3 +172,28 @@ export const EmptyRequest = () => {
   };
   return <AdminSearchPage store={searchStore} agent={sampleAgent} />;
 };
+
+const EditTutorDetails = observer(() => {
+  const store = SearchResultType.create(
+    { ...TUTORSEARCHRESULT_DATA_TRIMED[0] },
+    {
+      adapter: {
+        ...adapter,
+      },
+    }
+  );
+  const sampleAgent = {
+    name: "Benita",
+    phone_number: "+2349095121865",
+    email: "benita@tuteria.com",
+    image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
+  };
+
+  React.useEffect(() => {
+    store.initAvailabilityStore();
+  }, []);
+
+  return <EditTutorInfo type="hide" store={store} />;
+});
+
+export const EditTutorDetailsStory = () => <EditTutorDetails />;
