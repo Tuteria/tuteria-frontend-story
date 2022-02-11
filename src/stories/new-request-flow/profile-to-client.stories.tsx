@@ -967,22 +967,13 @@ export default {
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <Box h="100vh" position="relative" overflowY="scroll">
+        <Box m={-4} h="100vh" position="relative" overflowY="scroll">
           <Story />
         </Box>
       </ThemeProvider>
     ),
   ],
 };
-
-function navigate(path: string) {
-  let options = {
-    "/pricing": "Pricing Page",
-    "/request": "Lesson Detail",
-    "/home": "Landing Page",
-  };
-  linkTo("Request Flow/Pages", options[path])();
-}
 
 const sampleAgent = {
   name: "Benita",
@@ -1093,12 +1084,7 @@ export const CheckoutPageView = () => {
   return (
     <CheckoutPage
       store={bookingStore}
-      agent={{
-        name: "Benita",
-        phone_number: "+2349095121865",
-        email: "benita@tuteria.com",
-        image: "https://ik.imagekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
-      }}
+      agent={sampleAgent}
       onPaymentSuccessful={(url) => {
         console.log(url);
       }}
