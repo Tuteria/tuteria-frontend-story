@@ -33,6 +33,7 @@ export const ClientRequestModal = () => {
       instance: {
         requestSlug: "K5WW2U3WIO0K",
         requestSubjects: "Chemistry,Biology",
+        isParentRequest: true,
       },
     },
     { adapter: testAdapter }
