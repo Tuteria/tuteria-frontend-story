@@ -165,64 +165,27 @@ export const LessonDetail = () => {
     />
   );
 };
-const store = ClientRequestStore.create({}, { adapter });
+const store = SearchStore.create({}, { adapter });
 export const PricingPage = () => {
   const [loaded, setLoaded] = React.useState(false);
-  const samplePricingData = {
-    standardFx: 1.0,
-    premiumFx: 1.4,
-    deluxeFx: 1.8,
-    stateFx: 1.0,
-    vicinityFx: 0.9,
-    extraStudentDiscount: 20,
-    splitRequest: [
-      {
-        purposeFx: 1.0,
-        baseRate: 1200,
-        lessonDays: 2,
-        lessonHours: 2,
-        lessonDuration: 4,
-        hourFx: 1,
-        students: 1,
-        subjectsFx: 1.1,
-        curriculumFx: 1.2,
-      },
-      {
-        purposeFx: 1.2,
-        baseRate: 1200,
-        lessonDays: 1,
-        lessonHours: 2,
-        hourFx: 1,
-        lessonDuration: 4,
-        students: 1,
-        subjectsFx: 1.1,
-        curriculumFx: 1.2,
-      },
-      {
-        purposeFx: 1.2,
-        baseRate: 1200,
-        lessonDays: 1,
-        lessonHours: 2,
-        hourFx: 1,
-        lessonDuration: 4,
-        students: 1,
-        subjectsFx: 1.0,
-        curriculumFx: 1.0,
-      },
-    ],
-  };
   React.useEffect(() => {
-    updateClientStore(store);
+    store.initializeClientRequest({
+      pricingInfo: PRICING_INFO,
+      tutorResponses: [],
+      tutors: SAMPLEREQUEST.splitRequests,
+      requestInfo: SAMPLEREQUEST,
+    });
+    // updateClientStore(store);
     setLoaded(true);
   }, []);
-  console.log(store.pricingInfo);
+  console.log(store.clientRequest.pricingInfo);
   return loaded ? (
     <NewPricingPage
       onSubmit={() => {}}
       onEditRequest={() => {
         navigate("/request");
       }}
-      store={store}
+      store={store.clientRequest}
     />
   ) : null;
 };

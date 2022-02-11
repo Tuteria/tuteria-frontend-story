@@ -184,7 +184,7 @@ const RAW_TUTORS = [
     specialities: ["Business, Finance and Administration"],
     rank: 33.86150234741784,
     experience: 1,
-    isIndemand: false,
+    isIndemand: true,
     age: 25,
     eduDegrees: ["HND"],
     eduGrades: ["Other grade"],
