@@ -48,7 +48,6 @@ export const SingleRequest = () => {
         ...adapter,
         initializeAdminSearch: async () => {
           return samplePromise({
-            // requestInfo: {},
             requestInfo: {
               ...SAMPLEREQUEST,
               childDetails: [SAMPLEREQUEST.childDetails[0]],
@@ -92,7 +91,6 @@ export const MultipleSplitRequest = () => {
         ...adapter,
         initializeAdminSearch: async () => {
           return samplePromise({
-            // requestInfo: {},
             requestInfo: SAMPLEREQUEST,
             firstSearch: undefined,
             tutors: [
