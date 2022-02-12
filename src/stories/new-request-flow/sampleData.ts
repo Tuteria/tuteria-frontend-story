@@ -13729,6 +13729,14 @@ export const TUTORSEARCHRESULT_DATA_TRIMED = [
     state: "Lagos",
     region: "Shomolu",
     vicinity: "Palmgrove",
+    address: "1, sample address",
+    exemptedAreas: ["Agege", "Ajah", "Akute"],
+    paymentInfo: {
+      country: "Nigeria",
+      bankName: "Polaris Bank",
+      accountName: "Opeyemi Akande",
+      accountNumber: "1234567890",
+    },
     specialNeedExpertise: [],
     examsExperience: [
       "JSSCE / BECE",

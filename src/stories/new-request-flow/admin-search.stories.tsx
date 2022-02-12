@@ -12,6 +12,7 @@ import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import regions from "@tuteria/shared-lib/src/data/regions.json";
 import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-flow/constants";
 import EditTutorInfo from "@tuteria/shared-lib/src/new-request-flow/pages/AdminSearchPage/EditTutorInfo";
+import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
 
 import { SAMPLEREQUEST, TUTORSEARCHRESULT_DATA_TRIMED } from "./sampleData";
 import { observer } from "mobx-react-lite";
@@ -190,7 +191,11 @@ const EditTutorDetails = observer(() => {
   };
 
   React.useEffect(() => {
-    store.initAvailabilityStore();
+    store.initEditTutorStore({
+      regions,
+      countries: allCountries,
+      countriesSupported: supportedCountries,
+    });
   }, []);
 
   return <EditTutorInfo type="hide" store={store} />;
