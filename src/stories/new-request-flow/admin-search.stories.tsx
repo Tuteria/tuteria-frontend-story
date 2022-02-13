@@ -175,11 +175,38 @@ export const EmptyRequest = () => {
 };
 
 const EditTutorDetails = observer(() => {
-  const store = SearchResultType.create(
-    { ...TUTORSEARCHRESULT_DATA_TRIMED[0] },
+  const searchStore = AdminSearchStore.create(
+    {},
     {
       adapter: {
         ...adapter,
+        initializeAdminSearch: async () => {
+          return samplePromise({
+            requestInfo: {
+              ...SAMPLEREQUEST,
+              childDetails: [SAMPLEREQUEST.childDetails[0]],
+              splitRequests: [SAMPLEREQUEST.splitRequests[0]],
+            },
+            firstSearch: undefined,
+            tutors: [
+              // TUTORSEARCHRESULT_DATA[0],
+              // undefined,
+              // TUTORSEARCHRESULT_DATA[1],
+              // undefined,
+              // // undefined,
+              // // undefined,
+              // TUTORSEARCHRESULT_DATA[2],
+            ],
+            specialities: [
+              { key: "Primary Math", values: ["Engineering", "Sciences"] },
+
+              //this is where we put specialities
+            ],
+            academicData: ACADEMICS_DATA,
+            // regions: regions,
+            // countries: allCountries
+          });
+        },
       },
     }
   );
@@ -191,14 +218,20 @@ const EditTutorDetails = observer(() => {
   };
 
   React.useEffect(() => {
-    store.initEditTutorStore({
+    searchStore.useRequestDataProps.lessonLocationStore.updateFields({
+      regions,
+      countries: allCountries,
+    });
+    searchStore.editTutorInfo.initEditTutorStore({
       regions,
       countries: allCountries,
       countriesSupported: supportedCountries,
     });
+    searchStore.setCurrentEditTutorId("opeyemia2");
   }, []);
 
-  return <EditTutorInfo type="hide" store={store} />;
+  // return <EditTutorInfo type="hide" store={searchStore.editTutorInfo} />;
+  return <AdminSearchPage store={searchStore} agent={sampleAgent} />;
 });
 
 export const EditTutorDetailsStory = () => <EditTutorDetails />;
