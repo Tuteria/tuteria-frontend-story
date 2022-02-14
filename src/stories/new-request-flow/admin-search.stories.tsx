@@ -223,12 +223,9 @@ const EditTutorDetails = observer(() => {
       regions,
       countries: allCountries,
       countriesSupported: supportedCountries,
-      educationData: educationWorkData,
     });
-    searchStore.setCurrentEditTutorId("opeyemia2");
   }, []);
 
-  // return <EditTutorInfo type="hide" store={searchStore.editTutorInfo} />;
   return <AdminSearchPage store={searchStore} agent={sampleAgent} />;
 });
 

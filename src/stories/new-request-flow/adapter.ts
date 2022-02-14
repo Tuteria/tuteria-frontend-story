@@ -7818,5 +7818,9 @@ export const adapter = {
         timeSubmitted: new Date().toISOString(),
       };
     },
+    saveTutorInfo: async (data: any) => {
+      console.log(data);
+      return await samplePromise("tutorToken");
+    },
   },
 };
