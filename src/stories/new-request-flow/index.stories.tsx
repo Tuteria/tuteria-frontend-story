@@ -11,11 +11,6 @@ import {
   ClientRequestStore,
   RequestFlowStore,
 } from "@tuteria/shared-lib/src/home-tutoring/request-flow/store";
-import CheckoutPage from "@tuteria/shared-lib/src/new-request-flow/pages/CheckoutPage";
-import {
-  ClientRequestDetail,
-  ClientRequestPage as NewClientRequestPage,
-} from "@tuteria/shared-lib/src/new-request-flow/pages/ClientRequestPage";
 import CompletePage from "@tuteria/shared-lib/src/new-request-flow/pages/CompletePage";
 import LandingPageComponent from "@tuteria/shared-lib/src/new-request-flow/pages/LandingPage";
 import {
@@ -46,7 +41,7 @@ export default {
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <Box h="100vh" position="relative" overflowY="scroll">
+        <Box m={-4} h="100vh" position="relative" overflowY="scroll">
           <Story />
         </Box>
       </ThemeProvider>
@@ -170,64 +165,27 @@ export const LessonDetail = () => {
     />
   );
 };
-const store = ClientRequestStore.create({}, { adapter });
+const store = SearchStore.create({}, { adapter });
 export const PricingPage = () => {
   const [loaded, setLoaded] = React.useState(false);
-  const samplePricingData = {
-    standardFx: 1.0,
-    premiumFx: 1.4,
-    deluxeFx: 1.8,
-    stateFx: 1.0,
-    vicinityFx: 0.9,
-    extraStudentDiscount: 20,
-    splitRequest: [
-      {
-        purposeFx: 1.0,
-        baseRate: 1200,
-        lessonDays: 2,
-        lessonHours: 2,
-        lessonDuration: 4,
-        hourFx: 1,
-        students: 1,
-        subjectsFx: 1.1,
-        curriculumFx: 1.2,
-      },
-      {
-        purposeFx: 1.2,
-        baseRate: 1200,
-        lessonDays: 1,
-        lessonHours: 2,
-        hourFx: 1,
-        lessonDuration: 4,
-        students: 1,
-        subjectsFx: 1.1,
-        curriculumFx: 1.2,
-      },
-      {
-        purposeFx: 1.2,
-        baseRate: 1200,
-        lessonDays: 1,
-        lessonHours: 2,
-        hourFx: 1,
-        lessonDuration: 4,
-        students: 1,
-        subjectsFx: 1.0,
-        curriculumFx: 1.0,
-      },
-    ],
-  };
   React.useEffect(() => {
-    updateClientStore(store);
+    store.initializeClientRequest({
+      pricingInfo: PRICING_INFO,
+      tutorResponses: [],
+      tutors: SAMPLEREQUEST.splitRequests,
+      requestInfo: SAMPLEREQUEST,
+    });
+    // updateClientStore(store);
     setLoaded(true);
   }, []);
-  console.log(store.pricingInfo);
+  console.log(store.clientRequest.pricingInfo);
   return loaded ? (
     <NewPricingPage
       onSubmit={() => {}}
       onEditRequest={() => {
         navigate("/request");
       }}
-      store={store}
+      store={store.clientRequest}
     />
   ) : null;
 };
@@ -397,28 +355,50 @@ function updateClientStore(store) {
 export const RequestCompletePage = () => {
   return <CompletePage />;
 };
-
-export const ClientRequestPage = () => {
-  let [loaded, setLoaded] = useState(false);
-  useEffect(() => {
-    updateClientStore(store);
-    setLoaded(true);
-  }, []);
-  return loaded ? (
-    <NewClientRequestPage
-      defaultMenu={"Requests"}
-      onSidebarItemClick={() => {}}
-      onAddWhatsapp={() => {}}
-      store={store}
-    >
-      <ClientRequestDetail
-        noTutorsFound={store.tutors.length === 0}
-        currency={store.currency}
-        requestInfo={store.info}
-        store={store}
-      />
-    </NewClientRequestPage>
-  ) : null;
+const initialData = {
+  tutorResponses: SAMPLECLIENTREQUEST.tutorDetails.map((o) => ({
+    ...o.tutorResponse,
+    tutor_slug: o.tutorId,
+  })),
+  pricingInfo: PRICING_INFO,
+  tutors: SAMPLECLIENTREQUEST.tutorDetails.map((o) => ({
+    userId: o.tutorId,
+    ...o.tutorInfo,
+  })),
+  requestInfo: {
+    contactDetails: SAMPLECLIENTREQUEST.contactDetails,
+    lessonDetails: {
+      lessonType: SAMPLECLIENTREQUEST.lessonDetails.lessonType,
+      lessonSchedule: SAMPLECLIENTREQUEST.lessonDetails,
+      lessonDays: SAMPLEREQUEST.lessonDetails.lessonSchedule.lessonDays,
+    },
+    childDetails: SAMPLECLIENTREQUEST.childDetails,
+    splitRequests: SAMPLECLIENTREQUEST.tutorDetails.map((o, i) => ({
+      names: o.names,
+      curriculum: SAMPLECLIENTREQUEST.childDetails[i].curriculum,
+      purposes: SAMPLEREQUEST.splitRequests[i].purposes || [],
+      tutorId: o.tutorId,
+      lessonDays: o.lessonDays,
+      lessonDuration: 3,
+      lessonHours: 1,
+      subjectGroup: o.subjectGroup,
+      searchSubject: o.searchSubject,
+    })),
+    slug: SAMPLECLIENTREQUEST.slug,
+    created: SAMPLECLIENTREQUEST.created,
+    modified: SAMPLECLIENTREQUEST.modified,
+    status: SAMPLECLIENTREQUEST.status,
+    agent: SAMPLECLIENTREQUEST.agent,
+  },
+  bookingInfo: {
+    walletBalance: 0,
+    lessonPayments: [{ lessons: 8 }, { lessons: 8 }],
+    monthsPaid: 1,
+    speakingFee: 7500,
+    tuitionFee: 86616,
+    transportFare: 0,
+    totalDiscount: 0,
+  },
 };
 
 const SearchResultStory2 = observer(
@@ -520,120 +500,4 @@ export const SearchResults = () => {
 export const TutorProfilePage = () => {
   const store = searchResultStore.create(TUTORSEARCHRESULT_DATA_TRIMED[0]);
   return <TutorProfilePageComponent searchObj={{}} store={store} />;
-};
-
-export const CheckoutPageView = () => {
-  const bookingStore = SearchStore.create(
-    {},
-    {
-      adapter: {
-        ...adapter,
-        initializeRequestData: async () => {
-          return [
-            {
-              ...SAMPLEREQUEST,
-              splitRequest: SAMPLEREQUEST.splitRequests.map((o, i) => {
-                let tutors = ["tutorId9", "tutorId12", "tutorId19"];
-                return {
-                  ...o,
-                  tutorId: tutors[o],
-                };
-              }),
-            },
-            [
-              TUTORSEARCHRESULT_DATA[0][8],
-              TUTORSEARCHRESULT_DATA[1][5],
-              TUTORSEARCHRESULT_DATA[2][8],
-            ],
-          ];
-        },
-      },
-    }
-  );
-  const tutors = TUTORSEARCHRESULT_DATA_TRIMED.filter((u) =>
-    ["adebowalea", "opeyemia2", "bukolaa7"].includes(u.userId)
-  );
-  return (
-    <CheckoutPage
-      store={bookingStore}
-      agent={{
-        name: "Benita",
-        phone_number: "+2349095121865",
-        email: "benita@tuteria.com",
-        image: "https://ik.imagekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
-      }}
-      onPaymentSuccessful={(url) => {
-        console.log(url);
-      }}
-      initialData={{
-        requestInfo: {
-          ...SAMPLEREQUEST,
-          splitRequest: SAMPLEREQUEST.splitRequests.map((o, i) => {
-            let tutors = ["adebowalea", "opeyemia2", "bukolaa7"];
-            return {
-              ...o,
-              tutorId: tutors[o],
-            };
-          }),
-        },
-        tutors,
-        bookingInfo: {
-          slug: SAMPLEREQUEST.slug,
-          tutors: [
-            {
-              userId: "adebowalea",
-              subject: {
-                hourlyRate: 5000,
-                hourlyDiscount: 0,
-                discountForExtraStudents: 10,
-              },
-              newTutorDiscount: 0,
-              distance: 32,
-              firstName: "Adeleke",
-              lastName: "Benson",
-              photo: "https://randomuser.me/api/portraits/women/95.jpg",
-            },
-            {
-              userId: "opeyemia2",
-              subject: {
-                hourlyRate: 2800,
-                hourlyDiscount: 0,
-                discountForExtraStudents: 10,
-              },
-              newTutorDiscount: 0,
-              distance: 22,
-              firstName: "Adamson",
-              lastName: "Benson",
-              photo: "https://randomuser.me/api/portraits/men/35.jpg",
-            },
-
-            {
-              userId: "bukolaa7",
-              subject: {
-                hourlyRate: 2500,
-                hourlyDiscount: 0,
-                discountForExtraStudents: 10,
-              },
-              newTutorDiscount: 0,
-              distance: 32,
-              firstName: "Atinuke",
-              lastName: "Benson",
-              photo: "https://randomuser.me/api/portraits/men/36.jpg",
-            },
-          ],
-          tuitionFee: 48000,
-          totalLessons: 12,
-          totalDiscount: 0,
-          transportFare: 0,
-          couponDiscount: 0,
-          paidSpeakingFee: false,
-          distanceThreshold: 20,
-          walletBalance: 0,
-          fareParKM: 25,
-          currency: "₦",
-          timeSubmitted: new Date().toISOString(),
-        },
-      }}
-    />
-  );
 };

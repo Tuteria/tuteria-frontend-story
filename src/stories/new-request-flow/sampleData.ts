@@ -20939,6 +20939,14 @@ export const TUTORSEARCHRESULT_DATA_TRIMED = [
     state: "Lagos",
     region: "Ogudu",
     vicinity: "Ogudu",
+    address: "1, sample address",
+    exemptedAreas: ["Agege", "Ajah", "Akute"],
+    paymentInfo: {
+      country: "Nigeria",
+      bankName: "Polaris Bank",
+      accountName: "Oyeladun Akinniyi",
+      accountNumber: "1234567890",
+    },
     specialNeedExpertise: [],
     examsExperience: [
       "Entrance Into Top Schools",

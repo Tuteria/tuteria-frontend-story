@@ -2,17 +2,14 @@ import { Box } from "@chakra-ui/react";
 import { linkTo } from "@storybook/addon-links";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import AdminSearchPage from "@tuteria/shared-lib/src/new-request-flow/pages/AdminSearchPage";
-import {
-  AdminSearchStore,
-  SearchResultType,
-} from "@tuteria/shared-lib/src/stores";
+import { AdminSearchStore } from "@tuteria/shared-lib/src/stores";
 import React from "react";
 import { adapter, samplePromise } from "./adapter";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import regions from "@tuteria/shared-lib/src/data/regions.json";
 import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-flow/constants";
-import EditTutorInfo from "@tuteria/shared-lib/src/new-request-flow/pages/AdminSearchPage/EditTutorInfo";
 import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
+import educationWorkData from "@tuteria/shared-lib/src/data/educationData.json";
 
 import { SAMPLEREQUEST, TUTORSEARCHRESULT_DATA_TRIMED } from "./sampleData";
 import { observer } from "mobx-react-lite";
@@ -222,10 +219,11 @@ const EditTutorDetails = observer(() => {
       regions,
       countries: allCountries,
     });
-    searchStore.editTutorInfo.initEditTutorStore({
+    searchStore.editTutorInfo.initWithStaticData({
       regions,
       countries: allCountries,
       countriesSupported: supportedCountries,
+      educationData: educationWorkData,
     });
     searchStore.setCurrentEditTutorId("opeyemia2");
   }, []);

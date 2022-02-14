@@ -2,6 +2,7 @@ import "./bootstrap.css";
 import { Box } from "@chakra-ui/react";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { OverlayRouter } from "@tuteria/shared-lib/src/components/OverlayRouter";
+import "@tuteria/shared-lib/src/old-admin/AdminModal/admin-modal.css";
 import BookGroupLessonModalComponent from "@tuteria/shared-lib/src/old-admin/BookGroupLessonModal";
 import ClientRequestModalComponent from "@tuteria/shared-lib/src/old-admin/ClientRequestModal";
 import NewClientRequestModalComponent from "@tuteria/shared-lib/src/old-admin/NewClientRequestModal";
@@ -33,6 +34,7 @@ export const ClientRequestModal = () => {
       instance: {
         requestSlug: "K5WW2U3WIO0K",
         requestSubjects: "Chemistry,Biology",
+        isParentRequest: true,
       },
     },
     { adapter: testAdapter }

@@ -20,7 +20,7 @@ export default {
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <Box h="100vh" position="relative" overflowY="scroll">
+        <Box m={-4} h="100vh" position="relative" overflowY="scroll">
           <Story />
         </Box>
       </ThemeProvider>

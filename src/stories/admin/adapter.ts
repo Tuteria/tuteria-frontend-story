@@ -71,44 +71,58 @@ const serverResult = {
 };
 
 export const testAdapter = {
-  getTutorsFromPool(slug, component) {
+  getTutorsFromPool(slug, totalBudget, component) {
     let result = {
-      tutors: [
-        {
-          full_name: "Adewale R",
-          email: "samradicey@gmail.com",
-          phone_no: "+2348063560343",
-          address:
-            "1, Olusegun Akinseli Street, TVC Junction, Eruwen  Itamaga Axis Lagos",
-          pool_id: 103683,
-          approved: true,
-          teaches_all: true,
-          matched_subjects: [
-            {
-              name: "Geography",
-              active: true,
-              url: "/ng/adewaler/an-analytical-geography-teacher-and-a-map-reading-adept/",
-            },
-            {
-              name: "Biology",
-              active: true,
-              url: "/ng/adewaler/learn-biology-with-my-knowledge-of-medical-microbiology/",
-            },
-            {
-              name: "Basic Sciences",
-              active: true,
-              url: "/ng/adewaler/a-medical-microbiologist-with-8years-of-teaching-integratedbasic-sci/",
-            },
-            {
-              name: "Chemistry",
-              active: true,
-              url: "/ng/adewaler/an-analytical-and-practical-oriented-chemistry-teacher/",
-            },
-          ],
-          default_subject: "Chemistry",
-          cost: "3000.00",
-        },
-      ],
+      // tutors: [
+      //   {
+      //     full_name: "Adewale R",
+      //     email: "samradicey@gmail.com",
+      //     phone_no: "+2348063560343",
+      //     address:
+      //       "1, Olusegun Akinseli Street, TVC Junction, Eruwen  Itamaga Axis Lagos",
+      //     pool_id: 103683,
+      //     approved: true,
+      //     teaches_all: true,
+      //     matched_subjects: [
+      //       {
+      //         name: "Geography",
+      //         active: true,
+      //         url: "/ng/adewaler/an-analytical-geography-teacher-and-a-map-reading-adept/",
+      //       },
+      //       {
+      //         name: "Biology",
+      //         active: true,
+      //         url: "/ng/adewaler/learn-biology-with-my-knowledge-of-medical-microbiology/",
+      //       },
+      //       {
+      //         name: "Basic Sciences",
+      //         active: true,
+      //         url: "/ng/adewaler/a-medical-microbiologist-with-8years-of-teaching-integratedbasic-sci/",
+      //       },
+      //       {
+      //         name: "Chemistry",
+      //         active: true,
+      //         url: "/ng/adewaler/an-analytical-and-practical-oriented-chemistry-teacher/",
+      //       },
+      //     ],
+      //     default_subject: "Chemistry",
+      //     additionalInfo: {
+      //       budget: 50000,
+      //       no_of_lessons: 4,
+      //     },
+      //     cost: "3000.00",
+      //   },
+      // ],
+      tutors: serverResult.tutors.map((u) => {
+        return {
+          ...u,
+          additionalInfo: {
+            budget: u?.additionalInfo?.budget || totalBudget,
+            no_of_lessons: u?.additionalInfo?.no_of_lessons || 0,
+          },
+        };
+      }),
+      teach_all_subjects: false,
     };
     fetchTutorsState(component, result);
     return Promise.resolve(result);

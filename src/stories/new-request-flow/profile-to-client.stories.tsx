@@ -4,12 +4,10 @@ import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import TutorSelectPage from "@tuteria/shared-lib/src/new-request-flow/pages/TutorSelectPage";
 import { SearchStore } from "@tuteria/shared-lib/src/stores";
 import React from "react";
-import { adapter, samplePromise } from "./adapter";
-import {
-  SAMPLEREQUEST,
-  TUTORSEARCHRESULT_DATA,
-  TUTORSEARCHRESULT_DATA_TRIMED,
-} from "./sampleData";
+import { adapter, PRICING_INFO } from "./adapter";
+import { SAMPLEREQUEST, TUTORSEARCHRESULT_DATA_TRIMED } from "./sampleData";
+import CheckoutPage from "@tuteria/shared-lib/src/new-request-flow/pages/CheckoutPage";
+import NewClientRequestPage from "@tuteria/shared-lib/src/new-request-flow/pages/ClientRequestPage";
 
 // import { SAMPLEREQUEST as SAMPLECLIENTREQUEST } from "./sampleData";
 
@@ -186,7 +184,7 @@ const RAW_TUTORS = [
     specialities: ["Business, Finance and Administration"],
     rank: 33.86150234741784,
     experience: 1,
-    isIndemand: false,
+    isIndemand: true,
     age: 25,
     eduDegrees: ["HND"],
     eduGrades: ["Other grade"],
@@ -969,7 +967,7 @@ export default {
   decorators: [
     (Story: React.FC) => (
       <ThemeProvider>
-        <Box h="100vh" position="relative" overflowY="scroll">
+        <Box m={-4} h="100vh" position="relative" overflowY="scroll">
           <Story />
         </Box>
       </ThemeProvider>
@@ -977,15 +975,12 @@ export default {
   ],
 };
 
-function navigate(path: string) {
-  let options = {
-    "/pricing": "Pricing Page",
-    "/request": "Lesson Detail",
-    "/home": "Landing Page",
-  };
-  linkTo("Request Flow/Pages", options[path])();
-}
-
+const sampleAgent = {
+  name: "Benita",
+  phone_number: "+2349095121865",
+  email: "benita@tuteria.com",
+  image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
+};
 export const SingleRequest = () => {
   const searchStore = SearchStore.create(
     {},
@@ -994,37 +989,18 @@ export const SingleRequest = () => {
     }
   );
 
-  const sampleAgent = {
-    name: "Benita",
-    phone_number: "+2349095121865",
-    email: "benita@tuteria.com",
-    image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
-  };
   const firstSearch = TUTORSEARCHRESULT_DATA_TRIMED.slice(0, 3);
   return (
     <TutorSelectPage
       store={searchStore}
       agent={sampleAgent}
-      tutors={
-        [
-          //   firstSearch[0]
-        ]
-      }
+      tutors={[]}
       firstSearch={firstSearch.map((j) => ({
         ...j,
         totalAmount: 42000,
         lessons: 12,
       }))}
       requestInfo={demoSingle}
-      // requestInfo={{
-      //   ...SAMPLEREQUEST,
-      //   splitRequests: [SAMPLEREQUEST.splitRequests[0]].map((j) => ({
-      //     searchSubject: j.searchSubject,
-      //     lessonDays: j.lessonDays,
-      //     subjectGroup: j.subjectGroup,
-      //     class: j.class,
-      //   })),
-      // }}
     />
   );
 };
@@ -1037,19 +1013,6 @@ export const MultipleRequests = () => {
     }
   );
 
-  const sampleAgent = {
-    name: "Benita",
-    phone_number: "+2349095121865",
-    email: "benita@tuteria.com",
-    image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
-  };
-  const firstSearch = TUTORSEARCHRESULT_DATA_TRIMED.filter((u) =>
-    ["adebowalea", "opeyemia2", "bukolaa7"].includes(u.userId)
-  );
-  const tutors = TUTORSEARCHRESULT_DATA_TRIMED.filter((o) =>
-    firstSearch.map((u) => u.userId).includes(o.userId)
-  );
-  console.log({ tutors });
   return (
     <TutorSelectPage
       store={searchStore}
@@ -1068,4 +1031,69 @@ export const MultipleRequests = () => {
       requestInfo={demoData.requestInfo}
     />
   );
+};
+
+let requestInfo = {
+  ...demoData.requestInfo,
+  splitRequests: demoData.requestInfo.splitRequests.map((o, i) => {
+    let tutors = demoData.tutors.map((o) => o.userId);
+    return {
+      ...o,
+      tutorId: tutors[i],
+      tutorData: demoData.tutors[i],
+    };
+  }),
+};
+const initialData = {
+  requestInfo,
+  tutors: demoData.tutors.map((j) => ({
+    ...j,
+    totalAmount: 24000,
+    lessons: 4,
+  })),
+  bookingInfo: {
+    slug: demoData.requestInfo.slug,
+    tuitionFee: 48000,
+    totalLessons: 12,
+    totalDiscount: 0,
+    transportFare: 0,
+    couponDiscount: 0,
+    paidSpeakingFee: false,
+    distanceThreshold: 20,
+    walletBalance: 0,
+    fareParKM: 25,
+    currency: "₦",
+    timeSubmitted: new Date().toISOString(),
+  },
+
+  tutorResponses: demoData.tutors.map((o) => ({
+    status: "accepted",
+    dateSubmitted: "2021-05-20T03:10:00",
+    tutor_slug: o.userId,
+  })),
+  pricingInfo: PRICING_INFO,
+};
+export const CheckoutPageView = () => {
+  const bookingStore = SearchStore.create(
+    {},
+    {
+      adapter,
+    }
+  );
+  console.log(requestInfo);
+  return (
+    <CheckoutPage
+      store={bookingStore}
+      agent={sampleAgent}
+      onPaymentSuccessful={(url) => {
+        console.log(url);
+      }}
+      initialData={initialData}
+    />
+  );
+};
+
+export const AfterPaymentPage = () => {
+  const rootStore = SearchStore.create({}, { adapter });
+  return <NewClientRequestPage initialData={initialData} store={rootStore} />;
 };
