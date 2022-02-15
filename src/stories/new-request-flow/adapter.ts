@@ -7818,8 +7818,8 @@ export const adapter = {
         timeSubmitted: new Date().toISOString(),
       };
     },
-    saveTutorInfo: async (data: any) => {
-      console.log(data);
+    saveTutorInfo: async (key: string, data: any) => {
+      console.log(key, data);
       return await samplePromise("tutorToken");
     },
   },

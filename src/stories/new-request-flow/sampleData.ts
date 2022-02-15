@@ -6211,7 +6211,7 @@ export const TUTORSEARCHRESULT_DATA = [
     country: "Nigeria",
     state: "Lagos",
     region: "Ogudu",
-    vicinity: "Ogudu",
+    vicinity: "Sample vicinity",
     specialNeedExpertise: [],
     examsExperience: [
       "Entrance Into Top Schools",
@@ -20913,6 +20913,7 @@ export const TUTORSEARCHRESULT_DATA_TRIMED = [
     delivery: ["physical", "online"],
     dateOfBirth: "1989-05-05",
     phone: "2348103317380",
+    whatsappNumber: "2348103317380",
     requestPending: 0,
     requestsDeclined: 0,
     totalJobsAssigned: 0,
@@ -20938,7 +20939,7 @@ export const TUTORSEARCHRESULT_DATA_TRIMED = [
     country: "Nigeria",
     state: "Lagos",
     region: "Ogudu",
-    vicinity: "Ogudu",
+    vicinity: "Ogudu bustop",
     address: "1, sample address",
     exemptedAreas: ["Agege", "Ajah", "Akute"],
     paymentInfo: {
