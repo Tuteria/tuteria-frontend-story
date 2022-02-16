@@ -9,10 +9,9 @@ import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import regions from "@tuteria/shared-lib/src/data/regions.json";
 import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-flow/constants";
 import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
-import educationWorkData from "@tuteria/shared-lib/src/data/educationData.json";
-
-import { SAMPLEREQUEST, TUTORSEARCHRESULT_DATA_TRIMED } from "./sampleData";
+import { SAMPLEREQUEST } from "./sampleData";
 import { observer } from "mobx-react-lite";
+
 export default {
   title: "Request Flow/Pages/AdminSearch",
   decorators: [
