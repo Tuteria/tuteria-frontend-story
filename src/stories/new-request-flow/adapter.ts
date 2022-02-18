@@ -7405,7 +7405,7 @@ export const adapter = {
     }
     storage.set(REQUEST_KEY, requestData);
     console.log(requestData);
-    return data;
+    return await samplePromise(data, 5000);
   },
   fetchAcademicData: async () => {
     return ACADEMICS_DATA;
@@ -7817,6 +7817,10 @@ export const adapter = {
         currency: "₦",
         timeSubmitted: new Date().toISOString(),
       };
+    },
+    saveTutorInfo: async (key: string, data: any) => {
+      console.log(key, data);
+      return await samplePromise("tutorToken");
     },
   },
 };
