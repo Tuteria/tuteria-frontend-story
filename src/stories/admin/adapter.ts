@@ -6,6 +6,7 @@ import {
   tutorApprovalState,
   updateBudgetState,
   additionalInfoState,
+  updateSplitCountState,
 } from "@tuteria/shared-lib/src/old-admin/utils";
 import {
   SAMPLEREQUEST,
@@ -123,9 +124,14 @@ export const testAdapter = {
         };
       }),
       teach_all_subjects: false,
+      split_count: 2,
     };
     fetchTutorsState(component, result);
     return Promise.resolve(result);
+  },
+  updateSplitCount(slug, splitCount, component, updateMsg) {
+    updateSplitCountState({ msg: "Split updated" }, updateMsg);
+    return Promise.resolve({});
   },
   updateBudgetFunc(slug, budget, component) {
     return new Promise((resolve, reject) => {
