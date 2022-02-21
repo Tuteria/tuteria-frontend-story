@@ -3,6 +3,7 @@ import RemarkApp from "@tuteria/shared-lib/src/admin/Remark";
 import ReviewMediaUpload from "@tuteria/shared-lib/src/admin/ReviewMediaUpload";
 import ReviewGuarantorComponent from "@tuteria/shared-lib/src/admin/ReviewGuarantors";
 import WhatsAppChatModalComponent from "@tuteria/shared-lib/src/admin/WhatsAppChatModal";
+import RequestFollowUpComponent from "@tuteria/shared-lib/src/admin/RequestFollowUp";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import React from "react";
 import { samplePromise } from "../tutor-application/adapter";
@@ -176,6 +177,23 @@ export const WhatsAppChatModal = () => {
         },
       ]}
       onClose={() => {}}
+    />
+  );
+};
+
+export const RequestFollowUp = () => {
+  return (
+    <RequestFollowUpComponent
+      actions={[
+        { label: "Add Remark", value: "generic" },
+        { label: "Lead Won", value: "won" },
+        { label: "Lead Lost", value: "lost" },
+      ]}
+      currentStage={1}
+      onClose={() => {}}
+      onUpdateStage={async () => {}}
+      onUpdateRemark={async () => {}}
+      request_id="1234"
     />
   );
 };
