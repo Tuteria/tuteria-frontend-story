@@ -33,6 +33,7 @@ export const UpdateRemark = () => {
         { label: "Contact client later", value: "call_client_later" },
         { label: "Generic action", value: "generic" },
       ]}
+      childNode={document.getElementById("modal-root")}
     />
   );
 };
@@ -189,13 +190,12 @@ export const RequestFollowUp = () => {
         { label: "Lead Won", value: "won" },
         { label: "Lead Lost", value: "lost" },
       ]}
-      currentStage={1}
-      onClose={() => {}}
+      currentStage={2}
       onUpdateStage={async () => {
         return await samplePromise({});
       }}
       onUpdateRemark={async () => {
-        return await samplePromise({});
+        return await samplePromise("");
       }}
       request_id="1234"
     />
