@@ -185,14 +185,18 @@ export const RequestFollowUp = () => {
   return (
     <RequestFollowUpComponent
       actions={[
-        { label: "Add Remark", value: "generic" },
+        { label: "Generic Remark", value: "generic" },
         { label: "Lead Won", value: "won" },
         { label: "Lead Lost", value: "lost" },
       ]}
       currentStage={1}
       onClose={() => {}}
-      onUpdateStage={async () => {}}
-      onUpdateRemark={async () => {}}
+      onUpdateStage={async () => {
+        return await samplePromise({});
+      }}
+      onUpdateRemark={async () => {
+        return await samplePromise({});
+      }}
       request_id="1234"
     />
   );
