@@ -21,7 +21,7 @@ export function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(data);
-    }, 300);
+    }, timer);
   });
 }
 let gatewayJson = {
@@ -7821,6 +7821,10 @@ export const adapter = {
     saveTutorInfo: async (key: string, data: any) => {
       console.log(key, data);
       return await samplePromise("tutorToken");
+    },
+
+    updateRequestParameters(values) {
+      return samplePromise(values, 1000);
     },
   },
 };
