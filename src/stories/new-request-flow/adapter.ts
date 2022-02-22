@@ -7405,7 +7405,8 @@ export const adapter = {
     }
     storage.set(REQUEST_KEY, requestData);
     console.log(requestData);
-    return await samplePromise(data, 5000);
+    return data;
+    // return await samplePromise(data, 5000);
   },
   fetchAcademicData: async () => {
     return ACADEMICS_DATA;
