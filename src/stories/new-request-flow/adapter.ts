@@ -7381,6 +7381,21 @@ export const adapter = {
         },
       };
     }
+    if (key === "children-schedule") {
+      const schedule = data.reduce(
+        (acc, el) => ({
+          ...acc,
+          ...el,
+          lessonDays: [...new Set(el.lessonDays.concat(acc.lessonDays || []))],
+        }),
+        {}
+      );
+      requestData.lessonDetails = {
+        ...(requestData.lessonDetails || {}),
+        lessonSchedule: schedule,
+      };
+      requestData.clientSchedule = data;
+    }
     if (key === "lesson-location") {
       requestData.contactDetails = {
         ...(requestData.contactDetails || {}),
