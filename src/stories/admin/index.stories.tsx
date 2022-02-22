@@ -3,6 +3,7 @@ import RemarkApp from "@tuteria/shared-lib/src/admin/Remark";
 import ReviewMediaUpload from "@tuteria/shared-lib/src/admin/ReviewMediaUpload";
 import ReviewGuarantorComponent from "@tuteria/shared-lib/src/admin/ReviewGuarantors";
 import WhatsAppChatModalComponent from "@tuteria/shared-lib/src/admin/WhatsAppChatModal";
+import RequestFollowUpComponent from "@tuteria/shared-lib/src/admin/RequestFollowUp";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import React from "react";
 import { samplePromise } from "../tutor-application/adapter";
@@ -32,6 +33,7 @@ export const UpdateRemark = () => {
         { label: "Contact client later", value: "call_client_later" },
         { label: "Generic action", value: "generic" },
       ]}
+      childNode={document.getElementById("modal-root")}
     />
   );
 };
@@ -176,6 +178,26 @@ export const WhatsAppChatModal = () => {
         },
       ]}
       onClose={() => {}}
+    />
+  );
+};
+
+export const RequestFollowUp = () => {
+  return (
+    <RequestFollowUpComponent
+      actions={[
+        { label: "Generic Remark", value: "generic" },
+        { label: "Lead Won", value: "won" },
+        { label: "Lead Lost", value: "lost" },
+      ]}
+      currentStage={2}
+      onUpdateStage={async () => {
+        return await samplePromise({});
+      }}
+      onUpdateRemark={async () => {
+        return await samplePromise("");
+      }}
+      request_id="1234"
     />
   );
 };
