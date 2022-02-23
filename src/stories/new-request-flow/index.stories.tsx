@@ -4,29 +4,24 @@ import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
 import { OverlayRouter } from "@tuteria/shared-lib/src/components/OverlayRouter";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import regions from "@tuteria/shared-lib/src/data/regions.json";
-import { ClientRequestForm } from "@tuteria/shared-lib/src/home-tutoring/request-flow/ClientRequestForm";
 import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-flow/constants";
 import { PricingPage as NewPricingPage } from "@tuteria/shared-lib/src/home-tutoring/request-flow/PricingPage";
-import {
-  ClientRequestStore,
-  RequestFlowStore,
-} from "@tuteria/shared-lib/src/home-tutoring/request-flow/store";
 import CompletePage from "@tuteria/shared-lib/src/new-request-flow/pages/CompletePage";
 import LandingPageComponent from "@tuteria/shared-lib/src/new-request-flow/pages/LandingPage";
+import LessonDetailPage from "@tuteria/shared-lib/src/new-request-flow/pages/LessonDetailPage";
 import {
   ErrorState,
   SearchResultPage2,
 } from "@tuteria/shared-lib/src/new-request-flow/pages/SearchResultPage";
 import TutorProfilePageComponent from "@tuteria/shared-lib/src/new-request-flow/pages/TutorProfilePage";
 import {
-  IRequestFlowStore,
   LocationFieldStore,
   SearchStore,
 } from "@tuteria/shared-lib/src/stores";
 import searchResultStore from "@tuteria/shared-lib/src/stores/jobs/searchResult";
 import { observer } from "mobx-react-lite";
 import { ISearchStore } from "packages/shared-lib/src/stores/types";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { adapter, PRICING_INFO } from "./adapter";
 import {
   SAMPLEREQUEST,
@@ -108,42 +103,16 @@ export const LandingPage = () => {
   );
 };
 
-const NewParentFlow: React.FC<{
-  viewModel: IRequestFlowStore;
-  academicData: any;
-  onSubmit: any;
-  [key: string]: any;
-}> = observer(({ viewModel, academicData, onSubmit, ...rest }: any) => {
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    adapter.updateStaticData(rest);
-    viewModel.initializeRequestData(academicData, true).then(() => {
-      setLoaded(true);
-    });
-  }, []);
-
-  return (
-    <OverlayRouter>
-      <ClientRequestForm
-        loaded={loaded}
-        discountFlag={true}
-        onSubmit={onSubmit}
-        viewModel={viewModel}
-      />
-    </OverlayRouter>
-  );
-});
-
 export const LessonDetail = () => {
-  const viewModel = RequestFlowStore.create(undefined, {
+  const viewModel = SearchStore.create(undefined, {
     adapter,
   });
   return (
-    <NewParentFlow
+    <LessonDetailPage
       academicData={ACADEMICS_DATA}
       regions={regions}
       countries={allCountries}
+      requestInfo={SAMPLEREQUEST}
       viewModel={viewModel}
       onSubmit={() => {
         // if (
@@ -153,7 +122,7 @@ export const LessonDetail = () => {
         // } else {
         //   linkTo("External Pages / Request Flow", "Search Results")();
         // }
-        viewModel
+        viewModel.useRequestDataProps
           .saveRequestToServer()
           .then((result) => {
             console.log(result);

@@ -7463,13 +7463,13 @@ export const adapter = {
       setTimeout(() => resolve(SAMPLENEIGHBORINGAREA), 100);
     });
   },
-  updateStaticData({ regions, countries }) {
+  updateStaticData({ regions, countries, requestInfo = SAMPLEREQUEST }) {
     storage.set(adapter.regionKey, regions);
     storage.set(adapter.countryKey, countries);
     let existing = storage.get(adapter.requestKey, {});
     storage.set(adapter.requestKey, {
       ...existing,
-      ...SAMPLEREQUEST,
+      ...requestInfo,
     });
   },
   initializeLandingPage({ regions, countries }) {
