@@ -7834,7 +7834,7 @@ export const adapter = {
         timeSubmitted: new Date().toISOString(),
       };
     },
-    saveTutorInfo: async (key: string, data: any) => {
+    editTutorInfo: async (key: string, data: any) => {
       console.log(key, data);
       return await samplePromise("tutorToken");
     },
