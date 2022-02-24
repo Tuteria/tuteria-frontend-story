@@ -7568,7 +7568,12 @@ export const adapter = {
     });
   },
   getCurrencyForCountry: getCurrencyForCountry,
-  fetchSearchResultFunc(currentIndex, requestData, specialities) {
+  fetchSearchResultFunc(
+    currentIndex,
+    requestData,
+    specialities,
+    tutorPoolOnly
+  ) {
     // let currentSearchData = TUTORSEARCHRESULT_DATA;
     let currentSearchData = TUTORSEARCHRESULT_DATA_TRIMED;
     return new Promise((resolve, reject) => {
@@ -7583,6 +7588,9 @@ export const adapter = {
           specialities,
           []
         );
+        if (tutorPoolOnly) {
+          resolve(result.slice(result.length - 4));
+        }
         resolve(result);
       }, 500);
     });
