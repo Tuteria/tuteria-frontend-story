@@ -7850,4 +7850,8 @@ export const adapter = {
       tuteriaName: subject,
     });
   },
+  findTutorByEmail: async (email) => {
+    let currentSearchData = TUTORSEARCHRESULT_DATA_TRIMED.at(-1);
+    return samplePromise({ ...currentSearchData, email }, 4000);
+  },
 };
