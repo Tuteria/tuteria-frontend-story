@@ -7839,4 +7839,8 @@ export const adapter = {
       return await samplePromise("tutorToken");
     },
   },
+  selectDefaultSubject(subject, userId) {
+    console.log(subject, userId);
+    return {};
+  },
 };
