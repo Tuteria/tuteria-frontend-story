@@ -89,6 +89,11 @@ export const SingleRequest = () => {
       regions,
       countries: allCountries,
     });
+    searchStore.editTutorInfo.initWithStaticData({
+      regions,
+      countries: allCountries,
+      countriesSupported: supportedCountries,
+    });
   }, []);
 
   return <AdminSearchPage store={searchStore} agent={sampleAgent} />;

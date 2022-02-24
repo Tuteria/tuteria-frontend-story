@@ -7381,6 +7381,21 @@ export const adapter = {
         },
       };
     }
+    if (key === "children-schedule") {
+      const schedule = data.reduce(
+        (acc, el) => ({
+          ...acc,
+          ...el,
+          lessonDays: [...new Set(el.lessonDays.concat(acc.lessonDays || []))],
+        }),
+        {}
+      );
+      requestData.lessonDetails = {
+        ...(requestData.lessonDetails || {}),
+        lessonSchedule: schedule,
+      };
+      requestData.clientSchedule = data;
+    }
     if (key === "lesson-location") {
       requestData.contactDetails = {
         ...(requestData.contactDetails || {}),
@@ -7463,13 +7478,13 @@ export const adapter = {
       setTimeout(() => resolve(SAMPLENEIGHBORINGAREA), 100);
     });
   },
-  updateStaticData({ regions, countries }) {
+  updateStaticData({ regions, countries, requestInfo = SAMPLEREQUEST }) {
     storage.set(adapter.regionKey, regions);
     storage.set(adapter.countryKey, countries);
     let existing = storage.get(adapter.requestKey, {});
     storage.set(adapter.requestKey, {
       ...existing,
-      ...SAMPLEREQUEST,
+      ...requestInfo,
     });
   },
   initializeLandingPage({ regions, countries }) {
