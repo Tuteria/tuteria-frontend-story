@@ -453,4 +453,8 @@ export const testAdapter: ServerAdapterType = {
       },
     });
   },
+  async updateQuizAttempts(data) {
+    console.log(data);
+    return samplePromise({});
+  },
 };
