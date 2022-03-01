@@ -1,16 +1,17 @@
 import { Box } from "@chakra-ui/react";
 import { linkTo } from "@storybook/addon-links";
 import ThemeProvider from "@tuteria/shared-lib/src/bootstrap";
-import AdminSearchPage from "@tuteria/shared-lib/src/new-request-flow/pages/AdminSearchPage";
-import { AdminSearchStore } from "@tuteria/shared-lib/src/stores";
-import React from "react";
-import { adapter, samplePromise } from "./adapter";
 import allCountries from "@tuteria/shared-lib/src/data/countries.json";
 import regions from "@tuteria/shared-lib/src/data/regions.json";
-import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-flow/constants";
 import supportedCountries from "@tuteria/shared-lib/src/data/supportedCountries.json";
-import { SAMPLEREQUEST, TUTORSEARCHRESULT_DATA } from "./sampleData";
+import { ACADEMICS_DATA } from "@tuteria/shared-lib/src/home-tutoring/request-flow/constants";
+import AdminSearchPage from "@tuteria/shared-lib/src/new-request-flow/pages/AdminSearchPage";
+import { AdminSearchStore } from "@tuteria/shared-lib/src/stores";
 import { observer } from "mobx-react-lite";
+import { SAMPLE_JOB_LIST_DATA } from "@tuteria/shared-lib/src/data/tutor-application/sample_job_data";
+import React from "react";
+import { adapter, samplePromise } from "./adapter";
+import { SAMPLEREQUEST, TUTORSEARCHRESULT_DATA } from "./sampleData";
 
 export default {
   title: "Request Flow/Pages/AdminSearch",
@@ -94,6 +95,8 @@ export const SingleRequest = () => {
       countries: allCountries,
       countriesSupported: supportedCountries,
     });
+
+    searchStore.jobList.bulkMapToStore([SAMPLE_JOB_LIST_DATA[0]]);
   }, []);
 
   return <AdminSearchPage store={searchStore} agent={sampleAgent} />;
