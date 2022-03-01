@@ -235,7 +235,6 @@ export const testAdapter: ServerAdapterType = {
     return { ...SAMPLE_TUTOR_SUBJECTS[0], quizzes: subjectInfo.subjects };
   },
   updateTutorSubjectInfo: async (values, subject_id) => {
-    console.log(values);
     // return Promise.reject({ spellCheck: errors });
     // clearSubjectDescription();
     return await samplePromise({ values, subject_id });
@@ -452,9 +451,5 @@ export const testAdapter: ServerAdapterType = {
         phone: "This phone already exists on Tuteria",
       },
     });
-  },
-  async updateQuizAttempts(data) {
-    console.log(data);
-    return samplePromise({});
   },
 };
