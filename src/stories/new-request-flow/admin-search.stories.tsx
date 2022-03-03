@@ -42,6 +42,12 @@ const sampleAgent = {
 };
 
 export const SingleRequest = () => {
+  const sampleAgent = {
+    name: "Benita",
+    phone_number: "+2349095121865",
+    email: "benita@tuteria.com",
+    image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
+  };
   const searchStore = AdminSearchStore.create(
     {},
     {
@@ -49,6 +55,12 @@ export const SingleRequest = () => {
         ...adapter,
         initializeAdminSearch: async () => {
           return samplePromise({
+            serverInfo: {
+              agent: sampleAgent,
+              created: "2021-12-10T09:18:05.415Z",
+              modified: "2021-12-10T09:18:05.415Z",
+              status: "pending",
+            },
             requestInfo: {
               ...SAMPLEREQUEST,
               childDetails: [SAMPLEREQUEST.childDetails[0]],
@@ -77,12 +89,6 @@ export const SingleRequest = () => {
       },
     }
   );
-  const sampleAgent = {
-    name: "Benita",
-    phone_number: "+2349095121865",
-    email: "benita@tuteria.com",
-    image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
-  };
 
   React.useEffect(() => {
     searchStore.useRequestDataProps.lessonLocationStore.updateFields({
