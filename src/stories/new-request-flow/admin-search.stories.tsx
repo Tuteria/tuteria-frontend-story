@@ -118,6 +118,17 @@ export const MultipleSplitRequest = () => {
         ...adapter,
         initializeAdminSearch: async () => {
           return samplePromise({
+            serverInfo: {
+              agent: sampleAgent,
+              created: "2021-12-10T09:18:05.415Z",
+              modified: "2021-12-10T09:18:05.415Z",
+              status: "pending",
+              tutorRequestInfo: SAMPLEREQUEST.splitRequests[0],
+              rawRequest: {
+                budget: 70000,
+                hourlyRate: 4000,
+              },
+            },
             requestInfo: SAMPLEREQUEST,
             firstSearch: undefined,
             tutors: [
