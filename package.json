@@ -11,7 +11,8 @@
     "build:windows": "cd ./storybook-static && now --no-clipboard --token=%NOW_TOKEN% --prod",
     "deploy:linux": "cd ./storybook-static && vercel --no-clipboard --token=$NOW_TOKEN --prod",
     "prepare": "husky install",
-    "clean": "prettier --write"
+    "clean": "prettier --write",
+    "test:single": "node -r tsm tests/demo.ts"
   },
   "eslintConfig": {
     "overrides": [
@@ -82,7 +83,9 @@
     "lerna": "^4.0.0",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.2",
-    "typescript": "^4.3.5"
+    "tsm": "^2.2.1",
+    "typescript": "^4.3.5",
+    "uvu": "^0.5.3"
   },
   "description": "An Ionic project",
   "lint-staged": {
