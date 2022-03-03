@@ -376,7 +376,8 @@ export const testAdapter: ServerAdapterType = {
 
     return await samplePromise([quiz, quizzes]);
   },
-  beginQuiz: async (payload) => {
+  beginQuiz: async (payload, { skill_id, payload: subjectPayload }) => {
+    console.log({ skill_id, subjectPayload });
     return await samplePromise({});
   },
   sendEmailVerification: async ({ email, code }) => {
