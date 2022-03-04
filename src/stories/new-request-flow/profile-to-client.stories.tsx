@@ -1527,3 +1527,49 @@ export const AfterPaymentPage = () => {
   const rootStore = SearchStore.create({}, { adapter });
   return <NewClientRequestPage initialData={initialData} store={rootStore} />;
 };
+
+// export const RequestDetailInfo = ({}) => {
+// const sampleAgent = {
+//     name: "Benita",
+//     phone_number: "+2349095121865",
+//     email: "benita@tuteria.com",
+//     image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
+//   };
+//   const store = AdminSearchStore.create(
+//     {},
+//     {
+//       adapter: {
+//         ...adapter,
+//         initializeAdminSearch: async () => {
+//           return samplePromise({
+//             serverInfo: {
+//               agent: sampleAgent,
+//               created: "2021-12-10T09:18:05.415Z",
+//               modified: "2021-12-10T09:18:05.415Z",
+//               status: "pending",
+//               tutorRequestInfo: SAMPLEREQUEST.splitRequests[0],
+//               rawRequest: {
+//                 budget: 70000,
+//                 hourlyRate: 4000,
+//               },
+//             },
+//             requestInfo: {
+//               ...SAMPLEREQUEST,
+//               childDetails: [SAMPLEREQUEST.childDetails[0]],
+//               splitRequests: [SAMPLEREQUEST.splitRequests[0]],
+//             },
+//             firstSearch: undefined,
+//             tutors: [],
+//             specialities: [
+//               { key: "Primary Math", values: ["Engineering", "Sciences"] },
+//             ],
+//           });
+//         },
+//       },
+//     }
+//   );
+//   React.useEffect(() => {
+//     store.initializeAdminSearch();
+//   }, []);
+//   return <RequestSummaryCard store={store} />;
+// };
