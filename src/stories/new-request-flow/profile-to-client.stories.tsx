@@ -1528,6 +1528,67 @@ export const AfterPaymentPage = () => {
   return <NewClientRequestPage initialData={initialData} store={rootStore} />;
 };
 
+// const RequestSummaryCard: React.FC<{ store: IAdminSearchStore }> = observer(
+//   ({ store }) => {
+//     const [show, setShow] = React.useState(true);
+
+//     return (
+//       <Flex
+//         bg="white"
+//         minH="196px"
+//         overflow="hidden"
+//         shadow="fbShadow"
+//         alignItems="stretch"
+//         flexShrink={0}
+//         borderRadius="fbRadius"
+//         borderWidth="3xs"
+//         direction="column"
+//         //   {...rest}
+//       >
+//         <Stack spacing={6} py={6}>
+//           <BookingCardHeader
+//             display={false}
+//             id={store.requestInfo.requestSLUG}
+//             client={store.requestInfo.contactInfo}
+//             requestSLUG={store.requestInfo.requestSLUG}
+//             students={1}
+//             billingInfo={store.requestInfo.billingInfo}
+//             showBreakdown={true}
+//             openModal={undefined}
+//             lostRequest={false}
+//             dateCreated={store.requestInfo.dateCreated}
+//             lessonInfo={store.requestInfo.lessonInfo}
+//             requestStatus={store.requestInfo.requestStatus}
+//           />
+//           <Collapse in={show}>
+//             <Stack spacing={6}>
+//               <BookingDetails
+//                 isDisabled={false}
+//                 lostRequest={false}
+//                 isInvalid={false}
+//                 students={store.requestInfo.students}
+//                 isPending={true}
+//                 onChange={undefined}
+//                 checkedStatus={{}}
+//                 displayCheckbox={false}
+//               />
+
+//               <LessonInformation
+//                 mt={2}
+//                 px={[5, 6]}
+//                 client={store.requestInfo.contactInfo}
+//                 {...store.requestInfo.lessonInfo}
+//               />
+//             </Stack>
+//           </Collapse>
+//         </Stack>
+//       </Flex>
+//     );
+//   }
+// );
+
+// export default RequestSummaryCard;
+
 // export const RequestDetailInfo = ({}) => {
 // const sampleAgent = {
 //     name: "Benita",
