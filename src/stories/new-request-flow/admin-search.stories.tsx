@@ -145,6 +145,26 @@ export const MultipleSplitRequest = () => {
               modified: "2021-12-10T09:18:05.415Z",
               status: "pending",
               tutorRequestInfo: SAMPLEREQUEST.splitRequests[0],
+              tutorResponseInfo: {
+                id: 19,
+                status: "pending",
+                responseTime: 0,
+                reason: "",
+                comment: "",
+                bookingStage: {
+                  stages: [],
+                },
+                callFeedback: {
+                  startDate: "",
+                  callSummary: "",
+                },
+                dateSubmitted: "",
+                bookingDuration: {
+                  to: "",
+                  from: "",
+                  bookingUrl: "",
+                },
+              },
               rawRequest: {
                 budget: 70000,
                 hourlyRate: 4000,
