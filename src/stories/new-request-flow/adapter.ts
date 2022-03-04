@@ -7622,7 +7622,8 @@ export const adapter = {
   resolveCurrencyFromCountry: resolveCurrencyFromCountry,
   onTutorsSelected: async (data, paymentInfo) => {
     console.log({ data, paymentInfo });
-    return data;
+    return await samplePromise({ data }, 5000);
+    // return data;
   },
   initializeRequestData: async () => {
     // return [requestData, []];
@@ -7861,5 +7862,9 @@ export const adapter = {
   findTutorByEmail: async (email) => {
     let currentSearchData = TUTORSEARCHRESULT_DATA_TRIMED.at(-1);
     return samplePromise({ ...currentSearchData, email }, 4000);
+  },
+  async updateRequestParameters(params) {
+    return await this.fetchSearchResultFunc(1, SAMPLEREQUEST, []);
+    return await samplePromise();
   },
 };
