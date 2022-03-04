@@ -41,49 +41,78 @@ const sampleAgent = {
   email: "benita@tuteria.com",
   image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
 };
+const singleAdapter = (value?: any) => ({
+  ...adapter,
+  initializeAdminSearch: async () => {
+    return samplePromise({
+      serverInfo: {
+        agent: sampleAgent,
+        created: "2021-12-10T09:18:05.415Z",
+        modified: "2021-12-10T09:18:05.415Z",
+        status: "pending",
+        tutorRequestInfo: SAMPLEREQUEST.splitRequests[0],
+        rawRequest: {
+          budget: 70000,
+          hourlyRate: 4000,
+        },
+      },
+      requestInfo: {
+        ...SAMPLEREQUEST,
+        childDetails: [SAMPLEREQUEST.childDetails[0]],
+        splitRequests: value || [SAMPLEREQUEST.splitRequests[0]],
+      },
+      firstSearch: undefined,
+      tutors: [
+        TUTORSEARCHRESULT_DATA[0],
+        // undefined,
+        // TUTORSEARCHRESULT_DATA[1],
+        // undefined,
+        // // undefined,
+        // // undefined,
+        // TUTORSEARCHRESULT_DATA[2],
+      ],
+      specialities: [
+        { key: "Primary Math", values: ["Engineering", "Sciences"] },
+
+        //this is where we put specialities
+      ],
+      academicData: ACADEMICS_DATA,
+      // regions: regions,
+      // countries: allCountries
+    });
+  },
+});
 
 export const SingleRequest = () => {
   const searchStore = AdminSearchStore.create(
     {},
     {
-      adapter: {
-        ...adapter,
-        initializeAdminSearch: async () => {
-          return samplePromise({
-            requestInfo: {
-              ...SAMPLEREQUEST,
-              childDetails: [SAMPLEREQUEST.childDetails[0]],
-              splitRequests: [SAMPLEREQUEST.splitRequests[0]],
-            },
-            firstSearch: undefined,
-            tutors: [
-              TUTORSEARCHRESULT_DATA[0],
-              // undefined,
-              // TUTORSEARCHRESULT_DATA[1],
-              // undefined,
-              // // undefined,
-              // // undefined,
-              // TUTORSEARCHRESULT_DATA[2],
-            ],
-            specialities: [
-              { key: "Primary Math", values: ["Engineering", "Sciences"] },
-
-              //this is where we put specialities
-            ],
-            academicData: ACADEMICS_DATA,
-            // regions: regions,
-            // countries: allCountries
-          });
-        },
-      },
+      adapter: singleAdapter(),
     }
   );
-  const sampleAgent = {
-    name: "Benita",
-    phone_number: "+2349095121865",
-    email: "benita@tuteria.com",
-    image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
-  };
+
+  React.useEffect(() => {
+    searchStore.useRequestDataProps.lessonLocationStore.updateFields({
+      regions,
+      countries: allCountries,
+    });
+    searchStore.editTutorInfo.initWithStaticData({
+      regions,
+      countries: allCountries,
+      countriesSupported: supportedCountries,
+    });
+  }, []);
+
+  return <AdminSearchPage store={searchStore} agent={sampleAgent} />;
+};
+
+export const WithoutSplitRequest = () => {
+  const searchStore = AdminSearchStore.create(
+    {},
+    {
+      adapter: singleAdapter([]),
+    }
+  );
 
   React.useEffect(() => {
     searchStore.useRequestDataProps.lessonLocationStore.updateFields({
@@ -110,6 +139,17 @@ export const MultipleSplitRequest = () => {
         ...adapter,
         initializeAdminSearch: async () => {
           return samplePromise({
+            serverInfo: {
+              agent: sampleAgent,
+              created: "2021-12-10T09:18:05.415Z",
+              modified: "2021-12-10T09:18:05.415Z",
+              status: "pending",
+              tutorRequestInfo: SAMPLEREQUEST.splitRequests[0],
+              rawRequest: {
+                budget: 70000,
+                hourlyRate: 4000,
+              },
+            },
             requestInfo: SAMPLEREQUEST,
             firstSearch: undefined,
             tutors: [
