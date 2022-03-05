@@ -13695,7 +13695,8 @@ export const TUTORSEARCHRESULT_DATA2 = [
     },
   ],
 ];
-
+let options = ["Active", "Require Modification", "Pending", "Suspended"];
+let item = () => options[Math.floor(Math.random() * options.length)];
 export const TUTORSEARCHRESULT_DATA_TRIMED = [
   {
     userId: "opeyemia2",
@@ -22252,4 +22253,7 @@ export const TUTORSEARCHRESULT_DATA_TRIMED = [
       userId: "samuelu22",
     },
   },
-];
+].map((j) => ({
+  ...j,
+  skills_with_status: j.subjectList.map((k) => ({ name: k, status: item() })),
+}));
