@@ -25,6 +25,7 @@ import React, { useEffect } from "react";
 import { adapter, PRICING_INFO } from "./adapter";
 import {
   SAMPLEREQUEST,
+  SAMPLE_SERVER_REQUEST,
   TUTORSEARCHRESULT_DATA,
   TUTORSEARCHRESULT_DATA_TRIMED,
 } from "./sampleData";
@@ -112,7 +113,8 @@ export const LessonDetail = () => {
       academicData={ACADEMICS_DATA}
       regions={regions}
       countries={allCountries}
-      requestInfo={SAMPLEREQUEST}
+      // requestInfo={SAMPLEREQUEST}
+      requestInfo={SAMPLE_SERVER_REQUEST}
       viewModel={viewModel}
       onSubmit={() => {
         // if (

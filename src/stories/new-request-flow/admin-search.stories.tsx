@@ -62,7 +62,7 @@ const singleAdapter = (value?: any) => ({
         splitRequests: value || [SAMPLEREQUEST.splitRequests[0]],
       },
       firstSearch: undefined,
-      tutors: [
+      tutors: value || [
         TUTORSEARCHRESULT_DATA[0],
         // undefined,
         // TUTORSEARCHRESULT_DATA[1],
@@ -124,8 +124,6 @@ export const WithoutSplitRequest = () => {
       countries: allCountries,
       countriesSupported: supportedCountries,
     });
-
-    searchStore.jobList.bulkMapToStore([SAMPLE_JOB_LIST_DATA[0]]);
   }, []);
 
   return <AdminSearchPage store={searchStore} agent={sampleAgent} />;
