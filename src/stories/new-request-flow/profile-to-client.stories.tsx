@@ -1527,3 +1527,110 @@ export const AfterPaymentPage = () => {
   const rootStore = SearchStore.create({}, { adapter });
   return <NewClientRequestPage initialData={initialData} store={rootStore} />;
 };
+
+// const RequestSummaryCard: React.FC<{ store: IAdminSearchStore }> = observer(
+//   ({ store }) => {
+//     const [show, setShow] = React.useState(true);
+
+//     return (
+//       <Flex
+//         bg="white"
+//         minH="196px"
+//         overflow="hidden"
+//         shadow="fbShadow"
+//         alignItems="stretch"
+//         flexShrink={0}
+//         borderRadius="fbRadius"
+//         borderWidth="3xs"
+//         direction="column"
+//         //   {...rest}
+//       >
+//         <Stack spacing={6} py={6}>
+//           <BookingCardHeader
+//             display={false}
+//             id={store.requestInfo.requestSLUG}
+//             client={store.requestInfo.contactInfo}
+//             requestSLUG={store.requestInfo.requestSLUG}
+//             students={1}
+//             billingInfo={store.requestInfo.billingInfo}
+//             showBreakdown={true}
+//             openModal={undefined}
+//             lostRequest={false}
+//             dateCreated={store.requestInfo.dateCreated}
+//             lessonInfo={store.requestInfo.lessonInfo}
+//             requestStatus={store.requestInfo.requestStatus}
+//           />
+//           <Collapse in={show}>
+//             <Stack spacing={6}>
+//               <BookingDetails
+//                 isDisabled={false}
+//                 lostRequest={false}
+//                 isInvalid={false}
+//                 students={store.requestInfo.students}
+//                 isPending={true}
+//                 onChange={undefined}
+//                 checkedStatus={{}}
+//                 displayCheckbox={false}
+//               />
+
+//               <LessonInformation
+//                 mt={2}
+//                 px={[5, 6]}
+//                 client={store.requestInfo.contactInfo}
+//                 {...store.requestInfo.lessonInfo}
+//               />
+//             </Stack>
+//           </Collapse>
+//         </Stack>
+//       </Flex>
+//     );
+//   }
+// );
+
+// export default RequestSummaryCard;
+
+// export const RequestDetailInfo = ({}) => {
+// const sampleAgent = {
+//     name: "Benita",
+//     phone_number: "+2349095121865",
+//     email: "benita@tuteria.com",
+//     image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
+//   };
+//   const store = AdminSearchStore.create(
+//     {},
+//     {
+//       adapter: {
+//         ...adapter,
+//         initializeAdminSearch: async () => {
+//           return samplePromise({
+//             serverInfo: {
+//               agent: sampleAgent,
+//               created: "2021-12-10T09:18:05.415Z",
+//               modified: "2021-12-10T09:18:05.415Z",
+//               status: "pending",
+//               tutorRequestInfo: SAMPLEREQUEST.splitRequests[0],
+//               rawRequest: {
+//                 budget: 70000,
+//                 hourlyRate: 4000,
+//               },
+//             },
+//             requestInfo: {
+//               ...SAMPLEREQUEST,
+//               childDetails: [SAMPLEREQUEST.childDetails[0]],
+//               splitRequests: [SAMPLEREQUEST.splitRequests[0]],
+//             },
+//             firstSearch: undefined,
+//             tutors: [],
+//             specialities: [
+//               { key: "Primary Math", values: ["Engineering", "Sciences"] },
+//             ],
+//           });
+//         },
+//       },
+//     }
+//   );
+//   React.useEffect(() => {
+//     store.initializeAdminSearch();
+//   }, []);
+//   return <RequestSummaryCard store={store} />;
+// };
