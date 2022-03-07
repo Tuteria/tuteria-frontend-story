@@ -21,7 +21,7 @@ export function samplePromise(data = {}, timer = 300): Promise<any> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(data);
-    }, 300);
+    }, timer);
   });
 }
 let gatewayJson = {
@@ -7381,6 +7381,21 @@ export const adapter = {
         },
       };
     }
+    if (key === "children-schedule") {
+      const schedule = data.reduce(
+        (acc, el) => ({
+          ...acc,
+          ...el,
+          lessonDays: [...new Set(el.lessonDays.concat(acc.lessonDays || []))],
+        }),
+        {}
+      );
+      requestData.lessonDetails = {
+        ...(requestData.lessonDetails || {}),
+        lessonSchedule: schedule,
+      };
+      requestData.clientSchedule = data;
+    }
     if (key === "lesson-location") {
       requestData.contactDetails = {
         ...(requestData.contactDetails || {}),
@@ -7553,7 +7568,12 @@ export const adapter = {
     });
   },
   getCurrencyForCountry: getCurrencyForCountry,
-  fetchSearchResultFunc(currentIndex, requestData, specialities) {
+  fetchSearchResultFunc(
+    currentIndex,
+    requestData,
+    specialities,
+    tutorPoolOnly
+  ) {
     // let currentSearchData = TUTORSEARCHRESULT_DATA;
     let currentSearchData = TUTORSEARCHRESULT_DATA_TRIMED;
     return new Promise((resolve, reject) => {
@@ -7568,6 +7588,9 @@ export const adapter = {
           specialities,
           []
         );
+        if (tutorPoolOnly) {
+          resolve(result.slice(result.length - 4));
+        }
         resolve(result);
       }, 500);
     });
@@ -7599,7 +7622,8 @@ export const adapter = {
   resolveCurrencyFromCountry: resolveCurrencyFromCountry,
   onTutorsSelected: async (data, paymentInfo) => {
     console.log({ data, paymentInfo });
-    return data;
+    return await samplePromise({ data }, 5000);
+    // return data;
   },
   initializeRequestData: async () => {
     // return [requestData, []];
@@ -7819,9 +7843,32 @@ export const adapter = {
         timeSubmitted: new Date().toISOString(),
       };
     },
-    saveTutorInfo: async (key: string, data: any) => {
+    editTutorInfo: async (key: string, data: any) => {
       console.log(key, data);
       return await samplePromise("tutorToken");
     },
+
+    updateRequestParameters(values) {
+      return samplePromise(values, 1000);
+    },
+  },
+  selectDefaultSubject: async (subject, userId) => {
+    return await samplePromise({
+      hourlyRate: 3500,
+      discountForExtraStudents: 60,
+      name: subject,
+      headline: `I teach ${subject} with practical/illustrative examples.`,
+      description: `I love ${subject} because I realized it is actually practical and it is a basis for every other course or subject which involves calculation. With one's knowledge of mathematics, one would realize that other courses, be it physics, chemistry or accounting or whatsoever, is half done with. I teach with helpful illustrations and I make my students participate when I teach by giving them avenue to ask questions as well as solve questions.\r\nAlthough I've had many testimonies of my teachings, the most memorable for me was a single student I tutored in Physics and Further mathematics for WAEC during my service year. He had a B2 in the subject and sometimes this year, he called me again to thank me and that he had gained admission.`,
+      related: [subject],
+      tuteriaName: subject,
+    });
+  },
+  findTutorByEmail: async (email) => {
+    let currentSearchData = TUTORSEARCHRESULT_DATA_TRIMED.at(-1);
+    return samplePromise({ ...currentSearchData, email }, 4000);
+  },
+  async updateRequestParameters(params) {
+    return await this.fetchSearchResultFunc(1, SAMPLEREQUEST, []);
+    return await samplePromise();
   },
 };

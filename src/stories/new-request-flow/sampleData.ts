@@ -13695,7 +13695,8 @@ export const TUTORSEARCHRESULT_DATA2 = [
     },
   ],
 ];
-
+let options = ["Active", "Require Modification", "Pending", "Suspended"];
+let item = () => options[Math.floor(Math.random() * options.length)];
 export const TUTORSEARCHRESULT_DATA_TRIMED = [
   {
     userId: "opeyemia2",
@@ -22252,4 +22253,90 @@ export const TUTORSEARCHRESULT_DATA_TRIMED = [
       userId: "samuelu22",
     },
   },
-];
+].map((j) => ({
+  ...j,
+  skills_with_status: j.subjectList.map((k) => ({ name: k, status: item() })),
+}));
+
+export const SAMPLE_SERVER_REQUEST = {
+  contactDetails: {
+    email: "ay.atoam@gmail.com",
+    phone: "2348023821181",
+    state: "Lagos",
+    title: "",
+    medium: "Facebook",
+    region: "Alimosho",
+    address: "Alimosho Road",
+    country: "Nigeria",
+    lastName: "Aloh",
+    firstName: "Solomon",
+    vicinity: "Alaguntan",
+    country_code: "NG",
+    customerType: "parent",
+    preferredComms: {},
+  },
+  slug: "SYS98CHAUMF1",
+  teacherKind: "Specialized Teachers",
+  childDetails: [
+    {
+      name: "Primary 6",
+      gender: "",
+      firstName: "Primary 6",
+      curriculum: ["Nigerian"],
+      classDetail: {
+        class: "Primary 6",
+        purpose: "Entrance Exam Prep",
+        subjects: [
+          "Basic Mathematics",
+          "English Language",
+          "Basic Sciences",
+          "Verbal Reasoning",
+          "Quantitative Reasoning",
+        ],
+      },
+      displayName: "",
+      expectation:
+        "She's taking common entrance shortly soon this year. She needs to be well prepared for the exam",
+      learningNeed: "",
+      special_needs: "Airforce Schools",
+    },
+    {
+      name: "Primary 4",
+      gender: "",
+      firstName: "Primary 4",
+      curriculum: ["Nigerian"],
+      classDetail: {
+        class: "Primary 4",
+        purpose: "Academic Help",
+        subjects: [
+          "Basic Mathematics",
+          "English Language",
+          "Basic Sciences",
+          "Verbal Reasoning",
+          "Quantitative Reasoning",
+        ],
+      },
+      displayName: "",
+      expectation:
+        "He needs to be built up as to stimulate his interest for learning",
+      learningNeed: "",
+      special_needs: "None",
+    },
+  ],
+  lessonDetails: {
+    lessonType: "physical",
+    lessonSchedule: {
+      lessonDays: ["Saturday", "Sunday"],
+      lessonPlan: "",
+      lessonTime: "11:00 AM",
+      lessonHours: 2.0,
+      teacherKind: "",
+      lessonUrgency: "Immediately",
+      lessonDuration: 4,
+    },
+  },
+  splitRequests: [],
+  status: "completed",
+  created: "2022-01-21T20:52:26.802846",
+  modified: "2022-01-21T20:52:26.798982",
+};
