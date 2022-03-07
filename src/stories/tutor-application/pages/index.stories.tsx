@@ -21,6 +21,7 @@ import TutorPageComponent from "../components/TutorPageComponent";
 import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-application/pages/SubjectCreationPage";
 import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
+import PostApplicationComponent from "@tuteria/shared-lib/src/tutor-revamp/PostApplicationComponent";
 
 export default {
   title: "Tutor Application/Pages",
@@ -294,6 +295,38 @@ export const SubjectReviewPage = () => {
           }}
         />
       </TutorPageWrapper>
+    </LoadingStateWrapper>
+  );
+};
+
+export const PostApplicationPage = () => {
+  async function initialize(setLoading) {
+    let result = await testAdapter.initializeApplication(adapter, {
+      regions: allRegions,
+      countries: allCountries,
+      tuteriaSubjects: [],
+    });
+    store.initializeTutorData(result);
+    setLoading(false);
+    if (store.currentStep === APPLICATION_STEPS.APPLY) {
+    } else {
+      navigate("/apply");
+    }
+  }
+
+  return (
+    <LoadingStateWrapper defaultLoading={true} initialize={initialize}>
+      <PostApplicationComponent
+        // currentStep={store.currentEditableForm}
+        store={store}
+        // currentStep={store.currentStep}
+        onNextStep={() => {
+          navigate("/verify");
+        }}
+        onLogout={() => {
+          navigate("/landing");
+        }}
+      />
     </LoadingStateWrapper>
   );
 };

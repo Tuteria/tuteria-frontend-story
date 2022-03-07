@@ -96,9 +96,10 @@ export const Results = () => {
         completionRate: 100,
         correctAnswers: 19,
         passRate: 0,
-        passedQuiz: true,
+        passedQuiz: false,
         questionsAnswered: 21,
       }}
+      canRetakeTest={false}
     />
   );
 };
