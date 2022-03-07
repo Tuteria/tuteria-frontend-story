@@ -26,6 +26,7 @@ export const SAMPLEREQUEST = {
     lessonSchedule: {
       lessonDuration: 4,
       lessonHours: 2,
+      // lessonDays: [],
       lessonDays: ["Monday", "Wednesday", "Friday"],
       lessonTime: "4:00 PM",
       lessonUrgency: "In a few days",
