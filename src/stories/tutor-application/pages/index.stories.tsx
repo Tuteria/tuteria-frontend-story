@@ -321,10 +321,10 @@ export const PostApplicationPage = () => {
         store={store}
         // currentStep={store.currentStep}
         onNextStep={() => {
-          navigate("/verify");
+          // navigate("/verify");
         }}
         onLogout={() => {
-          navigate("/landing");
+          // navigate("/landing");
         }}
       />
     </LoadingStateWrapper>
