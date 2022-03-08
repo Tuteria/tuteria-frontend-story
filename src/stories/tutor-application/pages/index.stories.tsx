@@ -317,14 +317,9 @@ export const PostApplicationPage = () => {
   return (
     <LoadingStateWrapper defaultLoading={true} initialize={initialize}>
       <PostApplicationComponent
-        // currentStep={store.currentEditableForm}
         store={store}
-        // currentStep={store.currentStep}
         onNextStep={() => {
           // navigate("/verify");
-        }}
-        onLogout={() => {
-          // navigate("/landing");
         }}
       />
     </LoadingStateWrapper>
