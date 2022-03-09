@@ -298,30 +298,3 @@ export const SubjectReviewPage = () => {
     </LoadingStateWrapper>
   );
 };
-
-export const PostApplicationPage = () => {
-  async function initialize(setLoading) {
-    let result = await testAdapter.initializeApplication(adapter, {
-      regions: allRegions,
-      countries: allCountries,
-      tuteriaSubjects: [],
-    });
-    store.initializeTutorData(result);
-    setLoading(false);
-    if (store.currentStep === APPLICATION_STEPS.APPLY) {
-    } else {
-      navigate("/apply");
-    }
-  }
-
-  return (
-    <LoadingStateWrapper defaultLoading={true} initialize={initialize}>
-      <PostApplicationComponent
-        store={store}
-        onNextStep={() => {
-          // navigate("/verify");
-        }}
-      />
-    </LoadingStateWrapper>
-  );
-};
