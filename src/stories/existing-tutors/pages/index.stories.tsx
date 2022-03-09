@@ -135,6 +135,7 @@ export const PostApplicationPage = () => {
       initialData={initialData[CLIENT_PAGES.POST_APPLICATION]}
       host=""
       agent={undefined}
+      onNextStep={() => [console.log("complete")]}
     />
   );
 };
