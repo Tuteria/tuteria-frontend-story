@@ -21,7 +21,6 @@ import TutorPageComponent from "../components/TutorPageComponent";
 import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-application/pages/SubjectCreationPage";
 import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
-import PostApplicationComponent from "@tuteria/shared-lib/src/tutor-revamp/PostApplicationComponent";
 
 export default {
   title: "Tutor Application/Pages",
