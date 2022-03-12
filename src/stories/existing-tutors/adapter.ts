@@ -210,6 +210,14 @@ export const initialData = {
     },
     tutorInfo: SAMPLE_TUTOR_DATA,
   },
+  [CLIENT_PAGES.POST_APPLICATION]: {
+    staticData: {
+      regions: allRegions,
+      countries: allCountries,
+      supportedCountries,
+    },
+    tutorInfo: SAMPLE_TUTOR_DATA,
+  },
 };
 
 export { testAdapter } from "../tutor-application/adapter";

@@ -126,3 +126,16 @@ export const PaymentInformation = () => {
     />
   );
 };
+
+export const PostApplicationPage = () => {
+  return (
+    <ClientPages
+      page={CLIENT_PAGES.POST_APPLICATION}
+      store={store}
+      initialData={initialData[CLIENT_PAGES.POST_APPLICATION]}
+      host=""
+      agent={undefined}
+      onNextStep={() => [console.log("complete")]}
+    />
+  );
+};

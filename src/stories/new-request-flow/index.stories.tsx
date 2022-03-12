@@ -113,8 +113,8 @@ export const LessonDetail = () => {
       academicData={ACADEMICS_DATA}
       regions={regions}
       countries={allCountries}
-      // requestInfo={SAMPLEREQUEST}
-      requestInfo={SAMPLE_SERVER_REQUEST}
+      requestInfo={SAMPLEREQUEST}
+      // requestInfo={SAMPLE_SERVER_REQUEST}
       viewModel={viewModel}
       onSubmit={() => {
         // if (
