@@ -96,7 +96,7 @@ export const Results = () => {
         completionRate: 100,
         correctAnswers: 19,
         passRate: 0,
-        passedQuiz: false,
+        passedQuiz: true,
         questionsAnswered: 21,
       }}
       canRetakeTest={false}

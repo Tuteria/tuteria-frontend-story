@@ -297,3 +297,51 @@ export const SubjectReviewPage = () => {
     </LoadingStateWrapper>
   );
 };
+
+export const NonEditableSubjectPage = () => {
+  async function initialize(setLoading) {
+    let result = await testAdapter.initializeApplication(adapter, {
+      regions: allRegions,
+      countries: allCountries,
+      tuteriaSubjects: testAdapter.getTuteriaSubjects(),
+    });
+    store.initializeTutorData({
+      ...result,
+      tutorInfo: {
+        ...result.tutorInfo,
+        appData: {
+          currentStep: APPLICATION_STEPS.SUBJECT,
+        },
+      },
+    });
+    if (store.currentStep === APPLICATION_STEPS.SUBJECT) {
+      setLoading(false);
+    } else {
+      let options = {
+        [APPLICATION_STEPS.APPLY]: "/apply",
+        [APPLICATION_STEPS.VERIFY]: "/verify",
+        [APPLICATION_STEPS.COMPLETE]: "/complete",
+      };
+      navigate(options[store.currentStep]);
+    }
+  }
+  return (
+    <LoadingStateWrapper
+      defaultLoading={false}
+      initialize={initialize}
+      text="Loading subject details..."
+    >
+      <SubjectCreationPage
+        onLogout={() => {
+          navigate("/landing");
+        }}
+        onNextStep={async () => {
+          await store.submitApplication(store.currentStep);
+          navigate("/complete");
+        }}
+        store={store}
+        canEditSubject={false}
+      />
+    </LoadingStateWrapper>
+  );
+};
