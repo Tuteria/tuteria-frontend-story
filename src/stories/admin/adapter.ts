@@ -235,7 +235,6 @@ export const testAdapter = {
     },
     async onTutorsSelected(passedData) {
       console.log("Saved to server", passedData);
-      debugger;
       return {};
     },
     async updateAdditionalInfo(...rest) {
