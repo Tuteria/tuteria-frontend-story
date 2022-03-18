@@ -29,6 +29,7 @@ import {
   TUTORSEARCHRESULT_DATA,
   TUTORSEARCHRESULT_DATA_TRIMED,
 } from "./sampleData";
+import "keen-slider/keen-slider.min.css";
 
 // import { SAMPLEREQUEST as SAMPLECLIENTREQUEST } from "./sampleData";
 
