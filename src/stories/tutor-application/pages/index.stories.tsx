@@ -12,12 +12,15 @@ import {
 import LoginPage from "@tuteria/shared-lib/src/tutor-application/Login";
 import LandingView from "@tuteria/shared-lib/src/tutor-application/pages/LandingPage";
 import CompletedApplicationPage from "@tuteria/shared-lib/src/tutor-revamp/CompletedApplicationPage";
+import ApplicationCompletedPage from "@tuteria/shared-lib/src/tutor-application/pages/ApplicationCompletedPage";
 import VerificationPage from "@tuteria/shared-lib/src/tutor-application/pages/VerificationPage";
 import "katex/dist/katex.min.css";
 import React, { Suspense } from "react";
 import "react-phone-input-2/lib/style.css";
 import { testAdapter } from "../adapter";
 import TutorPageComponent from "../components/TutorPageComponent";
+import PreferencePage from "@tuteria/shared-lib/src/tutor-application/pages/PreferencePage";
+import TutorAgreementPage from "@tuteria/shared-lib/src/tutor-application/pages/TutorAgreementPage";
 import SubjectCreationPage from "@tuteria/shared-lib/src/tutor-application/pages/SubjectCreationPage";
 import TutorSubjectsPage from "@tuteria/shared-lib/src/tutor-revamp/Subject";
 import TutorPageWrapper from "@tuteria/shared-lib/src/tutor-revamp";
@@ -46,6 +49,9 @@ function navigate(path: string) {
     "/skills": "EditSubjectPage",
     "/quiz/select-skill": "TestSelectionPage",
     "/landing": "Landing Page",
+    "/preferences": "Tutor Preference Page",
+    "/agreement": "Tuteria Agreement Page",
+    "/app-verified": "Application Completed Page",
   };
   linkTo("Tutor Application/Pages", options[path])();
 }
@@ -56,7 +62,16 @@ export const TutorPage = () => {
       countries: allCountries,
       tuteriaSubjects: [],
     });
-    store.initializeTutorData(result);
+    store.initializeTutorData({
+      ...result,
+      tutorInfo: {
+        ...result.tutorInfo,
+        appData: {
+          currentStep: APPLICATION_STEPS.APPLY,
+          currentEditableForm: STEPS.WORK_HISTORY,
+        },
+      },
+    });
     setLoading(false);
     if (store.currentStep === APPLICATION_STEPS.APPLY) {
     } else {
@@ -343,5 +358,112 @@ export const NonEditableSubjectPage = () => {
         canEditSubject={false}
       />
     </LoadingStateWrapper>
+  );
+};
+
+export const TutorPreferencePage = () => {
+  async function initialize(setLoading) {
+    let result = await testAdapter.initializeApplication(adapter, {
+      regions: allRegions,
+      countries: allCountries,
+      tuteriaSubjects: [],
+    });
+    store.initializeTutorData({
+      ...result,
+      tutorInfo: {
+        ...result.tutorInfo,
+        appData: {
+          currentEditableForm: STEPS.LOCATION_INFO,
+          currentStep: APPLICATION_STEPS.TUTOR_PREFERENCES,
+        },
+      },
+    });
+    setLoading(false);
+    if (store.currentStep === APPLICATION_STEPS.TUTOR_PREFERENCES) {
+    } else {
+      navigate("/apply");
+    }
+  }
+  return (
+    <LoadingStateWrapper defaultLoading={true} initialize={initialize}>
+      <PreferencePage
+        // currentStep={store.currentEditableForm}
+        store={store}
+        // currentStep={store.currentStep}
+        onEditSubject={(subject) => {
+          return "/skills";
+        }}
+        onTakeTest={(subject) => {
+          console.log({ subject });
+          return "/quiz/select-skill";
+        }}
+        onNextStep={() => {
+          navigate("/verify");
+        }}
+        onLogout={() => {
+          navigate("/landing");
+        }}
+      />
+    </LoadingStateWrapper>
+  );
+};
+export const TuteriaAgreementPage = () => {
+  async function initialize(setLoading) {
+    let result = await testAdapter.initializeApplication(adapter, {
+      regions: allRegions,
+      countries: allCountries,
+      tuteriaSubjects: [],
+    });
+    store.initializeTutorData({
+      ...result,
+      tutorInfo: {
+        ...result.tutorInfo,
+        appData: {
+          currentEditableForm: STEPS.GUARANTOR_INFO,
+          currentStep: APPLICATION_STEPS.TERMS,
+        },
+      },
+    });
+    setLoading(false);
+    if (store.currentStep === APPLICATION_STEPS.TERMS) {
+    } else {
+      navigate("/apply");
+    }
+  }
+  return (
+    <LoadingStateWrapper defaultLoading={true} initialize={initialize}>
+      <TutorAgreementPage
+        // currentStep={store.currentEditableForm}
+        store={store}
+        // currentStep={store.currentStep}
+        onEditSubject={(subject) => {
+          return "/skills";
+        }}
+        onTakeTest={(subject) => {
+          console.log({ subject });
+          return "/quiz/select-skill";
+        }}
+        onNextStep={() => {
+          navigate("/verify");
+        }}
+        onLogout={() => {
+          navigate("/landing");
+        }}
+      />
+    </LoadingStateWrapper>
+  );
+};
+
+export const TutorApplicationCompletedPage = () => {
+  React.useEffect(() => {
+    store.setCurrentStep(APPLICATION_STEPS.VERIFIED_TUTOR);
+  }, []);
+
+  return (
+    <ApplicationCompletedPage
+      firstName="Chidi"
+      store={store}
+      photo="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200"
+    />
   );
 };
