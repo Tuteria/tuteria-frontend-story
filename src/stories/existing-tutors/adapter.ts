@@ -210,12 +210,15 @@ export const initialData = {
     },
     tutorInfo: SAMPLE_TUTOR_DATA,
   },
-  [CLIENT_PAGES.POST_APPLICATION]: {
+  [CLIENT_PAGES.POST_APPLICATION_1]: {
     staticData: {
       regions: allRegions,
       countries: allCountries,
       supportedCountries,
     },
+    tutorInfo: SAMPLE_TUTOR_DATA,
+  },
+  [CLIENT_PAGES.POST_APPLICATION_2]: {
     tutorInfo: SAMPLE_TUTOR_DATA,
   },
 };
