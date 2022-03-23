@@ -93,7 +93,7 @@ export const TutorPage = () => {
           return "/quiz/select-skill";
         }}
         onNextStep={() => {
-          navigate("/verify");
+          navigate("/subject");
         }}
         onLogout={() => {
           navigate("/landing");
@@ -215,7 +215,7 @@ export const Verification = () => {
         }}
         onNextStep={async () => {
           await store.submitApplication(store.currentStep);
-          navigate("/subject");
+          navigate("/complete");
         }}
       />
     </LoadingStateWrapper>
@@ -261,7 +261,7 @@ export const SubjectCreatePage = () => {
         }}
         onNextStep={async () => {
           await store.submitApplication(store.currentStep);
-          navigate("/complete");
+          navigate("/verify");
         }}
         store={store}
       />
