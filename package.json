@@ -12,7 +12,8 @@
     "deploy:linux": "cd ./storybook-static && vercel --no-clipboard --token=$NOW_TOKEN --prod",
     "prepare": "husky install",
     "clean": "prettier --write",
-    "test:single": "node --inspect -r tsm tests/demo.ts"
+    "test:single": "node --inspect -r tsm tests/demo.ts",
+    "test:can_proceed": "node --inspect -r tsm tests/can-proceed.ts"
   },
   "eslintConfig": {
     "overrides": [
