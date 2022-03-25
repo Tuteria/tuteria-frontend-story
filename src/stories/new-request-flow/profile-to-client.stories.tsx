@@ -981,6 +981,485 @@ const sampleAgent = {
   email: "benita@tuteria.com",
   image: "https://ik.im@agekit.io/gbudoh/Team_Photos/Benita_LzsSfrfW0.jpg",
 };
+const newPayload = {
+  agent: {
+    id: 45,
+    title: "",
+    name: "Abisoye",
+    phone_number: "",
+    email: "abisoye@tuteria.com",
+    image:
+      "https://res.cloudinary.com/tuteria/image/upload/w_430,h_400/v1624614323/agents/Abisoye.jpg",
+    slack_id: "",
+  },
+  firstSearch: [
+    {
+      userId: "franklino5",
+      email: "onwafranklin@gmail.com",
+      firstName: "Franklin",
+      lastName: "Onwa",
+      gender: "male",
+      photo: "",
+      level: "regular",
+      delivery: ["physical"],
+      dateOfBirth: "",
+      phone: "",
+      requestPending: 0,
+      requestsDeclined: 0,
+      totalJobsAssigned: 0,
+      totalJobsAccepted: 0,
+      requestsNotResponded: 0,
+      activeBookings: [],
+      distance: 0,
+      rating: 0,
+      ratingCount: 0,
+      isIdVerified: false,
+      isBackgroundChecked: true,
+      videoIntro: null,
+      students: 2,
+      lessonsTaught: 12,
+      newTutorDiscount: 0,
+      isNewTutor: false,
+      country: "",
+      state: "",
+      region: "",
+      vicinity: "",
+      specialNeedExpertise: [],
+      examsExperience: [],
+      curriculum: ["British", "Nigerian"],
+      levelsTaught: [
+        "jss",
+        "nursery",
+        "adult",
+        "primary",
+        "sss",
+        "undergraduate",
+      ],
+      entranceSchools: [],
+      education: [],
+      workHistory: [],
+      certification: [],
+      subject: {
+        hourlyRate: 4000,
+        discountForExtraStudents: 0,
+        extraStudents: 0,
+        name: "General Mathematics",
+        headline:
+          '"MATHEMATICS is difficult" is a lie that depends on the teacher',
+        description:
+          'I used to think mathematics is hard, till discovered the secret to understanding Maths. I am determined to eradicate the myth of "Mathematics is hard" by understanding my students\' taste, background and ability.\r\n\r\nI possess strong communication and analytical skills and have the ability to extract, interpret and present the basic information to those I teach.\r\n\r\nI blend this basic information with its application to make sure students appreciate the real-life reason for every mathematical equation.\r\n\r\nI have worked as a teacher in Ikot Uneke Comp. School, Uyo where I bagged title of best Further mathematics and General Mathematics teacher.\r\nAlso, I received a special recognition by Principal for good work and a 100% result in every class.\r\n\r\nMy style of teaching is practical;\r\n- Use of aids (Powerpoint slides, smart board etc.) to give concrete idea of the concepts to the students.\r\n- Concentrates on feedback from students.\r\n- Keeps good relation with the students.\r\n- Strong interpersonal abilities, with the ability to communicate and work with students from different backgrounds.\r\n- Computer skills.',
+        related: [
+          "General Mathematics",
+          "Basic Mathematics",
+          "Quantitative Reasoning",
+        ],
+        skills: [
+          "Quantitative Reasoning",
+          "Literacy & Numeracy",
+          "Photography",
+          "English Language",
+          "Computer Networking",
+          "Web Design",
+          "Oilfield Maths",
+          "Coreldraw",
+          "Video Editing",
+          "Microsoft Powerpoint",
+          "Video Production",
+          "General Mathematics",
+          "Basic Mathematics",
+          "Desktop Publishing",
+          "Search Engine Optimization",
+          "Autodesk Autocad",
+          "Physical Education",
+          "Photo Editing",
+          "Typing Skills",
+          "Graphic Design",
+          "Web Development",
+          "Basic Computing",
+          "Computer Science",
+          "Verbal Reasoning",
+          "Elementary English",
+          "Basic Sciences",
+          "Social Media Marketing",
+          "Igbo Language",
+          "Python Programming",
+          "Creative Arts",
+          "Adobe Photoshop",
+        ],
+        skills_with_status: [
+          {
+            name: "Quantitative Reasoning",
+            status: "Active",
+          },
+          {
+            name: "Literacy & Numeracy",
+            status: "Active",
+          },
+          {
+            name: "Photography",
+            status: "Active",
+          },
+          {
+            name: "English Language",
+            status: "Active",
+          },
+          {
+            name: "Computer Networking",
+            status: "Active",
+          },
+          {
+            name: "Web Design",
+            status: "Active",
+          },
+          {
+            name: "Oilfield Maths",
+            status: "Active",
+          },
+          {
+            name: "CORELDRAW",
+            status: "Active",
+          },
+          {
+            name: "Video Editing",
+            status: "Active",
+          },
+          {
+            name: "Microsoft PowerPoint",
+            status: "Active",
+          },
+          {
+            name: "Video Production",
+            status: "Active",
+          },
+          {
+            name: "General Mathematics",
+            status: "Active",
+          },
+          {
+            name: "Basic Mathematics",
+            status: "Active",
+          },
+          {
+            name: "Desktop Publishing",
+            status: "Active",
+          },
+          {
+            name: "Search Engine Optimization",
+            status: "Active",
+          },
+          {
+            name: "Autodesk AutoCAD",
+            status: "Active",
+          },
+          {
+            name: "Physical Education",
+            status: "Active",
+          },
+          {
+            name: "Photo Editing",
+            status: "Active",
+          },
+          {
+            name: "Typing Skills",
+            status: "Active",
+          },
+          {
+            name: "Graphic Design",
+            status: "Active",
+          },
+          {
+            name: "Web Development",
+            status: "Active",
+          },
+          {
+            name: "Basic Computing",
+            status: "Active",
+          },
+          {
+            name: "Computer Science",
+            status: "Active",
+          },
+          {
+            name: "Verbal Reasoning",
+            status: "Active",
+          },
+          {
+            name: "Elementary English",
+            status: "Active",
+          },
+          {
+            name: "Basic Sciences",
+            status: "Active",
+          },
+          {
+            name: "Social Media Marketing",
+            status: "Active",
+          },
+          {
+            name: "Handwriting Improvement",
+            status: "Require Modification",
+          },
+          {
+            name: "Igbo Language",
+            status: "Active",
+          },
+          {
+            name: "Python Programming",
+            status: "Active",
+          },
+          {
+            name: "Creative Arts",
+            status: "Active",
+          },
+          {
+            name: "Adobe Photoshop",
+            status: "Active",
+          },
+        ],
+        tuteriaName: "General Mathematics",
+      },
+      subjectList: [
+        "Quantitative Reasoning",
+        "Literacy & Numeracy",
+        "Photography",
+        "English Language",
+        "Computer Networking",
+        "Web Design",
+        "Oilfield Maths",
+        "CORELDRAW",
+        "Video Editing",
+        "Microsoft PowerPoint",
+        "Video Production",
+        "General Mathematics",
+        "Basic Mathematics",
+        "Desktop Publishing",
+        "Search Engine Optimization",
+        "Autodesk AutoCAD",
+        "Physical Education",
+        "Photo Editing",
+        "Typing Skills",
+        "Graphic Design",
+        "Web Development",
+        "Basic Computing",
+        "Computer Science",
+        "Verbal Reasoning",
+        "Elementary English",
+        "Basic Sciences",
+        "Social Media Marketing",
+        "Handwriting Improvement",
+        "Igbo Language",
+        "Python Programming",
+        "Creative Arts",
+        "Adobe Photoshop",
+      ],
+      testimonials: [],
+      lastCalendarUpdate: "",
+      availability: {},
+      totalAmount: 104760,
+      lessons: 12,
+      specialities: [],
+      rank: 37,
+      experience: 0,
+      isIndemand: false,
+      age: null,
+      eduDegrees: [],
+      eduGrades: [],
+      eduCountries: [],
+      otherDetails: {
+        badges: [],
+        price: {
+          scheduleIsSet: 3,
+          lessons: 12,
+          amount: 288000,
+          extraStudentTuition: 144000,
+          tuitionPerStudent: 144000,
+          students: 2,
+          chargePerLesson: 12000,
+        },
+        clientCountry: "Nigeria",
+        isSpecial: false,
+        earlyChildArray: [],
+        isMonthly: true,
+        relevantSubjects: [
+          "General Mathematics",
+          "Basic Mathematics",
+          "Quantitative Reasoning",
+        ],
+        isCertificate: false,
+        cambridgePrep: [],
+        placementExams: [],
+        certificateExams: [],
+        isPlacement: false,
+        isEarlyChild: false,
+        isEntrance: false,
+        isCambridge: false,
+        isPremium: false,
+        specialNeedExpertise: [],
+        experience: 0,
+        tutorSummary: [
+          {
+            title: "Curriculum experience",
+            icon: "homework",
+            description: "Teaches with the British and Nigerian curriculum.",
+          },
+          {
+            title: "Physical lessons only",
+            icon: "whiteBoard",
+            description:
+              "Franklin only offers physical lessons at your home or agreed location",
+          },
+        ],
+        classGroup: [],
+        education: [],
+        workHistory: [],
+        testimonials: [],
+        featuredReview: {},
+        userId: "franklino5",
+      },
+    },
+  ],
+  tutors: [],
+  requestInfo: {
+    contactDetails: {
+      email: "tomi.panox@gmail.com",
+      phone: "2348055570754",
+      state: "Lagos",
+      title: "",
+      medium: "Facebook",
+      region: "Lekki",
+      address: "Marwa,  former 2nd round about, Lekki",
+      country: "Nigeria",
+      lastName: "Tomi",
+      firstName: "Mrs Panox",
+      vicinity: "Lekki",
+      country_code: "NG",
+      customerType: "parent",
+      preferredComms: {},
+    },
+    slug: "IKWSADRH9O16",
+    teacherKind: "One teacher",
+    childDetails: [
+      {
+        name: "Primary 6",
+        gender: "",
+        firstName: "Primary 6",
+        curriculum: ["Not sure"],
+        classDetail: {
+          class: "Primary 6",
+          purpose: "Academic Help",
+          subjects: [
+            "Basic Mathematics",
+            "English Language",
+            "Basic Sciences",
+            "Verbal Reasoning",
+            "Quantitative Reasoning",
+          ],
+        },
+        displayName: "",
+        expectation:
+          "I need a very good tutor for my child. Someone who is passionate about teaching and seeing improvements in my kids' academics. Someone who can teach them how to study and research for answers. The tutor should be able to analyse the kids and tell their weaknesses and help them improve. ",
+        learningNeed: "",
+        special_needs: "None",
+      },
+      {
+        name: "JSS 3",
+        gender: "",
+        firstName: "JSS 3",
+        curriculum: ["Not sure"],
+        classDetail: {
+          class: "JSS 3",
+          purpose: "Academic Help",
+          subjects: [
+            "General Mathematics",
+            "English Language",
+            "Basic Sciences ",
+            "Basic Technology",
+            "Business Studies",
+            "ICT - Computer Science",
+          ],
+        },
+        displayName: "",
+        expectation:
+          "I need a very good tutor for my child. Someone who is passionate about teaching and seeing improvements in my kids' academics. Someone who can teach them how to study and research for answers. The tutor should be able to analyse the kids and tell their weaknesses and help them improve. ",
+        learningNeed: "",
+        special_needs: "None",
+      },
+    ],
+    lessonDetails: {
+      lessonType: "physical",
+      lessonSchedule: {
+        lessonDays: ["Tuesday", "Saturday", "Sunday"],
+        lessonPlan: "",
+        lessonTime: "4:00 PM",
+        lessonHours: 3,
+        teacherKind: "",
+        lessonUrgency: "Immediately",
+        lessonDuration: 4,
+      },
+    },
+    splitRequests: [
+      {
+        tutorId: null,
+        searchSubject: "General Mathematics",
+        lessonDays: ["Tuesday", "Saturday", "Sunday"],
+        teacherOption: "One teacher",
+        lessonHours: 3,
+        subjectGroup: ["General Mathematics"],
+        class: ["Primary 6", "JSS 3"],
+        curriculum: ["Not sure"],
+        learningNeed: [],
+        names: ["Primary 6", "JSS 3"],
+        purposes: ["Academic Help", "Academic Help"],
+        forTeacher: [
+          {
+            name: "Primary 6",
+            gender: "",
+            classDetail: {
+              class: "Primary 6",
+              purpose: "Academic Help",
+              subjects: [
+                "Basic Mathematics",
+                "English Language",
+                "Basic Sciences",
+                "Verbal Reasoning",
+                "Quantitative Reasoning",
+              ],
+            },
+            learningNeed: "",
+            curriculum: ["Not sure"],
+            expectation:
+              "I need a very good tutor for my child. Someone who is passionate about teaching and seeing improvements in my kids' academics. Someone who can teach them how to study and research for answers. The tutor should be able to analyse the kids and tell their weaknesses and help them improve. ",
+            special_needs: "None",
+          },
+          {
+            name: "JSS 3",
+            gender: "",
+            classDetail: {
+              class: "JSS 3",
+              purpose: "Academic Help",
+              subjects: [
+                "General Mathematics",
+                "English Language",
+                "Basic Sciences ",
+                "Basic Technology",
+                "Business Studies",
+                "ICT - Computer Science",
+              ],
+            },
+            learningNeed: "",
+            curriculum: ["Not sure"],
+            expectation:
+              "I need a very good tutor for my child. Someone who is passionate about teaching and seeing improvements in my kids' academics. Someone who can teach them how to study and research for answers. The tutor should be able to analyse the kids and tell their weaknesses and help them improve. ",
+            special_needs: "None",
+          },
+        ],
+      },
+    ],
+    status: "pending",
+    created: "2022-03-09T15:03:20.882822",
+    modified: "2022-03-10T11:50:53.177984",
+  },
+};
 export const SingleRequest = () => {
   const searchStore = SearchStore.create(
     {},
@@ -993,14 +1472,18 @@ export const SingleRequest = () => {
   return (
     <TutorSelectPage
       store={searchStore}
-      agent={sampleAgent}
-      tutors={[]}
-      firstSearch={firstSearch.map((j) => ({
-        ...j,
-        totalAmount: 42000,
-        lessons: 12,
-      }))}
-      requestInfo={demoSingle}
+      agent={newPayload.agent}
+      // agent={sampleAgent}
+      tutors={newPayload.tutors}
+      // tutors={[]}
+      // firstSearch={firstSearch.map((j) => ({
+      //   ...j,
+      //   totalAmount: 42000,
+      //   lessons: 12,
+      // }))}
+      firstSearch={newPayload.firstSearch}
+      requestInfo={newPayload.requestInfo}
+      // requestInfo={demoSingle}
     />
   );
 };
