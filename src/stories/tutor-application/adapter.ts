@@ -216,6 +216,7 @@ export const testAdapter: ServerAdapterType = {
   saveTutorSubjects: async (subjects) => {
     let existingSubjects: any = SAMPLE_TUTOR_SUBJECTS.map((tx) => {
       return {
+        ...tx,
         id: tx.id,
         name: tx.name,
         category: tx.category,
@@ -227,7 +228,13 @@ export const testAdapter: ServerAdapterType = {
       };
     });
     subjects.forEach((s) => {
-      existingSubjects.push({ id: 23, name: s, category: "Languages" });
+      existingSubjects.push({
+        id: 23,
+        name: s,
+        category: "",
+        status: "in-progress",
+        canTakeTest: true,
+      });
     });
     return await samplePromise(existingSubjects);
   },
