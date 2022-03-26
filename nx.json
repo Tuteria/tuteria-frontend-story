@@ -1,6 +1,6 @@
 {
   "extends": "@nrwl/workspace/presets/npm.json",
-  "npmScope": "tuteria-mobile-codebase",
+  "npmScope": "tuteria",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/nx-cloud",
