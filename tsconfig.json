@@ -1,24 +1,21 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-
     "strict": false,
-
     "skipLibCheck": true,
-
     "esModuleInterop": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es2015",
-
     "resolveJsonModule": true,
-
     "composite": true,
-    "jsx": "react"
+    "jsx": "react",
+    "paths": {
+      "@tuteria-mobile-codebase/stores": ["packages/stores/src/index.ts"]
+    }
   },
   "include": ["src/**/*", "src/**/*.json"]
 }
