@@ -14,7 +14,9 @@
     "resolveJsonModule": true,
     "composite": true,
     "jsx": "react",
-    "paths": {}
+    "paths": {
+      "@tuteria/design-system": ["packages/design-system/src/index.ts"]
+    }
   },
   "include": ["src/**/*", "src/**/*.json"],
   "exclude": ["node_modules", "tmp"]

@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "design-system": "packages/design-system",
     "shared-lib": "packages/shared-lib"
   }
 }

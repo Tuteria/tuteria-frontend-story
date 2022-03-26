@@ -37,5 +37,15 @@
     "@nrwl/js": {
       "analyzeSourceFiles": false
     }
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/react"
   }
 }
