@@ -211,49 +211,49 @@ Verification.args = {
 };
 const subjectStore = SubjectStore.create({}, { adapter });
 
-// export const SubjectCreatePage = Template.bind({});
-// SubjectCreatePage.args = {
-//   children: (
-//     <SubjectCreationPage
-//       onLogout={() => {
-//         navigate("/landing");
-//       }}
-//       onNextStep={async () => {
-//         await store.submitApplication(store.currentStep);
-//         navigate("/verify");
-//       }}
-//       store={store}
-//     />
-//   ),
-//   async initialize(setLoading) {
-//     let result = await testAdapter.initializeApplication(adapter, {
-//       regions: allRegions,
-//       countries: allCountries,
-//       tuteriaSubjects: testAdapter.getTuteriaSubjects(),
-//     });
-//     store.initializeTutorData({
-//       ...result,
-//       tutorInfo: {
-//         ...result.tutorInfo,
-//         appData: {
-//           currentStep: APPLICATION_STEPS.SUBJECT,
-//         },
-//       },
-//     });
-//     if (store.currentStep === APPLICATION_STEPS.SUBJECT) {
-//       setLoading(false);
-//     } else {
-//       let options = {
-//         [APPLICATION_STEPS.APPLY]: "/apply",
-//         [APPLICATION_STEPS.VERIFY]: "/verify",
-//         [APPLICATION_STEPS.COMPLETE]: "/complete",
-//       };
-//       navigate(options[store.currentStep]);
-//     }
-//   },
-//   defaultLoading: false,
-//   text: "Loading subject details...",
-// };
+export const SubjectCreatePage = Template.bind({});
+SubjectCreatePage.args = {
+  children: (
+    <SubjectCreationPage
+      onLogout={() => {
+        navigate("/landing");
+      }}
+      onNextStep={async () => {
+        await store.submitApplication(store.currentStep);
+        navigate("/verify");
+      }}
+      store={store}
+    />
+  ),
+  async initialize(setLoading) {
+    let result = await testAdapter.initializeApplication(adapter, {
+      regions: allRegions,
+      countries: allCountries,
+      tuteriaSubjects: testAdapter.getTuteriaSubjects(),
+    });
+    store.initializeTutorData({
+      ...result,
+      tutorInfo: {
+        ...result.tutorInfo,
+        appData: {
+          currentStep: APPLICATION_STEPS.SUBJECT,
+        },
+      },
+    });
+    if (store.currentStep === APPLICATION_STEPS.SUBJECT) {
+      setLoading(false);
+    } else {
+      let options = {
+        [APPLICATION_STEPS.APPLY]: "/apply",
+        [APPLICATION_STEPS.VERIFY]: "/verify",
+        [APPLICATION_STEPS.COMPLETE]: "/complete",
+      };
+      navigate(options[store.currentStep]);
+    }
+  },
+  defaultLoading: false,
+  text: "Loading subject details...",
+};
 
 export const CompletedPage = Template.bind({});
 CompletedPage.args = {
@@ -270,71 +270,71 @@ CompletedPage.args = {
   },
 };
 
-// export const SubjectReviewPage = Template.bind({});
-// SubjectReviewPage.args = {
-//   children: (
-//     <TutorPageWrapper store={{}}>
-//       <TutorSubjectsPage
-//         store={subjectStore}
-//         showWelcomeModal={false}
-//         renderPreview={(subjectStore) => {
-//           return null;
-//         }}
-//       />
-//     </TutorPageWrapper>
-//   ),
-//   async initialize(setLoading) {
-//     let result = await testAdapter.initializeApplication(adapter, {
-//       regions: allRegions,
-//       countries: allCountries,
-//       tuteriaSubjects: testAdapter.getTuteriaSubjects(),
-//     });
-//     subjectStore.initializeTutorSubjects(result.subjectData);
-//   },
-// };
+export const SubjectReviewPage = Template.bind({});
+SubjectReviewPage.args = {
+  children: (
+    <TutorPageWrapper store={{}}>
+      <TutorSubjectsPage
+        store={subjectStore}
+        showWelcomeModal={false}
+        renderPreview={(subjectStore) => {
+          return null;
+        }}
+      />
+    </TutorPageWrapper>
+  ),
+  async initialize(setLoading) {
+    let result = await testAdapter.initializeApplication(adapter, {
+      regions: allRegions,
+      countries: allCountries,
+      tuteriaSubjects: testAdapter.getTuteriaSubjects(),
+    });
+    subjectStore.initializeTutorSubjects(result.subjectData);
+  },
+};
 
-// export const NonEditableSubjectPage = Template.bind({});
-// NonEditableSubjectPage.args = {
-//   children: (
-//     <SubjectCreationPage
-//       onLogout={() => {
-//         navigate("/landing");
-//       }}
-//       onNextStep={async () => {
-//         await store.submitApplication(store.currentStep);
-//         navigate("/complete");
-//       }}
-//       store={store}
-//       canEditSubject={false}
-//     />
-//   ),
-//   async initialize(setLoading) {
-//     let result = await testAdapter.initializeApplication(adapter, {
-//       regions: allRegions,
-//       countries: allCountries,
-//       tuteriaSubjects: testAdapter.getTuteriaSubjects(),
-//     });
-//     store.initializeTutorData({
-//       ...result,
-//       tutorInfo: {
-//         ...result.tutorInfo,
-//         appData: {
-//           currentStep: APPLICATION_STEPS.SUBJECT,
-//         },
-//       },
-//     });
-//     if (store.currentStep === APPLICATION_STEPS.SUBJECT) {
-//       setLoading(false);
-//     } else {
-//       let options = {
-//         [APPLICATION_STEPS.APPLY]: "/apply",
-//         [APPLICATION_STEPS.VERIFY]: "/verify",
-//         [APPLICATION_STEPS.COMPLETE]: "/complete",
-//       };
-//       navigate(options[store.currentStep]);
-//     }
-//   },
-// };
+export const NonEditableSubjectPage = Template.bind({});
+NonEditableSubjectPage.args = {
+  children: (
+    <SubjectCreationPage
+      onLogout={() => {
+        navigate("/landing");
+      }}
+      onNextStep={async () => {
+        await store.submitApplication(store.currentStep);
+        navigate("/complete");
+      }}
+      store={store}
+      canEditSubject={false}
+    />
+  ),
+  async initialize(setLoading) {
+    let result = await testAdapter.initializeApplication(adapter, {
+      regions: allRegions,
+      countries: allCountries,
+      tuteriaSubjects: testAdapter.getTuteriaSubjects(),
+    });
+    store.initializeTutorData({
+      ...result,
+      tutorInfo: {
+        ...result.tutorInfo,
+        appData: {
+          currentStep: APPLICATION_STEPS.SUBJECT,
+        },
+      },
+    });
+    if (store.currentStep === APPLICATION_STEPS.SUBJECT) {
+      setLoading(false);
+    } else {
+      let options = {
+        [APPLICATION_STEPS.APPLY]: "/apply",
+        [APPLICATION_STEPS.VERIFY]: "/verify",
+        [APPLICATION_STEPS.COMPLETE]: "/complete",
+      };
+      navigate(options[store.currentStep]);
+    }
+  },
+};
 
 export const TutorPreferencePage = Template.bind({});
 TutorPreferencePage.args = {
@@ -381,51 +381,51 @@ TutorPreferencePage.args = {
     }
   },
 };
-// export const TuteriaAgreementPage = Template.bind({});
-// TuteriaAgreementPage.args = {
-//   children: (
-//     <TutorAgreementPage
-//       // currentStep={store.currentEditableForm}
-//       store={store}
-//       // currentStep={store.currentStep}
-//       onEditSubject={(subject) => {
-//         return "/skills";
-//       }}
-//       onTakeTest={(subject) => {
-//         console.log({ subject });
-//         return "/quiz/select-skill";
-//       }}
-//       onNextStep={() => {
-//         navigate("/verify");
-//       }}
-//       onLogout={() => {
-//         navigate("/landing");
-//       }}
-//     />
-//   ),
-//   initialize: async (setLoading) => {
-//     let result = await testAdapter.initializeApplication(adapter, {
-//       regions: allRegions,
-//       countries: allCountries,
-//       tuteriaSubjects: [],
-//     });
-//     store.initializeTutorData({
-//       ...result,
-//       tutorInfo: {
-//         ...result.tutorInfo,
-//         appData: {
-//           currentEditableForm: STEPS.GUARANTOR_INFO,
-//           currentStep: APPLICATION_STEPS.TERMS,
-//         },
-//       },
-//     });
-//     setLoading(false);
-//     if (store.currentStep === APPLICATION_STEPS.TERMS) {
-//     } else {
-//       navigate("/apply");
-//     }
-//   },
-// };
+export const TuteriaAgreementPage = Template.bind({});
+TuteriaAgreementPage.args = {
+  children: (
+    <TutorAgreementPage
+      // currentStep={store.currentEditableForm}
+      store={store}
+      // currentStep={store.currentStep}
+      onEditSubject={(subject) => {
+        return "/skills";
+      }}
+      onTakeTest={(subject) => {
+        console.log({ subject });
+        return "/quiz/select-skill";
+      }}
+      onNextStep={() => {
+        navigate("/verify");
+      }}
+      onLogout={() => {
+        navigate("/landing");
+      }}
+    />
+  ),
+  initialize: async (setLoading) => {
+    let result = await testAdapter.initializeApplication(adapter, {
+      regions: allRegions,
+      countries: allCountries,
+      tuteriaSubjects: [],
+    });
+    store.initializeTutorData({
+      ...result,
+      tutorInfo: {
+        ...result.tutorInfo,
+        appData: {
+          currentEditableForm: STEPS.GUARANTOR_INFO,
+          currentStep: APPLICATION_STEPS.TERMS,
+        },
+      },
+    });
+    setLoading(false);
+    if (store.currentStep === APPLICATION_STEPS.TERMS) {
+    } else {
+      navigate("/apply");
+    }
+  },
+};
 
 export const TutorApplicationCompletedPage = Template.bind({});
 TutorApplicationCompletedPage.args = {
