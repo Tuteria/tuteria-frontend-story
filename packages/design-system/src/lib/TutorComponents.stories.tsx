@@ -57,7 +57,7 @@ import VideoUploaderComponent from "@tuteria/shared-lib/src/tutor-revamp/VideoUp
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { testAdapter } from "../adapter";
-import { Components, ComponentsProps } from "./components";
+import { Components, ComponentsProps } from "./TutorComponents";
 
 export default {
   component: Components,

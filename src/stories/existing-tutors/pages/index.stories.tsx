@@ -126,29 +126,3 @@ export const PaymentInformation = () => {
     />
   );
 };
-
-export const PostApplicationOnePage = () => {
-  return (
-    <ClientPages
-      page={CLIENT_PAGES.POST_APPLICATION_1}
-      store={store}
-      initialData={initialData[CLIENT_PAGES.POST_APPLICATION_1]}
-      host=""
-      agent={undefined}
-      onNextStep={() => [console.log("complete")]}
-    />
-  );
-};
-
-export const PostApplicationTwoPage = () => {
-  return (
-    <ClientPages
-      page={CLIENT_PAGES.POST_APPLICATION_2}
-      store={store}
-      initialData={initialData[CLIENT_PAGES.POST_APPLICATION_2]}
-      host=""
-      agent={undefined}
-      onNextStep={() => [console.log("complete")]}
-    />
-  );
-};
