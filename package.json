@@ -16,6 +16,7 @@
     "test:can_proceed": "node --inspect -r tsm tests/can-proceed.ts",
     "shared-lib:lint": "npx nx run shared-lib:lint",
     "shared-lib:test": "npx nx run shared-lib:test",
+    "shared-lib:storybook": "npx nx run shared-lib:storybook",
     "design-system:storybook": "npx nx run design-system:storybook"
   },
   "eslintConfig": {
