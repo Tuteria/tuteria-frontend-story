@@ -2,6 +2,9 @@
   "version": 2,
   "projects": {
     "design-system": "packages/design-system",
-    "shared-lib": "packages/shared-lib"
+    "mobile-ui": "packages/mobile-ui",
+    "shared-lib": "packages/shared-lib",
+    "tuteria-mobile": "apps/tuteria-mobile",
+    "tuteria-mobile-e2e": "apps/tuteria-mobile-e2e"
   }
 }

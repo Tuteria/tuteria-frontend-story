@@ -15,7 +15,8 @@
     "composite": true,
     "jsx": "react",
     "paths": {
-      "@tuteria/design-system": ["packages/design-system/src/index.ts"]
+      "@tuteria/design-system": ["packages/design-system/src/index.ts"],
+      "@tuteria/mobile-ui": ["packages/mobile-ui/src/index.ts"]
     }
   },
   "include": ["src/**/*", "src/**/*.json"],

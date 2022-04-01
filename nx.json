@@ -47,5 +47,6 @@
   },
   "cli": {
     "defaultCollection": "@nrwl/react"
-  }
+  },
+  "defaultProject": "tuteria-mobile"
 }
