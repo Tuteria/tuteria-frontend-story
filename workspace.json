@@ -4,6 +4,7 @@
     "design-system": "packages/design-system",
     "mobile-ui": "packages/mobile-ui",
     "shared-lib": "packages/shared-lib",
+    "tuteria-data": "packages/tuteria-data",
     "tuteria-mobile": "apps/tuteria-mobile",
     "tuteria-mobile-e2e": "apps/tuteria-mobile-e2e"
   }
