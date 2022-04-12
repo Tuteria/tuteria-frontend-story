@@ -1,24 +1,25 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": ".",
-
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-
     "strict": false,
-
     "skipLibCheck": true,
-
     "esModuleInterop": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es2015",
-
     "resolveJsonModule": true,
-
     "composite": true,
-    "jsx": "react"
+    "jsx": "react",
+    "paths": {
+      "@tuteria/design-system": ["packages/design-system/src/index.ts"],
+      "@tuteria/mobile-ui": ["packages/mobile-ui/src/index.ts"],
+      "@tuteria/tuteria-data": ["packages/tuteria-data/src/index.ts"]
+    }
   },
-  "include": ["src/**/*", "src/**/*.json"]
+  "include": ["src/**/*", "src/**/*.json"],
+  "exclude": ["node_modules", "tmp"]
 }
