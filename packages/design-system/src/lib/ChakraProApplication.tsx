@@ -51,7 +51,7 @@ import { UserCardGrid } from "./components/Application/UserCardGrid";
 import { UserCardWithBackground } from "./components/Application/UserCardWithBackground";
 import { UserCardWithRating } from "./components/Application/UserCardWithRating";
 import { UserCardWithTags } from "./components/Application/UserCardWithTags";
-
+import { ShellWithLightBackgroundAndBlueText } from "./components/Application/ShellWithLightBackgroundAndBlueText";
 export {
   AuthenticationWithCenterForm,
   AuthenticationWithProviders,
@@ -83,6 +83,7 @@ export {
   ShellWithGroupedMenu,
   ShellWithThreeColumn,
   ShellWithTopNavbar,
+  ShellWithLightBackgroundAndBlueText,
   SidebarWithBackground,
   SidebarWithSearch,
   VerticalSteps,

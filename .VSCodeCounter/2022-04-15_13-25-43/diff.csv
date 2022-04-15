@@ -1,0 +1,15 @@
+"filename", "language", "JSON", "TypeScript React", "TypeScript", "comment", "blank", "total"
+"/home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/package.json", "JSON", 1, 0, 0, 0, 0, 1
+"/home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/ChakraProApplication.tsx", "TypeScript React", 0, 2, 0, 0, -1, 1
+"/home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/Card.tsx", "TypeScript React", 0, 11, 0, 0, 2, 13
+"/home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/Logo.tsx", "TypeScript React", 0, 56, 0, 0, 2, 58
+"/home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/NavButton.tsx", "TypeScript React", 0, 17, 0, 0, 3, 20
+"/home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/Navbar.tsx", "TypeScript React", 0, 47, 0, 1, 2, 50
+"/home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/Sidebar.tsx", "TypeScript React", 0, 102, 0, 0, 2, 104
+"/home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/ToggleButton.tsx", "TypeScript React", 0, 57, 0, 0, 5, 62
+"/home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/UserProfile.tsx", "TypeScript React", 0, 23, 0, 0, 3, 26
+"/home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/index.tsx", "TypeScript React", 0, 67, 0, 0, 3, 70
+"/home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackroundAndBlueText.tsx", "TypeScript React", 0, -67, 0, 0, -3, -70
+"/home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/shared-lib/package.json", "JSON", 1, 0, 0, 0, 0, 1
+"/home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/shared-lib/src/theme/index.ts", "TypeScript", 0, 0, 1, 0, 0, 1
+"Total", "-", 2, 315, 1, 1, 18, 337

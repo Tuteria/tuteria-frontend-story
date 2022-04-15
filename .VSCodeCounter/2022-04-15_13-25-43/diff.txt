@@ -1,0 +1,49 @@
+Date : 2022-04-15 13:25:43
+Directory : /home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase
+Total : 13 files,  318 codes, 1 comments, 18 blanks, all 337 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| TypeScript React |         10 |        315 |          1 |         18 |        334 |
+| JSON             |          2 |          2 |          0 |          0 |          2 |
+| TypeScript       |          1 |          1 |          0 |          0 |          1 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                                                          | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                                                             |         13 |        318 |          1 |         18 |        337 |
+| packages                                                                                                                                                                      |         12 |        317 |          1 |         18 |        336 |
+| packages/design-system                                                                                                                                                        |         10 |        315 |          1 |         18 |        334 |
+| packages/design-system/src                                                                                                                                                    |         10 |        315 |          1 |         18 |        334 |
+| packages/design-system/src/lib                                                                                                                                                |         10 |        315 |          1 |         18 |        334 |
+| packages/design-system/src/lib/components                                                                                                                                     |          9 |        313 |          1 |         19 |        333 |
+| packages/design-system/src/lib/components/Application                                                                                                                         |          9 |        313 |          1 |         19 |        333 |
+| packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText                                                                                     |          8 |        380 |          1 |         22 |        403 |
+| packages/shared-lib                                                                                                                                                           |          2 |          2 |          0 |          0 |          2 |
+| packages/shared-lib/src                                                                                                                                                       |          1 |          1 |          0 |          0 |          1 |
+| packages/shared-lib/src/theme                                                                                                                                                 |          1 |          1 |          0 |          0 |          1 |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                                                                                                                      | language         | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| /home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/package.json                                                                                               | JSON             |          1 |          0 |          0 |          1 |
+| /home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/ChakraProApplication.tsx                                                    | TypeScript React |          2 |          0 |         -1 |          1 |
+| /home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/Card.tsx         | TypeScript React |         11 |          0 |          2 |         13 |
+| /home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/Logo.tsx         | TypeScript React |         56 |          0 |          2 |         58 |
+| /home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/NavButton.tsx    | TypeScript React |         17 |          0 |          3 |         20 |
+| /home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/Navbar.tsx       | TypeScript React |         47 |          1 |          2 |         50 |
+| /home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/Sidebar.tsx      | TypeScript React |        102 |          0 |          2 |        104 |
+| /home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/ToggleButton.tsx | TypeScript React |         57 |          0 |          5 |         62 |
+| /home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/UserProfile.tsx  | TypeScript React |         23 |          0 |          3 |         26 |
+| /home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackgroundAndBlueText/index.tsx        | TypeScript React |         67 |          0 |          3 |         70 |
+| /home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/design-system/src/lib/components/Application/ShellWithLightBackroundAndBlueText.tsx               | TypeScript React |        -67 |          0 |         -3 |        -70 |
+| /home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/shared-lib/package.json                                                                           | JSON             |          1 |          0 |          0 |          1 |
+| /home/beesama/projects/tuteria-projects/v2/tuteria-mobile-codebase/packages/shared-lib/src/theme/index.ts                                                                     | TypeScript       |          1 |          0 |          0 |          1 |
+| Total                                                                                                                                                                         |                  |        318 |          1 |         18 |        337 |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
