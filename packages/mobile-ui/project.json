@@ -1,0 +1,23 @@
+{
+  "root": "packages/mobile-ui",
+  "sourceRoot": "packages/mobile-ui/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/mobile-ui/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/mobile-ui"],
+      "options": {
+        "jestConfig": "packages/mobile-ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
