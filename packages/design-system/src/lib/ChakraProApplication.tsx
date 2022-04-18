@@ -44,6 +44,7 @@ import { StatWithIndicator } from "./components/Application/StatWithIndicator";
 import { StatWithProgessBar } from "./components/Application/StatWithProgessBar";
 import { StatWithThreeColumns } from "./components/Application/StatWithThreeColumns";
 import { TableWithSearch } from "./components/Application/TableWithSearch";
+import { TableWithSearchNew } from "./components/Application/TableWithSearchNew";
 import { StepsWithArrow } from "./components/Application/StepsWithArrow";
 import { StepsWithNumbers } from "./components/Application/StepsWithNumbers";
 import { VerticalSteps } from "./components/Application/VerticalSteps";
@@ -94,6 +95,7 @@ export {
   StatWithCenteredIndicator,
   StatWithIcon,
   TableWithSearch,
+  TableWithSearchNew,
   StepsWithArrow,
   StepsWithNumbers,
   ButtonCheckBox,
