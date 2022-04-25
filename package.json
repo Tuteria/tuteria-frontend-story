@@ -6,6 +6,7 @@
     "packages/*"
   ],
   "scripts": {
+    "remove:node": "find . -name \"node_modules\" -type d -prune",
     "storybook": "start-storybook -p 6006 -s public --ci",
     "build-storybook": "build-storybook -s public",
     "build:windows": "cd ./storybook-static && now --no-clipboard --token=%NOW_TOKEN% --prod",
@@ -53,7 +54,7 @@
     "@capacitor/storage": "^1.0.3",
     "@chakra-ui/icons": "1.0.15",
     "@chakra-ui/pro-theme": "^0.0.44",
-    "@chakra-ui/react": "1.8.0",
+    "@chakra-ui/react": "1.6.10",
     "@chakra-ui/theme": "^1.14.0",
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
