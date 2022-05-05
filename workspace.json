@@ -2,9 +2,12 @@
   "version": 2,
   "projects": {
     "design-system": "packages/design-system",
+    "sama": "packages/sama",
     "shared-lib": "packages/shared-lib",
     "tuteria-data": "packages/tuteria-data",
     "tuteria-mobile": "apps/tuteria-mobile",
-    "tuteria-mobile-e2e": "apps/tuteria-mobile-e2e"
+    "tuteria-mobile-e2e": "apps/tuteria-mobile-e2e",
+    "tutor-app": "apps/tutor-app",
+    "tutor-app-e2e": "apps/tutor-app-e2e"
   }
 }

@@ -43,6 +43,12 @@
       "application": {
         "babel": true
       }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "@emotion/styled",
+        "linter": "eslint"
+      }
     }
   },
   "cli": {
