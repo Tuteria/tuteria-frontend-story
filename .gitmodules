@@ -6,7 +6,8 @@
 	url = git@gitlab.com:tuteria/v2/shared-lib.git
 [submodule "packages/tutor-app"]
 	path = apps/tutor-app
-	url = git@gitlab.com:tuteria/v2/tutor-frontend-app.git
+	# url = git@gitlab.com:tuteria/v2/tutor-frontend-app.git
+	url = git@github.com:Tuteria/tutor-app.git
 [submodule "packages/tuteria-data"]
 	path = packages/tuteria-data
 	url = git@gitlab.com:tuteria/v2/tuteria-data.git
